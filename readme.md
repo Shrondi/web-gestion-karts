@@ -1,2 +1,2 @@
 # WebProyectoPW
-Practica final de la asignatura de pw
+Practica final de la asignatura de PW
