@@ -1,22 +1,20 @@
 package display.javabean;
 
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 import business.usuario.UsuarioDTO;
 
 public class userBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private String nombre_;
-	private String apellidos_;
-	private String correo_;
-	private String fechaNacimiento_;
-	private String fechaInscripcion_;
-	private String passWord_;
-	private Boolean admin_;
+	private String nombre_="";
+	private String apellidos_="";
+	private String correo_="";
+	private String fechaNacimiento_="";
+	private String fechaInscripcion_="";
+	private String passWord_="";
+	private Boolean admin_=false;
 	
 	
 	/**
