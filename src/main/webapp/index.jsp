@@ -34,8 +34,8 @@
 			<input type="submit" value="Cerrar sesión">
 		</form>
 	<%}%>
-	<p><%=message%></p>
-	<aside>
+	<p><font color ="red"><%=message%></font></p>
+	<footer>
 	<ul style="list-style-type:none;">
 		<li>Pablo Roldan Puebla</li>
 		<li>Paloma Romero Delgado</li>
@@ -43,7 +43,7 @@
 		<li>Miguel Raigon Jimenez</li>
 		<li>Kamal Abdelkader</li>
 	</ul>
-</aside>
+</footer>
 </body>
 
 </html>
