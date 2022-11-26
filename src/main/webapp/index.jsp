@@ -9,7 +9,7 @@
 <title>UcoGestor</title>
 </head>
 <body>
-<h2>Bienvenido al Gestor</h2>
+<h2>Bienvenido a UcoGestor</h2>
 	<%
 	String message = request.getParameter("message");
 	if(message == null){
@@ -25,6 +25,9 @@
 	    	<input type="password" name="contraseña" placeholder="Contraseña">
 	    	<br/>
 	    	<p><input type="submit" value="Iniciar sesión"></p>
+		</form>
+		<form action="Register.jsp" method="post">
+			<p><input type="submit" value="Registrarse"></p>
 		</form>
 	<%}
 	else{
