@@ -9,14 +9,14 @@
 <title>UcoGestor</title>
 </head>
 <body>
-	<%usuario = new userBean();
+<h2>Bienvenido al Gestor</h2>
+	<%
+	String message = request.getParameter("message");
+	if(message == null){
+		message = "";
+	}
 	if(usuario == null || usuario.getNombre()==""){
-		String message = request.getParameter("message");
-		if(message == null){
-			message = "";
-		}
 		%>
-		<p><%=message%></p>
 		<form action="login.jsp" method="post">
 	    	Nombre:
 	    	<input type="text" name="nombre" placeholder="Nombre">
@@ -34,6 +34,7 @@
 			<input type="submit" value="Cerrar sesión">
 		</form>
 	<%}%>
+	<p><%=message%></p>
 	<aside>
 	<ul style="list-style-type:none;">
 		<li>Pablo Roldan Puebla</li>
