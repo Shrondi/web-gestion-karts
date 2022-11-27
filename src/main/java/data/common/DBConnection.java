@@ -3,12 +3,10 @@ package data.common;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Properties;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 /**
  * A class to manage the MySQL connection (general methods and configuration).
@@ -20,25 +18,21 @@ public class DBConnection {
 
 	public Connection getConnection(){
 	    
-	    Properties prop = new Properties();
-		String filename = "config.properties";
-		
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(new File(filename)));
-			prop.load(reader);
-			String url = prop.getProperty("url");
-			String user = prop.getProperty("user");
-			String password = prop.getProperty("password");
+			 Context ctx = new InitialContext();
+			 Context env = (Context) ctx.lookup("java:comp/env");
+			 final String url = (String) env.lookup("url");
+			 final String user = (String) env.lookup("user");
+			 final String password = (String) env.lookup("password");
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			this.connection = (Connection) DriverManager.getConnection(url, user, password);
-			//System.err.println("Database connection successfully opened!");
+			System.err.println("Database connection successfully opened!");
 			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		
-		} catch (IOException e) {
-			e.printStackTrace();
+			} catch (NamingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+
 			
 		}catch (SQLException e) {
 			System.err.println("Connection to MySQL has failed!");

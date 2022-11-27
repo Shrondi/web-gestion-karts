@@ -1,11 +1,6 @@
 package display.javabean;
 
-import java.io.Serializable;
-
-
-import business.usuario.UsuarioDTO;
-
-public class userBean implements Serializable{
+public class userBean implements java.io.Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private String nombre_="";
@@ -31,20 +26,6 @@ public class userBean implements Serializable{
 		admin_ = false;
 	}
 	
-	/**
-	 * Constructor parametrizado
-	 * @param usuario DTO con los datos del usuario obtenidos de la base de datos
-	 */
-	
-	public userBean(UsuarioDTO usuario) {
-		nombre_ = usuario.getNombre();
-		apellidos_ = usuario.getApellidos();
-		correo_ = usuario.getCorreo();
-		fechaNacimiento_ = usuario.getFechaNacimiento();
-		fechaInscripcion_ = usuario.getFechaInscripcion();
-		passWord_ = usuario.getPassWord();
-		admin_ = usuario.getAdmin();
-	}
 	
 	/**
 	 * Getter nombre del usuario

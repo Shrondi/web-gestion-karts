@@ -4,11 +4,6 @@ import data.common.DBConnection;
 import business.usuario.UsuarioDTO;
 
 import java.sql.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Properties;
 import java.util.List;
 import java.util.ArrayList;
@@ -32,18 +27,31 @@ public class UsuarioDAO{
 	private Connection con;
 	private Properties prop;
 	
-	public UsuarioDAO(){
-		
-		prop = new Properties();
+	public UsuarioDAO(Properties properties){
+		prop = properties;
+	}
+	
+	public boolean usuarioExiste(String correo){
+		boolean check = false;
+		DBConnection connection = new DBConnection();
+		con = connection.getConnection();
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(new File("sql.properties")));
-			prop.load(reader);
-			reader.close();
-		} catch (FileNotFoundException e) {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(prop.getProperty("obtenerUsuariobyEmailSTM")+String.format("'%s'", correo));
+			
+			if (rs.next()) {
+				check = true;
+			}
+		
+			
+		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
+		} catch(IllegalArgumentException e){
 			e.printStackTrace();
 		}
+		
+		connection.closeConnection();
+		return check;
 	}
 	
 	/**
@@ -67,6 +75,7 @@ public class UsuarioDAO{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		connection.closeConnection();
 	}
 	

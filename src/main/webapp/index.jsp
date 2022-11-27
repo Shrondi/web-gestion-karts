@@ -26,7 +26,7 @@
 	    	<br/>
 	    	<p><input type="submit" value="Iniciar sesión"></p>
 		</form>
-		<form action="Register.jsp" method="post">
+		<form action="mvc/control/RegistroController.jsp" method="post">
 			<p><input type="submit" value="Registrarse"></p>
 		</form>
 	<%}
