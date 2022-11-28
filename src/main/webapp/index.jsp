@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="display.javabean.userBean"%>
 <jsp:useBean id="usuario" class="display.javabean.userBean" scope = "session"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@
 	}
 	if(usuario == null || usuario.getNombre()==""){
 		%>
-		<form action="login.jsp" method="post">
+		<form action="/WebProyectoPW/mvc/control/LoginController.jsp" method="post">
 	    	Nombre:
 	    	<input type="text" name="nombre" placeholder="Nombre">
 	    	<br/>
@@ -27,7 +28,7 @@
 	    	<br/>
 	    	<p><input type="submit" value="Iniciar sesión"></p>
 		</form>
-		<form action="mvc/control/RegistroController.jsp" method="post">
+		<form action="/WebProyectoPW/mvc/control/RegistroController.jsp" method="post">
 			<p><input type="submit" value="Registrarse"></p>
 		</form>
 	<%}
