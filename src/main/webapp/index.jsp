@@ -10,7 +10,8 @@
 </head>
 <body>
 <h2>Bienvenido a UcoGestor</h2>
-	<%
+	<%usuario = new userBean();
+	usuario.setNombre("Pablo");
 	String message = request.getParameter("message");
 	if(message == null){
 		message = "";
@@ -35,6 +36,9 @@
 		<p>Usuario: <jsp:getProperty property="nombre" name="usuario"/></p>
 		<form action="logout.jsp" method="post">
 			<input type="submit" value="Cerrar sesión">
+		</form>
+		<form action="modify.jsp" method="post">
+			<input type="submit" value="Editar perfil">
 		</form>
 	<%}%>
 	<p><font color ="red"><%=message%></font></p>
