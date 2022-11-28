@@ -34,7 +34,7 @@
 	<%}
 	else{
 		%>
-		<p>Usuario: <jsp:getProperty property="nombre" name="usuario"/></p>
+		<p>Usuario: <%=usuario.getNombre() %></p>
 		<form action="logout.jsp" method="post">
 			<input type="submit" value="Cerrar sesión">
 		</form>
