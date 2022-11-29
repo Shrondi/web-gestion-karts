@@ -23,7 +23,6 @@ if (mensajeNextPage == null) {
 String password = request.getParameter("password");
 %>
 		<p id="mensaje"><%= mensajeNextPage %></p>
-		 <fieldset>
 			<legend>Registro</legend>
 			<form id="registroFormulario" method="post" action="/WebProyectoPW/mvc/control/RegistroController.jsp">
 				<div>
@@ -53,6 +52,5 @@ String password = request.getParameter("password");
 			<form method="post" action="../../index.jsp">
 				<input type="submit" value="Volver">
 			</form>
-			</fieldset>
 	</body>
 </html>
