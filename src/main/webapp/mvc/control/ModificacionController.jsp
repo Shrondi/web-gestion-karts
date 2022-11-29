@@ -45,7 +45,7 @@ if(   (userBean == null) || (userBean.getCorreo().equals(""))   ){
 
 else if(nombre == null){
 	
-	nextPage = "../view/vistaModificacion.jsp";
+	nextPage = "../view/ModificacionDisplay.jsp";
 	mensajeNextPage = "Rellene los campos con su informacion";
 }
 
@@ -86,7 +86,7 @@ else{
 	
 <%
 	
-	nextPage = "../view/vistaModificacion.jsp";
+	nextPage = "../view/ModificacionDisplay.jsp";
 	mensajeNextPage = "La informacion ha sido actualizada de manera exitosa";
 	
 }
