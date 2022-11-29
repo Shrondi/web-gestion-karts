@@ -29,10 +29,8 @@ public class DBConnection {
 			this.connection = (Connection) DriverManager.getConnection(url, user, password);
 			System.err.println("Database connection successfully opened!");
 			
-			} catch (NamingException e) {
-				// TODO Auto-generated catch block
+		} catch (NamingException e) {
 				e.printStackTrace();
-
 			
 		}catch (SQLException e) {
 			System.err.println("Connection to MySQL has failed!");
@@ -46,13 +44,11 @@ public class DBConnection {
 		return this.connection;
 	}
 
-	// We can include here other methods to encapsulate CRUD commands...
-
 	public void closeConnection() {
 		try {
 			if(this.connection != null && !this.connection.isClosed()) {
 				this.connection.close();
-				//System.err.println("Database connection successfully closed!");
+				System.err.println("Database connection successfully closed!");
 			}
 		} catch (SQLException e) {
 			System.err.println("Error while trying to close the connection.");

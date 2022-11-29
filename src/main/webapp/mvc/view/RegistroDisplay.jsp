@@ -37,7 +37,7 @@ String password = request.getParameter("password");
 					</p>
 					<p>
 						<label for="correo">Email: </label>
-						<input type="text" name="correo" id="correo" placeholder="email@example.com" required>
+						<input type="email" name="correo" id="correo" placeholder="email@example.com" required>
 					</p>
 					<p>
 						<label for="fechaNacimiento">Fecha Nacimiento: </label>

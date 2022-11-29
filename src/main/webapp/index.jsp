@@ -19,8 +19,8 @@
 	if(userBean == null || userBean.getNombre()==""){
 %>
 		<form action="/WebProyectoPW/mvc/control/LoginController.jsp" method="post">
-	    	Nombre:
-	    	<input type="text" name="nombre" placeholder="Nombre">
+	    	Email:
+	    	<input type="email" name="email" placeholder="example@gmail.com">
 	    	<br/>
 	    	Contraseña:
 	    	<input type="password" name="contraseña" placeholder="Contraseña">
@@ -37,19 +37,12 @@
 		<form action="logout.jsp" method="post">
 			<input type="submit" value="Cerrar sesión">
 		</form>
-		<form action="modify.jsp" method="post">
+		<form action="/WebProyectoPW/mvc/control/ModificacionController.jsp" method="post">
 			<input type="submit" value="Editar perfil">
 		</form>
 	<%}%>
 	<p><font color ="red"><%=message%></font></p>
 	<footer>
-	<ul style="list-style-type:none;">
-		<li>Pablo Roldan Puebla</li>
-		<li>Paloma Romero Delgado</li>
-		<li>Carlos Lucena Robles</li>
-		<li>Miguel Raigon Jimenez</li>
-		<li>Kamal Abdelkader</li>
-	</ul>
 </footer>
 </body>
 
