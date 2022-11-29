@@ -4,8 +4,15 @@
 <jsp:useBean  id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
 
 <%
+
 String nextPage = "";
 String mensajeNextPage = "";
+
+//Caso 0: Hay un usuario logueado
+if (userBean != null || userBean.getCorreo().equals("")) {
+	nextPage="../../index.jsp";
+	mensajeNextPage = "Ya esta logueado";
+}
 
 String nombre = request.getParameter("nombre");
 String apellidos = request.getParameter("apellidos");
