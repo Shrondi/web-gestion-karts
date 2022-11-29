@@ -11,14 +11,13 @@
 </head>
 <body>
 <h2>Bienvenido a UcoGestor</h2>
-	<%usuario = new userBean();
-	usuario.setNombre("Pablo");
+<%
 	String message = request.getParameter("message");
 	if(message == null){
 		message = "";
 	}
 	if(usuario == null || usuario.getNombre()==""){
-		%>
+%>
 		<form action="/WebProyectoPW/mvc/control/LoginController.jsp" method="post">
 	    	Nombre:
 	    	<input type="text" name="nombre" placeholder="Nombre">
