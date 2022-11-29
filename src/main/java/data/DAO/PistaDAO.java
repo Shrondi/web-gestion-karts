@@ -5,11 +5,6 @@ import business.pista.Dificultad;
 import business.pista.PistaDTO;
 
 import java.sql.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Properties;
 import java.util.List;
 import java.util.ArrayList;
@@ -32,18 +27,8 @@ public class PistaDAO{
 	private Connection con;
 	private Properties prop;
 	
-	public PistaDAO(){
-		
-		prop = new Properties();
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(new File("sql.properties")));
-			prop.load(reader);
-			reader.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public PistaDAO(Properties properties){
+		prop = properties;
 	}
 	
 	/**
