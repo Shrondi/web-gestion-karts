@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="display.javabean.userBean"%>
-<jsp:useBean id="usuario" class="display.javabean.userBean" scope = "session"/>
+<jsp:useBean id="userBean" class="display.javabean.userBean" scope = "session"/>
 
 <!DOCTYPE html>
 <html>
@@ -16,7 +16,7 @@
 	if(message == null){
 		message = "";
 	}
-	if(usuario == null || usuario.getNombre()==""){
+	if(userBean == null || userBean.getNombre()==""){
 %>
 		<form action="/WebProyectoPW/mvc/control/LoginController.jsp" method="post">
 	    	Nombre:
@@ -33,7 +33,7 @@
 	<%}
 	else{
 		%>
-		<p>Usuario: <%=usuario.getNombre() %></p>
+		<p>Usuario: <%=userBean.getNombre() %></p>
 		<form action="logout.jsp" method="post">
 			<input type="submit" value="Cerrar sesión">
 		</form>

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page errorPage="include/errorPage.jsp" %>
-<jsp:useBean id="usuario" class="display.javabean.userBean" scope = "session"/>
 
 <!DOCTYPE html>
 <html>
@@ -16,14 +15,17 @@
 	2) No hay parámetros en el request -> procede del controlador sin mensaje, es decir, es un nuevo registro -> Volvemos a registroController
 	3) No hay parámetros en el request -> procede del controlador sin mensaje, es decir, es un nuevo registro -> Volvemos a index.jsp
 */
-String messageNextPage = request.getParameter("message");
+String mensajeNextPage = request.getParameter("mensaje");
 
-if (messageNextPage == null) messageNextPage = "";
+if (mensajeNextPage == null) {
+	mensajeNextPage = "";
+}
 String password = request.getParameter("password");
 %>
-		<p id="message"><%= messageNextPage %></p>
+		<p id="mensaje"><%= mensajeNextPage %></p>
+		 <fieldset>
 			<legend>Registro</legend>
-			<form id="form" method="post" action="/WebProyectoPW/mvc/control/RegistroController.jsp">
+			<form id="registroFormulario" method="post" action="/WebProyectoPW/mvc/control/RegistroController.jsp">
 				<div>
 					<p>
 						<label for="nombre">Nombre: </label>
@@ -51,5 +53,6 @@ String password = request.getParameter("password");
 			<form method="post" action="../../index.jsp">
 				<input type="submit" value="Volver">
 			</form>
+			</fieldset>
 	</body>
 </html>
