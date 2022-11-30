@@ -38,7 +38,7 @@ String password = request.getParameter("password");
 				<p id="message"><%= mensajeNextPage %></p>
 				<fieldset>
 						<legend> Modificar datos</legend>
-						<form id="formModificarUsuario" method="post" action="./WebProyectoPW/mvc/control/ModificacionController.jsp">
+						<form id="formModificarUsuario" method="post" action="/WebProyectoPW/mvc/control/ModificacionController.jsp">
 								<div>
 										<p>
 												<label for="name">Nombre: </label>

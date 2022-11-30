@@ -62,13 +62,14 @@ if(userBean == null || userBean.getCorreo().isEmpty()){
 				<%
 				
 				//Si el usuario es administrador -> Se redirige a la vista del administrador
-				if(usuario.getAdmin()){
+				/*if(usuario.getAdmin()){
 					nextPage = "../view/LoginAdminDisplay.jsp";
 				}
 				//Si el usuario es cliente -> Se redirige a la vista del cliente	
 				else{
 					nextPage = "../view/LoginClientDisplay.jsp";
-				}
+				}*/
+				nextPage = "../../index.jsp";
 			}
 		}
 		

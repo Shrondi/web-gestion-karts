@@ -11,12 +11,13 @@
 </head>
 <body>
 <h2>Bienvenido a UcoGestor</h2>
-<%
+<%	//userBean.setCorreo("");
+	//userBean = null;
 	String message = request.getParameter("message");
 	if(message == null){
 		message = "";
 	}
-	if(userBean == null || userBean.getNombre()==""){
+	if(userBean == null || userBean.getCorreo().equals("")){
 %>
 		<form action="/WebProyectoPW/mvc/control/LoginController.jsp" method="post">
 	    	Email:
@@ -30,18 +31,29 @@
 		<form action="/WebProyectoPW/mvc/control/RegistroController.jsp" method="post">
 			<p><input type="submit" value="Registrarse"></p>
 		</form>
+		<p><font color ="red"><%=message%></font></p>
 	<%}
 	else{
 		%>
-		<p>Usuario: <%=userBean.getNombre() %></p>
 		<form action="/WebProyectoPW/mvc/control/CerrarSesionController.jsp" method="post">
 			<input type="submit" value="Cerrar sesión">
 		</form>
 		<form action="/WebProyectoPW/mvc/control/ModificacionController.jsp" method="post">
 			<input type="submit" value="Editar perfil">
 		</form>
-	<%}%>
-	<p><font color ="red"><%=message%></font></p>
+		<%
+		if(userBean.getAdmin()){
+		%>
+		<p>bienvenido admin <%=userBean.getNombre()%></p>
+		<%}if(!userBean.getAdmin()){
+		%>
+		<p>bienvenido usuario <%=userBean.getNombre()%></p>
+		<p>Son las <%= new java.util.Date() %></p>
+		<p>Se registro <%= userBean.getFechaInscripcion()%></p>
+	<% }
+		
+	}%>
+	
 	<footer>
 </footer>
 </body>
