@@ -250,17 +250,21 @@ public class UsuarioDAO{
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(prop.getProperty("obtenerUsuariobyEmailSTM")+String.format("'%s'", correo));
 			while (rs.next()) {
+				String passWord = rs.getString("password");
 				String nombre = rs.getString("nombre");
 				String apellidos = rs.getString("apellidos");
 				String fechaNacimiento = rs.getString("fecha_Nacimiento");
 				String fechaInscripcion = rs.getString("fecha_Inscripcion");
+				Boolean admin = rs.getBoolean("administrador");
 				
 				usuario = new UsuarioDTO();
+				usuario.setPassWord(passWord);
 				usuario.setCorreo(correo);
 				usuario.setNombre(nombre);
 				usuario.setApellidos(apellidos);
 				usuario.setFechaNacimiento(fechaNacimiento);
 				usuario.setFechaInscripcion(fechaInscripcion);
+				usuario.setAdmin(admin);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

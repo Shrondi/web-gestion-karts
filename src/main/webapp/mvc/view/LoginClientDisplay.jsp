@@ -31,10 +31,8 @@ if(userBean == null || userBean.getCorreo().equals("")){
 				
 				<p>
 					¡Bienvenido <%=userBean.getNombre()%>!<br>
-					Son las <%= Utils.dateToString(new java.util.Date()) %><br>
+					Son las <%= new java.util.Date() %><br>
 					Se registro <%= userBean.getFechaInscripcion()%>
-					Lleva con nosotros  <%= %>
-					La fecha de su proxima reserva es <%= %>
 				</p>
 				
 				<ul>
@@ -89,11 +87,11 @@ if(userBean == null || userBean.getCorreo().equals("")){
 										
 				</ul>
 				
-				<form method="post" action="../mvc/control/ModificacionController.jsp">
+				<form method="post" action="/WebProyectoPW/mvc/control/ModificacionController.jsp">
 					<input type="submit" value="Modificar datos">
 				</form>
 				
-				<form method="post" action="../mvc/control/LogoutController.jsp">
+				<form method="post" action="/WebProyectoPW/mvc/control/CerrarSesionController.jsp">
 					<input type="submit" value="Desconectar">
 				</form>
 				

@@ -8,52 +8,58 @@
 String nextPage = "";
 String mensajeNextPage = "";
 
-//Caso 0: Hay un usuario logueado
-if (userBean != null || userBean.getCorreo() != null) {
-	nextPage="../../index.jsp";
-	mensajeNextPage = "Ya esta logueado";
-}
-
-String nombre = request.getParameter("nombre");
-String apellidos = request.getParameter("apellidos");
-String correo = request.getParameter("correo");
-String fechaNacimiento = request.getParameter("fechaNacimiento");
-String passWord = request.getParameter("passWord");
-Boolean admin = false;
-
-//Obtenemos el valor del parametro sqlproperties, es decir, la ruta relativa al fichero sql.properties
-String sqlproperties = application.getInitParameter("sqlproperties");
-
-//Obtenemos el recurso
-java.io.InputStream myIO = application.getResourceAsStream(sqlproperties);
-
-//Creamos un objeto properties y lo cargamos con el fichero
-java.util.Properties prop = new java.util.Properties();
-prop.load(myIO);
-
-//Caso 1: Hay parametros en el request
-if (correo != null){
-	UsuarioDAO usuario = new UsuarioDAO(prop);
+//Caso 1: Se permite el registro a cualquier usuario no logueado y a los admin logueados
+if (userBean == null || userBean.getCorreo().isEmpty() || (userBean != null && userBean.getAdmin() == true)) {
 	
-	//Comprobamos si el usuario ya existe (crear DAO)
-	if (usuario.usuarioExiste(correo)){
-		nextPage = "../view/RegistroDisplay.jsp";
-		mensajeNextPage = "Ya existe un usuario registrado con ese email";
-		
-	//Creamos el usuario
-	}else{
-		UsuarioDTO nuevoUsuario = new UsuarioDTO(correo, nombre, apellidos, fechaNacimiento, passWord, admin);
-		
-		usuario.altaUsuario(nuevoUsuario);
-		
-		//Volvemos al index para que el usuario se loguee
-		nextPage = "../../index.jsp";
-		mensajeNextPage = "Se ha creado el usuario correctamente";
+	String nombre = request.getParameter("nombre");
+	String apellidos = request.getParameter("apellidos");
+	String correo = request.getParameter("correo");
+	String fechaNacimiento = request.getParameter("fechaNacimiento");
+	String passWord = request.getParameter("passWord");
+	Boolean admin = false;
+
+	//Cuando haya un admin logueado podra registrar usuarios administradores
+	if (userBean.getAdmin() == true){
+		admin = true;
 	}
 	
-//Caso 2: Se debe ir a la vista para registrarse
+	//Obtenemos el valor del parametro sqlproperties, es decir, la ruta relativa al fichero sql.properties
+	String sqlproperties = application.getInitParameter("sqlproperties");
+
+	//Obtenemos el recurso
+	java.io.InputStream myIO = application.getResourceAsStream(sqlproperties);
+
+	//Creamos un objeto properties y lo cargamos con el fichero
+	java.util.Properties prop = new java.util.Properties();
+	prop.load(myIO);
+
+	//Caso 1: Hay parametros en el request
+	if (correo != null){
+		UsuarioDAO usuario = new UsuarioDAO(prop);
+		
+		//Comprobamos si el usuario ya existe (crear DAO)
+		if (usuario.usuarioExiste(correo)){
+			nextPage = "../view/RegistroDisplay.jsp";
+			mensajeNextPage = "Ya existe un usuario registrado con ese email";
+			
+		//Creamos el usuario
+		}else{
+			UsuarioDTO nuevoUsuario = new UsuarioDTO(correo, nombre, apellidos, fechaNacimiento, passWord, admin);
+			
+			usuario.altaUsuario(nuevoUsuario);
+			
+			//Volvemos al index para que el usuario se loguee
+			nextPage = "../../index.jsp";
+			mensajeNextPage = "Se ha creado el usuario correctamente";
+		}
+		
+	//Caso 2: Se debe ir a la vista para registrarse
+	}else{
+		nextPage = "../view/RegistroDisplay.jsp";
+	}
+	
 }else{
-	nextPage = "../view/RegistroDisplay.jsp";
+	nextPage="../../index.jsp";
 }
 %>
 

@@ -20,10 +20,10 @@
 %>
 		<form action="/WebProyectoPW/mvc/control/LoginController.jsp" method="post">
 	    	Email:
-	    	<input type="email" name="email" placeholder="example@gmail.com">
+	    	<input type="email" name="correo" placeholder="example@gmail.com">
 	    	<br/>
 	    	Contraseña:
-	    	<input type="password" name="contraseña" placeholder="Contraseña">
+	    	<input type="password" name="passWord" placeholder="Contraseña">
 	    	<br/>
 	    	<p><input type="submit" value="Iniciar sesión"></p>
 		</form>
@@ -34,7 +34,7 @@
 	else{
 		%>
 		<p>Usuario: <%=userBean.getNombre() %></p>
-		<form action="logout.jsp" method="post">
+		<form action="/WebProyectoPW/mvc/control/CerrarSesionController.jsp" method="post">
 			<input type="submit" value="Cerrar sesión">
 		</form>
 		<form action="/WebProyectoPW/mvc/control/ModificacionController.jsp" method="post">

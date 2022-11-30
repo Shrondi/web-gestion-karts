@@ -24,8 +24,7 @@ if(userBean == null || userBean.getCorreo().equals("")){
 				<legend>Vista Administrador</legend>
 				
 				<p>
-					¡Bienvenido <%=userBean.getNombre()%>!<br>
-					Listado de clientes <%= %>
+					¡Bienvenido Administrador <%=userBean.getNombre()%>!<br>
 				</p>
 				
 				<ul>
@@ -85,13 +84,13 @@ if(userBean == null || userBean.getCorreo().equals("")){
 					</li>										
 				</ul>
 				
-				<form method="post" action="../mvc/control/ModificacionController.jsp">
+				<form method="post" action="/WebProyectoPW/mvc/control/ModificacionController.jsp">
 					<input type="submit" value="Modificar datos">
 				</form>
 				
-				<form method="post" action="../mvc/control/LogoutController.jsp">
+				<form method="post" action="/WebProyectoPW/mvc/control/CerrarSesionController.jsp">
 					<input type="submit" value="Desconectar">
-				</form>	
+				</form>
 				
 			</fieldset>
 		</body>

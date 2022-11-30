@@ -5,74 +5,76 @@
 
 <%
 
-String correo = request.getParameter("correo");
-String passWord = request.getParameter("passWord");
-Boolean admin = false;
-
-//Obtenemos el valor del parametro sqlproperties, es decir, la ruta relativa al fichero sql.properties
-String sqlproperties = application.getInitParameter("sqlproperties");
-
-//Obtenemos el recurso
-java.io.InputStream myIO = application.getResourceAsStream(sqlproperties);
-
-//Creamos un objeto properties y lo cargamos con el fichero
-java.util.Properties prop = new java.util.Properties();
-prop.load(myIO);
-
 //Caso 1, por defecto: userBean está logado -> Se redirige al index.jsp	
-	nextPage = "../../index.jsp";
-	mensajeNextPage = "";
+	String nextPage = "../../index.jsp";
+	String mensajeNextPage = "";
 
 /*
 Caso 2: userBean no está logado
-	a) Hay parámetros en el request  -> procede de la vista 
-	b) No hay parámetros en el request -> procede de otra funcionalidad o index.jsp
+	a) Hay parámetros en el request  -> Comprobamos existencia usuario -> Comprobamos datos introducidos -> procede de la vista usuario o admin
+	b) No hay parámetros en el request -> procede a index.jsp para loguearse
 */	
-if(userBean == null || userBean.getCorreo().equals("")){
+if(userBean == null || userBean.getCorreo().isEmpty()){
 	
-	String emailUsuario = request.getParameter("email");
-	String passwordUsuario = request.getParameter("password");
+	String emailUsuario = request.getParameter("correo");
+	String passwordUsuario = request.getParameter("passWord");
 
-	//Caso 2.a: Hay parámetros -> procede de la VISTA
-	if (emailUsuario != null) {
+	//Caso 2.a: Hay parámetros -> Comprobamos si el usuario existe -> procede a la vista
+	if (!emailUsuario.isEmpty() || !passwordUsuario.isEmpty()) {
 		
-		//Se accede a la base de datos para obtener el correo del usuario
+		//Obtenemos el valor del parametro sqlproperties, es decir, la ruta relativa al fichero sql.properties
+		String sqlproperties = application.getInitParameter("sqlproperties");
+
+		//Obtenemos el recurso
+		java.io.InputStream myIO = application.getResourceAsStream(sqlproperties);
+
+		//Creamos un objeto properties y lo cargamos con el fichero
+		java.util.Properties prop = new java.util.Properties();
+		prop.load(myIO);
+		
 		UsuarioDAO usuarioDAO = new UsuarioDAO(prop);
-		UsuarioDTO usuario = usuarioDAO.queryByEmail(emailUsuario);
-
-		//Comprobación de usuario
-		if (usuario == null || !usuario.getCorreo().equals(emailUsuario) || !usuario.getPassWord().equals(passwordUsuario)) {
-			
-			nextPage = "../view/LoginDisplay.jsp";
-			mensajeNextPage = "Usuario no existe o no es v&aacute;lido";
-			//Hay que dar opcion a volverlo a intentar
 		
-		//Usuario válido
-		} else {
+		//Comprobamos si el usuario existe
+		if ( !usuarioDAO.usuarioExiste(emailUsuario)){ //No existe
+			nextPage = "../../index.jsp";
+			mensajeNextPage = "Usuario no existe";
 			
-			%>
-			<jsp:setProperty property="email" value="<%=usuario.getCorreo()%>" name="userBean"/>
-			<jsp:setProperty property="nombre" value="<%=usuario.getNombre()%>" name="userBean"/>
-			<jsp:setProperty property="apellidos" value="<%=usuario.getApellidos()%>" name="userBean"/>
-			<jsp:setProperty property="fecha_nac" value="<%=usuario.getFechaNacimiento()%>" name="userBean"/>
-			<jsp:setProperty property="fecha_insc" value="<%=usuario.getFechaInscripcion()%>" name="userBean"/>
-			<jsp:setProperty property="password" value="<%=usuario.getPassWord()%>" name="userBean"/>
-			<jsp:setProperty property="admin" value="<%=usuario.getAdmin()%>" name="userBean"/>
-			<%
+		}else{ //Existe
 			
-			//Si el usuario es administrador -> Se redirige a la vista del administrador
-			if(usuario.getAdmin()){
-				nextPage = "../view/LoginAdminDisplay.jsp";
-			}
-			//Si el usuario es cliente -> Se redirige a la vista del cliente	
-			else{
-				nextPage = "../view/LoginClientDisplay.jsp";
+			UsuarioDTO usuario = usuarioDAO.queryByEmail(emailUsuario);
+
+			//Comprobamos si los datos introducidos por el usuario son correctos para el login
+			if (!usuario.getCorreo().contentEquals(emailUsuario) || !usuario.getPassWord().contentEquals(passwordUsuario)) { //Datos incorrectos
+				
+				nextPage = "../../index.jsp";
+				mensajeNextPage = "El usuario o la contraseña no son validos";
+				
+			}else{ //Datos correctos, se procede con el login
+				
+				%>
+				<jsp:setProperty property="correo" value="<%=usuario.getCorreo()%>" name="userBean"/>
+				<jsp:setProperty property="nombre" value="<%=usuario.getNombre()%>" name="userBean"/>
+				<jsp:setProperty property="apellidos" value="<%=usuario.getApellidos()%>" name="userBean"/>
+				<jsp:setProperty property="fechaNacimiento" value="<%=usuario.getFechaNacimiento()%>" name="userBean"/>
+				<jsp:setProperty property="fechaInscripcion" value="<%=usuario.getFechaInscripcion()%>" name="userBean"/>
+				<jsp:setProperty property="passWord" value="<%=usuario.getPassWord()%>" name="userBean"/>
+				<jsp:setProperty property="admin" value="<%=usuario.getAdmin()%>" name="userBean"/>
+				<%
+				
+				//Si el usuario es administrador -> Se redirige a la vista del administrador
+				if(usuario.getAdmin()){
+					nextPage = "../view/LoginAdminDisplay.jsp";
+				}
+				//Si el usuario es cliente -> Se redirige a la vista del cliente	
+				else{
+					nextPage = "../view/LoginClientDisplay.jsp";
+				}
 			}
 		}
 		
 	//Caso 2.b: No hay parámetros en el request -> ir a la vista por primera vez
 	} else {
-		nextPage = "../view/LoginDisplay.jsp";		
+		nextPage = "../../index.jsp";		
 	}
 }
 

@@ -23,7 +23,7 @@ if (mensajeNextPage == null) {
 String password = request.getParameter("password");
 %>
 		<p id="mensaje"><%= mensajeNextPage %></p>
-			<legend>Registro</legend>
+			<p> NUEVO REGISTRO </p>
 			<form id="registroFormulario" method="post" action="/WebProyectoPW/mvc/control/RegistroController.jsp">
 				<div>
 					<p>
