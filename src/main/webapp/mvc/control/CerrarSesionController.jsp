@@ -5,6 +5,7 @@
 
 <%
 request.getSession().removeAttribute("userBean");
+userBean = null;
 %>
 
 <jsp:forward page="../../index.jsp">
