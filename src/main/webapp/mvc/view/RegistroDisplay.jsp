@@ -47,7 +47,7 @@ String password = request.getParameter("password");
 						<input type="text" name="passWord" id="passWord" placeholder="Password" required>
 					</p>
 				</div>
-				<input type="submit" value="Submit">
+				<input type="submit" value="Aceptar">
 			</form>
 			<form method="post" action="../../index.jsp">
 				<input type="submit" value="Volver">

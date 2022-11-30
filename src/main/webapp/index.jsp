@@ -50,8 +50,7 @@
 		<p>bienvenido usuario <%=userBean.getNombre()%></p>
 		<p>Son las <%= new java.util.Date() %></p>
 		<p>Se registro <%= userBean.getFechaInscripcion()%></p>
-	<% }
-		
+	<% }	
 	}%>
 	
 	<footer>
