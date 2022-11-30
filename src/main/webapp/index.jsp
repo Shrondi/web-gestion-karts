@@ -17,6 +17,7 @@
 	if(message == null){
 		message = "";
 	}
+	
 	if(userBean == null || userBean.getCorreo().equals("")){
 %>
 		<form action="/WebProyectoPW/mvc/control/LoginController.jsp" method="post">
@@ -34,7 +35,9 @@
 		<p><font color ="red"><%=message%></font></p>
 	<%}
 	else{
+		
 		%>
+		<p><font color ="red"><%=message%></font></p>
 		<form action="/WebProyectoPW/mvc/control/CerrarSesionController.jsp" method="post">
 			<input type="submit" value="Cerrar sesión">
 		</form>
@@ -44,10 +47,10 @@
 		<%
 		if(userBean.getAdmin()){
 		%>
-		<p>bienvenido admin <%=userBean.getNombre()%></p>
-		<%}if(!userBean.getAdmin()){
+		<p>¡Bienvenido Administrador <%=userBean.getNombre()%>!</p>
+		<%}else{
 		%>
-		<p>bienvenido usuario <%=userBean.getNombre()%></p>
+		<p>¡Bienvenido usuario <%=userBean.getNombre()%>!</p>
 		<p>Son las <%= new java.util.Date() %></p>
 		<p>Se registro <%= userBean.getFechaInscripcion()%></p>
 	<% }	

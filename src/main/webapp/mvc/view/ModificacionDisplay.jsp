@@ -29,11 +29,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() ) {
 		</head>
 		<body>
 				<p id="message"><%= mensajeNextPage %></p>
-<<<<<<< HEAD
-				<fieldset>
 						<legend> Modificar datos</legend>
-=======
->>>>>>> 8620183 (Arreglado controlador modificar y display.)
 						<form id="formModificarUsuario" method="post" action="/WebProyectoPW/mvc/control/ModificacionController.jsp">
 								<div>
 										<p>
@@ -46,7 +42,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() ) {
 										</p>
 										<p>
 												<label for="passWord">Contraseña: </label>
-												<input type="password" name="passWord" id="passWord">
+												<input type="password" name="passWord" id="passWord" required="required">
 										</p>
 										<p>
 												<label for="email">Email: </label>

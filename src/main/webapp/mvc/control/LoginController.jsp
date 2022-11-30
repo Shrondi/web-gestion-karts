@@ -11,7 +11,7 @@
 
 /*
 Caso 2: userBean no está logado
-	a) Hay parámetros en el request  -> Comprobamos existencia usuario -> Comprobamos datos introducidos -> Procede a la vista usuario o admin
+	a) Hay parámetros en el request  -> Comprobamos existencia usuario -> Comprobamos datos introducidos -> Procede a la pagina principal
 	b) No hay parámetros en el request -> Procede a index.jsp para loguearse
 */	
 if(userBean == null || userBean.getCorreo().equals("")){
@@ -42,7 +42,7 @@ if(userBean == null || userBean.getCorreo().equals("")){
 			if (!usuario.getCorreo().contentEquals(emailUsuario) || !usuario.getPassWord().contentEquals(passwordUsuario)) { //Datos incorrectos
 				
 				nextPage = "../../index.jsp";
-				mensajeNextPage = "El usuario o la contraseña no son validos";
+				mensajeNextPage = "El usuario o la contrase&ntildea no son v&aacute;lidos";
 				
 			}else{ //Datos correctos, se procede con el login
 				
@@ -56,14 +56,6 @@ if(userBean == null || userBean.getCorreo().equals("")){
 				<jsp:setProperty property="admin" value="<%=usuario.getAdmin()%>" name="userBean"/>
 				<%
 				
-				//Si el usuario es administrador -> Se redirige a la vista del administrador
-				/*if(usuario.getAdmin()){
-					nextPage = "../view/LoginAdminDisplay.jsp";
-				}
-				//Si el usuario es cliente -> Se redirige a la vista del cliente	
-				else{
-					nextPage = "../view/LoginClientDisplay.jsp";
-				}*/
 				nextPage = "../../index.jsp";
 			}
 		}
