@@ -85,7 +85,7 @@ una pista puede tener 20 karts maximos pero el admin puede decidir asociar tanto
 		1) Cliente
 			-> Consultar reservas entre una fecha de inicio y fin. -- [¿Quien lo realiza?]
 				Diferenciar entre reservas finalizadas o futuras
-			-> Buscar una pista disponible segun uno de los siguientes criterios: -- [¿Quien lo realiza?]
+			-> Buscar una pista disponible segun uno de los siguientes criterios: -- [Paloma]
 				Tipo de pistas, fecha o numero minimo de karts disponibles
 			-> Realizar reserva individual para una fecha dada, del tipo solicitado y tenga los suficientes karts -- [Carlos]
 			-> Realizar una reserva bono [Carlos]
@@ -93,8 +93,8 @@ una pista puede tener 20 karts maximos pero el admin puede decidir asociar tanto
 			-> Cancelar una reserva (mirar restricciones del enunciado y practicas anteriores) -- [Carlos]
 
 		2) Administrador
-			-> Dar de alta pistas -- [¿Quien lo realiza?]
-			-> Dar de alta karts -- [¿Quien lo realiza?]
+			-> Dar de alta pistas -- [Paloma]
+			-> Dar de alta karts -- [Paloma]
 			-> Asociar kart a pista (mirar restricciones practicas anteriores) -- [¿Quien lo realiza?]
 			-> Modificar el estado de karts y pistas -- [¿Quien lo realiza?]
 			-> Eliminar reservas -- [Carlos]
