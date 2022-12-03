@@ -35,7 +35,7 @@
 	<%}
 	else{
 		%>
-		<form action="/WebProyectoPW/mvc/control/CerrarSesionController.jsp" method="post">
+		<form action="/WebProyectoPW/mvc/control/LogoutController.jsp" method="post">
 			<input type="submit" value="Cerrar sesión">
 		</form>
 		<form action="/WebProyectoPW/mvc/control/ModificacionController.jsp" method="post">
