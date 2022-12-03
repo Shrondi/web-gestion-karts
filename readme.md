@@ -36,7 +36,7 @@ A HACER EN GENERAL
 4) Redirigir a las paginas de error correctas
 
 
-EJERCICIO 1 -- [¿Quien lo realiza?]
+EJERCICIO 1 -- [Kamal]
 -------------
 Falta añadir/modificar/arreglar las siguientes funcionalidades en el index.jsp respecto a los dos tipos de usuario.
 
