@@ -11,22 +11,6 @@ public class userBean implements java.io.Serializable{
 	private String passWord_="";
 	private Boolean admin_=false;
 	
-	
-	/**
-	 * Constructor vacio (default)
-	 */
-	
-	public userBean() {
-		nombre_ = "";
-		apellidos_ = "";
-		correo_ = "";
-		fechaNacimiento_ = "";
-		fechaInscripcion_ = "";
-		passWord_ = "";
-		admin_ = false;
-	}
-	
-	
 	/**
 	 * Getter nombre del usuario
 	 * @return Nombre del usuario

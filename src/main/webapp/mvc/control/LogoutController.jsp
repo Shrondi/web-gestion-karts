@@ -1,17 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>  
-<jsp:useBean id="userBean" class="display.javabean.userBean" scope = "session"/>
-<!DOCTYPE html>
+<jsp:useBean id="userBean" scope = "session" class="display.javabean.userBean" />
 
 <% 
-String message = "No se cumplen los requisitos para realizar el cierre de sesi&oacuten";
+String message = "";
 String nextPage = "../../index.jsp";
 
-if(userBean !=null && userBean.getCorreo() != ""){
+if (userBean == null || userBean.getCorreo() == "") {
+	message = "No se cumplen los requisitos para realizar el cierre de sesi&oacuten";
+	
+}else{ 
 	request.getSession().removeAttribute("userBean");
-	userBean = null;
-	message = "Se ha cerrado sesi&oacuten";
+	message = "Sesion cerrada";
 }
+
 %>
 <jsp:forward page="<%=nextPage%>">
 	<jsp:param value="<%=message%>" name="message"/>

@@ -26,10 +26,19 @@ if (mensajeNextPage == null) {
 	mensajeNextPage = "";
 }
 
+String message = "Rellene los siguientes campos para registrarse";
+
+if (userBean.getAdmin()){
+	message = "AVISO: Se estan registrando usuarios administradores";
+}
+
 
 %>
 		<p id="mensaje"><%= mensajeNextPage %></p>
 			<p> NUEVO REGISTRO </p>
+			
+			<p><font color ="blue"><%=message%></font></p>
+			
 			<form id="registroFormulario" method="post" action="/WebProyectoPW/mvc/control/RegistroController.jsp">
 				<div>
 					<p>
