@@ -11,10 +11,10 @@
 
 /*
 Caso 2: userBean no está logado
-	a) Hay parámetros en el request  -> Comprobamos existencia usuario -> Comprobamos datos introducidos -> procede de la vista usuario o admin
-	b) No hay parámetros en el request -> procede a index.jsp para loguearse
+	a) Hay parámetros en el request  -> Comprobamos existencia usuario -> Comprobamos datos introducidos -> Procede a la pagina principal
+	b) No hay parámetros en el request -> Procede a index.jsp para loguearse
 */	
-if(userBean == null || userBean.getCorreo().isEmpty()){
+if(userBean == null || userBean.getCorreo().equals("")){
 	
 	String emailUsuario = request.getParameter("correo");
 	String passwordUsuario = request.getParameter("passWord");
@@ -22,13 +22,8 @@ if(userBean == null || userBean.getCorreo().isEmpty()){
 	//Caso 2.a: Hay parámetros -> Comprobamos si el usuario existe -> procede a la vista
 	if (!emailUsuario.isEmpty() || !passwordUsuario.isEmpty()) {
 		
-		//Obtenemos el valor del parametro sqlproperties, es decir, la ruta relativa al fichero sql.properties
 		String sqlproperties = application.getInitParameter("sqlproperties");
-
-		//Obtenemos el recurso
 		java.io.InputStream myIO = application.getResourceAsStream(sqlproperties);
-
-		//Creamos un objeto properties y lo cargamos con el fichero
 		java.util.Properties prop = new java.util.Properties();
 		prop.load(myIO);
 		
@@ -47,7 +42,7 @@ if(userBean == null || userBean.getCorreo().isEmpty()){
 			if (!usuario.getCorreo().contentEquals(emailUsuario) || !usuario.getPassWord().contentEquals(passwordUsuario)) { //Datos incorrectos
 				
 				nextPage = "../../index.jsp";
-				mensajeNextPage = "El usuario o la contraseña no son validos";
+				mensajeNextPage = "El usuario o la contrase&ntildea no son v&aacute;lidos";
 				
 			}else{ //Datos correctos, se procede con el login
 				
@@ -61,21 +56,14 @@ if(userBean == null || userBean.getCorreo().isEmpty()){
 				<jsp:setProperty property="admin" value="<%=usuario.getAdmin()%>" name="userBean"/>
 				<%
 				
-				//Si el usuario es administrador -> Se redirige a la vista del administrador
-				/*if(usuario.getAdmin()){
-					nextPage = "../view/LoginAdminDisplay.jsp";
-				}
-				//Si el usuario es cliente -> Se redirige a la vista del cliente	
-				else{
-					nextPage = "../view/LoginClientDisplay.jsp";
-				}*/
 				nextPage = "../../index.jsp";
 			}
 		}
 		
 	//Caso 2.b: No hay parámetros en el request -> ir a la vista por primera vez
 	} else {
-		nextPage = "../../index.jsp";		
+		nextPage = "../../index.jsp";
+		mensajeNextPage = "Rellene los campos para loguearse";
 	}
 }
 

@@ -4,16 +4,21 @@
 
 <%
 
-if(userBean == null || userBean.getCorreo().equals("")){
+//Caso 1: No esta logado
+if (userBean == null || userBean.getCorreo().isEmpty() ) {
 	
 %>
-
-		<jsp:forward page="/">
-				<jsp:param value="Debe acceder o registrarse" name="message"/>
-		</jsp:forward>
-
+	<jsp:forward page="../../index.jsp" />
 <%
-}
+//Caso 2: El usuario esta logado
+}else{
+	
+	String mensajeNextPage = request.getParameter("mensaje");
+	
+	if (mensajeNextPage == null) {
+		mensajeNextPage = "";
+	}
+
 %>
 
 <!DOCTYPE html>
@@ -23,45 +28,35 @@ if(userBean == null || userBean.getCorreo().equals("")){
 				<title>Modificar datos del usuario</title>
 		</head>
 		<body>
-
-<%
-
-String nextPage = "/WebProyectoPW/mvc/control/RegistroController.jsp";
-String mensajeNextPage = request.getParameter("message");
-
-if(mensajeNextPage == null) mensajeNextPage = "";
-
-String password = request.getParameter("password");
-
-%>
-
 				<p id="message"><%= mensajeNextPage %></p>
-				<fieldset>
 						<legend> Modificar datos</legend>
 						<form id="formModificarUsuario" method="post" action="/WebProyectoPW/mvc/control/ModificacionController.jsp">
 								<div>
 										<p>
-												<label for="name">Nombre: </label>
-												<input type="text" name="name" placeholder="<%= userBean.getNombre() %>">
+												<label for="nombre">Nombre: </label>
+												<input type="text" name="nombre" id="nombre" value="<%=userBean.getNombre()%>" required="required">
 										</p>
 										<p>
-												<label for="surname">Apellidos: </label>
-												<input type="text" name="surname" placeholder="<%= userBean.getApellidos() %>">
+												<label for="apellidos">Apellidos: </label>
+												<input type="text" name="apellidos" id="apellidos" value="<%=userBean.getApellidos()%>" required="required">
 										</p>
 										<p>
-												<label for="password">Password: </label>
-												<input type="password" id="password" name="password">
+												<label for="passWord">Contraseña: </label>
+												<input type="password" name="passWord" id="passWord" required="required">
 										</p>
 										<p>
 												<label for="email">Email: </label>
-												<input type="text" name="email" value="<%= userBean.getCorreo() %>" readonly>
+												<input type="email" id="email" value="<%= userBean.getCorreo() %>" readonly>
 										</p>
 								</div>	
-								<input type="submit" value="Modificar">
+								<input type="submit" value="Modificar datos">
 						</form>
 						<form id="volver" method="post" action="/WebProyectoPW">
 								<input type="submit" value="Volver">
 						</form>
-				</fieldset>
 		</body>
 </html>
+
+<%
+}
+%>

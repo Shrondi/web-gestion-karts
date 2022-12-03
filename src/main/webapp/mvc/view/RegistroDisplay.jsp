@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page errorPage="include/errorPage.jsp" %>
+<jsp:useBean  id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
 
 <!DOCTYPE html>
 <html>
@@ -11,16 +12,21 @@
 	<body>
 <%
 /* Posibles flujos:
-	1) Hay parámetros en el request  -> viene del RegistroControlador con el mensaje de que ya existe un usuario registrado -> Volvemos al RegistroController
-	2) No hay parámetros en el request -> procede del controlador sin mensaje, es decir, es un nuevo registro -> Volvemos a registroController
-	3) No hay parámetros en el request -> procede del controlador sin mensaje, es decir, es un nuevo registro -> Volvemos a index.jsp
+	1) Procede del controlador con mensaje de que ya existe un usuario registrado -> Se vuelve al controlador
+	2) Procede del controlador sin mensaje, es decir, es un nuevo registro -> Se vuelve al controlador
 */
+
+
+//Caso 1: Solo pueden acceder a esta vista si no esta logado o si lo esta es admin
+if (userBean == null || userBean.getCorreo().isEmpty() || (userBean != null && userBean.getAdmin() == true)) {
+	
 String mensajeNextPage = request.getParameter("mensaje");
 
 if (mensajeNextPage == null) {
 	mensajeNextPage = "";
 }
-String password = request.getParameter("password");
+
+
 %>
 		<p id="mensaje"><%= mensajeNextPage %></p>
 			<p> NUEVO REGISTRO </p>
@@ -54,3 +60,12 @@ String password = request.getParameter("password");
 			</form>
 	</body>
 </html>
+<%
+
+//Caso 2: El usuario esta logado
+}else{
+%>
+	<jsp:forward page="../../index.jsp" />
+<%
+}
+%>
