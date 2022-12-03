@@ -50,7 +50,7 @@ if (mensajeNextPage == null) {
 					</p>
 					<p>
 						<label for="passWord">Password: </label>
-						<input type="text" name="passWord" id="passWord" placeholder="Password" required>
+						<input type="password" name="passWord" id="passWord" placeholder="Password" required>
 					</p>
 				</div>
 				<input type="submit" value="Aceptar">

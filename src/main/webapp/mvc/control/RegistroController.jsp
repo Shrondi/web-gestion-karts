@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="data.DAO.UsuarioDAO,business.usuario.UsuarioDTO" %>
+<%@page import="display.javabean.userBean"%>
 <jsp:useBean  id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
 
 <%
@@ -50,6 +51,17 @@ if (userBean == null || userBean.getCorreo().isEmpty() || (userBean != null && u
 			
 			usuario.altaUsuario(nuevoUsuario);
 			
+			userBean = new userBean();
+			
+			%>
+			<jsp:setProperty property="correo" value="<%=nuevoUsuario.getCorreo()%>" name="userBean"/>
+			<jsp:setProperty property="nombre" value="<%=nuevoUsuario.getNombre()%>" name="userBean"/>
+			<jsp:setProperty property="apellidos" value="<%=nuevoUsuario.getApellidos()%>" name="userBean"/>
+			<jsp:setProperty property="fechaNacimiento" value="<%=nuevoUsuario.getFechaNacimiento()%>" name="userBean"/>
+			<jsp:setProperty property="passWord" value="<%=nuevoUsuario.getPassWord()%>" name="userBean"/>
+			<jsp:setProperty property="admin" value="<%=nuevoUsuario.getAdmin()%>" name="userBean"/>
+			
+			<%
 			//Volvemos al index para que el usuario se loguee
 			nextPage = "../../index.jsp";
 			mensajeNextPage = "Se ha creado el usuario correctamente";
