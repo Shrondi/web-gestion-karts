@@ -4,15 +4,13 @@
 <!DOCTYPE html>
 
 <% 
-String message = "";
+String message = "No se cumplen los requisitos para realizar el cierre de sesi&oacuten";
 String nextPage = "../../index.jsp";
 
-if(userBean!=null || userBean.getCorreo()!=""){
-	userBean.setCorreo("");
+if(userBean !=null && userBean.getCorreo() != ""){
+	request.getSession().removeAttribute("userBean");
 	userBean = null;
-	message = "Se ha cerrado sesi&oacute;n";
-}else{
-	message = "No se cumplian los requisitos para realizar el cierre de sesi&oacute;n";
+	message = "Se ha cerrado sesi&oacuten";
 }
 %>
 <jsp:forward page="<%=nextPage%>">

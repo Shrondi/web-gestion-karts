@@ -51,8 +51,6 @@ if (userBean == null || userBean.getCorreo().isEmpty() || (userBean != null && u
 			
 			usuario.altaUsuario(nuevoUsuario);
 			
-			userBean = new userBean();
-			
 			%>
 			<jsp:setProperty property="correo" value="<%=nuevoUsuario.getCorreo()%>" name="userBean"/>
 			<jsp:setProperty property="nombre" value="<%=nuevoUsuario.getNombre()%>" name="userBean"/>
