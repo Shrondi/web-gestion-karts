@@ -83,7 +83,7 @@ una pista puede tener 20 karts maximos pero el admin puede decidir asociar tanto
 * Respecto a las reservas, consultar que hacer una reserva conlleva una serie de restricciones  (numero de karts de cada tipo por pista, numero, tipo, etc) y al cancelar una reserva se desmarcan los karts como reservados.
 
 		1) Cliente
-			-> Consultar reservas entre una fecha de inicio y fin. -- [¿Quien lo realiza?]
+			-> Consultar reservas entre una fecha de inicio y fin. -- [Miguel]
 				Diferenciar entre reservas finalizadas o futuras
 			-> Buscar una pista disponible segun uno de los siguientes criterios: -- [Paloma]
 				Tipo de pistas, fecha o numero minimo de karts disponibles
@@ -95,7 +95,7 @@ una pista puede tener 20 karts maximos pero el admin puede decidir asociar tanto
 		2) Administrador
 			-> Dar de alta pistas -- [Paloma]
 			-> Dar de alta karts -- [Paloma]
-			-> Asociar kart a pista (mirar restricciones practicas anteriores) -- [¿Quien lo realiza?]
+			-> Asociar kart a pista (mirar restricciones practicas anteriores) -- [Miguel]
 			-> Modificar el estado de karts y pistas -- [¿Quien lo realiza?]
 			-> Eliminar reservas -- [Carlos]
 
