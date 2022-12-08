@@ -5,8 +5,8 @@
  const formulario = document.getElementById('formModificarUsuario');
  const inputs = document.querySelectorAll('#formModificarUsuario input');
  
- correctName = false
- correctSurname = false
+ correctName = true
+ correctSurname = true
  //correctPassWord = false
  
  
