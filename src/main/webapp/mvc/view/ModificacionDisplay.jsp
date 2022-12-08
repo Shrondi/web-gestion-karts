@@ -51,6 +51,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() ) {
 								</div>	
 								<input type="submit" value="Modificar datos">
 						</form>
+						<script type="text/javascript" src="/WebProyectoPW/js/ModifyValidation.js"></script>
 						<form id="volver" method="post" action="/WebProyectoPW">
 								<input type="submit" value="Volver">
 						</form>

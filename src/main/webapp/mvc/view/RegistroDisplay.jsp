@@ -30,7 +30,8 @@ if (mensajeNextPage == null) {
 %>
 		<p id="mensaje"><%= mensajeNextPage %></p>
 			<p> NUEVO REGISTRO </p>
-			<form id="registroFormulario" method="post" action="/WebProyectoPW/mvc/control/RegistroController.jsp">
+			<div>
+			<form id="registroFormulario" class="registroFormulario" method="post" action="/WebProyectoPW/mvc/control/RegistroController.jsp">
 				<div>
 					<p>
 						<label for="nombre">Nombre: </label>
@@ -55,6 +56,8 @@ if (mensajeNextPage == null) {
 				</div>
 				<input type="submit" value="Aceptar">
 			</form>
+			<script type="text/javascript" src="/WebProyectoPW/js/RegisterValidation.js"></script>
+			</div>
 			<form method="post" action="../../index.jsp">
 				<input type="submit" value="Volver">
 			</form>
