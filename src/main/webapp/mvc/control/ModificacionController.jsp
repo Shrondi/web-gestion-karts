@@ -39,6 +39,7 @@ if (userBean != null || !userBean.getCorreo().equals("")){
 			
 			<jsp:setProperty property="nombre" value="<%=usuarioDTO.getNombre()%>" name="userBean"/>
 			<jsp:setProperty property="apellidos" value="<%=usuarioDTO.getApellidos()%>" name="userBean"/>
+			<jsp:setProperty property="passWord" value="<%=usuarioDTO.getPassWord()%>" name="userBean"/>
 			
 <% 
 		//Caso 2b: No hay parametros en el request -> Se debe ir a la vista para modificar los datos
