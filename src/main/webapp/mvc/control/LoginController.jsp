@@ -57,6 +57,7 @@ if(userBean == null || userBean.getCorreo().equals("")){
 				<%
 				
 				nextPage = "../../index.jsp";
+				mensajeNextPage = "Se ha iniciado sesion correctamente";
 			}
 		}
 		

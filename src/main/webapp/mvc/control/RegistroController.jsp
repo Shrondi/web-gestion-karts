@@ -51,8 +51,8 @@ if (userBean == null || userBean.getCorreo().isEmpty() || (userBean != null && u
 			
 			usuario.altaUsuario(nuevoUsuario);
 			
-			userBean = new userBean();
-			
+			//Como un admin puede registrar otros admin solo se hace el login automatico hacia la nueva cuenta creada si es un usuario normal
+			if (userBean.getAdmin() == false){
 			%>
 			<jsp:setProperty property="correo" value="<%=nuevoUsuario.getCorreo()%>" name="userBean"/>
 			<jsp:setProperty property="nombre" value="<%=nuevoUsuario.getNombre()%>" name="userBean"/>
@@ -62,9 +62,16 @@ if (userBean == null || userBean.getCorreo().isEmpty() || (userBean != null && u
 			<jsp:setProperty property="admin" value="<%=nuevoUsuario.getAdmin()%>" name="userBean"/>
 			
 			<%
-			//Volvemos al index para que el usuario se loguee
+			}
+			
 			nextPage = "../../index.jsp";
-			mensajeNextPage = "Se ha creado el usuario correctamente";
+			
+			if (userBean.getAdmin()){
+				mensajeNextPage = "Se ha creado el usuario administrador " + correo + " correctamente";
+			}else{
+				mensajeNextPage = "Se ha iniciado sesion correctamente";
+			}
+			
 		}
 		
 	//Caso 2b: No hay parametros en el request -> Se debe ir a la vista para registrarse
