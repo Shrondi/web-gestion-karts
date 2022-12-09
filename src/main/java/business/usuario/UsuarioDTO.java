@@ -61,7 +61,7 @@ public class UsuarioDTO implements Serializable{
 		this.admin_ = admin;  
 		this.passWord_ = passWord;
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		sdf.setLenient(false);
 		try {
 			this.fechaNacimiento_ = sdf.parse(fechaNacimiento);
