@@ -3,6 +3,10 @@
  */
  const formulario = document.getElementById('registroFormulario');
  const inputs = document.querySelectorAll('#registroFormulario input');
+ const date = Date.parse(new Date().toLocaleDateString())
+ const localDate = new Date()
+ var inputDate
+ 
  
  correctName = false
  correctSurname = false
@@ -19,6 +23,13 @@ const RegularExpressions = {
 	date: /^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))$/
 }
 
+function validacionEdad(actualMillis , inputMillis){
+	
+	diff = actualMillis-inputMillis
+	diff = diff/31536000000
+	console.log("years: "+diff)
+	return diff
+}
 
 const validarFormulario = (e) => {
 	switch(e.target.name){
@@ -48,11 +59,20 @@ const validarFormulario = (e) => {
 		break;
 		case "fechaNacimiento":
 		if(RegularExpressions.date.test(e.target.value)){
-				correctDate=true
+				inputDate = Date.parse(e.target.value)
+				if(validacionEdad(date,inputDate)>=18){
+					correctDate=true
+				}else{
+					correctDate=false
+				}
+				console.log("parsed fechaNacimiento: "+ inputDate)
 			}else{
 				correctDate=false
 			}
 			console.log("fechaNacimiento: "+ correctDate)
+			console.log("dateValue: "+ localDate)
+			console.log("date: "+ date)
+			console.log("fechaNacimiento_VALUE: "+e.target.value)
 		break;
 		case "passWord":
 			if(RegularExpressions.password.test(e.target.value)){
