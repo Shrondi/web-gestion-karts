@@ -11,7 +11,7 @@ String nextPage = "../../index.jsp";
 String mensajeNextPage = "";
 
 //Caso 2: Se permite el registro a cualquier usuario no logueado y a los admin logueados
-if (userBean == null || userBean.getCorreo().isEmpty() || (userBean != null && userBean.getAdmin() == true)) {
+if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() == true) {
 	
 	String nombre = request.getParameter("nombre");
 	String apellidos = request.getParameter("apellidos");

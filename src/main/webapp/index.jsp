@@ -11,8 +11,7 @@
 </head>
 <body>
 <h2>Bienvenido a UcoGestor</h2>
-<%	//userBean.setCorreo("");
-	//userBean = null;
+<%	
 	String message = request.getParameter("message");
 	if(message == null){
 		message = "";

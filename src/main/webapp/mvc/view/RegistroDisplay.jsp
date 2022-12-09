@@ -18,7 +18,7 @@
 
 
 //Caso 1: Solo pueden acceder a esta vista si no esta logado o si lo esta es admin
-if (userBean == null || userBean.getCorreo().isEmpty() || (userBean != null && userBean.getAdmin() == true)) {
+if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() == true) {
 	
 String mensajeNextPage = request.getParameter("mensaje");
 
@@ -56,7 +56,7 @@ if (userBean.getAdmin()){
 					</p>
 					<p>
 						<label for="fechaNacimiento">Fecha Nacimiento: </label>
-						<input type="text" name="fechaNacimiento" id="fechaNacimiento" placeholder="dd/mm/yyyy" required>
+						<input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="dd/mm/yyyy" required>
 					</p>
 					<p>
 						<label for="passWord">Password: </label>

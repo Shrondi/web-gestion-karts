@@ -4,11 +4,6 @@ import data.common.DBConnection;
 
 import business.reserva.ReservaAdultosDTO;
 import java.sql.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -36,19 +31,8 @@ public class ReservaAdultosDAO {
 	 * Constructor sin parametros del DAO 
 	 */
 	
-	public ReservaAdultosDAO() {
-		
-		prop = new Properties();
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(new File("sql.properties")));
-			prop.load(reader);
-			reader.close();
-			
-		} catch(FileNotFoundException e) {
-			e.printStackTrace();
-		} catch(IOException e) {
-			e.printStackTrace();
-		}
+	public ReservaAdultosDAO(Properties properties) {
+		prop = properties;
 	}
 	
 	/**
