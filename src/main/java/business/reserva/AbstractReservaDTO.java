@@ -43,7 +43,7 @@ public class AbstractReservaDTO implements Serializable {
 	}
 	
 	public String getFecha() {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy'T'HH:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy HH:mm");
 		String retVal = sdf.format(this.fecha_);
 		return retVal;
 	}
