@@ -40,7 +40,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		
 		UsuarioDAO usuario = new UsuarioDAO(prop);
 		
-		//Comprobamos si el usuario ya existe (crear DAO)
+		//Comprobamos si el usuario ya existe
 		if (usuario.usuarioExiste(correo)){
 			nextPage = "../view/RegistroDisplay.jsp";
 			mensajeNextPage = "Ya existe un usuario registrado con ese email";

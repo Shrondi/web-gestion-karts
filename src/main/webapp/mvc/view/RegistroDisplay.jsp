@@ -20,7 +20,7 @@
 //Caso 1: Solo pueden acceder a esta vista si no esta logado o si lo esta es admin
 if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() == true) {
 	
-String mensajeNextPage = request.getParameter("mensaje");
+String mensajeNextPage = request.getParameter("message");
 
 if (mensajeNextPage == null) {
 	mensajeNextPage = "";
@@ -34,7 +34,7 @@ if (userBean.getAdmin()){
 
 
 %>
-		<p id="mensaje"><%= mensajeNextPage %></p>
+		<p> <font color ="red"> <%= mensajeNextPage %></font></p>
 			<p> NUEVO REGISTRO </p>
 			<div>
 			<form id="registroFormulario" class="registroFormulario" method="post" action="/WebProyectoPW/mvc/control/RegistroController.jsp">

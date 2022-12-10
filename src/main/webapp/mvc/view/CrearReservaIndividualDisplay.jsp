@@ -13,7 +13,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 //Caso 2: El usuario esta logado y no es admin
 }else{
 	
-	String mensajeNextPage = request.getParameter("mensaje");
+	String mensajeNextPage = (String) request.getAttribute("mensaje");
 	
 	if (mensajeNextPage == null) {
 		mensajeNextPage = "";
@@ -47,7 +47,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 										
 										<p>
 										Escribe el numero de participantes adultos:
-										<input type="number" name="numeroAdultos" min="1" max="20" step="1" required>
+										<input type="number" name="numeroAdultos" min="0" max="20" step="1" required>
 										</p>
 										
 										<p>
@@ -61,7 +61,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 										</p>
 										
 								</div>	
-								<input type="submit" value="Realizar Reserva">
+								<input type="submit" value="Continuar">
 						</form>
 						<form id="volver" method="post" action="/WebProyectoPW">
 								<input type="submit" value="Volver">

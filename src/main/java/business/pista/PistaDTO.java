@@ -21,7 +21,8 @@ public class PistaDTO implements Serializable{
 	private boolean estado_;
 	private Dificultad dif_;
 	private int max_karts_;
-	private int asoc_karts_;
+	private int asoc_karts_infantiles_;
+	private int asoc_karts_adultos_;
 	
 	/**
 	 * Constructor vacio (default)
@@ -32,7 +33,8 @@ public class PistaDTO implements Serializable{
 		this.estado_ = false;
 		this.dif_ = Dificultad.INFANTIL;
 		this.max_karts_ = -1;
-		this.asoc_karts_ = -1;
+		this.asoc_karts_infantiles_ = -1;
+		this.asoc_karts_adultos_ = -1;
 	}
 	
 	
@@ -44,12 +46,13 @@ public class PistaDTO implements Serializable{
 	 * @param max_karts Capacidad maxima de karts para la pista
 	 */
 	
-	public PistaDTO(String nombre, boolean estado, Dificultad dif,int max_karts) {
+	public PistaDTO(String nombre, boolean estado, Dificultad dif,int max_karts, int asoc_karts_inf, int asoc_karts_adult) {
 		this.nombre_= nombre;
 		this.estado_= estado;
 		this.dif_= dif;
 		this.max_karts_= max_karts;
-		//this.karts_= new ArrayList<>();
+		this.asoc_karts_infantiles_ = asoc_karts_inf;
+		this.asoc_karts_adultos_ = asoc_karts_adult;
 	}
 	
 	/**
@@ -84,12 +87,13 @@ public class PistaDTO implements Serializable{
 		return this.max_karts_;
 	}
 	
-	/**
-	 * Getter del numero de karts asociados a la pista
-	 * @return Numero de karts asociados
-	 */
-	public int getAsocAmmount(){
-		return this.max_karts_;
+	
+	public int getAsocAmmountInf(){
+		return asoc_karts_infantiles_;
+	}
+	
+	public int getAsocAmmountAdult(){
+		return asoc_karts_adultos_;
 	}
 	
 	/**
@@ -124,12 +128,13 @@ public class PistaDTO implements Serializable{
 		this.max_karts_=KartsNumber;
 	}
 	
-	/**
-	 * Setter del numero de karts asociados a la pista
-	 * @return Numero de karts asociados
-	 */
-	public void setAsocAmmount(int KartAsoc){
-		this.asoc_karts_ = KartAsoc;
+	
+	public void setAsocAmmountInf(int KartAsocInf){
+		this.asoc_karts_infantiles_ = KartAsocInf;
+	}
+	
+	public void setAsocAmmountAdult(int KartAsocAdult){
+		this.asoc_karts_adultos_ = KartAsocAdult;
 	}
 	
 	/**
@@ -140,7 +145,7 @@ public class PistaDTO implements Serializable{
 	@Override
  	public String toString() {
 		String retValue;
-		retValue = "Nombre: " + this.nombre_ + "\n" + "Estado: " + this.estado_ + "\n" + "Dificultad: " + this.dif_ + "\n" + "Maximo de karts: " + this.max_karts_  + "\n" + "Karts asociados: " + this.asoc_karts_ + "\n";
+		retValue = "Nombre: " + this.nombre_ + "\n" + "Estado: " + this.estado_ + "\n" + "Dificultad: " + this.dif_ + "\n" + "Maximo de karts: " + this.max_karts_  + "\n" + "Karts asociados infantiles: " + this.asoc_karts_infantiles_ + "\n" + "Karts asociados infantiles: " + this.asoc_karts_adultos_ + "\n";
 		return retValue;
 	}
 }

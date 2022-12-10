@@ -46,10 +46,10 @@
 		<%
 		if(userBean.getAdmin()){
 		%>
-		<p>¡Bienvenido Administrador <%=userBean.getNombre()%>!</p>
+		<p>¡Bienvenido Administrador <%=userBean.getNombre() + userBean.getApellidos()%>!</p>
 		<%}else{
 		%>
-		<p>¡Bienvenido usuario <%=userBean.getNombre()%>!</p>
+		<p>¡Bienvenido usuario <%=userBean.getCorreo()%>!</p>
 		<p>Son las <%= new java.util.Date() %></p>
 		<p>Se registro <%= userBean.getFechaInscripcion()%></p>
 	<% }	

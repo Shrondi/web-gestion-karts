@@ -71,35 +71,33 @@ public class KartDAO {
 			ps.executeUpdate();
 			
 		} catch(Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		connection.closeConnection();
 	}
 	
-	/**
-	 * Actualizar estado del kart 
-	 * @param estado Estado del kart
-	 * @param id Id del kart
-	 */
 	
-	public void actualizarEstadoKart(String estado, int id) {
+	//NEW
+	public void actualizarEstadoKart(boolean tipo, String nombre, int numKart) {
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
 		
 		try {
 			PreparedStatement ps = con.prepareStatement(prop.getProperty("actualizarEstadoKartSTM"));
-			ps.setString(1,estado);
-			ps.setInt(2,id);
+			ps.setBoolean(1, tipo);
+			ps.setString(2,nombre);
+			ps.setInt(3,numKart);
 			ps.executeUpdate();
 			
 		} catch(Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		connection.closeConnection();
 	}
 	
+
 	/**
-	 * Consultar karts disponibles de una pista por su tipo
+	 * Consultar karts disponibles por pista
 	 * @param nombre Nombre de una pista
 	 * @return karts Listado de karts
 	 */

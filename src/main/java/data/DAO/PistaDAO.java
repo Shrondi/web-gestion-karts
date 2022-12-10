@@ -53,20 +53,15 @@ public class PistaDAO{
 		connection.closeConnection();
 	}
 	
-	/**
-	 * Actualizar pista
-	 * @param nombre Nombre de la pista
-	 * @param estado Estado de la pista
-	 * @param asocKart Numero de karts asociados a la pista
-	 */
-	
-	public void actualizarPista(String nombre, boolean estado, int asocKart) {
+
+	//NEW
+	public void actualizarPista(String nombre, int asocKartInfantiles, int asocKartAdultos) {
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
 		try {
-			PreparedStatement ps = con.prepareStatement(prop.getProperty("actualizarPistaSTM") + String.format("'%s'", nombre));
-			ps.setBoolean(1, estado);
-			ps.setInt(2, asocKart);
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("actualizarPistaSTM"));
+			ps.setInt(1, asocKartInfantiles);
+			ps.setInt(2, asocKartAdultos);
 			ps.setString(3, nombre);
 			ps.executeUpdate();
 			
@@ -100,7 +95,7 @@ public class PistaDAO{
 				pistaToPush.setNombre(nombre);
 				pistaToPush.setDificulty(Dificultad.valueOf(dificultad.toUpperCase()));
 				pistaToPush.setMaxAmmount(max_karts);
-				pistaToPush.setAsocAmmount(asoc_karts);
+				//pistaToPush.setAsocAmmount(asoc_karts);
 				pistaToPush.setEstado(estado);
 				pistas.add(pistaToPush);
 			}
@@ -140,5 +135,53 @@ public class PistaDAO{
 		
 		connection.closeConnection();
 		return flag;
-	}	
+	}
+	
+	//NEW
+	public List<PistaDTO> consultarPistas(String tipoPista, int kartsInfantiles, int kartsAdultos){
+		List<PistaDTO> pistas = new ArrayList<>();
+		DBConnection connection = new DBConnection();
+		con = connection.getConnection();
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerPistasSTM"));
+			
+			ps.setString(1, tipoPista);
+			ps.setInt(2, kartsInfantiles);
+			ps.setInt(3, kartsAdultos);
+		
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+
+				String nombre = rs.getString("nombre");
+				Boolean estado = rs.getBoolean("estado");
+				String dificultad = rs.getString("dificultad");
+				int max_karts = rs.getInt("max_karts");
+				int asoc_karts_infantiles = rs.getInt("asoc_karts_disp_infantiles");
+				int asoc_karts_adultos = rs.getInt("asoc_karts_disp_adultos");
+				
+				PistaDTO pistaToPush = new PistaDTO();
+				pistaToPush.setNombre(nombre);
+				pistaToPush.setEstado(estado);
+				pistaToPush.setDificulty(Dificultad.valueOf(dificultad.toUpperCase()));
+				pistaToPush.setMaxAmmount(max_karts);
+				pistaToPush.setAsocAmmountInf(asoc_karts_infantiles);
+				pistaToPush.setAsocAmmountAdult(asoc_karts_adultos);
+				
+				pistas.add(pistaToPush);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} catch(IllegalArgumentException e){
+			e.printStackTrace();
+		}
+		
+		connection.closeConnection();
+		return pistas;
+	}
+	
+	
 }
