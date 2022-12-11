@@ -33,7 +33,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 								<div>
 										<p>
 												<label for="fecha">Fecha Reserva: </label>
-												<input type="datetime-local" name="fecha" id="fecha" placeholder="dd/mm/yyyy" required>
+												<input type="datetime-local" name="fecha" id="fecha" required>
 										</p>
 										
 										<input type="radio" name="tipoReserva" value="INFANTIL" required>Reserva Infantil <br>

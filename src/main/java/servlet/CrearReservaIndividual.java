@@ -140,6 +140,8 @@ public class CrearReservaIndividual extends HttpServlet {
 					
 					reserva.crearReservaInfantil(infantil);
 					
+					request.setAttribute("reservaInfantil", infantil);
+					
 					
 				}else if(tipoReserva.contentEquals("FAMILIAR")) {
 					ReservaFamiliarDAO reserva = new ReservaFamiliarDAO(prop);
@@ -156,6 +158,8 @@ public class CrearReservaIndividual extends HttpServlet {
 					
 					reserva.crearReservaFamiliar(familiar);
 					
+					request.setAttribute("reservaFamiliar", familiar);
+					
 				}else if(tipoReserva.contentEquals("ADULTOS")) {
 					ReservaAdultosDAO reserva = new ReservaAdultosDAO(prop);
 					ReservaAdultosDTO adultos = new ReservaAdultosDTO();
@@ -169,6 +173,8 @@ public class CrearReservaIndividual extends HttpServlet {
 					adultos.setIdPista(pista);
 					
 					reserva.crearReservaAdulto(adultos);
+					
+					request.setAttribute("reservaAdultos", adultos);
 				}
 				
 				//Actualizamos la fecha de inscripcion si es la primera reserva
@@ -195,10 +201,9 @@ public class CrearReservaIndividual extends HttpServlet {
 				request.getSession().removeAttribute("tipoReserva");
 				request.getSession().removeAttribute("fecha");
 				
-				
-				System.err.println("RESERVA REALIZADA");
-				
-				response.sendRedirect("/WebProyectoPW");
+				//Mostramos el resumen de la reserva
+				dispatcher = request.getRequestDispatcher("/mvc/view/ResumenReservaIndividualDisplay.jsp");
+				dispatcher.forward(request, response);
 				
 			//Caso 2c: Hay parametros en el request proveniente de la vista de crear reservas
 			}else{

@@ -32,20 +32,22 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 <html>
 		<head>
 				<meta charset="UTF-8">
-				<title>Elegir Pista Reserva</title>
+				<title>Cancelar Reserva</title>
 		</head>
 		<body>
 				<p id="message"><%= mensajeNextPage %> </p>
 				<form id="submit" method="post" action="/WebProyectoPW/CancelarReservaIndividual">
 				
 				<p>
-					RESERVAS INFANTILES
+					Seleccione una de las siguientes reservas:
 				</p>
 				
 				 <%  if (reservasInfantil.isEmpty()){ %>
-				 		No existen reservas infantiles
+				 		<p> No se han encontrado reservas infantiles </p>
 				  <% }else{ %>
+				
 				<table>
+				<caption> <strong> Reservas Infantiles </strong> </caption>
 							<thead>
 							  <tr>
 							    <th></th>
@@ -74,16 +76,13 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							</tbody>
 						</table>
 					<% } %>
-						
-				<p>
-					RESERVAS FAMILIARES
-				</p>
 				
 				<%  if (reservasFamiliar.isEmpty()){ %>
-				 		No existen reservas familiares
+				 		<p> No se han encontrado reservas familiares </p>
 				  <% }else{ %>
 				
 				<table>
+				<caption> <strong> Reservas Familiares </strong> </caption>
 							<thead>
 							  <tr>
 							    <th></th>
@@ -114,21 +113,19 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							</tbody>
 						</table>
 					<% } %>
-				<p>
-					RESERVAS ADULTOS
-				</p>
 				
 				<%  if (reservasAdultos.isEmpty()){ %>
-				 		No existen reservas de adultos
+				 		<p> No se han encontrado reservas adultos </p>
 				  <% }else{ %>
 				
 				<table>
+				<caption> <strong> Reservas Adultos </strong> </caption>
 							<thead>
 							  <tr>
 							    <th></th>
 							    <th>Fecha y hora</th>
 							    <th>Duracion</th>
-							    <th>Participantes infantiles</th>
+							    <th>Participantes adultos</th>
 							    <th>Descuento</th>
 							    <th>Precio</th>
 							    <th>Pista</th>

@@ -65,10 +65,12 @@ public class CancelarReservaIndividual extends HttpServlet {
 				dispatcher = request.getRequestDispatcher("/mvc/view/ReservasDisplay.jsp");
 				dispatcher.forward(request, response);
 				
+				
 			}else {
 				ReservaDAO reservaDAO = new ReservaDAO(prop);
 			
 				reservaDAO.borrarReserva(userBean.getCorreo(), Integer.parseInt(reserva));
+				
 			}
 			
 		}
