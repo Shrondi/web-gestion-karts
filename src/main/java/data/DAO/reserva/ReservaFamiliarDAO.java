@@ -132,12 +132,8 @@ public class ReservaFamiliarDAO {
 			
 	}
 	
-	/**
-	 * Método que obtiene las reservas de tipo Familiar cuya fecha aun no esté cumplida
-	 * @return Una lista de Reservas de tipo Familiar con fecha superior a la actual
-	 */
-	
-	public List<ReservaFamiliarDTO> consultarReservasFamiliar(){
+	//NEW
+	public List<ReservaFamiliarDTO> consultarReservasFamiliarFuturas(){
 		List<ReservaFamiliarDTO> reservas = new ArrayList<>();
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
@@ -147,9 +143,11 @@ public class ReservaFamiliarDAO {
 			String query = prop.getProperty("obtenerReservasFamiliarbyFechaSTM");
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
+				int idReserva = rs.getInt("id_Reserva");
 				String usuario = rs.getString("usuario");
 				int participantes_infantiles = rs.getInt("participantes_infantiles");
 				int participantes_adultos = rs.getInt("participantes_adultos");
+				Date fecha = rs.getDate("fecha");
 				int duracion = rs.getInt("duracion");
 				float descuento = rs.getFloat("descuento");
 				float precio = rs.getFloat("precio");
@@ -157,9 +155,11 @@ public class ReservaFamiliarDAO {
 				
 				ReservaFamiliarDTO reservafamiliar = new ReservaFamiliarDTO();
 				
+				reservafamiliar.setIdReserva(idReserva);
 				reservafamiliar.setIdUsuario(usuario);
 				reservafamiliar.setParticipantesInfantiles(participantes_infantiles);
 				reservafamiliar.setParticipantesAdultos(participantes_adultos);
+				reservafamiliar.setFecha(fecha);
 				reservafamiliar.setDuracion(duracion);
 				reservafamiliar.setDescuento(descuento);
 				reservafamiliar.setPrecio(precio);

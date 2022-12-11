@@ -32,20 +32,16 @@ public class ReservaDAO {
 		prop = properties;
 	}
 	
-	/**
-	 * Borrar una reserva
-	 * @param reserva AbstractReservaDTO
-	 */
-	
-	public void borrarReserva(AbstractReservaDTO reserva) {
+	//NEW
+	public void borrarReserva(String nombre, int idReserva) {
 		
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
 
 		try {
 			PreparedStatement ps = con.prepareStatement(prop.getProperty("cancelarReservaSTM"));
-			ps.setString(1,reserva.getIdUsuario());
-			ps.setString(2,reserva.getFecha());
+			ps.setString(1,nombre);
+			ps.setInt(2,idReserva);
 			
 			ps.executeUpdate();
 		

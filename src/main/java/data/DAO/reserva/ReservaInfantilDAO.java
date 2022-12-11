@@ -129,12 +129,9 @@ public class ReservaInfantilDAO {
 		
 	}
 	
-	/**
-	 * Método que obtiene las reservas de tipo Infantil cuya fecha aun no esté cumplida
-	 * @return una lista de Reservas de tipo Infantil con fecha superior a la actual
-	 */
 	
-	public List<ReservaInfantilDTO> consultarReservasInfantil(){
+	//NEW
+	public List<ReservaInfantilDTO> consultarReservasInfantilFuturas(){
 		List<ReservaInfantilDTO> reservas = new ArrayList<>();
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
@@ -144,8 +141,10 @@ public class ReservaInfantilDAO {
 			String query = prop.getProperty("obtenerReservasInfantilbyFechaSTM");
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
+				int idReserva = rs.getInt("id_Reserva");
 				String usuario = rs.getString("usuario");
 				int participantes_infantiles = rs.getInt("participantes_infantiles");
+				Date fecha = rs.getDate("fecha");
 				int duracion = rs.getInt("duracion");
 				float descuento = rs.getFloat("descuento");
 				float precio = rs.getFloat("precio");
@@ -153,8 +152,10 @@ public class ReservaInfantilDAO {
 				
 				ReservaInfantilDTO reservainfantil = new ReservaInfantilDTO();
 				
+				reservainfantil.setIdReserva(idReserva);
 				reservainfantil.setIdUsuario(usuario);
 				reservainfantil.setParticipantesInfantiles(participantes_infantiles);
+				reservainfantil.setFecha(fecha);
 				reservainfantil.setDuracion(duracion);
 				reservainfantil.setDescuento(descuento);
 				reservainfantil.setPrecio(precio);

@@ -22,6 +22,7 @@ import java.text.ParseException;
 @SuppressWarnings("serial")
 public class AbstractReservaDTO implements Serializable {
 	
+	protected int idReserva_;
 	protected String idUsuario_;
 	protected Date fecha_;
 	protected int duracion_;
@@ -30,12 +31,17 @@ public class AbstractReservaDTO implements Serializable {
 	protected float descuento_;
 	
 	public AbstractReservaDTO() {
+		idReserva_ = -1;
 		idUsuario_ = null;
 		fecha_ = new Date();
 		duracion_ = 0;
 		idPista_ = null;
 		precio_ = 0;
 		descuento_ = 0;
+	}
+	
+	public int getIdReserva() {
+		return this.idReserva_;
 	}
 	
 	public String getIdUsuario() {
@@ -68,6 +74,10 @@ public class AbstractReservaDTO implements Serializable {
 		this.idUsuario_ = idUsuario;
 	}
 	
+	public void setIdReserva(int idReserva) {
+		this.idReserva_ = idReserva;
+	}
+	
 	public void setFecha(String fecha) {
 		java.text.SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd'T'HH:mm");
 		sdf.setLenient(false);
@@ -77,6 +87,11 @@ public class AbstractReservaDTO implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public void setFecha(Date fecha) {
+		this.fecha_ = fecha;
+	}
+	
 	
 	public void setDuracion(int duracion) {
 		this.duracion_ = duracion;

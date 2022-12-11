@@ -21,7 +21,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 	
 	List<PistaDTO> pistas = (List<PistaDTO>) request.getAttribute("ListaPistas");
 	
-	//Caso 3: El usuario accede por la url
+	//Caso 3: Si se accede de forma forzosa por url
 	if (pistas == null){ 
 %>
 		<jsp:forward page="../../index.jsp" />

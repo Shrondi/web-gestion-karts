@@ -187,6 +187,15 @@ public class CrearReservaIndividual extends HttpServlet {
 				kartDAO.actualizarEstadoKart(true, pista, numeroNinios);
 				kartDAO.actualizarEstadoKart(false, pista, numeroAdultos);
 				
+				//Borramos los atributos de la sesion correspondientes a esta reserva
+				request.removeAttribute("ListaPistas");
+				request.getSession().removeAttribute("duracion");
+				request.getSession().removeAttribute("numeroNinios");
+				request.getSession().removeAttribute("numeroAdultos");
+				request.getSession().removeAttribute("tipoReserva");
+				request.getSession().removeAttribute("fecha");
+				
+				
 				System.err.println("RESERVA REALIZADA");
 				
 				response.sendRedirect("/WebProyectoPW");

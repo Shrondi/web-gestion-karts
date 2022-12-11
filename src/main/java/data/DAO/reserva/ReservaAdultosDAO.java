@@ -126,11 +126,8 @@ public class ReservaAdultosDAO {
 			
 	}
 	
-	/**
-	 * Método que obtiene las reservas de tipo Adulto cuya fecha aun no esté cumplida
-	 * @return Una lista de Reservas de tipo Adulto con fecha superior a la actual
-	 */
-	public List<ReservaAdultosDTO> consultarReservasAdultos(){
+	//NEW
+	public List<ReservaAdultosDTO> consultarReservasAdultosFuturas(){
 		List<ReservaAdultosDTO> reservas = new ArrayList<>();
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
@@ -140,8 +137,10 @@ public class ReservaAdultosDAO {
 			String query = prop.getProperty("obtenerReservasAdultosbyFechaSTM");
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
+				int idReserva = rs.getInt("id_Reserva");
 				String usuario = rs.getString("usuario");
 				int participantes_adultos = rs.getInt("participantes_adultos");
+				Date fecha = rs.getDate("fecha");
 				int duracion = rs.getInt("duracion");
 				float descuento = rs.getFloat("descuento");
 				float precio = rs.getFloat("precio");
@@ -149,8 +148,10 @@ public class ReservaAdultosDAO {
 				
 				ReservaAdultosDTO reservaadulto = new ReservaAdultosDTO();
 				
+				reservaadulto.setIdReserva(idReserva);
 				reservaadulto.setIdUsuario(usuario);
 				reservaadulto.setParticipantesAdultos(participantes_adultos);
+				reservaadulto.setFecha(fecha);
 				reservaadulto.setDuracion(duracion);
 				reservaadulto.setDescuento(descuento);
 				reservaadulto.setPrecio(precio);
