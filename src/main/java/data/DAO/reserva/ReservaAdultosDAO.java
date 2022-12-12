@@ -1,7 +1,8 @@
 package data.DAO.reserva;
 
 import data.common.DBConnection;
-
+import business.pista.Dificultad;
+import business.pista.PistaDTO;
 import business.reserva.ReservaAdultosDTO;
 import java.sql.*;
 import java.util.ArrayList;
@@ -167,6 +168,108 @@ public class ReservaAdultosDAO {
 		connection.closeConnection();
 		return reservas;
 	}
+	
+	//NEW
+	public List<ReservaAdultosDTO> consultarReservasAdultosFuturasRango(String fechaInicio, String fechaFin, String usuario){
+		List<ReservaAdultosDTO> reservas = new ArrayList<>();
+		DBConnection connection = new DBConnection();
+		con = connection.getConnection();
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasAdultosFuturasSTM"));
+			
+			ps.setString(1, fechaInicio);
+			ps.setString(2, fechaFin);
+			ps.setString(3, usuario);
+		
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+
+				int idReserva = rs.getInt("id_Reserva");
+				int participantes_adultos = rs.getInt("participantes_adultos");
+				Date fecha = rs.getDate("fecha");
+				int duracion = rs.getInt("duracion");
+				float descuento = rs.getFloat("descuento");
+				float precio = rs.getFloat("precio");
+				String pista = rs.getString("pista");
+				
+				ReservaAdultosDTO reservaadulto = new ReservaAdultosDTO();
+				
+				reservaadulto.setIdReserva(idReserva);
+				reservaadulto.setIdUsuario(usuario);
+				reservaadulto.setParticipantesAdultos(participantes_adultos);
+				reservaadulto.setFecha(fecha);
+				reservaadulto.setDuracion(duracion);
+				reservaadulto.setDescuento(descuento);
+				reservaadulto.setPrecio(precio);
+				reservaadulto.setIdPista(pista);
+				reservas.add(reservaadulto);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} catch(IllegalArgumentException e){
+			e.printStackTrace();
+		}
+		
+		connection.closeConnection();
+		return reservas;
+	}
+	
+	//NEW
+	public List<ReservaAdultosDTO> consultarReservasAdultosPasadasRango(String fechaInicio, String fechaFin, String usuario){
+		
+		List<ReservaAdultosDTO> reservas = new ArrayList<>();
+		DBConnection connection = new DBConnection();
+		con = connection.getConnection();
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasAdultosPasadasSTM"));
+			
+			ps.setString(1, fechaInicio);
+			ps.setString(2, fechaFin);
+			ps.setString(3, usuario);
+		
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+
+				int idReserva = rs.getInt("id_Reserva");
+				int participantes_adultos = rs.getInt("participantes_adultos");
+				Date fecha = rs.getDate("fecha");
+				int duracion = rs.getInt("duracion");
+				float descuento = rs.getFloat("descuento");
+				float precio = rs.getFloat("precio");
+				String pista = rs.getString("pista");
+				
+				ReservaAdultosDTO reservaadulto = new ReservaAdultosDTO();
+				
+				reservaadulto.setIdReserva(idReserva);
+				reservaadulto.setIdUsuario(usuario);
+				reservaadulto.setParticipantesAdultos(participantes_adultos);
+				reservaadulto.setFecha(fecha);
+				reservaadulto.setDuracion(duracion);
+				reservaadulto.setDescuento(descuento);
+				reservaadulto.setPrecio(precio);
+				reservaadulto.setIdPista(pista);
+				reservas.add(reservaadulto);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} catch(IllegalArgumentException e){
+			e.printStackTrace();
+		}
+		
+		connection.closeConnection();
+		return reservas;
+		
+	}
+	
+	
 	
 	/**
 	 * 

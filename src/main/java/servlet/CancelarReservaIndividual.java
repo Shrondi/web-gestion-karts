@@ -46,7 +46,7 @@ public class CancelarReservaIndividual extends HttpServlet {
 		//Caso 2: Usuario logueado
 		}else{
 			
-			String reserva = request.getParameter("reserva");
+			String reserva = request.getParameter("reserva"); 
 			
 			if (reserva == null) {
 				

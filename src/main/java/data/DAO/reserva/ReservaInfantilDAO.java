@@ -1,7 +1,7 @@
 package data.DAO.reserva;
 
 import data.common.DBConnection;
-
+import business.reserva.ReservaFamiliarDTO;
 import business.reserva.ReservaInfantilDTO;
 
 import java.sql.*;
@@ -171,6 +171,110 @@ public class ReservaInfantilDAO {
 		connection.closeConnection();
 		return reservas;
 	}
+	
+	//NEW
+	public List<ReservaInfantilDTO> consultarReservasInfantilFuturasRango(String fechaInicio, String fechaFin, String usuario){
+		
+		List<ReservaInfantilDTO> reservas = new ArrayList<>();
+		DBConnection connection = new DBConnection();
+		con = connection.getConnection();
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasInfantilFuturasSTM"));
+			
+			ps.setString(1, fechaInicio);
+			ps.setString(2, fechaFin);
+			ps.setString(3, usuario);
+		
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+
+				int idReserva = rs.getInt("id_Reserva");
+				int participantes_infantiles = rs.getInt("participantes_infantiles");
+				Date fecha = rs.getDate("fecha");
+				int duracion = rs.getInt("duracion");
+				float descuento = rs.getFloat("descuento");
+				float precio = rs.getFloat("precio");
+				String pista = rs.getString("pista");
+				
+				ReservaInfantilDTO reservainfantil = new ReservaInfantilDTO();
+				
+				reservainfantil.setIdReserva(idReserva);
+				reservainfantil.setIdUsuario(usuario);
+				reservainfantil.setParticipantesInfantiles(participantes_infantiles);
+				reservainfantil.setFecha(fecha);
+				reservainfantil.setDuracion(duracion);
+				reservainfantil.setDescuento(descuento);
+				reservainfantil.setPrecio(precio);
+				reservainfantil.setIdPista(pista);
+				reservas.add(reservainfantil);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} catch(IllegalArgumentException e){
+			e.printStackTrace();
+		}
+		
+		connection.closeConnection();
+		return reservas;
+		
+	}
+	
+	
+	//NEW
+	public List<ReservaInfantilDTO> consultarReservasInfantilPasadasRango(String fechaInicio, String fechaFin, String usuario){
+		
+		List<ReservaInfantilDTO> reservas = new ArrayList<>();
+		DBConnection connection = new DBConnection();
+		con = connection.getConnection();
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasInfantilPasadasSTM"));
+			
+			ps.setString(1, fechaInicio);
+			ps.setString(2, fechaFin);
+			ps.setString(3, usuario);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+
+				int idReserva = rs.getInt("id_Reserva");
+				int participantes_infantiles = rs.getInt("participantes_infantiles");
+				Date fecha = rs.getDate("fecha");
+				int duracion = rs.getInt("duracion");
+				float descuento = rs.getFloat("descuento");
+				float precio = rs.getFloat("precio");
+				String pista = rs.getString("pista");
+				
+				ReservaInfantilDTO reservainfantil = new ReservaInfantilDTO();
+				
+				reservainfantil.setIdReserva(idReserva);
+				reservainfantil.setIdUsuario(usuario);
+				reservainfantil.setParticipantesInfantiles(participantes_infantiles);
+				reservainfantil.setFecha(fecha);
+				reservainfantil.setDuracion(duracion);
+				reservainfantil.setDescuento(descuento);
+				reservainfantil.setPrecio(precio);
+				reservainfantil.setIdPista(pista);
+				reservas.add(reservainfantil);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} catch(IllegalArgumentException e){
+			e.printStackTrace();
+		}
+		
+		connection.closeConnection();
+		return reservas;
+		
+	}
+	
 	
 	/**
 	 * 
