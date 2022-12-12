@@ -133,18 +133,17 @@ public class ReservaFamiliarDAO {
 	}
 	
 	//NEW
-	public List<ReservaFamiliarDTO> consultarReservasFamiliarFuturas(){
+	public List<ReservaFamiliarDTO> consultarReservasFamiliarFuturas(String usuario){
 		List<ReservaFamiliarDTO> reservas = new ArrayList<>();
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
 		
 		try {
 			Statement stmt = con.createStatement();
-			String query = prop.getProperty("obtenerReservasFamiliarbyFechaSTM");
+			String query = prop.getProperty("obtenerReservasFamiliarbyFechaSTM") + String.format("'%s'", usuario);
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
 				int idReserva = rs.getInt("id_Reserva");
-				String usuario = rs.getString("usuario");
 				int participantes_infantiles = rs.getInt("participantes_infantiles");
 				int participantes_adultos = rs.getInt("participantes_adultos");
 				Date fecha = rs.getDate("fecha");

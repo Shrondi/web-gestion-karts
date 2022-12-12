@@ -220,7 +220,7 @@ public class CrearReservaIndividual extends HttpServlet {
 				//No se puede realizar una reserva ya que no hay pistas disponibles para los datos dados
 				if (pistas.isEmpty()) {
 					
-					String mensaje = "No hay pistas disponibles. Intentelo de nuevo mas tarde.";
+					String mensaje = "No hay pistas disponibles con los datos dados. Intentelo de nuevo mas tarde.";
 					request.setAttribute("mensaje", mensaje);
 					
 					dispatcher = request.getRequestDispatcher("/mvc/view/CrearReservaIndividualDisplay.jsp");
@@ -228,13 +228,13 @@ public class CrearReservaIndividual extends HttpServlet {
 					
 				}else{
 					request.setAttribute("ListaPistas", pistas);
-					request.getSession().setAttribute("duracion", duracion);
-					request.getSession().setAttribute("numeroNinios", numeroNinios);
-					request.getSession().setAttribute("numeroAdultos", numeroAdultos);
-					request.getSession().setAttribute("tipoReserva", tipoReserva);
-					request.getSession().setAttribute("fecha", fecha);
+					request.setAttribute("duracion", duracion);
+					request.setAttribute("numeroNinios", numeroNinios);
+					request.setAttribute("numeroAdultos", numeroAdultos);
+					request.setAttribute("tipoReserva", tipoReserva);
+					request.setAttribute("fecha", fecha);
 					
-					dispatcher = request.getRequestDispatcher("/mvc/view/PistasReservaDisplay.jsp");
+					dispatcher = request.getRequestDispatcher("/mvc/view/CrearReservaIndividualDisplay.jsp");
 					dispatcher.forward(request, response);
 				}
 						

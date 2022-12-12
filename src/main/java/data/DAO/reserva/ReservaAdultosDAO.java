@@ -128,18 +128,17 @@ public class ReservaAdultosDAO {
 	}
 	
 	//NEW
-	public List<ReservaAdultosDTO> consultarReservasAdultosFuturas(){
+	public List<ReservaAdultosDTO> consultarReservasAdultosFuturas(String usuario){
 		List<ReservaAdultosDTO> reservas = new ArrayList<>();
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
 		
 		try {
 			Statement stmt = con.createStatement();
-			String query = prop.getProperty("obtenerReservasAdultosbyFechaSTM");
+			String query = prop.getProperty("obtenerReservasAdultosbyFechaSTM") + String.format("'%s'", usuario);
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
 				int idReserva = rs.getInt("id_Reserva");
-				String usuario = rs.getString("usuario");
 				int participantes_adultos = rs.getInt("participantes_adultos");
 				Date fecha = rs.getDate("fecha");
 				int duracion = rs.getInt("duracion");

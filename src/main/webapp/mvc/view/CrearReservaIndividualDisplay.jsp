@@ -33,23 +33,25 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 								<div>
 										<p>
 												<label for="fecha">Fecha Reserva: </label>
-												<input type="datetime-local" name="fecha" id="fecha" required>
+												<input type="datetime-local" name="fecha" id="fecha" value="<%= request.getAttribute("fecha")%>" required>
 										</p>
 										
-										<input type="radio" name="tipoReserva" value="INFANTIL" required>Reserva Infantil <br>
-										<input type="radio" name="tipoReserva" value="FAMILIAR" required>Reserva Familiar <br>
-										<input type="radio" name="tipoReserva" value="ADULTOS" required>Reserva Adultos
-
+										 <% if (request.getAttribute("tipoReserva") == null){ %>
+										 		<input type="radio" name="tipoReserva" value="INFANTIL" required>Reserva Infantil <br>
+												<input type="radio" name="tipoReserva" value="FAMILIAR" required>Reserva Familiar <br>
+												<input type="radio" name="tipoReserva" value="ADULTOS" required>Reserva Adultos
+												
+										
 										<p>
 										Escribe el numero de participantes infantiles:
-										<input type="number" name="numeroNinios" min="0" max="20" step="1" required>
+										<input type="number" name="numeroNinios" min="0" max="20" step="1" value="<%= request.getAttribute("numeroNinios")%>" required>
 										</p>
 										
 										<p>
 										Escribe el numero de participantes adultos:
-										<input type="number" name="numeroAdultos" min="0" max="20" step="1" required>
+										<input type="number" name="numeroAdultos" min="0" max="20" step="1" value="<%= request.getAttribute("numeroAdultos")%>" required>
 										</p>
-										
+										$scope.
 										<p>
 										Elige la duracion de la reserva :
 										<select name="duracion" required>
@@ -61,14 +63,22 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 										</p>
 										
 								</div>	
+								
+								<% if (request.getAttribute("ListaPistas") != null){ %>
+										<jsp:include page="/mvc/view/PistasReservaDisplay.jsp" />  
+								 <% }else{%> 
+						
 								<input type="submit" value="Continuar">
 						</form>
 						<form id="volver" method="post" action="/WebProyectoPW">
 								<input type="submit" value="Volver">
 						</form>
+						<%} %>
 		</body>
 </html>
 
+
 <%
+
 }
 %>

@@ -54,9 +54,9 @@ public class CancelarReservaIndividual extends HttpServlet {
 				ReservaFamiliarDAO reservaFamiliarDAO = new ReservaFamiliarDAO(prop);
 				ReservaAdultosDAO reservaAdultosDAO = new ReservaAdultosDAO(prop);
 
-				List<ReservaInfantilDTO> reservasInfantil = reservaInfantilDAO.consultarReservasInfantilFuturas();
-				List<ReservaFamiliarDTO> reservasFamiliar = reservaFamiliarDAO.consultarReservasFamiliarFuturas();
-				List<ReservaAdultosDTO> reservasAdultos = reservaAdultosDAO.consultarReservasAdultosFuturas();
+				List<ReservaInfantilDTO> reservasInfantil = reservaInfantilDAO.consultarReservasInfantilFuturas(userBean.getCorreo());
+				List<ReservaFamiliarDTO> reservasFamiliar = reservaFamiliarDAO.consultarReservasFamiliarFuturas(userBean.getCorreo());
+				List<ReservaAdultosDTO> reservasAdultos = reservaAdultosDAO.consultarReservasAdultosFuturas(userBean.getCorreo());
 				
 				request.setAttribute("reservasInfantil", reservasInfantil);
 				request.setAttribute("reservasFamiliar", reservasFamiliar);
@@ -69,7 +69,7 @@ public class CancelarReservaIndividual extends HttpServlet {
 			}else {
 				ReservaDAO reservaDAO = new ReservaDAO(prop);
 			
-				reservaDAO.borrarReserva(userBean.getCorreo(), Integer.parseInt(reserva));
+				reservaDAO.borrarReserva(Integer.parseInt(reserva));
 				
 			}
 			
