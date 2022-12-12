@@ -8,7 +8,7 @@
 if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() == true) {
 	
 %>
-	<jsp:forward page="../../index.jsp" />
+	<jsp:forward page="../../../index.jsp" />
 <%
 //Caso 2: El usuario esta logado y no es admin
 }else{
@@ -25,26 +25,26 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 <html>
 		<head>
 				<meta charset="UTF-8">
-				<title>Pedir fechas maxima y minima de las reservas del usuario</title>
+				<title>Consultar Reservas</title>
 		</head>
 		<body>
 				<p id="message"><%= mensajeNextPage %></p>
-						<legend> Escriba la fecha de inicio y de fin</legend>
+						<p> Escriba la fecha de inicio y de fin</p>
 						<form id="formReservasUsuario" method="post" action="/WebProyectoPW/ConsultarReservas">
 								<div>
 										<p>
 												<label for="fechaInicio">Fecha Inicio: </label>
-												<input type="date" name="fechaInicio" id="fechaInicio" placeholder="dd/mm/yyyy" required>
+												<input type="datetime-local" name="fechaInicio" id="fechaInicio" value= <%=request.getAttribute("fechaInicio")%>required>
 										</p>
 										<p>
 												<label for="fechaFin">Fecha Fin: </label>
-												<input type="date" name="fechaFin" id="fechaFin" placeholder="dd/mm/yyyy" required>
+												<input type="datetime-local" name="fechaFin" id="fechaFin" value= <%=request.getAttribute("fechaFin")%> required>
 										</p>
 										
 								</div>	
 								<input type="submit" value="Aceptar">
 						</form>
-						<%-- <script type="text/javascript" src="/WebProyectoPW/js/ModifyValidation.js"></script> --%>
+						
 						<form id="volver" method="post" action="/WebProyectoPW">
 								<input type="submit" value="Volver">
 						</form>

@@ -1,10 +1,7 @@
-package servlet;
+package servlet.user;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -15,17 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-
 import display.javabean.userBean;
-import business.pista.PistaDTO;
 import business.reserva.*;
-import data.DAO.KartDAO;
-import data.DAO.PistaDAO;
-import data.DAO.UsuarioDAO;
 import data.DAO.reserva.*;
 
-import display.javabean.userBean;
 
 /**
  * Servlet implementation class ConsultarReservas
@@ -59,13 +49,12 @@ public class ConsultarReservas extends HttpServlet {
 		//Caso 2: Usuario logueado
 		}else{
 			
-			//String reserva = request.getParameter("reserva");
 			String fechaInicio = request.getParameter("fechaInicio");
 			String fechaFin = request.getParameter("fechaFin");
 			
 			if ( fechaInicio == null || fechaFin == null ) {
 								
-				dispatcher = request.getRequestDispatcher("/mvc/view/PedirFechasDisplay.jsp");
+				dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservasRangoDisplay.jsp");
 				dispatcher.forward(request, response);
 				
 				
@@ -93,7 +82,10 @@ public class ConsultarReservas extends HttpServlet {
 				request.setAttribute("reservasAdultosPasadas", reservasAdultosPasadas);
 				request.setAttribute("reservasAdultosFuturas", reservasAdultosFuturas);
 				
-				dispatcher = request.getRequestDispatcher("/mvc/view/ConsultarReservasDisplay.jsp");
+				request.setAttribute("fechaInicio", fechaInicio);
+				request.setAttribute("fechaFin", fechaFin);
+				
+				dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservasRangoDisplay.jsp");
 				dispatcher.forward(request, response);
 				
 			}

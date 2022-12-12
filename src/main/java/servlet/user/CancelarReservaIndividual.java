@@ -1,4 +1,4 @@
-package servlet;
+package servlet.user;
 
 import java.io.IOException;
 import java.util.List;
@@ -62,7 +62,7 @@ public class CancelarReservaIndividual extends HttpServlet {
 				request.setAttribute("reservasFamiliar", reservasFamiliar);
 				request.setAttribute("reservasAdultos", reservasAdultos);
 				
-				dispatcher = request.getRequestDispatcher("/mvc/view/ReservasDisplay.jsp");
+				dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservasCancelarDisplay.jsp");
 				dispatcher.forward(request, response);
 				
 				

@@ -1,11 +1,10 @@
 package data.DAO.reserva;
 
 import data.common.DBConnection;
-import business.pista.Dificultad;
-import business.pista.PistaDTO;
 import business.reserva.ReservaAdultosDTO;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -140,7 +139,7 @@ public class ReservaAdultosDAO {
 			while (rs.next()) {
 				int idReserva = rs.getInt("id_Reserva");
 				int participantes_adultos = rs.getInt("participantes_adultos");
-				Date fecha = rs.getDate("fecha");
+				Date fecha = new Date(rs.getTimestamp("fecha").getTime());
 				int duracion = rs.getInt("duracion");
 				float descuento = rs.getFloat("descuento");
 				float precio = rs.getFloat("precio");
@@ -157,7 +156,12 @@ public class ReservaAdultosDAO {
 				reservaadulto.setPrecio(precio);
 				reservaadulto.setIdPista(pista);
 				reservas.add(reservaadulto);
+				
 			}
+			
+			rs.close();
+			stmt.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch(IllegalArgumentException e){
@@ -187,7 +191,7 @@ public class ReservaAdultosDAO {
 
 				int idReserva = rs.getInt("id_Reserva");
 				int participantes_adultos = rs.getInt("participantes_adultos");
-				Date fecha = rs.getDate("fecha");
+				Date fecha = new Date(rs.getTimestamp("fecha").getTime());
 				int duracion = rs.getInt("duracion");
 				float descuento = rs.getFloat("descuento");
 				float precio = rs.getFloat("precio");
@@ -205,6 +209,9 @@ public class ReservaAdultosDAO {
 				reservaadulto.setIdPista(pista);
 				reservas.add(reservaadulto);
 			}
+			
+			rs.close();
+			ps.close();
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -237,7 +244,7 @@ public class ReservaAdultosDAO {
 
 				int idReserva = rs.getInt("id_Reserva");
 				int participantes_adultos = rs.getInt("participantes_adultos");
-				Date fecha = rs.getDate("fecha");
+				Date fecha = new Date(rs.getTimestamp("fecha").getTime());
 				int duracion = rs.getInt("duracion");
 				float descuento = rs.getFloat("descuento");
 				float precio = rs.getFloat("precio");
@@ -255,6 +262,9 @@ public class ReservaAdultosDAO {
 				reservaadulto.setIdPista(pista);
 				reservas.add(reservaadulto);
 			}
+			
+			rs.close();
+			ps.close();
 		
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -8,7 +8,7 @@
 if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() == true) {
 	
 %>
-	<jsp:forward page="../../index.jsp" />
+	<jsp:forward page="../../../index.jsp" />
 <%
 //Caso 2: El usuario esta logado y no es admin
 }else{
@@ -25,7 +25,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 	
 	if (reservasInfantil == null || reservasFamiliar == null || reservasAdultos == null){
 %>
-		<jsp:forward page="../../index.jsp" />
+		<jsp:forward page="../../../index.jsp" />
 <%	}else{ %> 
 
 <!DOCTYPE html>

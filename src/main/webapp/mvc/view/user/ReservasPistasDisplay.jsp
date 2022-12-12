@@ -8,7 +8,7 @@
 if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() == true) {
 	
 %>
-	<jsp:forward page="../../index.jsp" />
+	<jsp:forward page="../../../index.jsp" />
 <%
 //Caso 2: El usuario esta logado y no es admin
 }else{
@@ -19,12 +19,12 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		mensajeNextPage = "";
 	}
 	
-	List<PistaDTO> pistas = (List<PistaDTO>) request.getAttribute("ListaPistas");
+	List<PistaDTO> pistas = (List<PistaDTO>) request.getSession().getAttribute("ListaPistas");
 	
 	//Caso 3: Si se accede de forma forzosa por url
 	if (pistas == null){ 
 %>
-		<jsp:forward page="../../index.jsp" />
+		<jsp:forward page="../../../index.jsp" />
 		
 <% 	}else{ %>
 

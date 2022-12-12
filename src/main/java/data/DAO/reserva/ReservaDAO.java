@@ -1,7 +1,6 @@
 package data.DAO.reserva;
 
 import data.common.DBConnection;
-import business.reserva.AbstractReservaDTO;
 
 import java.sql.*;
 import java.util.ArrayList;

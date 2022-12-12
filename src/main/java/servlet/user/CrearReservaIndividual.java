@@ -1,4 +1,4 @@
-package servlet;
+package servlet.user;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -62,7 +62,7 @@ public class CrearReservaIndividual extends HttpServlet {
 			//Caso 2a: No hay parametros en el request -> Ir a la vista para crear una reserva individual
 			if (fecha == null && pista == null){
 				
-				dispatcher = request.getRequestDispatcher("/mvc/view/CrearReservaIndividualDisplay.jsp");
+				dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaIndividualDisplay.jsp");
 				dispatcher.forward(request, response);
 			
 			//Caso 2b: Hay parametros en el request (se ha elegido la pista) -> Realizar la reserva
@@ -194,7 +194,7 @@ public class CrearReservaIndividual extends HttpServlet {
 				kartDAO.actualizarEstadoKart(false, pista, numeroAdultos);
 				
 				//Borramos los atributos de la sesion correspondientes a esta reserva
-				request.removeAttribute("ListaPistas");
+				request.getSession().removeAttribute("ListaPistas");
 				request.getSession().removeAttribute("duracion");
 				request.getSession().removeAttribute("numeroNinios");
 				request.getSession().removeAttribute("numeroAdultos");
@@ -202,11 +202,12 @@ public class CrearReservaIndividual extends HttpServlet {
 				request.getSession().removeAttribute("fecha");
 				
 				//Mostramos el resumen de la reserva
-				dispatcher = request.getRequestDispatcher("/mvc/view/ResumenReservaIndividualDisplay.jsp");
+				dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservaIndividualDisplay.jsp");
 				dispatcher.forward(request, response);
 				
 			//Caso 2c: Hay parametros en el request proveniente de la vista de crear reservas
 			}else{
+				
 				int duracion = Integer.parseInt(request.getParameter("duracion"));
 				int numeroNinios = Integer.parseInt(request.getParameter("numeroNinios"));
 				int numeroAdultos = Integer.parseInt(request.getParameter("numeroAdultos"));
@@ -223,18 +224,18 @@ public class CrearReservaIndividual extends HttpServlet {
 					String mensaje = "No hay pistas disponibles con los datos dados. Intentelo de nuevo mas tarde.";
 					request.setAttribute("mensaje", mensaje);
 					
-					dispatcher = request.getRequestDispatcher("/mvc/view/CrearReservaIndividualDisplay.jsp");
+					dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaIndividualDisplay.jsp");
 					dispatcher.forward(request, response);
 					
 				}else{
-					request.setAttribute("ListaPistas", pistas);
-					request.setAttribute("duracion", duracion);
-					request.setAttribute("numeroNinios", numeroNinios);
-					request.setAttribute("numeroAdultos", numeroAdultos);
-					request.setAttribute("tipoReserva", tipoReserva);
-					request.setAttribute("fecha", fecha);
-					
-					dispatcher = request.getRequestDispatcher("/mvc/view/CrearReservaIndividualDisplay.jsp");
+					request.getSession().setAttribute("ListaPistas", pistas);
+					request.getSession().setAttribute("duracion", duracion);
+					request.getSession().setAttribute("numeroNinios", numeroNinios);
+					request.getSession().setAttribute("numeroAdultos", numeroAdultos);
+					request.getSession().setAttribute("tipoReserva", tipoReserva);
+					request.getSession().setAttribute("fecha", fecha);
+
+					dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservasPistasDisplay.jsp");
 					dispatcher.forward(request, response);
 				}
 						

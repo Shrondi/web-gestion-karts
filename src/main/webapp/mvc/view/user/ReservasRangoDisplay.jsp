@@ -9,7 +9,7 @@
 if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() == true) {
 	
 %>
-	<jsp:forward page="../../index.jsp" />
+	<jsp:forward page="../../../index.jsp" />
 <%
 //Caso 2: El usuario esta logado y no es admin
 }else{
@@ -31,7 +31,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 	
 	if (reservasInfantilPasadas == null || reservasInfantilFuturas == null || reservasFamiliarPasadas == null || reservasFamiliarFuturas == null || reservasAdultosPasadas == null || reservasAdultosFuturas == null){
 %>
-		<jsp:forward page="../../index.jsp" />
+		<jsp:forward page="../../../index.jsp" />
 <%	}else{ %> 
 
 
@@ -255,10 +255,8 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 						</table>
 						<% } %>
 						
-						
 						<br>
-						<br>
-						<form id="volver" method="post" action="/WebProyectoPW">
+						<form id="volver" method="post" action="/WebProyectoPW/ConsultarReservas">
 								<input type="submit" value="Volver">
 						</form>
 		</body>

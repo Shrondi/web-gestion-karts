@@ -1,9 +1,9 @@
 package data.DAO.reserva;
 
 import data.common.DBConnection;
-import business.reserva.ReservaAdultosDTO;
 import business.reserva.ReservaFamiliarDTO;
 
+import java.util.Date;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -146,7 +146,7 @@ public class ReservaFamiliarDAO {
 				int idReserva = rs.getInt("id_Reserva");
 				int participantes_infantiles = rs.getInt("participantes_infantiles");
 				int participantes_adultos = rs.getInt("participantes_adultos");
-				Date fecha = rs.getDate("fecha");
+				Date fecha = new Date(rs.getTimestamp("fecha").getTime());
 				int duracion = rs.getInt("duracion");
 				float descuento = rs.getFloat("descuento");
 				float precio = rs.getFloat("precio");
@@ -165,6 +165,10 @@ public class ReservaFamiliarDAO {
 				reservafamiliar.setIdPista(pista);
 				reservas.add(reservafamiliar);
 			}
+			
+			rs.close();
+			stmt.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch(IllegalArgumentException e){
@@ -196,7 +200,7 @@ public class ReservaFamiliarDAO {
 				int idReserva = rs.getInt("id_Reserva");
 				int participantes_adultos = rs.getInt("participantes_adultos");
 				int participantes_infantiles = rs.getInt("participantes_infantiles");
-				Date fecha = rs.getDate("fecha");
+				Date fecha = new Date(rs.getTimestamp("fecha").getTime());
 				int duracion = rs.getInt("duracion");
 				float descuento = rs.getFloat("descuento");
 				float precio = rs.getFloat("precio");
@@ -215,6 +219,9 @@ public class ReservaFamiliarDAO {
 				reservafamiliar.setIdPista(pista);
 				reservas.add(reservafamiliar);
 			}
+			
+			rs.close();
+			ps.close();
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -250,7 +257,7 @@ public class ReservaFamiliarDAO {
 				int idReserva = rs.getInt("id_Reserva");
 				int participantes_adultos = rs.getInt("participantes_adultos");
 				int participantes_infantiles = rs.getInt("participantes_infantiles");
-				Date fecha = rs.getDate("fecha");
+				Date fecha = new Date(rs.getTimestamp("fecha").getTime());
 				int duracion = rs.getInt("duracion");
 				float descuento = rs.getFloat("descuento");
 				float precio = rs.getFloat("precio");
@@ -269,6 +276,9 @@ public class ReservaFamiliarDAO {
 				reservafamiliar.setIdPista(pista);
 				reservas.add(reservafamiliar);
 			}
+			
+			rs.close();
+			ps.close();
 		
 		} catch (SQLException e) {
 			e.printStackTrace();

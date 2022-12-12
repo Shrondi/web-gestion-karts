@@ -95,8 +95,8 @@ una pista puede tener 20 karts maximos pero el admin puede decidir asociar tanto
 		2) Administrador
 			-> Dar de alta pistas -- [Paloma]
 			-> Dar de alta karts -- [Paloma]
-			-> Asociar kart a pista (mirar restricciones practicas anteriores) -- [Miguel]
-			-> Modificar el estado de karts y pistas -- [¿Quien lo realiza?]
+			-> Asociar kart a pista (mirar restricciones practicas anteriores) -- [Carlos]
+			-> Modificar el estado de karts y pistas -- [Miguel]
 			-> Eliminar reservas -- [Carlos]
 
 
