@@ -41,7 +41,7 @@ public class ConsultarReservas extends HttpServlet {
 		prop.load(myIO);
 		
 		//Caso 1: Usuario no esta logueado -> Volvemos al index
-		if (userBean == null || userBean.getCorreo().equals("")) {
+		if (userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() == true) {
 			//dispatcher = request.getRequestDispatcher("/index.jsp");
 			//dispatcher.forward(request, response);
 			response.sendRedirect("/WebProyectoPW");
