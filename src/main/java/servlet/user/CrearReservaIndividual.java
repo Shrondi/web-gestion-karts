@@ -221,8 +221,7 @@ public class CrearReservaIndividual extends HttpServlet {
 				//No se puede realizar una reserva ya que no hay pistas disponibles para los datos dados
 				if (pistas.isEmpty()) {
 					
-					String mensaje = "No hay pistas disponibles con los datos dados. Intentelo de nuevo mas tarde.";
-					request.setAttribute("mensaje", mensaje);
+					request.setAttribute("mensaje", "No hay pistas disponibles con los datos dados. Intentelo de nuevo mas tarde.");
 					
 					dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaIndividualDisplay.jsp");
 					dispatcher.forward(request, response);

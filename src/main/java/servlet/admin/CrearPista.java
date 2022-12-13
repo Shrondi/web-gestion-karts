@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import data.DAO.PistaDAO;
+import business.pista.*;
 import display.javabean.userBean;
 
 /**
@@ -51,27 +52,42 @@ public class CrearPista extends HttpServlet {
 			String dificultad = request.getParameter("dificultad");
 			int max_karts = Integer.parseInt(request.getParameter("max_karts"));
 			
-			if (nombre_pista != null)
+			//Caso 2a: Si no hay parametros en el request -> A la vista
+			if (nombre_pista != null) {
+				
+				//AÑADIR LA RUTA DE DONDE SE ENCUENTRA LA VISTA DE PEDIR DATOS DE LA PISTA: /mvc/display/admin/fichero.jsp
+				dispatcher = request.getRequestDispatcher("/mvc/display/admin/");
+				dispatcher.forward(request, response);
 			
-			PistaDAO pistaDAO = new PistaDAO(prop);
+			//Caso 2b: Hay parametros en el request
+			}else {
+				PistaDAO pistaDAO = new PistaDAO(prop);
+				
+				//Si el nombre de la pista ya existe -> Volver al display
+				if (pistaDAO.consultarPistaExiste(nombre_pista)) {
+					
+					request.setAttribute("mensaje", "El nombre ya esta siendo usando, por favor escriba otro nombre");
+					dispatcher = request.getRequestDispatcher("/mvc/display/admin/");
+					dispatcher.forward(request, response);
+					
+				//Si el nombre no existe
+				}else {
+					
+					PistaDTO pista = new PistaDTO();
+					
+					pista.setNombre(nombre_pista);
+					pista.setMaxAmmount(max_karts);
+					pista.setDificulty(Dificultad.valueOf(dificultad.toUpperCase()));
+					
+					pistaDAO.CrearPista(pista);
+					
+					request.setAttribute("mensaje", "Se ha creado la pista correctamente");
+					dispatcher = request.getRequestDispatcher("/WebProyectoPW");
+					dispatcher.forward(request, response);
+				}
+					
+			}
 			
-			//REVISAR SI HACE FALTA ESTOS CONTROLES O NO
-			boolean estado_control = false;
-			boolean dificultad_control = false;
-			boolean numero_karts = true;
-			
-			//Control de estado
-			if(estado.toUpperCase().contains("DISPONIBLE") || estado.toUpperCase().contains("RESERVADO") || estado.toUpperCase().contains("MANTENIMIENTO")) {
-				estado_control = true;
-			}
-			//Control de dificultad
-			if(dificultad.toUpperCase().contains("INFANTIL") || dificultad.toUpperCase().contains("FAMILIAR") || dificultad.toUpperCase().contains("ADULTOS")) {
-				dificultad_control = true;
-			}
-			//Control de numero maximo de karts
-			if(max_karts <= 0) {
-				numero_karts = false;
-			}
 		}
 	}
 	
