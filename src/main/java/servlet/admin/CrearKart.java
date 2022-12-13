@@ -5,13 +5,13 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import data.DAO.KartDAO;
+import business.kart.*;
 import display.javabean.userBean;
 
 /**
@@ -43,25 +43,29 @@ public class CrearKart extends HttpServlet {
 			response.sendRedirect("/WebProyectoPW");
 		}
 		
-		//Caso 2: Usuario logueado y creamos kart
+		//Caso 2: Usuario logueado, creamos kart
 		else
 		{
-			String tipo = (String) request.getSession().getAttribute("tipo");
-			String estado = (String) request.getSession().getAttribute("estado");
+			Boolean tipo = Boolean.parseBoolean(request.getParameter("tipo"));
+			String estado = request.getParameter("estado");
 			
-			KartDAO kartDAO = new KartDAO(prop);
+			//Caso 2a: Si no hay parametros en el request -> A la vista
+			if (estado == null) {
+				
+				//Ruta de donde se encuentra la vista de pedir datos de kart
+				dispatcher = request.getRequestDispatcher("/mvc/view/CrearKart.jsp");
+				dispatcher.forward(request, response);
 			
-			//REVISAR SI HACE FALTA ESTOS CONTROLES O NO
-			boolean estado_control = false;
-			boolean tipo_control = false;
-			
-			//Control de estado
-			if(estado.toUpperCase().contains("DISPONIBLE") || estado.toUpperCase().contains("RESERVADO") || estado.toUpperCase().contains("MANTENIMIENTO")) {
-				estado_control = true;
-			}
-			//Control de tipo
-			if(tipo.toUpperCase().contains("INFANTIL") || tipo.toUpperCase().contains("ADULTOS")) {
-				tipo_control = true;
+			//Caso 2b: Hay parametros en el request (viene de la vista)
+			}else {
+				KartDAO kartDAO = new KartDAO(prop);
+				KartDTO kart = new KartDTO();
+				
+				kart.setStatus(Estado.valueOf(estado.toUpperCase()));
+				kart.seType(tipo);
+				
+				kartDAO.crearKart(kart);
+				response.sendRedirect("/WebProyectoPW");
 			}
 		}	
 	}

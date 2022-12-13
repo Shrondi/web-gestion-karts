@@ -52,10 +52,10 @@ public class CrearPista extends HttpServlet {
 			int max_karts = Integer.parseInt(request.getParameter("max_karts"));
 			
 			//Caso 2a: Si no hay parametros en el request -> A la vista
-			if (nombre_pista != null) {
+			if (nombre_pista == null) {
 				
-				//AÑADIR LA RUTA DE DONDE SE ENCUENTRA LA VISTA DE PEDIR DATOS DE LA PISTA: /mvc/display/admin/fichero.jsp
-				dispatcher = request.getRequestDispatcher("/mvc/display/admin/");
+				//Ruta de donde se encuentra la vista de pedir datos de la pista
+				dispatcher = request.getRequestDispatcher("/mvc/view/CrearPista.jsp");
 				dispatcher.forward(request, response);
 			
 			//Caso 2b: Hay parametros en el request (viene de la vista)
