@@ -1,6 +1,8 @@
 package data.DAO;
 
 import data.common.DBConnection;
+import business.kart.Estado;
+import business.kart.KartDTO;
 import business.pista.Dificultad;
 import business.pista.PistaDTO;
 
@@ -183,5 +185,58 @@ public class PistaDAO{
 		return pistas;
 	}
 	
+	//NEW
+	public List<PistaDTO> listadoPistas() {
+		List<PistaDTO> pistas = new ArrayList<>();
+		DBConnection connection = new DBConnection();
+		con = connection.getConnection();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(prop.getProperty("obtenerTodasPistasSTM"));
+			while (rs.next()) {
+				
+				String nombre = rs.getString("nombre");
+				Boolean estado = rs.getBoolean("estado");
+				String dificultad = rs.getString("dificultad");
+				int max_karts = rs.getInt("max_karts");
+				int asoc_karts_infantiles = rs.getInt("asoc_karts_disp_infantiles");
+				int asoc_karts_adultos = rs.getInt("asoc_karts_disp_adultos");
+								
+				PistaDTO pistaToPush = new PistaDTO();
+				pistaToPush.setNombre(nombre);
+				pistaToPush.setEstado(estado);
+				pistaToPush.setDificulty(Dificultad.valueOf(dificultad.toUpperCase()));
+				pistaToPush.setMaxAmmount(max_karts);
+				pistaToPush.setAsocAmmountInf(asoc_karts_infantiles);
+				pistaToPush.setAsocAmmountAdult(asoc_karts_adultos);
+				
+				pistas.add(pistaToPush);
+					
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch(IllegalArgumentException e){
+			e.printStackTrace();
+		}
+		connection.closeConnection();
+		return pistas;
+	}
+	
+	//NEW
+	public void modificarEstadoPista(boolean estado, String nombre_pista) {
+		DBConnection connection = new DBConnection();
+		con = connection.getConnection();
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("modificacionEstadoPistaSTM"));
+			ps.setBoolean(1,estado);
+			ps.setString(2,nombre_pista);
+			ps.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		connection.closeConnection();
+	}
 	
 }

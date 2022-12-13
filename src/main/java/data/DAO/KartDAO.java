@@ -3,6 +3,7 @@ package data.DAO;
 import data.common.DBConnection;
 
 import business.kart.KartDTO;
+import business.pista.Dificultad;
 import business.kart.Estado;
 
 import java.sql.*;
@@ -194,4 +195,23 @@ public class KartDAO {
 		connection.closeConnection();
 		return karts;
 	}
+	
+	//NEW
+	public void modificarEstadoKart(String estado, int id_kart) {
+		DBConnection connection = new DBConnection();
+		con = connection.getConnection();
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("modificacionEstadoKartSTM"));
+			ps.setString(1,estado);
+			ps.setInt(2,id_kart);
+			ps.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		connection.closeConnection();
+	}
+	
+	
 }
