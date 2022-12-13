@@ -208,29 +208,41 @@ public class CrearReservaIndividual extends HttpServlet {
 				int numeroAdultos = Integer.parseInt(request.getParameter("numeroAdultos"));
 				String tipoReserva = request.getParameter("tipoReserva");
 		
-				PistaDAO pistaDAO = new PistaDAO(prop);
-				List<PistaDTO> pistas = new ArrayList<>();
+				ReservaDAO reservaDAO = new ReservaDAO(prop);
 				
-				pistas = pistaDAO.consultarPistas(tipoReserva, numeroNinios, numeroAdultos);
-				
-				//No se puede realizar una reserva ya que no hay pistas disponibles para los datos dados
-				if (pistas.isEmpty()) {
-					
-					request.setAttribute("mensaje", "No hay pistas disponibles con los datos dados. Intentelo de nuevo mas tarde.");
+				//Si el usuario elige una fecha en en el rango de la fecha de la ultima reserva + 2 horas, tendra que elegir otra fecha
+				// (Asi se evita tener dos reservas que transcurran a la vez para el mismo usuario)
+				if (reservaDAO.comprobarReserva(fecha, userBean.getCorreo())) {
+					request.setAttribute("mensaje", "Ya tiene una reserva para la fecha dada. Debe haber una diferencia de 2 horas minimo entre la fecha de las reservas");
 					
 					dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaIndividualDisplay.jsp");
 					dispatcher.forward(request, response);
 					
 				}else{
-					session.setAttribute("ListaPistas", pistas);
-					session.setAttribute("duracion", duracion);
-					session.setAttribute("numeroNinios", numeroNinios);
-					session.setAttribute("numeroAdultos", numeroAdultos);
-					session.setAttribute("tipoReserva", tipoReserva);
-					session.setAttribute("fecha", fecha);
+					PistaDAO pistaDAO = new PistaDAO(prop);
+					List<PistaDTO> pistas = new ArrayList<>();
+					
+					pistas = pistaDAO.consultarPistas(tipoReserva, numeroNinios, numeroAdultos);
+					
+					//No se puede realizar una reserva ya que no hay pistas disponibles para los datos dados
+					if (pistas.isEmpty()) {
+						
+						request.setAttribute("mensaje", "No hay pistas disponibles con los datos dados. Intentelo de nuevo mas tarde.");
+						
+						dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaIndividualDisplay.jsp");
+						dispatcher.forward(request, response);
+						
+					}else{
+						session.setAttribute("ListaPistas", pistas);
+						session.setAttribute("duracion", duracion);
+						session.setAttribute("numeroNinios", numeroNinios);
+						session.setAttribute("numeroAdultos", numeroAdultos);
+						session.setAttribute("tipoReserva", tipoReserva);
+						session.setAttribute("fecha", fecha);
 
-					dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservasPistasDisplay.jsp");
-					dispatcher.forward(request, response);
+						dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservasPistasDisplay.jsp");
+						dispatcher.forward(request, response);
+					}
 				}
 						
 			}

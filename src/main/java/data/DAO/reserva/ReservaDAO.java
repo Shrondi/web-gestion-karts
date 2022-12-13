@@ -53,6 +53,35 @@ public class ReservaDAO {
 		return flag;
 	}
 	
+	//NEW
+	public boolean comprobarReserva(String fecha, String correo){
+		boolean check = false;
+		DBConnection connection = new DBConnection();
+		con = connection.getConnection();
+		try {
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservaSTM"));
+			System.out.println(fecha);
+			ps.setString(1, correo);
+			ps.setString(2, fecha);
+			ps.setString(3, fecha);
+				
+			ResultSet rs = ps.executeQuery();
+				
+			rs.first();
+			check = rs.getBoolean(1);	
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch(IllegalArgumentException e){
+			e.printStackTrace();
+		}
+			
+		connection.closeConnection();
+		return check;
+	}
+	
+	
+	
 	/**
 	 * Insertar un nuevo bono
 	 * @param id ID del bono

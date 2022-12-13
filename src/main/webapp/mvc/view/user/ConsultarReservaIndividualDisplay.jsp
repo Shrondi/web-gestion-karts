@@ -19,8 +19,9 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		mensajeNextPage = "";
 	}
 	
+	String mensaje = "";
 	if (request.getSession().getAttribute("fecha") != null){
-		mensajeNextPage = "Se ha recuperado la informacion de una reserva sin realizar";
+		mensaje = "Se ha recuperado la informacion de una reserva sin realizar";
 	}
 
 %>
@@ -33,6 +34,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		</head>
 		<body>
 				<p id="message"><%= mensajeNextPage %></p>
+				<p id="mensaje"><%= mensaje %></p>
 						<form id="formReservaIndividual" method="post" action="/WebProyectoPW/ReservaIndividual">
 								<div>
 										<p>
