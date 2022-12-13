@@ -3,7 +3,7 @@
  */
  const formulario = document.getElementById('registroFormulario');
  const inputs = document.querySelectorAll('#registroFormulario input');
- const date = Date.parse(new Date().toLocaleDateString())
+ const date = Date.parse(new Date())
  const localDate = new Date()
  var inputDate
  
@@ -16,9 +16,9 @@
  
  
 const RegularExpressions = {
-	firstname: /^[a-zA-ZÀ-ÿ\s]{1,20}$/, // letters, numbers and - _
-	surname: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // 
-	password: /^.{4,32}$/, // 4 a 12 digitos.
+	firstname: /^[a-zA-ZÀ-ÿ\s]{1,32}$/, // letters, numbers and - _
+	surname: /^[a-zA-ZÀ-ÿ\s]{1,32}$/, // 
+	password: /^.{4,16}$/, // 4 a 16 caracteres
 	email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
 	date: /^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))$/
 }
@@ -99,6 +99,5 @@ formulario.addEventListener('submit', (e) => {
 		e.preventDefault()
 	}
 });
-
 
 

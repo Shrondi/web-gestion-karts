@@ -101,7 +101,7 @@ public class UsuarioDTO implements Serializable{
 	 * @return Fecha de nacimiento del usuario
 	 */
 	public String getFechaNacimiento() {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		return sdf.format(fechaNacimiento_);
 	}
 	
