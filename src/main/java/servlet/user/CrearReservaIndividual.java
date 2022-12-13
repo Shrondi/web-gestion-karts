@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 
 
 import display.javabean.userBean;
+import business.kart.Estado;
 import business.pista.PistaDTO;
 import business.reserva.*;
 import data.DAO.KartDAO;
@@ -190,8 +191,8 @@ public class CrearReservaIndividual extends HttpServlet {
 				
 				//Actualizamos el estado de los karts a reservado por cada tipo
 				KartDAO kartDAO = new KartDAO(prop);
-				kartDAO.actualizarEstadoKart(true, pista, numeroNinios);
-				kartDAO.actualizarEstadoKart(false, pista, numeroAdultos);
+				kartDAO.actualizarEstadoKart(true, Estado.RESERVADO, pista, numeroNinios);
+				kartDAO.actualizarEstadoKart(false, Estado.RESERVADO, pista, numeroAdultos);
 				
 				//Borramos los atributos de la sesion correspondientes a esta reserva
 				request.getSession().removeAttribute("ListaPistas");

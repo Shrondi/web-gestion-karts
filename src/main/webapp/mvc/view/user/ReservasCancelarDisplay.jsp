@@ -19,9 +19,9 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		mensajeNextPage = "";
 	}
 	
-	List<ReservaInfantilDTO> reservasInfantil = (List<ReservaInfantilDTO>) request.getAttribute("reservasInfantil");
-	List<ReservaFamiliarDTO> reservasFamiliar = (List<ReservaFamiliarDTO>) request.getAttribute("reservasFamiliar");
-	List<ReservaAdultosDTO> reservasAdultos = (List<ReservaAdultosDTO>) request.getAttribute("reservasAdultos");
+	List<ReservaInfantilDTO> reservasInfantil = (List<ReservaInfantilDTO>) request.getSession().getAttribute("reservasInfantil");
+	List<ReservaFamiliarDTO> reservasFamiliar = (List<ReservaFamiliarDTO>) request.getSession().getAttribute("reservasFamiliar");
+	List<ReservaAdultosDTO> reservasAdultos = (List<ReservaAdultosDTO>) request.getSession().getAttribute("reservasAdultos");
 	
 	if (reservasInfantil == null || reservasFamiliar == null || reservasAdultos == null){
 %>
@@ -36,6 +36,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		</head>
 		<body>
 				<p id="message"><%= mensajeNextPage %> </p>
+				
 				<form id="submit" method="post" action="/WebProyectoPW/CancelarReservaIndividual">
 				<p>
 					Seleccione una de las siguientes reservas:
@@ -148,10 +149,13 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 						</table>
 						<% } %>
 						
-						<br>
-								<input type="submit" value="Confirmar">
-						</form>
-						<br>
+						
+						<% if (!(reservasInfantil.isEmpty() && reservasFamiliar.isEmpty() && reservasAdultos.isEmpty())){ %>
+							
+									<input type="submit" value="Confirmar">
+							</form>
+						<%} %>
+						
 						<form id="volver" method="post" action="/WebProyectoPW">
 								<input type="submit" value="Volver">
 						</form>

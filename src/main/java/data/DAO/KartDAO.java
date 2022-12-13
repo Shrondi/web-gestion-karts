@@ -79,15 +79,16 @@ public class KartDAO {
 	
 	
 	//NEW
-	public void actualizarEstadoKart(boolean tipo, String nombre, int numKart) {
+	public void actualizarEstadoKart(boolean tipo, Estado estado, String nombre, int numKart) {
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
 		
 		try {
-			PreparedStatement ps = con.prepareStatement(prop.getProperty("actualizarEstadoKartSTM"));
-			ps.setBoolean(1, tipo);
-			ps.setString(2,nombre);
-			ps.setInt(3,numKart);
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("actualizarEstadoKartReservaSTM"));
+			ps.setString(1, estado.name());
+			ps.setBoolean(2, tipo);
+			ps.setString(3,nombre);
+			ps.setInt(4,numKart);
 			ps.executeUpdate();
 			
 		} catch(Exception e) {
@@ -196,7 +197,7 @@ public class KartDAO {
 		return karts;
 	}
 	
-	//NEW
+	//NEW -- NO USAR BORRAR
 	public void modificarEstadoKart(String estado, int id_kart) {
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
