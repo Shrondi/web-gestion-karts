@@ -61,7 +61,15 @@ public class UsuarioDTO implements Serializable{
 		this.admin_ = admin;  
 		this.passWord_ = passWord;
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String formato;
+		
+		if (fechaNacimiento.contains("/")) {
+			formato = "dd/MM/yyyy";
+		}else {
+			formato = "yyyy-MM-dd";
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat(formato);
 		sdf.setLenient(false);
 		try {
 			this.fechaNacimiento_ = sdf.parse(fechaNacimiento);
@@ -101,7 +109,7 @@ public class UsuarioDTO implements Serializable{
 	 * @return Fecha de nacimiento del usuario
 	 */
 	public String getFechaNacimiento() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy");
 		return sdf.format(fechaNacimiento_);
 	}
 	
@@ -162,7 +170,15 @@ public class UsuarioDTO implements Serializable{
 	 * @param fechaNacimiento Fecha de nacimiento del usuario
 	 */
 	public void setFechaNacimiento(String fechaNacimiento) {	
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		String formato;
+		
+		if (fechaNacimiento.contains("/")) {
+			formato = "dd/MM/yyyy";
+		}else {
+			formato = "yyyy-MM-dd";
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat(formato);
 		sdf.setLenient(false);
 		try {
 			this.fechaNacimiento_ = sdf.parse(fechaNacimiento);

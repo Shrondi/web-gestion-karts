@@ -17,7 +17,6 @@ import display.javabean.userBean;
 /**
  * Servlet implementation class CrearKart
  */
-@WebServlet("/CrearKart")
 public class CrearKart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        	

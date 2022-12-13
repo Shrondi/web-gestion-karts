@@ -17,7 +17,6 @@ import display.javabean.userBean;
 /**
  * Servlet implementation class CrearPista
  */
-@WebServlet("/CrearPista")
 public class CrearPista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        	
@@ -47,10 +46,12 @@ public class CrearPista extends HttpServlet {
 		//Caso 2: Usuario logueado, creamos la pista
 		else
 		{
-			String nombre_pista = (String) request.getSession().getAttribute("nombre");
-			String estado = (String) request.getSession().getAttribute("estado");
-			String dificultad = (String) request.getSession().getAttribute("dificultad");
-			int max_karts = (int) request.getSession().getAttribute("max_karts");
+			String nombre_pista = request.getParameter("nombre");
+			String estado = request.getParameter("estado");
+			String dificultad = request.getParameter("dificultad");
+			int max_karts = Integer.parseInt(request.getParameter("max_karts"));
+			
+			if (nombre_pista != null)
 			
 			PistaDAO pistaDAO = new PistaDAO(prop);
 			
