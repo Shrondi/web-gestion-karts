@@ -51,7 +51,8 @@ public class UsuarioDTO implements Serializable{
 	 * @param nombre Nombre del usuario
 	 * @param apellidos Apellidos del usuario
 	 * @param fechaNacimiento Fecha de nacimiento del usuario
-	 * @param fechaInscripcion Fecha de inscripcion del usuario
+	 * @param passWord Contraseña del usuario
+	 * @param admin Permisos usuario
 	 */
 	
 	public UsuarioDTO(String correo, String nombre, String apellidos, String fechaNacimiento, String passWord, Boolean admin) {
@@ -60,9 +61,9 @@ public class UsuarioDTO implements Serializable{
 		this.apellidos_ = apellidos;
 		this.admin_ = admin;  
 		this.passWord_ = passWord;
+		this.fechaInscripcion_ = new Date();
 		
 		String formato;
-		
 		if (fechaNacimiento.contains("/")) {
 			formato = "dd/MM/yyyy";
 		}else {
@@ -71,12 +72,12 @@ public class UsuarioDTO implements Serializable{
 		
 		SimpleDateFormat sdf = new SimpleDateFormat(formato);
 		sdf.setLenient(false);
+		
 		try {
 			this.fechaNacimiento_ = sdf.parse(fechaNacimiento);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
 		
 	}
 	

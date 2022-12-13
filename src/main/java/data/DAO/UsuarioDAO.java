@@ -37,13 +37,14 @@ public class UsuarioDAO{
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
 		try {
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(prop.getProperty("obtenerUsuariobyEmailSTM")+String.format("'%s'", correo));
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("usuarioSTM"));
 			
-			if (rs.next()) {
-				check = true;
-			}
-		
+			ps.setString(1, correo);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			rs.first();
+			check = rs.getBoolean(1);	
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -71,6 +72,7 @@ public class UsuarioDAO{
 			ps.setString(4, usuario.getFechaNacimiento());
 			ps.setString(5, usuario.getPassWord());
 			ps.setBoolean(6,usuario.getAdmin());
+			ps.setString(7, usuario.getFechaInscripcion());
 			ps.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -104,118 +106,7 @@ public class UsuarioDAO{
 		
 		connection.closeConnection();
 	}
-	
-	
-	/**
-	 * Modificar contrasenia de usuario
-	 * @param password Contrasenia del usuario
-	 * @param new_password Nueva contrasenia del usuario
-	 */
-	
-	public void modificarPasswordUsuario(String correo, String password, String new_password) {
-		DBConnection connection = new DBConnection();
-		con = connection.getConnection();
-		try {
-			PreparedStatement ps = con.prepareStatement(prop.getProperty("modificarPasswordUsuarioSTM"));
-			ps.setString(1, new_password);
-			ps.setString(2, password);
-			ps.setString(3, correo);
-			ps.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		connection.closeConnection();
-	}
-	
-	/**
-	 * Modificar nombre de usuario
-	 * @param correo Correo del usuario
-	 * @param nombre Nombre del usuario
-	 */
-	
-	public void modificarNombreUsuario(String correo, String nombre) {
-		DBConnection connection = new DBConnection();
-		con = connection.getConnection();
-		try {
-			PreparedStatement ps = con.prepareStatement(prop.getProperty("modificarNombreUsuarioSTM"));
-			ps.setString(1, nombre);
-			ps.setString(2, correo);
-			ps.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		connection.closeConnection();
-	}
-	
-	/**
-	 * Modificar apellidos de usuario
-	 * @param correo Correo del usuario
-	 * @param apellidos Apellidos del usuario
-	 */
-	
-	public void modificarApellidosUsuario(String correo, String apellidos) {
-		DBConnection connection = new DBConnection();
-		con = connection.getConnection();
-		try {
-			PreparedStatement ps = con.prepareStatement(prop.getProperty("modificarApellidosUsuarioSTM"));
-			ps.setString(1, apellidos);
-			ps.setString(2, correo);
-			ps.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		connection.closeConnection();
-	}
-	
-	/**
-	 * Modificar fecha nacimiento de usuario
-	 * @param correo Correo del usuario
-	 * @param fechaNacimiento Fecha de nacimiento del usuario
-	 */
-	
-	public void modificarFechaNacimientoUsuario(String correo, String fechaNacimiento) {
-		DBConnection connection = new DBConnection();
-		con = connection.getConnection();
-		try {
-			PreparedStatement ps = con.prepareStatement(prop.getProperty("modificarFechaNacimientoUsuarioSTM"));
-			ps.setString(1, fechaNacimiento);
-			ps.setString(2, correo);
-			ps.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		connection.closeConnection();
-	}
-	
-	/**
-	 * Modificar fecha inscripcion de usuario
-	 * @param correo Correo del usuario
-	 * @param fechaInscripcion Fecha de inscripcion del usuario
-	 */
-	
-	public void modificarFechaInscripcionUsuario(String correo, String fechaInscripcion) {
-		DBConnection connection = new DBConnection();
-		con = connection.getConnection();
-		try {
-			PreparedStatement ps = con.prepareStatement(prop.getProperty("modificarFechaInscripcionUsuarioSTM"));
-			ps.setString(1, fechaInscripcion);
-			ps.setString(2, correo);
-			ps.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		connection.closeConnection();
-	}
+
 	
 	/**
 	 * Eliminar usuario, solo se necesita su correo para eliminarlo
@@ -243,7 +134,7 @@ public class UsuarioDAO{
 	 * @return usuario Usuario buscado
 	 */
 	
-	public UsuarioDTO queryByEmail(String correo){
+	public UsuarioDTO obtenerUsuario(String correo){
 		UsuarioDTO usuario = null;
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();

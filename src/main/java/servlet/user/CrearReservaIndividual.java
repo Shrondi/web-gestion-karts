@@ -178,12 +178,6 @@ public class CrearReservaIndividual extends HttpServlet {
 					request.setAttribute("reservaAdultos", adultos);
 				}
 				
-				//Actualizamos la fecha de inscripcion si es la primera reserva
-				if (fechaInscripcion.equals("1/1/1900")) {
-					String nuevafechaInscripcion = sdf.format(currDate);
-					
-					usuarioDAO.modificarFechaInscripcionUsuario(userBean.getCorreo(), nuevafechaInscripcion);
-				}
 				
 				//Actualizamos el numero de karts disponibles de la pista
 				PistaDAO pistaDAO = new PistaDAO(prop);
@@ -195,12 +189,12 @@ public class CrearReservaIndividual extends HttpServlet {
 				kartDAO.actualizarEstadoKart(false, Estado.RESERVADO, pista, numeroAdultos);
 				
 				//Borramos los atributos de la sesion correspondientes a esta reserva
-				request.getSession().removeAttribute("ListaPistas");
-				request.getSession().removeAttribute("duracion");
-				request.getSession().removeAttribute("numeroNinios");
-				request.getSession().removeAttribute("numeroAdultos");
-				request.getSession().removeAttribute("tipoReserva");
-				request.getSession().removeAttribute("fecha");
+				session.removeAttribute("ListaPistas");
+				session.removeAttribute("duracion");
+				session.removeAttribute("numeroNinios");
+				session.removeAttribute("numeroAdultos");
+				session.removeAttribute("tipoReserva");
+				session.removeAttribute("fecha");
 				
 				//Mostramos el resumen de la reserva
 				dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservaIndividualDisplay.jsp");
@@ -228,12 +222,12 @@ public class CrearReservaIndividual extends HttpServlet {
 					dispatcher.forward(request, response);
 					
 				}else{
-					request.getSession().setAttribute("ListaPistas", pistas);
-					request.getSession().setAttribute("duracion", duracion);
-					request.getSession().setAttribute("numeroNinios", numeroNinios);
-					request.getSession().setAttribute("numeroAdultos", numeroAdultos);
-					request.getSession().setAttribute("tipoReserva", tipoReserva);
-					request.getSession().setAttribute("fecha", fecha);
+					session.setAttribute("ListaPistas", pistas);
+					session.setAttribute("duracion", duracion);
+					session.setAttribute("numeroNinios", numeroNinios);
+					session.setAttribute("numeroAdultos", numeroAdultos);
+					session.setAttribute("tipoReserva", tipoReserva);
+					session.setAttribute("fecha", fecha);
 
 					dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservasPistasDisplay.jsp");
 					dispatcher.forward(request, response);

@@ -36,13 +36,13 @@ public class ReservaAdultosDTO extends AbstractReservaDTO implements Serializabl
 	@Override
 	public String toString() {
 		String reservaInfo = (
-							   "\t\n\n\n - Usuario: " + this.idUsuario_ 
-							 + "\t\n - Fecha: " + this.getFecha() 
-							 + "\t\n - Duracion: " + this.duracion_ 
-							 + "\t\n - Participantes adultos: " + this.participantesAdultos_
-							 + "\t\n - Descuento: " + this.descuento_
-							 + "\t\n - Precio: " + this.precio_ 
-				             + "\t\n - Pista: " + this.idPista_);
+							   "Usuario: " + this.idUsuario_ 
+							 + "\nFecha: " + this.getFecha() 
+							 + "\nDuracion: " + this.duracion_ + " minutos"
+							 + "\nParticipantes adultos: " + this.participantesAdultos_
+							 + "\nDescuento: " + this.descuento_ + " %"
+							 + "\nPrecio: " + this.precio_ + " €" 
+				             + "\nPista: " + this.idPista_);
 		return reservaInfo;
 	}
 }

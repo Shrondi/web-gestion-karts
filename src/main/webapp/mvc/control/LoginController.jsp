@@ -36,7 +36,7 @@ if(userBean == null || userBean.getCorreo().equals("")){
 			
 		}else{ //Existe
 			
-			UsuarioDTO usuario = usuarioDAO.queryByEmail(emailUsuario);
+			UsuarioDTO usuario = usuarioDAO.obtenerUsuario(emailUsuario);
 
 			//Comprobamos si los datos introducidos por el usuario son correctos para el login
 			if (!usuario.getCorreo().contentEquals(emailUsuario) || !usuario.getPassWord().contentEquals(passwordUsuario)) { //Datos incorrectos
