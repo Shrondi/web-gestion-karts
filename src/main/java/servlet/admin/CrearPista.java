@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,7 +47,7 @@ public class CrearPista extends HttpServlet {
 		else
 		{
 			String nombre_pista = request.getParameter("nombre");
-			String estado = request.getParameter("estado");
+			Boolean estado = Boolean.parseBoolean(request.getParameter("estado"));
 			String dificultad = request.getParameter("dificultad");
 			int max_karts = Integer.parseInt(request.getParameter("max_karts"));
 			
@@ -59,7 +58,7 @@ public class CrearPista extends HttpServlet {
 				dispatcher = request.getRequestDispatcher("/mvc/display/admin/");
 				dispatcher.forward(request, response);
 			
-			//Caso 2b: Hay parametros en el request
+			//Caso 2b: Hay parametros en el request (viene de la vista)
 			}else {
 				PistaDAO pistaDAO = new PistaDAO(prop);
 				
@@ -76,14 +75,13 @@ public class CrearPista extends HttpServlet {
 					PistaDTO pista = new PistaDTO();
 					
 					pista.setNombre(nombre_pista);
+					pista.setEstado(estado);
 					pista.setMaxAmmount(max_karts);
 					pista.setDificulty(Dificultad.valueOf(dificultad.toUpperCase()));
 					
 					pistaDAO.CrearPista(pista);
 					
-					request.setAttribute("mensaje", "Se ha creado la pista correctamente");
-					dispatcher = request.getRequestDispatcher("/WebProyectoPW");
-					dispatcher.forward(request, response);
+					response.sendRedirect("/WebProyectoPW");
 				}
 					
 			}

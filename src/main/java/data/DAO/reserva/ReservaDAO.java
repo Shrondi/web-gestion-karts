@@ -32,8 +32,9 @@ public class ReservaDAO {
 	}
 	
 	//NEW
-	public void borrarReserva(int idReserva) {
+	public boolean borrarReserva(int idReserva) {
 		
+		boolean flag = true;
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
 
@@ -45,9 +46,11 @@ public class ReservaDAO {
 		
 		} catch(SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
 		
 		connection.closeConnection();
+		return flag;
 	}
 	
 	/**
