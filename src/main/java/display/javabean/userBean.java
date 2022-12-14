@@ -9,7 +9,7 @@ public class userBean implements java.io.Serializable{
 	private String fechaNacimiento_="";
 	private String fechaInscripcion_="";
 	private String passWord_="";
-	private Boolean admin_=false;
+	private Boolean admin_= false;
 	
 	/**
 	 * Getter nombre del usuario

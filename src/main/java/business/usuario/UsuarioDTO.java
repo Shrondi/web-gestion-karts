@@ -28,6 +28,7 @@ public class UsuarioDTO implements Serializable{
 	private String correo_;
 	private Date fechaNacimiento_;
 	private Date fechaInscripcion_;
+	private int antiguedad_;
 	private String passWord_;
 	private Boolean admin_; //true administrador, false usuario
 	
@@ -41,6 +42,7 @@ public class UsuarioDTO implements Serializable{
 		this.correo_ = null;
 		this.fechaNacimiento_ = null;
 		this.fechaInscripcion_ = null;
+		this.antiguedad_ = 0;
 		this.passWord_ = null;
 		this.admin_ = false;
 	}
@@ -124,6 +126,23 @@ public class UsuarioDTO implements Serializable{
 	}
 	
 	/**
+	 * Getter fecha de inscripción como Date
+	 * @return Fecha de inscripción
+	 */
+	public Date getFechaInscripcionDate() {
+		return this.fechaInscripcion_;
+	}
+	
+	/**
+	 * Getter antiguedad usuario
+	 * @return Antiguedad usuario
+	 */
+	
+	public int getAntiguedad(){
+		return this.antiguedad_;
+	}
+	
+	/**
 	 * Getter contraseña del usuario
 	 * @return contraseña del usuario
 	 */
@@ -202,6 +221,14 @@ public class UsuarioDTO implements Serializable{
 		}
 	}
 	
+	/**
+	 * Setter antiguedad usuario
+	 * @return Antiguedad usuario
+	 */
+	
+	public void setAntiguedad(int antiguedad){
+		antiguedad_ = antiguedad;
+	}
 	
 	/**
 	 * Permite asignar una contraseña nueva al usuario

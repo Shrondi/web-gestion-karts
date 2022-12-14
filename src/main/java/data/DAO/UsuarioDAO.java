@@ -186,6 +186,7 @@ public class UsuarioDAO{
 				String apellidos = rs.getString("apellidos");
 				String fechaNacimiento = rs.getString("fecha_Nacimiento");
 				String fechaInscripcion = rs.getString("fecha_Inscripcion");
+				Boolean admin = rs.getBoolean("administrador");
 				
 				UsuarioDTO usuarioToPush = new UsuarioDTO();
 				usuarioToPush.setCorreo(correo);
@@ -193,6 +194,7 @@ public class UsuarioDAO{
 				usuarioToPush.setApellidos(apellidos);
 				usuarioToPush.setFechaNacimiento(fechaNacimiento);
 				usuarioToPush.setFechaInscripcion(fechaInscripcion);
+				usuarioToPush.setAdmin(admin);
 				usuarios.add(usuarioToPush);
 			}
 		} catch (SQLException e) {

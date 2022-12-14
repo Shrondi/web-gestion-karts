@@ -3,6 +3,7 @@
 <%@page import="display.javabean.userBean"%>
 <jsp:useBean id="userBean" class="display.javabean.userBean" scope = "session"/>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,11 +48,14 @@
 		if(userBean.getAdmin()){
 		%>
 		<p>¡Bienvenido Administrador <%=userBean.getNombre() + userBean.getApellidos()%>!</p>
+		
+			<jsp:include page="/mvc/control/ListadoUsuariosController.jsp" />
 		<%}else{
 		%>
 		<p>¡Bienvenido usuario <%=userBean.getCorreo()%>!</p>
 		<p>Son las <%= new java.util.Date() %></p>
 		<p>Se registro <%= userBean.getFechaInscripcion()%></p>
+		
 	<% }	
 	}%>
 	

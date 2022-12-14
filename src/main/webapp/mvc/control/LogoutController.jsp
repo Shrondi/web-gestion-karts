@@ -11,6 +11,7 @@ if (userBean == null || userBean.getCorreo() == "") {
 	
 }else{ 
 	request.getSession().removeAttribute("userBean");
+	userBean = null;
 	
 	message = "Sesion cerrada";
 }
