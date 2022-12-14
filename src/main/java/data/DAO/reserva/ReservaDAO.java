@@ -4,8 +4,11 @@ import data.common.DBConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+
+import business.reserva.AbstractReservaDTO;
 
 /**
  * @author Carlos Lucena Robles.
@@ -79,6 +82,39 @@ public class ReservaDAO {
 		connection.closeConnection();
 		return check;
 	}
+	
+	//NEW
+	public AbstractReservaDTO obtenerProximaReserva(String correo){
+		AbstractReservaDTO reserva = new AbstractReservaDTO();
+		DBConnection connection = new DBConnection();
+		con = connection.getConnection();
+		try {
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservaProximaSTM"));
+			
+			ps.setString(1, correo);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			
+					
+			while (rs.next()) {
+				
+				Date fecha = new Date(rs.getTimestamp("fecha").getTime());
+				reserva.setFecha(fecha);
+			}
+					
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch(IllegalArgumentException e){
+			e.printStackTrace();
+		}
+				
+		connection.closeConnection();
+		return reserva;
+	}
+	
+	
 	
 	
 	

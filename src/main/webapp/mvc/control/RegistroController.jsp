@@ -59,8 +59,8 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 			<jsp:setProperty property="apellidos" value="<%=nuevoUsuario.getApellidos()%>" name="userBean"/>
 			<jsp:setProperty property="fechaNacimiento" value="<%=nuevoUsuario.getFechaNacimiento()%>" name="userBean"/>
 			<jsp:setProperty property="passWord" value="<%=nuevoUsuario.getPassWord()%>" name="userBean"/>
-			<jsp:setProperty property="admin" value="<%=nuevoUsuario.getAdmin()%>" name="userBean"/>
-			
+			<jsp:setProperty property="admin" value="<%=nuevoUsuario.getAdmin()%>" name="userBean"/>	
+		
 			<%
 			}
 			

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="display.javabean.userBean"%>
+<%@page import="display.javabean.userBean, java.util.Date"%>
 <jsp:useBean id="userBean" class="display.javabean.userBean" scope = "session"/>
 
 
@@ -53,8 +53,14 @@
 		<%}else{
 		%>
 		<p>¡Bienvenido usuario <%=userBean.getCorreo()%>!</p>
-		<p>Son las <%= new java.util.Date() %></p>
-		<p>Se registro <%= userBean.getFechaInscripcion()%></p>
+		<p>Se registro el <%= userBean.getFechaInscripcion()%></p>
+		<p>Su antiguedad es de <%= userBean.getAntiguedad()%> meses</p>
+		<%if (userBean.getFechaReserva().compareTo(new Date()) != 0){ %>
+			<p>Su proxima reserva es el <%= userBean.getFechaReservaString()%></p>
+		<%}else{ %>
+			<p> No tiene reservas futuras </p>
+		
+		<%} %>
 		
 	<% }	
 	}%>

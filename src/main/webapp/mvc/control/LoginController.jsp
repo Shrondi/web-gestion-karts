@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="data.DAO.UsuarioDAO,business.usuario.UsuarioDTO" %>
+<%@ page import="data.DAO.UsuarioDAO,business.usuario.UsuarioDTO, data.DAO.reserva.ReservaDAO, business.reserva.AbstractReservaDTO, java.util.Date" %>
 <jsp:useBean  id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
 
 <%
@@ -46,6 +46,18 @@ if(userBean == null || userBean.getCorreo().equals("")){
 				
 			}else{ //Datos correctos, se procede con el login
 				
+				//Obtenemos la fecha de su proxima reserva
+				ReservaDAO reserva = new ReservaDAO(prop);
+				AbstractReservaDTO reservaDTO = reserva.obtenerProximaReserva(usuario.getCorreo());
+				reservaDTO.getFechaDate();
+				
+				Date currDate = new Date();
+				Date fechaInscripcion = usuario.getFechaInscripcionDate();
+				
+				long diff = currDate.getTime() - fechaInscripcion.getTime();
+				long d = ((1000l*60*60*24*365)/12);
+				long months = Math.round(diff/d);
+				
 				%>
 				<jsp:setProperty property="correo" value="<%=usuario.getCorreo()%>" name="userBean"/>
 				<jsp:setProperty property="nombre" value="<%=usuario.getNombre()%>" name="userBean"/>
@@ -54,6 +66,8 @@ if(userBean == null || userBean.getCorreo().equals("")){
 				<jsp:setProperty property="fechaInscripcion" value="<%=usuario.getFechaInscripcion()%>" name="userBean"/>
 				<jsp:setProperty property="passWord" value="<%=usuario.getPassWord()%>" name="userBean"/>
 				<jsp:setProperty property="admin" value="<%=usuario.getAdmin()%>" name="userBean"/>
+				<jsp:setProperty property="fechaReserva" value="<%=reservaDTO.getFechaDate()%>" name="userBean"/>
+				<jsp:setProperty property="antiguedad" value="<%=(int) months%>" name="userBean"/>
 				<%
 				
 				nextPage = "../../index.jsp";

@@ -1,5 +1,8 @@
 package display.javabean;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class userBean implements java.io.Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -10,6 +13,8 @@ public class userBean implements java.io.Serializable{
 	private String fechaInscripcion_="";
 	private String passWord_="";
 	private Boolean admin_= false;
+	private Date fechaReserva_ = new Date();
+	private int antiguedad_ = 0;
 	
 	/**
 	 * Getter nombre del usuario
@@ -70,6 +75,24 @@ public class userBean implements java.io.Serializable{
 	}
 	
 	/**
+	 * Getter Fecha de proxima reserva
+	 * @return Fecha y hora proxima reserva
+	 */
+
+	public String getFechaReservaString() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		return sdf.format(this.fechaReserva_);
+	}
+	
+	public Date getFechaReserva() {
+		return this.fechaReserva_;
+	}
+	
+	public int getAntiguedad() {
+		return this.antiguedad_;
+	}
+	
+	/**
 	 * Setter del nombre del usuario
 	 * @param nombre Nombre del usuario
 	 */
@@ -127,6 +150,19 @@ public class userBean implements java.io.Serializable{
 	
 	public void setAdmin(Boolean admin) {
 		this.admin_ = admin;
+	}
+	
+	/**
+	 * Setter Fecha de proxima reserva
+	 * @return Fecha y hora proxima reserva
+	 */
+	
+	public void setFechaReserva(Date fechaReserva) {
+		this.fechaReserva_ = fechaReserva;
+	}
+	
+	public void setAntiguedad(int antiguedad) {
+		this.antiguedad_ = antiguedad;
 	}
 	
 }
