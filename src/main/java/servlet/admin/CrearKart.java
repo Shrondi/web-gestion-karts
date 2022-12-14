@@ -38,22 +38,20 @@ public class CrearKart extends HttpServlet {
 		//Caso 1: Usuario no esta logueado -> Volvemos al index
 		if (userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() == false)
 		{
-			//dispatcher = request.getRequestDispatcher("/index.jsp");
-			//dispatcher.forward(request, response);
 			response.sendRedirect("/WebProyectoPW");
 		}
 		
 		//Caso 2: Usuario logueado, creamos kart
 		else
 		{
-			Boolean tipo = Boolean.parseBoolean(request.getParameter("tipo"));
-			String estado = request.getParameter("estado");
+			Boolean tipo = Boolean.parseBoolean(request.getParameter("tipoKart"));
+			String estado = request.getParameter("estadoKart");
 			
 			//Caso 2a: Si no hay parametros en el request -> A la vista
 			if (estado == null) {
 				
 				//Ruta de donde se encuentra la vista de pedir datos de kart
-				dispatcher = request.getRequestDispatcher("/mvc/view/CrearKart.jsp");
+				dispatcher = request.getRequestDispatcher("/mvc/view/admin/CrearKart.jsp");
 				dispatcher.forward(request, response);
 			
 			//Caso 2b: Hay parametros en el request (viene de la vista)
@@ -65,7 +63,10 @@ public class CrearKart extends HttpServlet {
 				kart.seType(tipo);
 				
 				kartDAO.crearKart(kart);
-				response.sendRedirect("/WebProyectoPW");
+				
+				request.setAttribute("mensaje", "Se ha creado con éxito el kart");
+				dispatcher = request.getRequestDispatcher("/mvc/view/admin/CrearKart.jsp");
+				dispatcher.forward(request, response);
 			}
 		}	
 	}

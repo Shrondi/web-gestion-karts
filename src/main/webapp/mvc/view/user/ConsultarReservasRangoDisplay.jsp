@@ -29,19 +29,24 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		</head>
 		<body>
 				<p id="message"><%= mensajeNextPage %></p>
-						<p> Escriba la fecha de inicio y de fin</p>
+						<p> Escriba la fecha de inicio y de fin para consultar reservas entre dichas fechas:</p>
 						<form id="formReservasUsuario" method="post" action="/WebProyectoPW/ConsultarReservas">
 								<div>
-										<p>
+								
 												<label for="fechaInicio">Fecha Inicio: </label>
-												<input type="datetime-local" name="fechaInicio" id="fechaInicio" value= <%=request.getAttribute("fechaInicio")%>required>
-										</p>
-										<p>
+												<input type="datetime-local" name="fechaInicio" id="fechaInicio" value="<%=request.getAttribute("fechaInicio")%>" required>
+										
+										
 												<label for="fechaFin">Fecha Fin: </label>
-												<input type="datetime-local" name="fechaFin" id="fechaFin" value= <%=request.getAttribute("fechaFin")%> required>
-										</p>
+												<input type="datetime-local" name="fechaFin" id="fechaFin" value="<%=request.getAttribute("fechaFin")%>" required>
+										
 										
 								</div>	
+								
+								<% if (request.getAttribute("reservasInfantilPasadas") != null){ %>
+										<jsp:include page="ReservasRangoDisplay.jsp" />  
+								<%} %>
+								
 								<input type="submit" value="Aceptar">
 						</form>
 						

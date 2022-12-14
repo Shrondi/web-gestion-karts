@@ -14,12 +14,6 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 //Caso 2: El usuario esta logado y no es admin
 }else{
 	
-	String mensajeNextPage = (String) request.getAttribute("mensaje");
-	
-	if (mensajeNextPage == null) {
-		mensajeNextPage = "";
-	}
-	
 	List<ReservaInfantilDTO> reservasInfantilPasadas = (List<ReservaInfantilDTO>) request.getAttribute("reservasInfantilPasadas");
 	List<ReservaInfantilDTO> reservasInfantilFuturas = (List<ReservaInfantilDTO>) request.getAttribute("reservasInfantilFuturas");
 	
@@ -43,8 +37,6 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 				<title>Consultar Reservas</title>
 		</head>
 		<body>
-				<p id="message"><%= mensajeNextPage %> </p>
-				
 				<p>
 					RESERVAS PASADAS:
 				</p>
@@ -254,11 +246,6 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							</tbody>
 						</table>
 						<% } %>
-						
-						<br>
-						<form id="volver" method="post" action="/WebProyectoPW/ConsultarReservas">
-								<input type="submit" value="Volver">
-						</form>
 		</body>
 </html>
 

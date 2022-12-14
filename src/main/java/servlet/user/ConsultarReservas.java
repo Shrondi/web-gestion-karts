@@ -116,7 +116,7 @@ public class ConsultarReservas extends HttpServlet {
 				request.setAttribute("fechaInicio", fechaInicio);
 				request.setAttribute("fechaFin", fechaFin);
 				
-				dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservasRangoDisplay.jsp");
+				dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservasRangoDisplay.jsp");
 				dispatcher.forward(request, response);
 				
 			}

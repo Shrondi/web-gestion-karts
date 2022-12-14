@@ -38,35 +38,33 @@ public class CrearPista extends HttpServlet {
 		//Caso 1: Usuario no esta logueado -> Volvemos al index
 		if (userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() == false)
 		{
-			//dispatcher = request.getRequestDispatcher("/index.jsp");
-			//dispatcher.forward(request, response);
 			response.sendRedirect("/WebProyectoPW");
 		}
 		
 		//Caso 2: Usuario logueado, creamos la pista
-		else
-		{
-			String nombre_pista = request.getParameter("nombre");
-			Boolean estado = Boolean.parseBoolean(request.getParameter("estado"));
-			String dificultad = request.getParameter("dificultad");
-			int max_karts = Integer.parseInt(request.getParameter("max_karts"));
+		else{
+			String nombre_pista = request.getParameter("nombrePista");
 			
 			//Caso 2a: Si no hay parametros en el request -> A la vista
 			if (nombre_pista == null) {
 				
 				//Ruta de donde se encuentra la vista de pedir datos de la pista
-				dispatcher = request.getRequestDispatcher("/mvc/view/CrearPista.jsp");
+				dispatcher = request.getRequestDispatcher("/mvc/view/admin/CrearPista.jsp");
 				dispatcher.forward(request, response);
 			
 			//Caso 2b: Hay parametros en el request (viene de la vista)
-			}else {
+			}else{
+				Boolean estado = Boolean.valueOf(request.getParameter("estado"));
+				Dificultad dificultad = Dificultad.valueOf(request.getParameter("dificultad").toUpperCase());
+				int max_karts = Integer.parseInt(request.getParameter("max_karts"));
+				
 				PistaDAO pistaDAO = new PistaDAO(prop);
 				
 				//Si el nombre de la pista ya existe -> Volver al display
 				if (pistaDAO.consultarPistaExiste(nombre_pista)) {
 					
-					request.setAttribute("mensaje", "El nombre ya esta siendo usando, por favor escriba otro nombre");
-					dispatcher = request.getRequestDispatcher("/mvc/display/admin/");
+					request.setAttribute("mensaje", "Ya existe una pista con ese nombre, por favor escriba otro nombre");
+					dispatcher = request.getRequestDispatcher("/mvc/view/admin/CrearPista.jsp");
 					dispatcher.forward(request, response);
 					
 				//Si el nombre no existe
@@ -77,11 +75,14 @@ public class CrearPista extends HttpServlet {
 					pista.setNombre(nombre_pista);
 					pista.setEstado(estado);
 					pista.setMaxAmmount(max_karts);
-					pista.setDificulty(Dificultad.valueOf(dificultad.toUpperCase()));
+					pista.setDificulty(dificultad);
 					
 					pistaDAO.CrearPista(pista);
 					
-					response.sendRedirect("/WebProyectoPW");
+					//Volvemos a la vista para crear mas pistas
+					request.setAttribute("mensaje", "Se ha creado con éxito la pista con nombre: " + nombre_pista);
+					dispatcher = request.getRequestDispatcher("/mvc/view/admin/CrearPista.jsp");
+					dispatcher.forward(request, response);
 				}
 					
 			}
