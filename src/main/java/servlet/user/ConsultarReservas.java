@@ -16,7 +16,8 @@ import display.javabean.userBean;
 import business.reserva.*;
 import data.DAO.reserva.*;
 
-
+import java.util.ArrayList;
+import java.util.Date;
 /**
  * Servlet implementation class ConsultarReservas
  */
@@ -64,14 +65,44 @@ public class ConsultarReservas extends HttpServlet {
 				ReservaFamiliarDAO reservaFamiliarDAO = new ReservaFamiliarDAO(prop);
 				ReservaAdultosDAO reservaAdultosDAO = new ReservaAdultosDAO(prop);
 
-				List<ReservaInfantilDTO> reservasInfantilPasadas = reservaInfantilDAO.consultarReservasInfantilPasadasRango(fechaInicio,fechaFin,userBean.getCorreo());
-				List<ReservaInfantilDTO> reservasInfantilFuturas = reservaInfantilDAO.consultarReservasInfantilFuturasRango(fechaInicio,fechaFin,userBean.getCorreo());
+				List<ReservaInfantilDTO> reservasInfantilPasadas = new ArrayList<>();
+				List<ReservaInfantilDTO> reservasInfantilFuturas = new ArrayList<>();
 				
-				List<ReservaFamiliarDTO> reservasFamiliarPasadas = reservaFamiliarDAO.consultarReservasFamiliarPasadasRango(fechaInicio,fechaFin,userBean.getCorreo());
-				List<ReservaFamiliarDTO> reservasFamiliarFuturas = reservaFamiliarDAO.consultarReservasFamiliarFuturasRango(fechaInicio,fechaFin,userBean.getCorreo());
+				List<ReservaFamiliarDTO> reservasFamiliarPasadas = new ArrayList<>();
+				List<ReservaFamiliarDTO> reservasFamiliarFuturas = new ArrayList<>();
 				
-				List<ReservaAdultosDTO> reservasAdultosPasadas = reservaAdultosDAO.consultarReservasAdultosPasadasRango(fechaInicio,fechaFin,userBean.getCorreo());
-				List<ReservaAdultosDTO> reservasAdultosFuturas = reservaAdultosDAO.consultarReservasAdultosFuturasRango(fechaInicio,fechaFin,userBean.getCorreo());
+				List<ReservaAdultosDTO> reservasAdultosPasadas = new ArrayList<>();
+				List<ReservaAdultosDTO> reservasAdultosFuturas = new ArrayList<>();
+				
+				
+				Date fecha = new Date();
+				
+				for (ReservaInfantilDTO reservaInfantil : reservaInfantilDAO.consultarReservasInfantilRango(fechaInicio, fechaFin, userBean.getCorreo()) ) {
+					if (reservaInfantil.getFechaDate().compareTo(fecha) <= 0) {
+						reservasInfantilPasadas.add(reservaInfantil);
+
+					}else {
+						reservasInfantilFuturas.add(reservaInfantil);
+					}
+				}
+				
+				for (ReservaFamiliarDTO reservaFamiliar : reservaFamiliarDAO.consultarReservasFamiliarRango(fechaInicio, fechaFin, userBean.getCorreo()) ) {
+					if (reservaFamiliar.getFechaDate().compareTo(fecha) <= 0) {
+						reservasFamiliarPasadas.add(reservaFamiliar);
+
+					}else {
+						reservasFamiliarFuturas.add(reservaFamiliar);
+					}
+				}
+				
+				for (ReservaAdultosDTO reservaAdultos : reservaAdultosDAO.consultarReservasAdultosRango(fechaInicio, fechaFin, userBean.getCorreo()) ) {
+					if (reservaAdultos.getFechaDate().compareTo(fecha) <= 0) {
+						reservasAdultosPasadas.add(reservaAdultos);
+
+					}else {
+						reservasAdultosFuturas.add(reservaAdultos);
+					}
+				}
 				
 				request.setAttribute("reservasInfantilPasadas", reservasInfantilPasadas);
 				request.setAttribute("reservasInfantilFuturas", reservasInfantilFuturas);

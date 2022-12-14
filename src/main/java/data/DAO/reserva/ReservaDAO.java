@@ -60,7 +60,7 @@ public class ReservaDAO {
 		con = connection.getConnection();
 		try {
 			PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservaSTM"));
-			System.out.println(fecha);
+			
 			ps.setString(1, correo);
 			ps.setString(2, fecha);
 			ps.setString(3, fecha);

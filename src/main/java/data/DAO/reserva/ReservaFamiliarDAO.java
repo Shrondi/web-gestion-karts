@@ -180,75 +180,19 @@ public class ReservaFamiliarDAO {
 	}
 	
 	//NEW
-	public List<ReservaFamiliarDTO> consultarReservasFamiliarPasadasRango(String fechaInicio, String fechaFin, String usuario){
+	public List<ReservaFamiliarDTO> consultarReservasFamiliarRango(String fechaInicio, String fechaFin, String usuario){
 		
 		List<ReservaFamiliarDTO> reservas = new ArrayList<>();
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
 		
 		try {
-			PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasFamiliarPasadasSTM"));
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasFamiliarRangoSTM"));
 			
-			ps.setString(1, fechaInicio);
-			ps.setString(2, fechaFin);
-			ps.setString(3, usuario);
-		
-			ResultSet rs = ps.executeQuery();
+			ps.setString(1, usuario);
+			ps.setString(2, fechaInicio);
+			ps.setString(3, fechaFin);
 			
-			while (rs.next()) {
-
-				int idReserva = rs.getInt("id_Reserva");
-				int participantes_adultos = rs.getInt("participantes_adultos");
-				int participantes_infantiles = rs.getInt("participantes_infantiles");
-				Date fecha = new Date(rs.getTimestamp("fecha").getTime());
-				int duracion = rs.getInt("duracion");
-				float descuento = rs.getFloat("descuento");
-				float precio = rs.getFloat("precio");
-				String pista = rs.getString("pista");
-				
-				ReservaFamiliarDTO reservafamiliar = new ReservaFamiliarDTO();
-				
-				reservafamiliar.setIdReserva(idReserva);
-				reservafamiliar.setIdUsuario(usuario);
-				reservafamiliar.setParticipantesAdultos(participantes_adultos);
-				reservafamiliar.setParticipantesInfantiles(participantes_infantiles);
-				reservafamiliar.setFecha(fecha);
-				reservafamiliar.setDuracion(duracion);
-				reservafamiliar.setDescuento(descuento);
-				reservafamiliar.setPrecio(precio);
-				reservafamiliar.setIdPista(pista);
-				reservas.add(reservafamiliar);
-			}
-			
-			rs.close();
-			ps.close();
-		
-		} catch (SQLException e) {
-			e.printStackTrace();
-			
-		} catch(IllegalArgumentException e){
-			e.printStackTrace();
-		}
-		
-		connection.closeConnection();
-		return reservas;
-		
-	}
-	
-	
-	//NEW
-	public List<ReservaFamiliarDTO> consultarReservasFamiliarFuturasRango(String fechaInicio, String fechaFin, String usuario){
-		
-		List<ReservaFamiliarDTO> reservas = new ArrayList<>();
-		DBConnection connection = new DBConnection();
-		con = connection.getConnection();
-		
-		try {
-			PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasFamiliarFuturasSTM"));
-			
-			ps.setString(1, fechaInicio);
-			ps.setString(2, fechaFin);
-			ps.setString(3, usuario);
 		
 			ResultSet rs = ps.executeQuery();
 			

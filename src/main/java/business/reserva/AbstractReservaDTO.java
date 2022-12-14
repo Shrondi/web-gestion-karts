@@ -54,6 +54,10 @@ public class AbstractReservaDTO implements Serializable {
 		return retVal;
 	}
 	
+	public Date getFechaDate() {
+		return this.fecha_;
+	}
+	
 	public int getDuracion() {
 		return this.duracion_;
 	}

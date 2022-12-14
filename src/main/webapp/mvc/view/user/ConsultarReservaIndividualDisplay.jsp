@@ -37,36 +37,37 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 				<p id="mensaje"><%= mensaje %></p>
 						<form id="formReservaIndividual" method="post" action="/WebProyectoPW/ReservaIndividual">
 								<div>
-										<p>
-												<label for="fecha">Fecha Reserva: </label>
-												<input type="datetime-local" name="fecha" id="fecha" value="<%= request.getSession().getAttribute("fecha")%>" required>
-										</p>
 										
+										<label for="fecha">Fecha reserva: </label>
+										<input type="datetime-local" name="fecha" id="fecha" value="<%= request.getSession().getAttribute("fecha")%>" required>
+										
+										
+										<p> Tipo reserva: </p>
+										<input type="radio" name="tipoReserva" id="infantil" value="INFANTIL" "checked=\"checked\"" required>
+										<label for="infantil">Reserva Infantil</label> <br>
+										
+										<input type="radio" name="tipoReserva" id="familiar" value="FAMILIAR" "checked=\"checked\"" required>
+										<label for="familiar">Reserva Familiar</label> <br>
+										
+										<input type="radio" name="tipoReserva" id="adultos" value="ADULTOS" "checked=\"checked\"" required>
+										<label for="adultos">Reserva Adulto</label> <br>
 										 
-										 		<input type="radio" name="tipoReserva" value="INFANTIL" required>Reserva Infantil <br>
-												<input type="radio" name="tipoReserva" value="FAMILIAR" required>Reserva Familiar <br>
-												<input type="radio" name="tipoReserva" value="ADULTOS" required>Reserva Adultos
-										
-										
-										<p>
-										Escribe el numero de participantes infantiles:
-										<input type="number" name="numeroNinios" min="0" max="20" step="1" value="<%= request.getSession().getAttribute("numeroNinios")%>" required>
-										</p>
-										
-										<p>
-										Escribe el numero de participantes adultos:
+										<p> </p>
+										<label for="numeroNinios"> Número de participantes infantiles:  </label>
+										<input type="number" name="numeroNinios" id="numeroNinios" min="0" max="20" step="1" value="<%= request.getSession().getAttribute("numeroNinios")%>" required>
+										<p> </p>
+										<label for="numeroAdultos">Número de participantes adultos: </label>
 										<input type="number" name="numeroAdultos" min="0" max="20" step="1" value="<%= request.getSession().getAttribute("numeroAdultos")%>" required>
-										</p>
 										
-										<p>
-										Elige la duracion de la reserva :
-										<select name="duracion" required>
+										
+										<p> </p>
+										<label for="duracion"> Duración:  </label>
+										<select name="duracion" id="duracion" required>
 										  <option value="">...</option>
 										  <option value="60">60 minutos</option>
 										  <option value="90">90 minutos</option>
 										  <option value="120">120 minutos</option>
 										</select>
-										</p>
 										
 								</div>	
 						

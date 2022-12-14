@@ -179,18 +179,19 @@ public class ReservaInfantilDAO {
 	}
 	
 	//NEW
-	public List<ReservaInfantilDTO> consultarReservasInfantilFuturasRango(String fechaInicio, String fechaFin, String usuario){
+	public List<ReservaInfantilDTO> consultarReservasInfantilRango(String fechaInicio, String fechaFin, String usuario){
 		
 		List<ReservaInfantilDTO> reservas = new ArrayList<>();
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
 		
 		try {
-			PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasInfantilFuturasSTM"));
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasInfantilRangoSTM"));
 			
-			ps.setString(1, fechaInicio);
-			ps.setString(2, fechaFin);
-			ps.setString(3, usuario);
+			ps.setString(1, usuario);
+			ps.setString(2, fechaInicio);
+			ps.setString(3, fechaFin);
+		
 		
 			ResultSet rs = ps.executeQuery();
 			
@@ -220,62 +221,6 @@ public class ReservaInfantilDAO {
 			rs.close();
 			ps.close();
 		
-		} catch (SQLException e) {
-			e.printStackTrace();
-			
-		} catch(IllegalArgumentException e){
-			e.printStackTrace();
-		}
-		
-		connection.closeConnection();
-		return reservas;
-		
-	}
-	
-	
-	//NEW
-	public List<ReservaInfantilDTO> consultarReservasInfantilPasadasRango(String fechaInicio, String fechaFin, String usuario){
-		
-		List<ReservaInfantilDTO> reservas = new ArrayList<>();
-		DBConnection connection = new DBConnection();
-		con = connection.getConnection();
-		
-		try {
-			PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasInfantilPasadasSTM"));
-			
-			ps.setString(1, fechaInicio);
-			ps.setString(2, fechaFin);
-			ps.setString(3, usuario);
-			
-			ResultSet rs = ps.executeQuery();
-			
-			while (rs.next()) {
-
-				int idReserva = rs.getInt("id_Reserva");
-				int participantes_infantiles = rs.getInt("participantes_infantiles");
-				Date fecha = new Date(rs.getTimestamp("fecha").getTime());
-				int duracion = rs.getInt("duracion");
-				float descuento = rs.getFloat("descuento");
-				float precio = rs.getFloat("precio");
-				String pista = rs.getString("pista");
-				
-				ReservaInfantilDTO reservainfantil = new ReservaInfantilDTO();
-				
-				reservainfantil.setIdReserva(idReserva);
-				reservainfantil.setIdUsuario(usuario);
-				reservainfantil.setParticipantesInfantiles(participantes_infantiles);
-				reservainfantil.setFecha(fecha);
-				reservainfantil.setDuracion(duracion);
-				reservainfantil.setDescuento(descuento);
-				reservainfantil.setPrecio(precio);
-				reservainfantil.setIdPista(pista);
-				reservas.add(reservainfantil);
-			}
-		
-			rs.close();
-			ps.close();
-			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			
