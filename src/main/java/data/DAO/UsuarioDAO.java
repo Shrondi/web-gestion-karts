@@ -207,30 +207,4 @@ public class UsuarioDAO{
 		return usuarios;
 	}
 	
-	/**
-	 * Obtiene la fecha de inscripcion de un usuario
-	 * @param correo Correo del usuario
-	 * @return fechaInscripcion Fecha de inscripcion del usuario
-	 */
-	
-	public String obtenerFechaInscripcion(String correo) {
-		DBConnection connection = new DBConnection();
-		con = connection.getConnection();
-		
-		String fechaInscripcion = null;
-		try {		
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(prop.getProperty("obtenerFechaInscripcionSTM")+String.format("'%s'", correo));
-			while (rs.next()) {
-				fechaInscripcion = rs.getString("fecha_Inscripcion");
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch(IllegalArgumentException e){
-			e.printStackTrace();
-		}
-		connection.closeConnection();
-		return fechaInscripcion;
-	}
 }

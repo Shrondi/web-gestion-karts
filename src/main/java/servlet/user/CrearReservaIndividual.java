@@ -75,41 +75,13 @@ public class CrearReservaIndividual extends HttpServlet {
 
 				UsuarioDAO usuarioDAO = new UsuarioDAO(prop);
 				
-				//Obtenemos la fecha de inscripcion (fecha de primera reserva) del usuario
-				String fechaInscripcion = usuarioDAO.obtenerFechaInscripcion(userBean.getCorreo());
-				/*
-				 * Calculamos la antiguedad del usuario, el descuento por su antiguedad y el precio final de la reserva
-				 */
-				
-				int antiguedad = 0;
+				 //Calculamos el descuento por su antiguedad y el precio final de la reserva
+				 
 				float precio = 1f;
 				float descuento = 0;
 				
-				//Comprobamos si el valor de la fecha de inscripcion es el por defecto.
-				
-				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-				
-				Date currDate = new Date();
-				Date date = new Date();
-				
-				try {
-					date = sdf.parse(fechaInscripcion);
-				} catch (ParseException e){
-					e.printStackTrace();
-				}
-				
-				//Si no lo es, calculamos la antiguedad del usuario
-				if (!fechaInscripcion.equals("1/1/1900")) {
-					
-					long diff = currDate.getTime() - date.getTime();
-					long d = (1000l*60*60*24*365);
-					long years = Math.round(diff/d);
-					
-					antiguedad = (int) years;
-				}
-				
-				//Asignamos un descuento del 10% si el usuario tiene una antiguedad mayor a 2 años
-				if(antiguedad > 2){
+				//Asignamos un descuento del 10% si el usuario tiene una antiguedad mayor a 2 años (24 meses)
+				if(userBean.getAntiguedad() > 24){
 					descuento = 10f;
 					precio = 0.9f;
 				}
