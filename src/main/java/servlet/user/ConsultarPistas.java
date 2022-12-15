@@ -50,8 +50,8 @@ public class ConsultarPistas extends HttpServlet {
 		}else{
 			String estado = request.getParameter("estado");
 			String tipo = request.getParameter("tipo");
-			String fechaInicio = request.getParameter("fechaInicio");
-			String min_karts = request.getParameter("min_karts");
+			int min_karts_inf = Integer.parseInt(request.getParameter("min_karts_inf"));
+			int min_karts_adult = Integer.parseInt(request.getParameter("min_karts_adult"));
 			
 			//Solo se permite consultar pistas disponibles
 			if(estado.toUpperCase().contains("DISPONIBLE"))
@@ -59,13 +59,13 @@ public class ConsultarPistas extends HttpServlet {
 				//Consulta por tipo
 				if(tipo == null)
 				{
-					dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarPistasTipoDisplay.jsp");
+					dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarPistasDisplay.jsp");
 					dispatcher.forward(request, response);
 				}
 				else
 				{
 					PistaDAO pistatipoDAO = new PistaDAO(prop);
-					List<PistaDTO> pistastipo = pistatipoDAO.consultarByDif(tipo,userBean.getCorreo());
+					List<PistaDTO> pistastipo = pistatipoDAO.consultarByDif(tipo);
 					
 					request.setAttribute("pistastipo", pistastipo);
 					request.setAttribute("tipo", tipo);
@@ -74,42 +74,44 @@ public class ConsultarPistas extends HttpServlet {
 					dispatcher.forward(request, response);
 				}
 				
-				//Consulta por fecha
-				if(fechaInicio == null)
-				{
-					dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarPistasFechaDisplay.jsp");
-					dispatcher.forward(request, response);
-				}
-				else
-				{
-					PistaDAO pistafechaDAO = new PistaDAO(prop);
-					List<PistaDTO> pistasfecha = pistafechaDAO.consultarByFecha(fechaInicio,userBean.getCorreo());
-					
-					request.setAttribute("pistasfecha", pistasfecha);
-					request.setAttribute("fechaInicio", fechaInicio);
-					
-					dispatcher = request.getRequestDispatcher("/mvc/view/user/PistasFechaDisplay.jsp");
-					dispatcher.forward(request, response);
-				}
-				
 				//Consulta por min de karts
-				if(min_karts == null)
+				if(min_karts_inf == 0 && min_karts_adult == 0)
 				{
-					dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarPistasMinKartsDisplay.jsp");
+					dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarPistasDisplay.jsp");
 					dispatcher.forward(request, response);
 				}
 				else
 				{
 					PistaDAO pista_min_kartsDAO = new PistaDAO(prop);
-					List<PistaDTO> pista_min_karts = pista_min_kartsDAO.consultarByMinKarts(min_karts,userBean.getCorreo());
+					List<PistaDTO> pista_min_karts = pista_min_kartsDAO.consultarByMinKarts(min_karts_inf,min_karts_adult);
 					
 					request.setAttribute("pista_min_karts", pista_min_karts);
-					request.setAttribute("min_karts", min_karts);
+					request.setAttribute("min_karts_inf", min_karts_inf);
+					request.setAttribute("min_karts_adult", min_karts_adult);
 					
 					dispatcher = request.getRequestDispatcher("/mvc/view/user/PistasMinKartsDisplay.jsp");
 					dispatcher.forward(request, response);
 				}
-			
+				
+				//Consulta por tipo y min de karts
+				if(tipo == null && min_karts_inf == 0 && min_karts_adult == 0)
+				{
+					dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarPistasDisplay.jsp");
+					dispatcher.forward(request, response);
+				}
+				else
+				{
+					PistaDAO pista_tipo_kartsDAO = new PistaDAO(prop);
+					List<PistaDTO> pista_tipo_karts = pista_tipo_kartsDAO.consultarPistas(tipo,min_karts_inf,min_karts_adult);
+					
+					request.setAttribute("pista_tipo_karts", pista_tipo_karts);
+					request.setAttribute("tipo", tipo);
+					request.setAttribute("min_karts_inf", min_karts_inf);
+					request.setAttribute("min_karts_adult", min_karts_adult);
+					
+					dispatcher = request.getRequestDispatcher("/mvc/view/user/PistasTipoKartsDisplay.jsp");
+					dispatcher.forward(request, response);
+				}
 			}
 		}
 	}
