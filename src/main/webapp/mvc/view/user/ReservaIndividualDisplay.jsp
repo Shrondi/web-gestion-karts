@@ -44,7 +44,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 				</p>
 				
 				 <%  if (reservaInfantil != null){ %>
-				 		Modalidad: Individual <br>
+				 		Modalidad: <%= request.getAttribute("modalidad") %> <br>
 				 		Tipo: Infantil <br>
 				 		
 					 	<%= reservaInfantil.toString().replaceAll("(\r\n|\n)", "<br>") %>
@@ -52,14 +52,14 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 					 	
 					<% }else if (reservaFamiliar != null){%>
 			
-						Modalidad: Individual <br>
+						Modalidad: <%= request.getAttribute("modalidad") %> <br>
 				 		Tipo: Familiar <br>
 				 		
 					 	<%= reservaFamiliar.toString().replaceAll("(\r\n|\n)", "<br>") %>
 					 	
 					<% }else if (reservaAdultos != null){%>
 			
-						Modalidad: Individual <br>
+						Modalidad: <%= request.getAttribute("modalidad") %> <br>
 				 		Tipo: Adulto <br>
 				 		
 					 	<%= reservaAdultos.toString().replaceAll("(\r\n|\n)", "<br>") %>

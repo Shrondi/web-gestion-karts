@@ -23,8 +23,21 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 	if (request.getSession().getAttribute("fecha") != null){
 		mensaje = "Se ha recuperado la informacion de una reserva sin realizar";
 	}
-
+	
+	String tipoBono = " ";
+	
+	//En caso de que se cambie forzadamente por url al servlet que comparte este mismo display
+	if (request.getAttribute("nextPage") == "/WebProyectoPW/ReservaIndividual"){
+		request.getSession().removeAttribute("tipoReserva");
+		
+	}else if ((String) request.getSession().getAttribute("tipoReserva") != null){		
+		tipoBono = (String) request.getSession().getAttribute("tipoReserva");
+		
+	}else{
 %>
+	<jsp:forward page="../../../index.jsp" />
+
+<% } %>
 
 <!DOCTYPE html>
 <html>
@@ -40,24 +53,34 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 										
 										<label for="fecha">Fecha reserva: </label>
 										<input type="datetime-local" name="fecha" id="fecha" value="<%= request.getSession().getAttribute("fecha")%>" required>
-										
-										
-										<p> Tipo reserva: </p>
-										<input type="radio" name="tipoReserva" id="infantil" value="INFANTIL" "checked=\"checked\"" required>
-										<label for="infantil">Reserva Infantil</label> <br>
-										
-										<input type="radio" name="tipoReserva" id="familiar" value="FAMILIAR" "checked=\"checked\"" required>
-										<label for="familiar">Reserva Familiar</label> <br>
-										
-										<input type="radio" name="tipoReserva" id="adultos" value="ADULTOS" "checked=\"checked\"" required>
-										<label for="adultos">Reserva Adulto</label> <br>
 										 
-										<p> </p>
-										<label for="numeroNinios"> Número de participantes infantiles:  </label>
-										<input type="number" name="numeroNinios" id="numeroNinios" min="0" max="20" step="1" value="<%= request.getSession().getAttribute("numeroNinios")%>" required>
-										<p> </p>
-										<label for="numeroAdultos">Número de participantes adultos: </label>
-										<input type="number" name="numeroAdultos" min="0" max="20" step="1" value="<%= request.getSession().getAttribute("numeroAdultos")%>" required>
+										<% 
+										if (tipoBono.contentEquals("INFANTIL") || tipoBono.contentEquals("FAMILIAR")){  %>
+											<p> </p>
+											<label for="numeroNinios"> Número de participantes infantiles:  </label>
+											<input type="number" name="numeroNinios" id="numeroNinios" min="0" max="20" step="1" value="<%= request.getSession().getAttribute("numeroNinios")%>" required>
+										<%}if (tipoBono.contentEquals("ADULTOS") || tipoBono.contentEquals("FAMILIAR")){ %>
+											<p> </p>
+											<label for="numeroAdultos">Número de participantes adultos: </label>
+											<input type="number" name="numeroAdultos" min="0" max="20" step="1" value="<%= request.getSession().getAttribute("numeroAdultos")%>" required>
+										<%}if (tipoBono.contentEquals(" ")){%>
+											<p> Tipo reserva: </p>
+											<input type="radio" name="tipoReserva" id="infantil" value="INFANTIL" "checked=\"checked\"" required>
+											<label for="infantil">Reserva Infantil</label> <br>
+											
+											<input type="radio" name="tipoReserva" id="familiar" value="FAMILIAR" required>
+											<label for="familiar">Reserva Familiar</label> <br>
+											
+											<input type="radio" name="tipoReserva" id="adultos" value="ADULTOS" required>
+											<label for="adultos">Reserva Adulto</label> <br>
+											
+											<p> </p>
+											<label for="numeroNinios"> Número de participantes infantiles:  </label>
+											<input type="number" name="numeroNinios" id="numeroNinios" min="0" max="20" step="1" value="<%= request.getSession().getAttribute("numeroNinios")%>" placeholder="0" required>
+											<p> </p>
+											<label for="numeroAdultos">Número de participantes adultos: </label>
+											<input type="number" name="numeroAdultos" min="0" max="20" step="1" value="<%= request.getSession().getAttribute("numeroAdultos")%>" placeholder="0" required>
+										<%} %>
 										
 										
 										<p> </p>

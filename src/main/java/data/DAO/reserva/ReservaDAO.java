@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Properties;
 
 import business.reserva.AbstractReservaDTO;
+import business.reserva.BonoDTO;
 
 /**
  * @author Carlos Lucena Robles.
@@ -120,21 +121,19 @@ public class ReservaDAO {
 	
 	/**
 	 * Insertar un nuevo bono
-	 * @param id ID del bono
 	 * @param correo Correo del usuario
-	 * @param fecha Fecha 
 	 */	
-	
-	public void insertarBono(int id, String correo, String fecha) {
+	//NEW
+	public void insertarBono(String correo, String tipoBono) {
 		
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
 
 		try {
 			PreparedStatement ps = con.prepareStatement(prop.getProperty("crearBonoSTM"));
-			ps.setInt(1,id);
-			ps.setString(2,correo);
-			ps.setString(3,fecha);
+
+			ps.setString(1,correo);
+			ps.setString(2,tipoBono);
 			
 			ps.executeUpdate();
 		
@@ -195,21 +194,33 @@ public class ReservaDAO {
 	 * @return ids Lista de IDs de los bonos
 	 */		
 	
-	public List<Integer> consultarBono(String usuario){
-		List<Integer> ids = new ArrayList<>();
+	public List<BonoDTO> consultarBonos(String usuario){
 		
+		List<BonoDTO> bonos = new ArrayList<>();
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
-		
-		int id = 0; 
-		
+			
 		try {
 			Statement stmt = con.createStatement();
 			String query = prop.getProperty("obtenerBonoByUsuarioSTM")+String.format("'%s'", usuario);
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
-				id = rs.getInt("id_Bono");
-				ids.add(id);
+				
+				int id = rs.getInt("id_Bono");
+				String tipoBono = rs.getString("tipo_Bono");
+				Date fechaCaducidad = rs.getDate("fecha_caducidad");
+				int sesiones = rs.getInt("numero_sesiones");
+				
+				
+				BonoDTO bono = new BonoDTO();
+				bono.setBonoId(id);
+				bono.setUsuario(usuario);
+				bono.setFechaCaducidad(fechaCaducidad);
+				bono.setTipo(tipoBono);
+				bono.setSesiones(sesiones);
+				
+				bonos.add(bono);
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -218,7 +229,7 @@ public class ReservaDAO {
 		}
 		
 		connection.closeConnection();
-		return ids;
+		return bonos;
 	}
 	
 	/**

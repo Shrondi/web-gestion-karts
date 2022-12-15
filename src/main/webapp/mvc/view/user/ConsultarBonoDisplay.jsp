@@ -13,17 +13,6 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 //Caso 2: El usuario esta logado y no es admin
 }else{
 	
-	String mensajeNextPage = (String) request.getAttribute("mensaje");
-	
-	if (mensajeNextPage == null) {
-		mensajeNextPage = "";
-	}
-	
-	String mensaje = "";
-	if (request.getSession().getAttribute("fecha") != null){
-		mensaje = "Se ha recuperado la informacion de una reserva sin realizar";
-	}
-
 %>
 
 <!DOCTYPE html>
@@ -33,12 +22,10 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 				<title>Crear Bono</title>
 		</head>
 		<body>
-				<p id="message"><%= mensajeNextPage %></p>
-				<p id="mensaje"><%= mensaje %></p>
-						<form id="formBono" method="post" action="/WebProyectoPW/ReservaIndividual">
+						<form id="formBono" method="post" action="/WebProyectoPW/CrearBono">
 								<div>
 								
-										
+										<p> Seleccione el tipo de bono que desea: </p>
 										<p> Tipo de bono: </p>
 										<input type="radio" name="tipoBono" id="infantil" value="INFANTIL" required>
 										<label for="infantil">Bono Infantil</label> <br>
@@ -51,7 +38,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 										
 								</div>	
 						
-								<input type="submit" value="Continuar">
+								<input type="submit" value="Crear Bono">
 						</form>
 						<form id="volver" method="post" action="/WebProyectoPW">
 								<input type="submit" value="Volver">

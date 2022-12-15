@@ -42,6 +42,7 @@ public class CrearReservaIndividual extends HttpServlet {
 		java.util.Properties prop = new java.util.Properties();
 		prop.load(myIO);
 		
+		
 		//Caso 1: Usuario no esta logueado -> Volvemos al index
 		if (userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() == true) {
 			//dispatcher = request.getRequestDispatcher("/index.jsp");
@@ -162,6 +163,7 @@ public class CrearReservaIndividual extends HttpServlet {
 				session.removeAttribute("fecha");
 				
 				//Mostramos el resumen de la reserva
+				request.setAttribute("modalidad", "Individual");
 				dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservaIndividualDisplay.jsp");
 				dispatcher.forward(request, response);
 				
@@ -169,9 +171,13 @@ public class CrearReservaIndividual extends HttpServlet {
 			}else{
 				
 				int duracion = Integer.parseInt(request.getParameter("duracion"));
-				int numeroNinios = Integer.parseInt(request.getParameter("numeroNinios"));
-				int numeroAdultos = Integer.parseInt(request.getParameter("numeroAdultos"));
 				String tipoReserva = request.getParameter("tipoReserva");
+				int numeroNinios = Integer.parseInt(request.getParameter("numeroNinios"));
+				int numeroAdultos = 0;
+				
+				if (tipoReserva.contentEquals("FAMILIAR") || tipoReserva.contentEquals("ADULTOS")) {
+					numeroAdultos = Integer.parseInt(request.getParameter("numeroAdultos"));
+				}
 		
 				ReservaDAO reservaDAO = new ReservaDAO(prop);
 				
