@@ -1,10 +1,7 @@
 package servlet.user;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -21,7 +18,6 @@ import business.pista.PistaDTO;
 import business.reserva.*;
 import data.DAO.KartDAO;
 import data.DAO.PistaDAO;
-import data.DAO.UsuarioDAO;
 import data.DAO.reserva.*;
 
 /**
@@ -72,8 +68,6 @@ public class CrearReservaIndividual extends HttpServlet {
 				int numeroAdultos = (int) request.getSession().getAttribute("numeroAdultos");
 				String tipoReserva = (String) request.getSession().getAttribute("tipoReserva");
 				fecha = (String) request.getSession().getAttribute("fecha");
-
-				UsuarioDAO usuarioDAO = new UsuarioDAO(prop);
 				
 				 //Calculamos el descuento por su antiguedad y el precio final de la reserva
 				 

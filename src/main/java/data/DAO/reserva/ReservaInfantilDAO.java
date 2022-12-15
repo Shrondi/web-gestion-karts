@@ -130,7 +130,7 @@ public class ReservaInfantilDAO {
 	}
 	
 	
-	//NEW
+	//NEW -- Consultar reservas a partir de mañana de un usuario
 	public List<ReservaInfantilDTO> consultarReservasInfantilFuturas(String usuario){
 		List<ReservaInfantilDTO> reservas = new ArrayList<>();
 		DBConnection connection = new DBConnection();
@@ -178,7 +178,7 @@ public class ReservaInfantilDAO {
 		return reservas;
 	}
 	
-	//NEW
+	//NEW -- Consultar reservas de un usuario en un rango de fechas dado
 	public List<ReservaInfantilDTO> consultarReservasInfantilRango(String fechaInicio, String fechaFin, String usuario){
 		
 		List<ReservaInfantilDTO> reservas = new ArrayList<>();
@@ -231,6 +231,116 @@ public class ReservaInfantilDAO {
 		connection.closeConnection();
 		return reservas;
 		
+	}
+	
+	//NEW -- Consultar todas las reservas de cualquier usuario en un rango de fechas dado
+		public List<ReservaInfantilDTO> consultarReservasInfantil(String fechaInicio, String fechaFin){
+			
+			List<ReservaInfantilDTO> reservas = new ArrayList<>();
+			DBConnection connection = new DBConnection();
+			con = connection.getConnection();
+			
+			try {
+				PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasInfantilSTM"));
+				
+				ps.setString(1, fechaInicio);
+				ps.setString(2, fechaFin);
+			
+			
+				ResultSet rs = ps.executeQuery();
+				
+				while (rs.next()) {
+
+					int idReserva = rs.getInt("id_Reserva");
+					String usuario = rs.getString("usuario");
+					int participantes_infantiles = rs.getInt("participantes_infantiles");
+					Date fecha = new Date(rs.getTimestamp("fecha").getTime());
+					int duracion = rs.getInt("duracion");
+					float descuento = rs.getFloat("descuento");
+					float precio = rs.getFloat("precio");
+					String pista = rs.getString("pista");
+					
+					ReservaInfantilDTO reservainfantil = new ReservaInfantilDTO();
+					
+					reservainfantil.setIdReserva(idReserva);
+					reservainfantil.setIdUsuario(usuario);
+					reservainfantil.setParticipantesInfantiles(participantes_infantiles);
+					reservainfantil.setFecha(fecha);
+					reservainfantil.setDuracion(duracion);
+					reservainfantil.setDescuento(descuento);
+					reservainfantil.setPrecio(precio);
+					reservainfantil.setIdPista(pista);
+					reservas.add(reservainfantil);
+				}
+				
+				rs.close();
+				ps.close();
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+			} catch(IllegalArgumentException e){
+				e.printStackTrace();
+			}
+			
+			connection.closeConnection();
+			return reservas;
+			
+		}
+		
+		///NEW -- Consultar todas las reservas de cualquier usuario en un rango dado y a partir de mañana
+		public List<ReservaInfantilDTO> consultarReservasInfantilRangoFuturas(String fechaInicio, String fechaFin){
+					
+			List<ReservaInfantilDTO> reservas = new ArrayList<>();
+			DBConnection connection = new DBConnection();
+			con = connection.getConnection();
+					
+			try {
+				PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasInfantilRangobyFechaSTM"));
+						
+				ps.setString(1, fechaInicio);
+				ps.setString(2, fechaFin);
+					
+					
+				ResultSet rs = ps.executeQuery();
+						
+				while (rs.next()) {
+
+					int idReserva = rs.getInt("id_Reserva");
+					String usuario = rs.getString("usuario");
+					int participantes_infantiles = rs.getInt("participantes_infantiles");
+					Date fecha = new Date(rs.getTimestamp("fecha").getTime());
+					int duracion = rs.getInt("duracion");
+					float descuento = rs.getFloat("descuento");
+					float precio = rs.getFloat("precio");
+					String pista = rs.getString("pista");
+							
+					ReservaInfantilDTO reservainfantil = new ReservaInfantilDTO();
+							
+					reservainfantil.setIdReserva(idReserva);
+					reservainfantil.setIdUsuario(usuario);
+					reservainfantil.setParticipantesInfantiles(participantes_infantiles);
+					reservainfantil.setFecha(fecha);
+					reservainfantil.setDuracion(duracion);
+					reservainfantil.setDescuento(descuento);
+					reservainfantil.setPrecio(precio);
+					reservainfantil.setIdPista(pista);
+					reservas.add(reservainfantil);
+				}
+						
+				rs.close();
+				ps.close();
+					
+			} catch (SQLException e) {
+				e.printStackTrace();
+						
+			} catch(IllegalArgumentException e){
+				e.printStackTrace();
+			}
+					
+			connection.closeConnection();
+			return reservas;
+					
 	}
 	
 	

@@ -126,7 +126,7 @@ public class ReservaAdultosDAO {
 			
 	}
 	
-	//NEW
+	//NEW -- Consultar reservas a partir de mañana de un usuario
 	public List<ReservaAdultosDTO> consultarReservasAdultosFuturas(String usuario){
 		List<ReservaAdultosDTO> reservas = new ArrayList<>();
 		DBConnection connection = new DBConnection();
@@ -172,7 +172,7 @@ public class ReservaAdultosDAO {
 		return reservas;
 	}
 	
-	//NEW
+	///NEW -- Consultar reservas de un usuario en un rango de fechas dado
 	public List<ReservaAdultosDTO> consultarReservasAdultosRango(String fechaInicio, String fechaFin, String usuario){
 		List<ReservaAdultosDTO> reservas = new ArrayList<>();
 		DBConnection connection = new DBConnection();
@@ -224,6 +224,112 @@ public class ReservaAdultosDAO {
 		connection.closeConnection();
 		return reservas;
 	}
+	
+	////NEW -- Consultar todas las reservas de cualquier usuario en un rango de fechas dado
+		public List<ReservaAdultosDTO> consultarReservasAdultos(String fechaInicio, String fechaFin){
+			List<ReservaAdultosDTO> reservas = new ArrayList<>();
+			DBConnection connection = new DBConnection();
+			con = connection.getConnection();
+			
+			try {
+				PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasAdultosSTM"));
+				
+				ps.setString(1, fechaInicio);
+				ps.setString(2, fechaFin);
+				
+			
+				ResultSet rs = ps.executeQuery();
+				
+				while (rs.next()) {
+
+					int idReserva = rs.getInt("id_Reserva");
+					String usuario = rs.getString("usuario");
+					int participantes_adultos = rs.getInt("participantes_adultos");
+					Date fecha = new Date(rs.getTimestamp("fecha").getTime());
+					int duracion = rs.getInt("duracion");
+					float descuento = rs.getFloat("descuento");
+					float precio = rs.getFloat("precio");
+					String pista = rs.getString("pista");
+					
+					ReservaAdultosDTO reservaadulto = new ReservaAdultosDTO();
+					
+					reservaadulto.setIdReserva(idReserva);
+					reservaadulto.setIdUsuario(usuario);
+					reservaadulto.setParticipantesAdultos(participantes_adultos);
+					reservaadulto.setFecha(fecha);
+					reservaadulto.setDuracion(duracion);
+					reservaadulto.setDescuento(descuento);
+					reservaadulto.setPrecio(precio);
+					reservaadulto.setIdPista(pista);
+					reservas.add(reservaadulto);
+				}
+				
+				rs.close();
+				ps.close();
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+			} catch(IllegalArgumentException e){
+				e.printStackTrace();
+			}
+			
+			connection.closeConnection();
+			return reservas;
+		}
+		
+		//NEW -- Consultar todas las reservas de cualquier usuario en un rango dado y a partir de mañana
+				public List<ReservaAdultosDTO> consultarReservasAdultosRangoFuturas(String fechaInicio, String fechaFin){
+					List<ReservaAdultosDTO> reservas = new ArrayList<>();
+					DBConnection connection = new DBConnection();
+					con = connection.getConnection();
+					
+					try {
+						PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasAdultosRangobyFechaSTM"));
+						
+						ps.setString(1, fechaInicio);
+						ps.setString(2, fechaFin);
+						
+					
+						ResultSet rs = ps.executeQuery();
+						
+						while (rs.next()) {
+
+							int idReserva = rs.getInt("id_Reserva");
+							String usuario = rs.getString("usuario");
+							int participantes_adultos = rs.getInt("participantes_adultos");
+							Date fecha = new Date(rs.getTimestamp("fecha").getTime());
+							int duracion = rs.getInt("duracion");
+							float descuento = rs.getFloat("descuento");
+							float precio = rs.getFloat("precio");
+							String pista = rs.getString("pista");
+							
+							ReservaAdultosDTO reservaadulto = new ReservaAdultosDTO();
+							
+							reservaadulto.setIdReserva(idReserva);
+							reservaadulto.setIdUsuario(usuario);
+							reservaadulto.setParticipantesAdultos(participantes_adultos);
+							reservaadulto.setFecha(fecha);
+							reservaadulto.setDuracion(duracion);
+							reservaadulto.setDescuento(descuento);
+							reservaadulto.setPrecio(precio);
+							reservaadulto.setIdPista(pista);
+							reservas.add(reservaadulto);
+						}
+						
+						rs.close();
+						ps.close();
+					
+					} catch (SQLException e) {
+						e.printStackTrace();
+						
+					} catch(IllegalArgumentException e){
+						e.printStackTrace();
+					}
+					
+					connection.closeConnection();
+					return reservas;
+				}
 	
 	
 	/**

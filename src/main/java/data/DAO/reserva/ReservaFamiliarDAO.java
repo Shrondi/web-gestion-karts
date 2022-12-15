@@ -132,7 +132,7 @@ public class ReservaFamiliarDAO {
 			
 	}
 	
-	//NEW
+	//NEW -- Consultar reservas a partir de mañana de un usuario
 	public List<ReservaFamiliarDTO> consultarReservasFamiliarFuturas(String usuario){
 		List<ReservaFamiliarDTO> reservas = new ArrayList<>();
 		DBConnection connection = new DBConnection();
@@ -179,7 +179,7 @@ public class ReservaFamiliarDAO {
 		return reservas;
 	}
 	
-	//NEW
+	//NEW -- Consultar reservas de un usuario en un rango de fechas dado
 	public List<ReservaFamiliarDTO> consultarReservasFamiliarRango(String fechaInicio, String fechaFin, String usuario){
 		
 		List<ReservaFamiliarDTO> reservas = new ArrayList<>();
@@ -235,6 +235,120 @@ public class ReservaFamiliarDAO {
 		return reservas;
 		
 	}
+	
+	//NEW -- Consultar todas las reservas de cualquier usuario en un rango de fechas dado
+		public List<ReservaFamiliarDTO> consultarReservasFamiliar(String fechaInicio, String fechaFin){
+			
+			List<ReservaFamiliarDTO> reservas = new ArrayList<>();
+			DBConnection connection = new DBConnection();
+			con = connection.getConnection();
+			
+			try {
+				PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasFamiliarSTM"));
+				
+				ps.setString(1, fechaInicio);
+				ps.setString(2, fechaFin);
+				
+			
+				ResultSet rs = ps.executeQuery();
+				
+				while (rs.next()) {
+
+					int idReserva = rs.getInt("id_Reserva");
+					String usuario = rs.getString("usuario");
+					int participantes_adultos = rs.getInt("participantes_adultos");
+					int participantes_infantiles = rs.getInt("participantes_infantiles");
+					Date fecha = new Date(rs.getTimestamp("fecha").getTime());
+					int duracion = rs.getInt("duracion");
+					float descuento = rs.getFloat("descuento");
+					float precio = rs.getFloat("precio");
+					String pista = rs.getString("pista");
+					
+					ReservaFamiliarDTO reservafamiliar = new ReservaFamiliarDTO();
+					
+					reservafamiliar.setIdReserva(idReserva);
+					reservafamiliar.setIdUsuario(usuario);
+					reservafamiliar.setParticipantesAdultos(participantes_adultos);
+					reservafamiliar.setParticipantesInfantiles(participantes_infantiles);
+					reservafamiliar.setFecha(fecha);
+					reservafamiliar.setDuracion(duracion);
+					reservafamiliar.setDescuento(descuento);
+					reservafamiliar.setPrecio(precio);
+					reservafamiliar.setIdPista(pista);
+					reservas.add(reservafamiliar);
+				}
+				
+				rs.close();
+				ps.close();
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+			} catch(IllegalArgumentException e){
+				e.printStackTrace();
+			}
+			
+			connection.closeConnection();
+			return reservas;
+			
+		}
+		
+		//NEW -- Consultar todas las reservas de cualquier usuario en un rango dado y a partir de mañana
+				public List<ReservaFamiliarDTO> consultarReservasFamiliarRangoFuturas(String fechaInicio, String fechaFin){
+					
+					List<ReservaFamiliarDTO> reservas = new ArrayList<>();
+					DBConnection connection = new DBConnection();
+					con = connection.getConnection();
+					
+					try {
+						PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasFamiliarRangobyFechaSTM"));
+						
+						ps.setString(1, fechaInicio);
+						ps.setString(2, fechaFin);
+						
+					
+						ResultSet rs = ps.executeQuery();
+						
+						while (rs.next()) {
+
+							int idReserva = rs.getInt("id_Reserva");
+							String usuario = rs.getString("usuario");
+							int participantes_adultos = rs.getInt("participantes_adultos");
+							int participantes_infantiles = rs.getInt("participantes_infantiles");
+							Date fecha = new Date(rs.getTimestamp("fecha").getTime());
+							int duracion = rs.getInt("duracion");
+							float descuento = rs.getFloat("descuento");
+							float precio = rs.getFloat("precio");
+							String pista = rs.getString("pista");
+							
+							ReservaFamiliarDTO reservafamiliar = new ReservaFamiliarDTO();
+							
+							reservafamiliar.setIdReserva(idReserva);
+							reservafamiliar.setIdUsuario(usuario);
+							reservafamiliar.setParticipantesAdultos(participantes_adultos);
+							reservafamiliar.setParticipantesInfantiles(participantes_infantiles);
+							reservafamiliar.setFecha(fecha);
+							reservafamiliar.setDuracion(duracion);
+							reservafamiliar.setDescuento(descuento);
+							reservafamiliar.setPrecio(precio);
+							reservafamiliar.setIdPista(pista);
+							reservas.add(reservafamiliar);
+						}
+						
+						rs.close();
+						ps.close();
+					
+					} catch (SQLException e) {
+						e.printStackTrace();
+						
+					} catch(IllegalArgumentException e){
+						e.printStackTrace();
+					}
+					
+					connection.closeConnection();
+					return reservas;
+					
+				}
 	
 	
 	
