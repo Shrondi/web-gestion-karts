@@ -35,7 +35,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		<body>
 				<p id="message"><%= mensajeNextPage %></p>
 				<p id="mensaje"><%= mensaje %></p>
-						<form id="formReservaIndividual" method="post" action="/WebProyectoPW/ReservaIndividual">
+						<form id="formReserva" method="post" action="<%= request.getAttribute("nextPage")%>">
 								<div>
 										
 										<label for="fecha">Fecha reserva: </label>

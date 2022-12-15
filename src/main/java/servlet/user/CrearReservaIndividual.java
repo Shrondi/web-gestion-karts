@@ -57,7 +57,8 @@ public class CrearReservaIndividual extends HttpServlet {
 			//Caso 2a: No hay parametros en el request -> Ir a la vista para crear una reserva individual
 			if (fecha == null && pista == null){
 				
-				dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaIndividualDisplay.jsp");
+				request.setAttribute("nextPage", "/WebProyectoPW/ReservaIndividual");
+				dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaDisplay.jsp");
 				dispatcher.forward(request, response);
 			
 			//Caso 2b: Hay parametros en el request (se ha elegido la pista) -> Realizar la reserva
@@ -179,7 +180,8 @@ public class CrearReservaIndividual extends HttpServlet {
 				if (reservaDAO.comprobarReserva(fecha, userBean.getCorreo())) {
 					request.setAttribute("mensaje", "Ya tiene una reserva para la fecha dada. Debe haber una diferencia de 2 horas minimo entre la fecha de las reservas");
 					
-					dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaIndividualDisplay.jsp");
+					request.setAttribute("nextPage", "/WebProyectoPW/ReservaIndividual");
+					dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaDisplay.jsp");
 					dispatcher.forward(request, response);
 					
 				}else{
@@ -193,7 +195,8 @@ public class CrearReservaIndividual extends HttpServlet {
 						
 						request.setAttribute("mensaje", "No hay pistas disponibles con los datos dados. Intentelo de nuevo mas tarde.");
 						
-						dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaIndividualDisplay.jsp");
+						request.setAttribute("nextPage", "/WebProyectoPW/ReservaIndividual");
+						dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaDisplay.jsp");
 						dispatcher.forward(request, response);
 						
 					}else{
@@ -204,6 +207,7 @@ public class CrearReservaIndividual extends HttpServlet {
 						session.setAttribute("tipoReserva", tipoReserva);
 						session.setAttribute("fecha", fecha);
 
+						request.setAttribute("nextPage", "/WebProyectoPW/ReservaIndividual");
 						dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservasPistasDisplay.jsp");
 						dispatcher.forward(request, response);
 					}
