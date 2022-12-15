@@ -7,66 +7,86 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>UcoGestor</title>
+	<meta charset="UTF-8">
+	<title>UcoGestor</title>
 </head>
+
 <body>
-<h2>Bienvenido a UcoGestor</h2>
+<h1>Bienvenido a UcoKarts</h1>
 <%	
 	String message = request.getParameter("message");
 	if(message == null){
 		message = "";
 	}
 	
+	String mensaje = "Rellene los siguientes campos para iniciar sesión";
+	
 	if(userBean == null || userBean.getCorreo().equals("")){
 %>
+	<fieldset>
 		<form action="/WebProyectoPW/mvc/control/LoginController.jsp" method="post">
-	    	Email:
-	    	<input type="email" name="correo" placeholder="example@gmail.com">
-	    	<br/>
-	    	Contraseña:
-	    	<input type="password" name="passWord" placeholder="Contraseña">
-	    	<br/>
+	    <p><font color ="blue"><%=mensaje%></font></p>
+	    
+	    	<label for="correo">Correo electrónico:</label>
+	    	<input type="email" name="correo" placeholder="example@gmail.com" required><br><br/>
+	    	
+	    	<label for="passWord">Contraseña:</label>
+	    	<input type="password" name="passWord" placeholder="Contraseña" required><br><br/>
+	    	
 	    	<p><input type="submit" value="Iniciar sesión"></p>
 		</form>
+		
 		<form action="/WebProyectoPW/mvc/control/RegistroController.jsp" method="post">
 			<p><input type="submit" value="Registrarse"></p>
 		</form>
-		<p><font color ="red"><%=message%></font></p>
+	</fieldset>
+	
+	<p><font color ="red"><%=message%></font></p>
+	
 	<%}
 	else{
 		
-		%>
-		<form action="/WebProyectoPW/mvc/control/LogoutController.jsp" method="post">
-			<input type="submit" value="Cerrar sesión">
-		</form>
-		<form action="/WebProyectoPW/mvc/control/ModificacionController.jsp" method="post">
-			<input type="submit" value="Editar perfil">
-		</form>
-		<p><font color ="red"><%=message%></font></p>
-		<%
 		if(userBean.getAdmin()){
 		%>
-		<p>¡Bienvenido Administrador <%=userBean.getNombre() + userBean.getApellidos()%>!</p>
-		
+			<p>¡Bienvenido Administrador <%=userBean.getNombre() + userBean.getApellidos()%>!</p>
 			<jsp:include page="/mvc/control/ListadoUsuariosController.jsp" />
+					
+			<form action="/WebProyectoPW/mvc/view/LoginAdminDisplay.jsp" method="post">
+				<p><input type="submit" value="Acceso a operaciones"></p>
+			</form>
+				
 		<%}else{
 		%>
-		<p>¡Bienvenido usuario <%=userBean.getCorreo()%>!</p>
-		<p>Se registro el <%= userBean.getFechaInscripcion()%></p>
-		<p>Su antiguedad es de <%= userBean.getAntiguedad()%> meses</p>
-		<%if (userBean.getFechaReserva().compareTo(new Date()) != 0){ %>
-			<p>Su proxima reserva es el <%= userBean.getFechaReservaString()%></p>
-		<%}else{ %>
-			<p> No tiene reservas futuras </p>
-		
+			<p>¡Bienvenido usuario <%=userBean.getCorreo()%>!</p>
+			<p>Son las <%= new java.util.Date() %></p>
+			<p>Se registró <%= userBean.getFechaInscripcion()%></p>
+			<p>Lleva con nosotros <%= userBean.getAntiguedad()%> meses</p>
+			
+			<%if (userBean.getFechaReserva().compareTo(new Date()) != 0){ %>
+				<p>Su proxima reserva es el <%= userBean.getFechaReservaString()%></p>
+			<%}else{ %>
+				<p> No tiene reservas futuras </p>
+			<%} %>
+			
+			<form action="/WebProyectoPW/mvc/view/LoginClientDisplay.jsp" method="post">
+				<p><input type="submit" value="Acceso a operaciones"></p>
+			</form>
 		<%} %>
+			<form action="/WebProyectoPW/mvc/control/ModificacionController.jsp" method="post">
+				<input type="submit" value="Editar perfil">
+			</form>
+				
+			<form action="/WebProyectoPW/mvc/control/LogoutController.jsp" method="post">
+				<input type="submit" value="Cerrar sesión">
+			</form>
+			<p><font color ="red"><%=message%></font></p>
 		
-	<% }	
-	}%>
-	
-	<footer>
-</footer>
-</body>
+		<%
+		}%>
+		
+		<footer>
+		  Programación Web - GM3
+		</footer>
 
+</body>
 </html>
