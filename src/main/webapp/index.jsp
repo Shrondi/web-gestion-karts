@@ -84,9 +84,7 @@
 		<%
 		}%>
 		
-		<footer>
-		  Programación Web - GM3
-		</footer>
+	<jsp:include page="/include/footer.jsp" />
 
 </body>
 </html>
