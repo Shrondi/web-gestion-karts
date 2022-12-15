@@ -15,6 +15,16 @@ if(userBean == null || userBean.getCorreo().equals("")){
 %>
 <!DOCTYPE html>
 <html>
+
+	<header>
+		<nav>
+			<ul>
+				<li><a href="/WebProyectoPW/mvc/control/ModificacionController.jsp">Modificar datos</a> </li>
+				<li><a href="/WebProyectoPW/mvc/control/CerrarSesionController.jsp">Desconectar</a> </li>
+			</ul>
+		</nav>
+	</header>
+
 		<head>
 				<meta charset="UTF-8">
 				<title>Vista Administrador</title>
@@ -23,75 +33,81 @@ if(userBean == null || userBean.getCorreo().equals("")){
 			<fieldset>
 				<legend>Vista Administrador</legend>
 				
-				<p>
-					¡Bienvenido Administrador <%=userBean.getNombre()%>!<br>
-				</p>
-				
 				<ul>
-					<li>
-						<form method="get" action="/WebProyectoPW-main/AltaUsuario">
-							<input type="submit" name="option" class="option" value="Alta de usuario">
-						</form>
-					</li>
-				
-					<li>
-						<form method="get" action="/WebProyectoPW-main/ModificarUsuario">
-							<input type="submit" name="option" class="option" value="Modificar todos los campos de un usuario">
-						</form>
-					</li>
-					
-					<li>
-						<form method="get" action="/WebProyectoPW-main/ModificarNombreUsuario">
-							<input type="submit" name="option" class="option" value="Modificar nombre de un usuario">
-						</form>
-					</li>
-					
-					<li>
-						<form method="get" action="/WebProyectoPW-main/ModificarApellidosUsuario">
-							<input type="submit" name="option" class="option" value="Modificar apellidos de un usuario">
-						</form>
-					</li>		
-					
-					
-					<li>
-						<form method="get" action="/WebProyectoPW-main/ModificarFechaNacimientoUsuario">
-							<input type="submit" name="option" class="option" value="Modificar fecha de nacimiento de un usuario">
-						</form>
-					</li>						
+					<li>Operaciones con usuarios
+						<ul>
+							<li>
+								<form method="get" action="/WebProyectoPW-main/AltaUsuario">
+									<input type="submit" name="option" class="option" value="Alta de usuario administrador">
+								</form>
+							</li>
+						
+							<li>
+								<form method="get" action="/WebProyectoPW-main/EliminarUsuario">
+									<input type="submit" name="option" class="option" value="Eliminar usuario">
+								</form>
+							</li>	
 											
-					<li>
-						<form method="get" action="/WebProyectoPW-main/ModificarFechaInscripcionUsuario">
-							<input type="submit" name="option" class="option" value="Modificar fecha de inscripción de un usuario">
-						</form>
-					</li>									
+							<li>
+								<form method="get" action="/WebProyectoPW-main/BuscarUsuario">
+									<input type="submit" name="option" class="option" value="Búsqueda de un usuario por su correo">
+								</form>
+							</li>	
+		
+							<li>
+								<form method="get" action="/WebProyectoPW-main/ListadoUsuarios">
+									<input type="submit" name="option" class="option" value="Listado de usuarios registrados">
+								</form>
+							</li>
+						</ul>
+					</li>
+					<li>Operaciones con pistas y karts
+						<ul>
+							<li>
+								<form method="get" action="/CrearPista">
+									<input type="submit" name="option" class="option" value="Crear Pista">
+								</form>
+							</li>
+						
+							<li>
+								<form method="get" action="/CrearKart">
+									<input type="submit" name="option" class="option" value="Crear Kart">
+								</form>
+							</li>	
+											
+							<li>
+								<form method="get" action="/AsociarKartPista">
+									<input type="submit" name="option" class="option" value="Asociar kart a pista">
+								</form>
+							</li>
 							
-					<li>
-						<form method="get" action="/WebProyectoPW-main/EliminarUsuario">
-							<input type="submit" name="option" class="option" value="Eliminar usuario">
-						</form>
-					</li>	
-
-					<li>
-						<form method="get" action="/WebProyectoPW-main/BuscarUsuario">
-							<input type="submit" name="option" class="option" value="Búsqueda de un usuario por su correo">
-						</form>
-					</li>	
-
-					<li>
-						<form method="get" action="/WebProyectoPW-main/ListadoUsuarios">
-							<input type="submit" name="option" class="option" value="Listado de usuarios registrados">
-						</form>
+							<li>
+								<form method="get" action="/ModificarEstadoPista">
+									<input type="submit" name="option" class="option" value="Modificar estado de una pista">
+								</form>
+							</li>
+							
+							<li>
+								<form method="get" action="/ModificarEstadoKart">
+									<input type="submit" name="option" class="option" value="Modificar estado de un kart">
+								</form>
+							</li>													
+						</ul>
+					</li>
+					<li>Operaciones con reservas
+						<ul>
+							<li>
+								<form method="get" action="/CancelarReserva">
+									<input type="submit" name="option" class="option" value="Eliminar Reserva">
+								</form>
+							</li>							
+						</ul>
 					</li>										
 				</ul>
-				
-				<form method="post" action="/WebProyectoPW/mvc/control/ModificacionController.jsp">
-					<input type="submit" value="Modificar datos">
-				</form>
-				
-				<form method="post" action="/WebProyectoPW/mvc/control/CerrarSesionController.jsp">
-					<input type="submit" value="Desconectar">
-				</form>
-				
 			</fieldset>
-		</body>
+			
+			<form id="volver" method="post" action="/WebProyectoPW">
+				<input type="submit" value="Volver">
+			</form>				
+	</body>
 </html>
