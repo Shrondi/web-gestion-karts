@@ -8,6 +8,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Registro</title>
+		<link rel="stylesheet" type="text/css" href="/css/index.css">
 	</head>
 	<body>
 <%
@@ -34,43 +35,37 @@ if (userBean.getAdmin()){
 
 
 %>
-		<p> <font color ="red"> <%= mensajeNextPage %></font></p>
-			<p> NUEVO REGISTRO </p>
-			<div>
-			<form id="registroFormulario" class="registroFormulario" method="post" action="/WebProyectoPW/mvc/control/RegistroController.jsp">
-			
-			<p><font color ="blue"><%=message%></font></p>
+	<p><font color ="red"> <%= mensajeNextPage %></font></p>
+		<h2> Nuevo Registro </h2>
 
-				<div>
-					<p>
-						<label for="nombre">Nombre: </label>
-						<input type="text" name="nombre" placeholder="Mi nombre" required>
-					</p>
-					<p>
-						<label for="apellidos">Apellidos: </label>
-						<input type="text" name="apellidos" placeholder="Mis apellidos" required>
-					</p>
-					<p>
-						<label for="correo">Email: </label>
-						<input type="email" name="correo" id="correo" placeholder="email@example.com" required>
-					</p>
-					<p>
-						<label for="fechaNacimiento">Fecha Nacimiento: </label>
-						<input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="dd/mm/yyyy" required>
-					</p>
-					<p>
-						<label for="passWord">Password: </label>
-						<input type="password" name="passWord" id="passWord" placeholder="Password" required>
-					</p>
-				</div>
+		<fieldset>
+			<form id="registroFormulario" class="registroFormulario" method="post" action="/WebProyectoPW/mvc/control/RegistroController.jsp">
+			<p><font color ="blue"><%=message%></font></p>
+			
+				<label for="nombre">Nombre: </label>
+				<input type="text" name="nombre" placeholder="Nombre" required><br></br>
+
+				<label for="apellidos">Apellidos: </label>
+				<input type="text" name="apellidos" placeholder="Apellidos" required><br></br>
+
+				<label for="correo">Correo: </label>
+				<input type="email" name="correo" id="correo" placeholder="email@example.com" required><br></br>
+
+				<label for="fechaNacimiento">Fecha Nacimiento: </label>
+				<input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="dd/mm/yyyy" required><br></br>
+
+				<label for="passWord">Contraseña: </label>
+				<input type="password" name="passWord" id="passWord" placeholder="Contraseña" required><br></br>
+
 				<input type="submit" value="Aceptar">
 			</form>
 			<script type="text/javascript" src="/WebProyectoPW/js/RegisterValidation.js"></script>
-			</div>
-			<form method="post" action="../../index.jsp">
-				<input type="submit" value="Volver">
-			</form>
-	</body>
+		</fieldset>
+		
+	<jsp:include page="/include/volver.jsp" />
+	<jsp:include page="/include/footer.jsp" />
+	
+</body>
 </html>
 <%
 

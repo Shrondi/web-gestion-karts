@@ -15,86 +15,88 @@ if(userBean == null || userBean.getCorreo().equals("")){
 %>
 <!DOCTYPE html>
 <html>
-		<head>
-				<meta charset="UTF-8">
-				<title>Vista Cliente</title>
-		</head>
-		<body>
-			<%
-				String message = (String)request.getAttribute("message");
-				if(message == null) message = "";
-			%>
-			<%=message%>
+		
+	<jsp:include page="/include/encabezado.jsp" />		
+		
+	<head>
+			<meta charset="UTF-8">
+			<title>Vista Cliente</title>
+	</head>
+	<body>	
+		<fieldset>
+			<legend>Vista Cliente</legend>
 			
-			<fieldset>
-				<legend>Vista Cliente</legend>
+			<ul>
+				<li>Reservas Individuales
+					<ul>
+						<li>
+							<form method="post" action="/WebProyectoPW-main/CrearReservaIndividual">
+								<input type="submit" name="option" class="option" value="Hacer reserva Individual">
+							</form>
+						</li>
+						
+						<li>
+							<form method="post" action="/WebProyectoPW-main/ModificarReservaIndividual">
+								<input type="submit" name="option" class="option" value="Modificar reserva Individual">
+							</form>
+						</li>
+						
+						<li>
+							<form method="post" action="/WebProyectoPW-main/EliminarReservaIndividual">
+								<input type="submit" name="option" class="option" value="Cancelar reserva Individual">
+							</form>
+						</li>	
+					</ul>
+				</li>			
+			
+				<li>Reservas Bono
+					<ul>
+						<li>
+							<form method="post" action="/WebProyectoPW-main/CrearReservaBono">
+								<input type="submit" name="option" class="option" value="Hacer reserva Bono">
+							</form>
+						</li>
+						
+						<li>
+							<form method="post" action="/WebProyectoPW-main/ModificarReservaBono">
+								<input type="submit" name="option" class="option" value="Modificar reserva Bono">
+							</form>
+						</li>
+						
+						<li>
+							<form method="post" action="/WebProyectoPW-main/EliminarReservaBono">
+								<input type="submit" name="option" class="option" value="Cancelar reserva Bono">
+							</form>
+						</li>	
+					</ul>
+				</li>
 				
-				<p>
-					¡Bienvenido <%=userBean.getNombre()%>!<br>
-					Son las <%= new java.util.Date() %><br>
-					Se registro <%= userBean.getFechaInscripcion()%>
-				</p>
-				
-				<ul>
-					<li>
-						<form method="post" action="/WebProyectoPW-main/CrearReservaIndividual">
-							<input type="submit" name="option" class="option" value="Hacer reserva Individual">
-						</form>
-					</li>
-				
-					<li>
-						<form method="post" action="/WebProyectoPW-main/CrearReservaBono">
-							<input type="submit" name="option" class="option" value="Hacer reserva Bono">
-						</form>
-					</li>
-					
-					<li>
-						<form method="get" action="/WebProyectoPW-main/ListadoReservasFuturas">
-							<input type="submit" name="option" class="option" value="Listado de reservas futuras">
-						</form>
-					</li>
-					
-					<li>
-						<form method="get" action="/WebProyectoPW-main/ListadoResrvasFechaPista">
-							<input type="submit" name="option" class="option" value="Listado de reservas segun fecha y pista">
-						</form>
-					</li>		
-					
-					
-					<li>
-						<form method="post" action="/WebProyectoPW-main/ModificarReservaIndividual">
-							<input type="submit" name="option" class="option" value="Modificar reserva Individual">
-						</form>
-					</li>						
-											
-					<li>
-						<form method="post" action="/WebProyectoPW-main/ModificarReservaBono">
-							<input type="submit" name="option" class="option" value="Modificar reserva Bono">
-						</form>
-					</li>									
-							
-					<li>
-						<form method="post" action="/WebProyectoPW-main/EliminarReservaIndividual">
-							<input type="submit" name="option" class="option" value="Cancelar reserva Individual">
-						</form>
-					</li>	
-
-					<li>
-						<form method="post" action="/WebProyectoPW-main/EliminarReservaBono">
-							<input type="submit" name="option" class="option" value="Cancelar reserva Bono">
-						</form>
-					</li>	
-										
-				</ul>
-				
-				<form method="post" action="/WebProyectoPW/mvc/control/ModificacionController.jsp">
-					<input type="submit" value="Modificar datos">
-				</form>
-				
-				<form method="post" action="/WebProyectoPW/mvc/control/CerrarSesionController.jsp">
-					<input type="submit" value="Desconectar">
-				</form>
-				
-			</fieldset>
-		</body>
+				<li>Consultas de reservas y pistas
+					<ul>
+						<li>
+							<form method="post" action="/WebProyectoPW-main/ConsultarPistas">
+								<input type="submit" name="option" class="option" value="Consultar pistas disponibles">
+							</form>
+						</li>
+						
+						<li>
+							<form method="post" action="/WebProyectoPW-main/ConsultarReservas">
+								<input type="submit" name="option" class="option" value="Consultar reservas">
+							</form>
+						</li>
+						
+						<li>
+							<form method="post" action="/WebProyectoPW-main/ConsultarReservasRango">
+								<input type="submit" name="option" class="option" value="Consultar reservas por fecha de inicio y fin">
+							</form>
+						</li>
+					</ul>
+				</li>					
+			</ul>
+		</fieldset>
+		
+	<jsp:include page="/include/volver.jsp" />
+	<jsp:include page="/include/footer.jsp" />
+		
+	</body>
 </html>

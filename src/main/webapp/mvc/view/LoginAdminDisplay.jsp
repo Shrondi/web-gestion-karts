@@ -16,14 +16,7 @@ if(userBean == null || userBean.getCorreo().equals("")){
 <!DOCTYPE html>
 <html>
 
-	<header>
-		<nav>
-			<ul>
-				<li><a href="/WebProyectoPW/mvc/control/ModificacionController.jsp">Modificar datos</a> </li>
-				<li><a href="/WebProyectoPW/mvc/control/CerrarSesionController.jsp">Desconectar</a> </li>
-			</ul>
-		</nav>
-	</header>
+	<jsp:include page="/include/encabezado.jsp" />
 
 		<head>
 				<meta charset="UTF-8">
@@ -106,8 +99,8 @@ if(userBean == null || userBean.getCorreo().equals("")){
 				</ul>
 			</fieldset>
 			
-			<form id="volver" method="post" action="/WebProyectoPW">
-				<input type="submit" value="Volver">
-			</form>				
+	<jsp:include page="/include/volver.jsp" />
+	<jsp:include page="/include/footer.jsp" />
+						
 	</body>
 </html>
