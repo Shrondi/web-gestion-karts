@@ -60,7 +60,7 @@ if(userBean == null || userBean.getCorreo().equals("")){
 						</li>
 						<li>
 							<form method="post" action="/WebProyectoPW/ReservaBono">
-								<input type="submit" name="option" class="option" value="Hacer reserva Bono">
+								<input type="submit" name="option" class="option" value="Hacer reserva para un Bono">
 							</form>
 						</li>
 						
