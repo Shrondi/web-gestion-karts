@@ -72,6 +72,7 @@ public class CancelarReservaIndividual extends HttpServlet {
 				session.setAttribute("reservasFamiliar", reservasFamiliar);
 				session.setAttribute("reservasAdultos", reservasAdultos);
 				
+				request.setAttribute("nextPage", "/WebProyectoPW/CancelarReservaIndividual");
 				request.setAttribute("mensaje", "Aviso: Solo se estan mostrando aquellas reservas que se pueden cancelar");
 				dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservasCancelarDisplay.jsp");
 				dispatcher.forward(request, response);

@@ -38,7 +38,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		<body>
 				<p id="message"><%= mensajeNextPage %> </p>
 				
-				<form id="submit" method="post" action="/WebProyectoPW/CancelarReservaIndividual">
+				<form id="submit" method="post" action="<%= request.getAttribute("nextPage")%>">
 				<p>
 					Seleccione una de las siguientes reservas:
 				</p>

@@ -30,7 +30,9 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 	if (request.getAttribute("nextPage") == "/WebProyectoPW/ReservaIndividual"){
 		request.getSession().removeAttribute("tipoReserva");
 		
-	}else if ((String) request.getSession().getAttribute("tipoReserva") != null){		
+	}else if(request.getAttribute("nextPage") == "/WebProyectoPW/ModificarReservaIndividual"){
+				
+	}else if ((String) request.getSession().getAttribute("tipoReserva") != null){
 		tipoBono = (String) request.getSession().getAttribute("tipoReserva");
 		
 	}else{
