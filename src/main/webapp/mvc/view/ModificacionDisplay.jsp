@@ -29,6 +29,9 @@ if (userBean == null || userBean.getCorreo().isEmpty() ) {
 		<head>
 				<meta charset="UTF-8">
 				<title>Modificar datos del usuario</title>
+				<title>Vista Administrador</title>
+				<link rel="stylesheet" type="text/css" href="/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/css/footer_header.css">
 		</head>
 		<body>
 			<h3>Modifique sus datos </h3>

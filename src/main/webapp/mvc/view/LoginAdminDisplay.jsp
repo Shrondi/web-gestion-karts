@@ -21,6 +21,9 @@ if(userBean == null || userBean.getCorreo().equals("")){
 		<head>
 				<meta charset="UTF-8">
 				<title>Vista Administrador</title>
+				<link rel="stylesheet" type="text/css" href="/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/css/fieldset.css">
+				<link rel="stylesheet" type="text/css" href="/css/footer_header.css">
 		</head>
 		<body>
 			<fieldset>

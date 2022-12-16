@@ -8,7 +8,9 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Registro</title>
+		<link rel="stylesheet" type="text/css" href="/css/comun.css">
 		<link rel="stylesheet" type="text/css" href="/css/index.css">
+		<link rel="stylesheet" type="text/css" href="/css/footer_header.css">
 	</head>
 	<body>
 <%
