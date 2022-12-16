@@ -76,7 +76,7 @@ public class PistaDAO{
 	 * @param estado Estado de la pista
 	 * @return pistas Listado de pistas
 	 */
-	
+	//NEW
 	public List<PistaDTO> consultarByEstado(Boolean estado){
 		List<PistaDTO> pistas = new ArrayList<>();
 		DBConnection connection = new DBConnection();
@@ -251,6 +251,8 @@ public class PistaDAO{
 			ps.setString(1, tipoPista);
 			ps.setInt(2, kartsInfantiles);
 			ps.setInt(3, kartsAdultos);
+			ps.setInt(4, kartsInfantiles);
+			ps.setInt(5, kartsAdultos);
 		
 			ResultSet rs = ps.executeQuery();
 			

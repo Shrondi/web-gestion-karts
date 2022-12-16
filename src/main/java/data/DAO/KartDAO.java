@@ -134,7 +134,7 @@ public class KartDAO {
 	 * Consultar karts sin asignar a pistas y que esten disponibles
 	 * @return karts Listado de karts
 	 */
-	
+	//NEW
 	public List<KartDTO> consultarKartsDisponibles() {
 		List<KartDTO> karts = new ArrayList<>();
 		DBConnection connection = new DBConnection();
@@ -197,7 +197,7 @@ public class KartDAO {
 		return karts;
 	}
 	
-	//NEW -- NO USAR BORRAR
+	//NEW
 	public void modificarEstadoKart(String estado, int id_kart) {
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
