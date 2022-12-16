@@ -13,7 +13,6 @@ public class userBean implements java.io.Serializable{
 	private String fechaInscripcion_="";
 	private String passWord_="";
 	private Boolean admin_= false;
-	private Date fechaReserva_ = new Date();
 	private int antiguedad_ = 0;
 	
 	/**
@@ -75,19 +74,9 @@ public class userBean implements java.io.Serializable{
 	}
 	
 	/**
-	 * Getter Fecha de proxima reserva
-	 * @return Fecha y hora proxima reserva
+	 * Getter Antiguedad
+	 * @return Antiguedad
 	 */
-
-	public String getFechaReservaString() {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		return sdf.format(this.fechaReserva_);
-	}
-	
-	public Date getFechaReserva() {
-		return this.fechaReserva_;
-	}
-	
 	public int getAntiguedad() {
 		return this.antiguedad_;
 	}
@@ -135,7 +124,7 @@ public class userBean implements java.io.Serializable{
 	
 	
 	/**
-	 * Permite asignar una contraseña nueva al usuario
+	 * Setter Contraseña nueva al usuario
 	 * @param passWord Nueva contraseña del usuario
 	 */
 	
@@ -144,7 +133,7 @@ public class userBean implements java.io.Serializable{
 	}
 	
 	/**
-	 * Permite asignar el tipo de usuario
+	 * Setter Tipo de usuario
 	 * @param admin tipo de usuario a asignar al usuario
 	 */
 	
@@ -152,15 +141,11 @@ public class userBean implements java.io.Serializable{
 		this.admin_ = admin;
 	}
 	
+	
 	/**
-	 * Setter Fecha de proxima reserva
-	 * @return Fecha y hora proxima reserva
+	 * Setter de la antiguedad
+	 * @param antiguedad Angtiguedad (en meses)
 	 */
-	
-	public void setFechaReserva(Date fechaReserva) {
-		this.fechaReserva_ = fechaReserva;
-	}
-	
 	public void setAntiguedad(int antiguedad) {
 		this.antiguedad_ = antiguedad;
 	}

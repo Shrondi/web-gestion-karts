@@ -15,7 +15,7 @@
 </head>
 
 <body>
-<h1>Bienvenido a UcoKarts</h1>
+
 <%	
 	String message = request.getParameter("message");
 	String mensaje = (String) request.getAttribute("mensaje");
@@ -29,6 +29,7 @@
 	
 	if(userBean == null || userBean.getCorreo().equals("")){
 %>
+	<h1>Bienvenido a UcoKarts</h1>
 	<fieldset>
 	
 		<form action="/WebProyectoPW/mvc/control/LoginController.jsp" method="post">
@@ -51,12 +52,14 @@
 	
 	
 	<%}
-	else{
+	else{ %>
+		<jsp:include page="/include/encabezado.jsp" />
 		
+		<h1>Bienvenido a UcoKarts</h1>
+<%		
 		if(userBean.getAdmin()){
 		%>
-			<p><strong>¡Bienvenido Administrador <%=userBean.getNombre() + userBean.getApellidos()%>!</strong></p>
-			<jsp:include page="/mvc/control/ListadoUsuariosController.jsp" />
+			<jsp:include page="/mvc/control/PaginaPrincipalAdministradorController.jsp" />
 					
 			<form action="/WebProyectoPW/mvc/view/LoginAdminDisplay.jsp" method="post">
 				<p><input type="submit" value="Acceso a operaciones"></p>
@@ -64,26 +67,7 @@
 				
 		<%}else{
 		%>
-			<p><strong>¡Bienvenido usuario <%=userBean.getCorreo()%>!</strong></p>
-			<p>Hoy es <%= new java.util.Date() %></p>
-			
-			<%if (userBean.getAntiguedad() <= 0){ %>
-				<p>Se registró hoy</p>
-			<%}else{ %>
-				<p>Se registró <%= userBean.getFechaInscripcion()%></p>
-			<%} %>
-			
-			<%if (userBean.getAntiguedad() <= 0){ %>
-				<p>Lleva con nosotros menos de un mes</p>
-			<%}else{ %>
-				<p>Lleva con nosotros <%= userBean.getAntiguedad()%> meses</p>
-			<%} %>
-			
-			<%if (userBean.getFechaReserva().compareTo(new Date()) != 0){ %>
-				<p>Su proxima reserva es el <%= userBean.getFechaReservaString()%></p>
-			<%}else{ %>
-				<p> No tiene reservas futuras </p>
-			<%} %>
+			<jsp:include page="/mvc/control/PaginaPrincipalUsuarioController.jsp" />
 			
 			<form action="/WebProyectoPW/mvc/view/LoginClientDisplay.jsp" method="post">
 				<p><input type="submit" value="Acceso a operaciones"></p>

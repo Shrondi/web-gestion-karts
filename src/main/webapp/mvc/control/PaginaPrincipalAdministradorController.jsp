@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import ="java.util.List, java.util.Date, java.time.*, business.usuario.UsuarioDTO, data.DAO.UsuarioDAO" %>
+<%@ page import ="java.util.List, java.util.Date, java.time.*, business.usuario.UsuarioDTO, data.DAO.UsuarioDAO, data.DAO.reserva.ReservaDAO" %>
 <jsp:useBean  id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
 
 <%
 
-//Caso 1: Usuario logueado y es admin
-if (userBean.equals(null) || !userBean.getCorreo().isEmpty() || userBean.getAdmin() == true){
+if(userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() == false){
+	
+	%>
+	<jsp:forward page="../../index.jsp"/>
+	<%	
+}else{
 	
 	//Se obtienen los parámetros de inicializacion del fichero web.xml
 	String sqlProperties= application.getInitParameter("sqlproperties"); 
@@ -30,14 +34,16 @@ if (userBean.equals(null) || !userBean.getCorreo().isEmpty() || userBean.getAdmi
 		months = Math.round(diff/d);
 		
 		usuario.setAntiguedad((int)months);
-		
 	}
 	
+	int numeroReservas = new ReservaDAO(prop).consultarReservasCompletadas();
+	request.setAttribute("numeroReservas", numeroReservas);
 	request.setAttribute("usuarios", usuarios);
 %>
-	<jsp:include page="/mvc/view/admin/ListadoUsuariosDisplay.jsp"/>
+	<jsp:include page="/mvc/view/admin/PaginaPrincipalAdministradorDisplay.jsp"/>
 <%
 }
 %>
+
 
 

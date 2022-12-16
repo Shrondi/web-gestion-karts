@@ -37,6 +37,10 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		<body>
 				<p id="message"><%= mensajeNextPage %> </p>
 				<form id="submit" method="post" action="/WebProyectoPW/ReservaBono">
+				
+				<%if (bonos.isEmpty()){ %>
+					<p> No dispone de bonos </p>
+				<% }else{%>
 				<table>
 							<thead>
 							  <tr>
@@ -70,6 +74,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 								<input type="submit" value="Confirmar">
 						</form>
 						<br>
+					<%} %>
 						<form id="volver" method="post" action="/WebProyectoPW">
 								<input type="submit" value="Volver">
 						</form>

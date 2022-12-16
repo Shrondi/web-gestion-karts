@@ -96,11 +96,12 @@ public class ReservaDAO {
 			
 			ResultSet rs = ps.executeQuery();
 			
-			
-					
 			while (rs.next()) {
 				
+				String pista = rs.getString("pista");
 				Date fecha = new Date(rs.getTimestamp("fecha").getTime());
+				
+				reserva.setIdPista(pista);
 				reserva.setFecha(fecha);
 			}
 					
@@ -114,9 +115,6 @@ public class ReservaDAO {
 		connection.closeConnection();
 		return reserva;
 	}
-	
-	
-	
 	
 	
 	/**
@@ -145,76 +143,98 @@ public class ReservaDAO {
 	}
 	
 	//NEW
-		public int consultarSesionesBono(String correo, int idBono) {
+	public int consultarSesionesBono(String correo, int idBono) {
 			
-			int sesiones = 0;
-			DBConnection connection = new DBConnection();
-			con = connection.getConnection();
+		int sesiones = 0;
+		DBConnection connection = new DBConnection();
+		con = connection.getConnection();
 
-			try {
-				PreparedStatement ps = con.prepareStatement(prop.getProperty("consultarSesionesBonoSTM"));
+		try {
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("consultarSesionesBonoSTM"));
 
-				ps.setInt(1,idBono);
-				ps.setString(2, correo);
+			ps.setInt(1,idBono);
+			ps.setString(2, correo);
 				
-				ResultSet rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 
-				while (rs.next()) {
-					sesiones = rs.getInt("numero_sesiones");
-				}
+			while (rs.next()) {
+				sesiones = rs.getInt("numero_sesiones");
+			}
 				
 				
-				} catch(SQLException e) {
-					e.printStackTrace();
-				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
 				
-				connection.closeConnection();
-				return sesiones;
-		}
+			connection.closeConnection();
+			return sesiones;
+	}
 		
 		//NEW
-				public int actualizarFechaBono(int idBono, java.util.Date fecha) {
+	public int actualizarFechaBono(int idBono, java.util.Date fecha) {
 					
-					int sesiones = 0;
-					DBConnection connection = new DBConnection();
-					con = connection.getConnection();
+		int sesiones = 0;
+		DBConnection connection = new DBConnection();
+		con = connection.getConnection();
 
-					try {
-						PreparedStatement ps = con.prepareStatement(prop.getProperty("actualizarFechaBonoSTM"));
+		try {
+		PreparedStatement ps = con.prepareStatement(prop.getProperty("actualizarFechaBonoSTM"));
 
-						ps.setDate(1, new Date(fecha.getTime()));
-						ps.setInt(2, idBono);
+		ps.setDate(1, new Date(fecha.getTime()));
+		ps.setInt(2, idBono);
 						
-						ps.executeUpdate();
+		ps.executeUpdate();
 					
-					} catch(SQLException e) {
-						e.printStackTrace();
-					}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 					
-					connection.closeConnection();
-					return sesiones;
-				}
+			connection.closeConnection();
+			return sesiones;
+	}
 				
-				//NEW
-				public int actualizarSesionesBono(int idBono) {
+	//NEW
+	public int actualizarSesionesBono(int idBono) {
 					
-					int sesiones = 0;
-					DBConnection connection = new DBConnection();
-					con = connection.getConnection();
+		int sesiones = 0;
+		DBConnection connection = new DBConnection();
+		con = connection.getConnection();
 
-					try {
-						PreparedStatement ps2 = con.prepareStatement(prop.getProperty("actualizarSesionesBonoSTM"));
-						ps2.setInt(1, idBono);
+		try {
+			PreparedStatement ps2 = con.prepareStatement(prop.getProperty("actualizarSesionesBonoSTM"));
+			ps2.setInt(1, idBono);
 						
-						ps2.executeUpdate();
+			ps2.executeUpdate();
 					
-					} catch(SQLException e) {
-						e.printStackTrace();
-					}
+		} catch(SQLException e) {
+				e.printStackTrace();
+		}
 					
-					connection.closeConnection();
-					return sesiones;
-				}
+		connection.closeConnection();
+		return sesiones;
+	}
+	
+	//NEW
+	public int consultarReservasCompletadas() {
+				
+		int reservas = 0;
+		DBConnection connection = new DBConnection();
+		con = connection.getConnection();
+
+		try {
+			Statement stm = con.createStatement();
+			ResultSet rs = stm.executeQuery(prop.getProperty("obtenerReservasCompletadasSTM"));
+
+			rs.first();
+			reservas = rs.getInt(1);			
+					
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+					
+			connection.closeConnection();
+			return reservas;
+	}
 				
 	/**
 	 * Borrar una reserva de un bono
@@ -304,31 +324,5 @@ public class ReservaDAO {
 		return bonos;
 	}
 	
-	/**
-	 * Consultar el ID del ultimo bono
-	 * @return id ID del ultimo bono 
-	 */		
 	
-	public int consultarUltimoIdBono(){
-		DBConnection connection = new DBConnection();
-		con = connection.getConnection();
-		
-		int id = 0;
-		
-		try {
-			Statement stmt = con.createStatement();
-			String query = prop.getProperty("obtenerIdBonoSTM");
-			ResultSet rs = stmt.executeQuery(query);
-			while (rs.next()) {
-				id = rs.getInt(1);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch(IllegalArgumentException e){
-			e.printStackTrace();
-		}
-		
-		connection.closeConnection();
-		return id;
-	}
 }

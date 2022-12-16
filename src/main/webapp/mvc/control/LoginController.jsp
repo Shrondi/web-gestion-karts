@@ -46,11 +46,6 @@ if(userBean == null || userBean.getCorreo().equals("")){
 				
 			}else{ //Datos correctos, se procede con el login
 				
-				//Obtenemos la fecha de su proxima reserva
-				ReservaDAO reserva = new ReservaDAO(prop);
-				AbstractReservaDTO reservaDTO = reserva.obtenerProximaReserva(usuario.getCorreo());
-				reservaDTO.getFechaDate();
-				
 				Date currDate = new Date();
 				Date fechaInscripcion = usuario.getFechaInscripcionDate();
 				
@@ -66,7 +61,6 @@ if(userBean == null || userBean.getCorreo().equals("")){
 				<jsp:setProperty property="fechaInscripcion" value="<%=usuario.getFechaInscripcion()%>" name="userBean"/>
 				<jsp:setProperty property="passWord" value="<%=usuario.getPassWord()%>" name="userBean"/>
 				<jsp:setProperty property="admin" value="<%=usuario.getAdmin()%>" name="userBean"/>
-				<jsp:setProperty property="fechaReserva" value="<%=reservaDTO.getFechaDate()%>" name="userBean"/>
 				<jsp:setProperty property="antiguedad" value="<%=(int) months%>" name="userBean"/>
 				<%
 				
