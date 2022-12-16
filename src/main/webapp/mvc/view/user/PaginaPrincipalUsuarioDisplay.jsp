@@ -30,7 +30,7 @@ if(userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() ==
 				<p>Lleva con nosotros <%= userBean.getAntiguedad()%> meses</p>
 			<%} %>
 			<%AbstractReservaDTO abstractReservaDTO = (AbstractReservaDTO)request.getAttribute("ProximaReserva"); %>
-			<%if (abstractReservaDTO.getFechaDate().compareTo(new java.util.Date()) != 0){ %>
+			<%if (abstractReservaDTO.getIdPista() != null){ %>
 				<p>Su proxima reserva es el <%= abstractReservaDTO.getFecha()%> en la pista <%= abstractReservaDTO.getIdPista() %></p>
 			<%}else{ %>
 				<p> No tiene reservas futuras </p>
