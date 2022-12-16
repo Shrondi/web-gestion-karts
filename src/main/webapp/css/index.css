@@ -1,0 +1,9 @@
+fieldset{
+    height: auto;
+    background-image: linear-gradient(-225deg, #d7fdf6 50%, #d8e4fc 50%);    
+    border-radius: 5px;
+    border-color:black;
+    padding: 2%;
+    margin:auto;
+    width:50%;
+}

@@ -1,0 +1,10 @@
+form {
+    color: black;
+    height: auto;
+    border-radius: 5px;
+    margin: 2% auto;
+    padding: 2%;
+	background-image: linear-gradient(-225deg, #c5f1fc 0%, white 100%);
+    padding: 0;
+    margin: 0;
+}

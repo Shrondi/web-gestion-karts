@@ -1,0 +1,38 @@
+header {
+  background: rgba(0,0,0,0.8);
+  width: 100%;
+  z-index: 100;
+  font-family: sans-serif, Arial;
+  margin:auto;
+  font-size: small;
+}
+
+ul {
+  list-style: none;
+  overflow: hidden; 
+}
+
+nav li a{
+  display: block;
+  padding: 10px;
+  color: #fff;
+  text-decoration: none;
+  float:right;
+}
+
+nav li a:hover {
+  background: #1a5c9f;
+}
+
+footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.8);
+  font-family: sans-serif, Arial;
+  color: white;
+  font-size: small;
+  padding: 20px 0 20px;
+  text-align:center;
+}

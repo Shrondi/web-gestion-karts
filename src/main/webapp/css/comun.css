@@ -1,0 +1,28 @@
+*{
+	box-sizing: border-box;
+	font-family: sans-serif, Arial;
+}
+
+body{
+    color:black;
+}
+
+h1,h2{
+	text-align: center;
+}
+
+input:focus {
+  background-color: #d9f4fc;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #1a5c9f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  text-decoration: none;
+  margin: 5px 1px;
+  cursor: pointer;
+  display:inline-block;
+}
