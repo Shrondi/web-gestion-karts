@@ -9,6 +9,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>UcoGestor</title>
+	<link rel="stylesheet" type="text/css" href="/css/comun.css">
+	<link rel="stylesheet" type="text/css" href="/css/index.css">
+	<link rel="stylesheet" type="text/css" href="/css/footer_header.css">
 </head>
 
 <body>
@@ -18,22 +21,20 @@
 	if(message == null){
 		message = "";
 	}
-	
-	String mensaje = "Rellene los siguientes campos para iniciar sesión";
-	
+		
 	if(userBean == null || userBean.getCorreo().equals("")){
 %>
 	<fieldset>
+	
 		<form action="/WebProyectoPW/mvc/control/LoginController.jsp" method="post">
-	    <p><font color ="blue"><%=mensaje%></font></p>
 	    
 	    	<label for="correo">Correo electrónico:</label>
 	    	<input type="email" name="correo" placeholder="example@gmail.com" required><br><br/>
 	    	
 	    	<label for="passWord">Contraseña:</label>
-	    	<input type="password" name="passWord" placeholder="Contraseña" required><br><br/>
-	    	
-	    	<p><input type="submit" value="Iniciar sesión"></p>
+	    	<input type="password" name="passWord" placeholder="Contraseña" required><br><br/>	
+			
+			<p><input type="submit" value="Iniciar sesión"></p>
 		</form>
 		
 		<form action="/WebProyectoPW/mvc/control/RegistroController.jsp" method="post">
@@ -48,7 +49,7 @@
 		
 		if(userBean.getAdmin()){
 		%>
-			<p>¡Bienvenido Administrador <%=userBean.getNombre() + userBean.getApellidos()%>!</p>
+			<p><strong>¡Bienvenido Administrador <%=userBean.getNombre() + userBean.getApellidos()%>!</strong></p>
 			<jsp:include page="/mvc/control/ListadoUsuariosController.jsp" />
 					
 			<form action="/WebProyectoPW/mvc/view/LoginAdminDisplay.jsp" method="post">
@@ -57,10 +58,20 @@
 				
 		<%}else{
 		%>
-			<p>¡Bienvenido usuario <%=userBean.getCorreo()%>!</p>
-			<p>Son las <%= new java.util.Date() %></p>
-			<p>Se registró <%= userBean.getFechaInscripcion()%></p>
-			<p>Lleva con nosotros <%= userBean.getAntiguedad()%> meses</p>
+			<p><strong>¡Bienvenido usuario <%=userBean.getCorreo()%>!</strong></p>
+			<p>Hoy es <%= new java.util.Date() %></p>
+			
+			<%if (userBean.getAntiguedad() <= 0){ %>
+				<p>Se registró hoy</p>
+			<%}else{ %>
+				<p>Se registró <%= userBean.getFechaInscripcion()%></p>
+			<%} %>
+			
+			<%if (userBean.getAntiguedad() <= 0){ %>
+				<p>Lleva con nosotros menos de un mes</p>
+			<%}else{ %>
+				<p>Lleva con nosotros <%= userBean.getAntiguedad()%> meses</p>
+			<%} %>
 			
 			<%if (userBean.getFechaReserva().compareTo(new Date()) != 0){ %>
 				<p>Su proxima reserva es el <%= userBean.getFechaReservaString()%></p>
