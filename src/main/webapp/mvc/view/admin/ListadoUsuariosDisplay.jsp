@@ -22,7 +22,7 @@
 <html>
 		<head>
 				<meta charset="UTF-8">
-				<link rel="stylesheet" type="text/css" href="/css/table.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">
 		</head>
 		<body>
 						
