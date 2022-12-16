@@ -19,6 +19,7 @@ if(userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() ==
 	prop.load(myIO);
 
 	UsuarioDAO usuarioDAO = new UsuarioDAO(prop);
+	ReservaDAO reserva = new ReservaDAO(prop);
 	
 	List<UsuarioDTO> usuarios = usuarioDAO.obtenerUsuarios();
 
@@ -34,9 +35,10 @@ if(userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() ==
 		months = Math.round(diff/d);
 		
 		usuario.setAntiguedad((int)months);
+		usuario.setReservas(reserva.obtenerReservasCompletadasUsuario(usuario.getCorreo()));
 	}
 	
-	int numeroReservas = new ReservaDAO(prop).consultarReservasCompletadas();
+	int numeroReservas = reserva.consultarReservasCompletadas();
 	request.setAttribute("numeroReservas", numeroReservas);
 	request.setAttribute("usuarios", usuarios);
 %>

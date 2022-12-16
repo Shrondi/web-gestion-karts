@@ -170,7 +170,7 @@ public class ReservaDAO {
 			return sesiones;
 	}
 		
-		//NEW
+	//NEW
 	public int actualizarFechaBono(int idBono, java.util.Date fecha) {
 					
 		int sesiones = 0;
@@ -235,7 +235,29 @@ public class ReservaDAO {
 			connection.closeConnection();
 			return reservas;
 	}
-				
+			
+	
+	//NEW
+	public int obtenerReservasCompletadasUsuario(String correo){
+						
+		int reservas = 0;
+		DBConnection connection = new DBConnection();
+		con = connection.getConnection();
+
+		try {
+			Statement stm = con.createStatement();
+			ResultSet rs = stm.executeQuery(prop.getProperty("obtenerReservasCompletadasUsuarioSTM")+String.format("'%s'", correo));
+
+			rs.first();
+			reservas = rs.getInt(1);			
+					
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+					
+			connection.closeConnection();
+			return reservas;
+	}
 	/**
 	 * Borrar una reserva de un bono
 	 * @param id ID del bono
@@ -285,7 +307,7 @@ public class ReservaDAO {
 	 * @param usuario Usuario poseedor del bono
 	 * @return ids Lista de IDs de los bonos
 	 */		
-	
+	//NEW
 	public List<BonoDTO> consultarBonos(String usuario){
 		
 		List<BonoDTO> bonos = new ArrayList<>();

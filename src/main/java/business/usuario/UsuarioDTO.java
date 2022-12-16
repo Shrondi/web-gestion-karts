@@ -31,6 +31,7 @@ public class UsuarioDTO implements Serializable{
 	private int antiguedad_;
 	private String passWord_;
 	private Boolean admin_; //true administrador, false usuario
+	private int reservasCompletadas_;
 	
 	/**
 	 * Constructor vacio (default)
@@ -45,6 +46,7 @@ public class UsuarioDTO implements Serializable{
 		this.antiguedad_ = 0;
 		this.passWord_ = null;
 		this.admin_ = false;
+		this.reservasCompletadas_ = 0;
 	}
 	
 	/**
@@ -161,6 +163,15 @@ public class UsuarioDTO implements Serializable{
 	}
 	
 	/**
+	 * Getter Numero de reservas completadas
+	 * @return Numero de reservas completadas
+	 */
+	
+	public int getReservas() {
+		return this.reservasCompletadas_;
+	}
+	
+	/**
 	 * Setter del nombre del usuario
 	 * @param nombre Nombre del usuario
 	 */
@@ -246,6 +257,15 @@ public class UsuarioDTO implements Serializable{
 	
 	public void setAdmin(Boolean admin) {
 		this.admin_ = admin;
+	}
+	
+	/**
+	 * Setter Numero de reservas completadas
+	 * @param Numero de reservas completadas
+	 */
+	
+	public void setReservas(int reservasCompletadas) {
+		this.reservasCompletadas_ = reservasCompletadas;
 	}
 	
 	/**

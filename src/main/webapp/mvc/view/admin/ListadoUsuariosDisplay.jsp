@@ -36,6 +36,7 @@
 							    <th>Fecha Nacimiento</th>
 							    <th>Fecha Inscripcion</th>
 							    <th>Antigüedad</th>
+							    <th>Numero de reservas completadas</th>
 							    <th>¿Administrador?</th>
 							  </tr>
 							</thead>
@@ -50,6 +51,7 @@
 							  	<td><%= usuario.getFechaNacimiento() %></td>
 							  	<td><%= usuario.getFechaInscripcion() %></td>
 							  	<td><%= usuario.getAntiguedad() %> meses</td>
+							  	<td><%= usuario.getReservas() %></td>
 							  	<% if (usuario.getAdmin()){ %>
 							  		<td>Si</td>
 							  	<% }else{ %>
