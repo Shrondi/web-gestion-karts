@@ -87,7 +87,7 @@ if(userBean == null || userBean.getCorreo().equals("")){
 						</li>
 						
 						<li>
-							<form method="post" action="/WebProyectoPW-main/ConsultarReservas">
+							<form method="post" action="/WebProyectoPW/ConsultarReservas">
 								<input type="submit" name="option" class="option" value="Consultar reservas por fecha de inicio y fin">
 							</form>
 						</li>

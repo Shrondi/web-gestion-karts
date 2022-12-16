@@ -32,7 +32,7 @@ if(userBean == null || userBean.getCorreo().equals("")){
 					<li>Operaciones con usuarios
 						<ul>
 							<li>
-								<form method="post" action="/WebProyectoPW/AltaUsuario">
+								<form method="post" action="/WebProyectoPW/mvc/control/RegistroController.jsp">
 									<input type="submit" name="option" class="option" value="Alta de usuario administrador">
 								</form>
 							</li>
@@ -50,7 +50,7 @@ if(userBean == null || userBean.getCorreo().equals("")){
 							</li>	
 		
 							<li>
-								<form method="post" action="/WebProyectoPW/ListadoUsuarios">
+								<form method="post" action="/WebProyectoPW/mvc/control/ListadoUsuariosController.jsp">
 									<input type="submit" name="option" class="option" value="Listado de usuarios registrados">
 								</form>
 							</li>
