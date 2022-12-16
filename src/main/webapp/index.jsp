@@ -9,9 +9,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>UcoGestor</title>
-	<link rel="stylesheet" type="text/css" href="/css/comun.css">
-	<link rel="stylesheet" type="text/css" href="/css/index.css">
-	<link rel="stylesheet" type="text/css" href="/css/footer_header.css">
+	<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
+	<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/index.css">
+	<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
 </head>
 
 <body>
@@ -32,10 +32,7 @@
 	<fieldset>
 	
 		<form action="/WebProyectoPW/mvc/control/LoginController.jsp" method="post">
-	    
-
-	    <p><font color ="blue"> Rellene los siguientes campos para iniciar sesión: </font></p>
-	    	
+	    	    	
 	    	<label for="correo">Correo electrónico:</label>
 	    	<input type="email" name="correo" placeholder="example@gmail.com" required><br><br/>
 	    	
