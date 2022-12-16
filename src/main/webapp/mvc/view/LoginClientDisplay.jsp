@@ -11,7 +11,6 @@ if(userBean == null || userBean.getCorreo().equals("")){
 	<jsp:forward page="../../index.jsp"/>
 	<%	
 }
-
 %>
 <!DOCTYPE html>
 <html>
@@ -21,9 +20,9 @@ if(userBean == null || userBean.getCorreo().equals("")){
 	<head>
 			<meta charset="UTF-8">
 			<title>Vista Cliente</title>
-				<link rel="stylesheet" type="text/css" href="/css/comun.css">
-				<link rel="stylesheet" type="text/css" href="/css/fieldset.css">
-				<link rel="stylesheet" type="text/css" href="/css/footer_header.css">	
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/fieldset.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">	
 	</head>
 	<body>	
 		<fieldset>
