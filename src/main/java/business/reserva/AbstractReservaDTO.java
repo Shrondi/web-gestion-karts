@@ -49,7 +49,7 @@ public class AbstractReservaDTO implements Serializable {
 	}
 	
 	public String getFecha() {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy HH:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		String retVal = sdf.format(this.fecha_);
 		return retVal;
 	}
@@ -83,7 +83,7 @@ public class AbstractReservaDTO implements Serializable {
 	}
 	
 	public void setFecha(String fecha) {
-		java.text.SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd'T'HH:mm");
+		java.text.SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 		sdf.setLenient(false);
 		try{
 			this.fecha_ = sdf.parse(fecha);

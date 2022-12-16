@@ -172,11 +172,15 @@ public class CrearReservaIndividual extends HttpServlet {
 				
 				int duracion = Integer.parseInt(request.getParameter("duracion"));
 				String tipoReserva = request.getParameter("tipoReserva");
-				int numeroNinios = Integer.parseInt(request.getParameter("numeroNinios"));
+				int numeroNinios = 0;
 				int numeroAdultos = 0;
 				
 				if (tipoReserva.contentEquals("FAMILIAR") || tipoReserva.contentEquals("ADULTOS")) {
 					numeroAdultos = Integer.parseInt(request.getParameter("numeroAdultos"));
+				}
+				
+				if (tipoReserva.contentEquals("FAMILIAR") || tipoReserva.contentEquals("INFANTILES")) {
+					numeroNinios = Integer.parseInt(request.getParameter("numeroNinios"));
 				}
 		
 				ReservaDAO reservaDAO = new ReservaDAO(prop);

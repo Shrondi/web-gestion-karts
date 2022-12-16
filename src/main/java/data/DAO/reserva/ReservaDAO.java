@@ -4,7 +4,7 @@ import data.common.DBConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -144,6 +144,78 @@ public class ReservaDAO {
 		connection.closeConnection();
 	}
 	
+	//NEW
+		public int consultarSesionesBono(String correo, int idBono) {
+			
+			int sesiones = 0;
+			DBConnection connection = new DBConnection();
+			con = connection.getConnection();
+
+			try {
+				PreparedStatement ps = con.prepareStatement(prop.getProperty("consultarSesionesBonoSTM"));
+
+				ps.setInt(1,idBono);
+				ps.setString(2, correo);
+				
+				ResultSet rs = ps.executeQuery();
+
+				while (rs.next()) {
+					sesiones = rs.getInt("numero_sesiones");
+				}
+				
+				
+				} catch(SQLException e) {
+					e.printStackTrace();
+				}
+				
+				connection.closeConnection();
+				return sesiones;
+		}
+		
+		//NEW
+				public int actualizarFechaBono(int idBono, java.util.Date fecha) {
+					
+					int sesiones = 0;
+					DBConnection connection = new DBConnection();
+					con = connection.getConnection();
+
+					try {
+						PreparedStatement ps = con.prepareStatement(prop.getProperty("actualizarFechaBonoSTM"));
+
+						ps.setDate(1, new Date(fecha.getTime()));
+						ps.setInt(2, idBono);
+						
+						ps.executeUpdate();
+					
+					} catch(SQLException e) {
+						e.printStackTrace();
+					}
+					
+					connection.closeConnection();
+					return sesiones;
+				}
+				
+				//NEW
+				public int actualizarSesionesBono(int idBono) {
+					
+					int sesiones = 0;
+					DBConnection connection = new DBConnection();
+					con = connection.getConnection();
+
+					try {
+						PreparedStatement ps2 = con.prepareStatement(prop.getProperty("actualizarSesionesBonoSTM"));
+						ps2.setInt(1, idBono);
+						
+						ps2.executeUpdate();
+					
+					} catch(SQLException e) {
+						e.printStackTrace();
+					}
+					
+					connection.closeConnection();
+					return sesiones;
+				}
+				
 	/**
 	 * Borrar una reserva de un bono
 	 * @param id ID del bono

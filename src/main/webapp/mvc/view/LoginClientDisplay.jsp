@@ -33,7 +33,7 @@ if(userBean == null || userBean.getCorreo().equals("")){
 				<li>Reservas Individuales
 					<ul>
 						<li>
-							<form method="post" action="/WebProyectoPW-main/CrearReservaIndividual">
+							<form method="post" action="/WebProyectoPW/ReservaIndividual">
 								<input type="submit" name="option" class="option" value="Hacer reserva Individual">
 							</form>
 						</li>
@@ -45,7 +45,7 @@ if(userBean == null || userBean.getCorreo().equals("")){
 						</li>
 						
 						<li>
-							<form method="post" action="/WebProyectoPW-main/EliminarReservaIndividual">
+							<form method="post" action="/WebProyectoPW-main/CancelarReservaIndividual">
 								<input type="submit" name="option" class="option" value="Cancelar reserva Individual">
 							</form>
 						</li>	
@@ -55,7 +55,12 @@ if(userBean == null || userBean.getCorreo().equals("")){
 				<li>Reservas Bono
 					<ul>
 						<li>
-							<form method="post" action="/WebProyectoPW-main/CrearReservaBono">
+							<form method="post" action="/WebProyectoPW/CrearBono">
+								<input type="submit" name="option" class="option" value="Crear Bono">
+							</form>
+						</li>
+						<li>
+							<form method="post" action="/WebProyectoPW/ReservaBono">
 								<input type="submit" name="option" class="option" value="Hacer reserva Bono">
 							</form>
 						</li>
@@ -77,19 +82,13 @@ if(userBean == null || userBean.getCorreo().equals("")){
 				<li>Consultas de reservas y pistas
 					<ul>
 						<li>
-							<form method="post" action="/WebProyectoPW-main/ConsultarPistas">
+							<form method="post" action="/WebProyectoPW/ConsultarPistas">
 								<input type="submit" name="option" class="option" value="Consultar pistas disponibles">
 							</form>
 						</li>
 						
 						<li>
 							<form method="post" action="/WebProyectoPW-main/ConsultarReservas">
-								<input type="submit" name="option" class="option" value="Consultar reservas">
-							</form>
-						</li>
-						
-						<li>
-							<form method="post" action="/WebProyectoPW-main/ConsultarReservasRango">
 								<input type="submit" name="option" class="option" value="Consultar reservas por fecha de inicio y fin">
 							</form>
 						</li>

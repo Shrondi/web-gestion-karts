@@ -33,7 +33,7 @@ if(userBean == null || userBean.getCorreo().equals("")){
 					<li>Operaciones con usuarios
 						<ul>
 							<li>
-								<form method="get" action="/WebProyectoPW-main/AltaUsuario">
+								<form method="post" action="/WebProyectoPW/AltaUsuario">
 									<input type="submit" name="option" class="option" value="Alta de usuario administrador">
 								</form>
 							</li>
@@ -51,7 +51,7 @@ if(userBean == null || userBean.getCorreo().equals("")){
 							</li>	
 		
 							<li>
-								<form method="get" action="/WebProyectoPW-main/ListadoUsuarios">
+								<form method="post" action="/WebProyectoPW/ListadoUsuarios">
 									<input type="submit" name="option" class="option" value="Listado de usuarios registrados">
 								</form>
 							</li>
@@ -60,31 +60,31 @@ if(userBean == null || userBean.getCorreo().equals("")){
 					<li>Operaciones con pistas y karts
 						<ul>
 							<li>
-								<form method="get" action="/CrearPista">
+								<form method="post" action="/WebProyectoPW/CrearPista">
 									<input type="submit" name="option" class="option" value="Crear Pista">
 								</form>
 							</li>
 						
 							<li>
-								<form method="get" action="/CrearKart">
+								<form method="post" action="/WebProyectoPW/CrearKart">
 									<input type="submit" name="option" class="option" value="Crear Kart">
 								</form>
 							</li>	
 											
 							<li>
-								<form method="get" action="/AsociarKartPista">
+								<form method="post" action="/WebProyectoPW/AsociarKartPista">
 									<input type="submit" name="option" class="option" value="Asociar kart a pista">
 								</form>
 							</li>
 							
 							<li>
-								<form method="get" action="/ModificarEstadoPista">
+								<form method="post" action="/WebProyectoPW/ModificarEstadoPista">
 									<input type="submit" name="option" class="option" value="Modificar estado de una pista">
 								</form>
 							</li>
 							
 							<li>
-								<form method="get" action="/ModificarEstadoKart">
+								<form method="post" action="/WebProyectoPW/ModificarEstadoKart">
 									<input type="submit" name="option" class="option" value="Modificar estado de un kart">
 								</form>
 							</li>													
@@ -93,7 +93,7 @@ if(userBean == null || userBean.getCorreo().equals("")){
 					<li>Operaciones con reservas
 						<ul>
 							<li>
-								<form method="get" action="/CancelarReserva">
+								<form method="post" action="/WebProyectoPW/BorrarReservaIndividual">
 									<input type="submit" name="option" class="option" value="Eliminar Reserva">
 								</form>
 							</li>							

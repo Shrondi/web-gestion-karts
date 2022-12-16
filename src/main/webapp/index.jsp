@@ -18,16 +18,24 @@
 <h1>Bienvenido a UcoKarts</h1>
 <%	
 	String message = request.getParameter("message");
+	String mensaje = (String) request.getAttribute("mensaje");
 	if(message == null){
 		message = "";
 	}
-		
+	
+	if(mensaje == null){
+		mensaje = "";
+	}
+	
 	if(userBean == null || userBean.getCorreo().equals("")){
 %>
 	<fieldset>
 	
 		<form action="/WebProyectoPW/mvc/control/LoginController.jsp" method="post">
 	    
+
+	    <p><font color ="blue"> Rellene los siguientes campos para iniciar sesión: </font></p>
+	    	
 	    	<label for="correo">Correo electrónico:</label>
 	    	<input type="email" name="correo" placeholder="example@gmail.com" required><br><br/>
 	    	
@@ -43,6 +51,7 @@
 	</fieldset>
 	
 	<p><font color ="red"><%=message%></font></p>
+	
 	
 	<%}
 	else{
@@ -91,6 +100,7 @@
 				<input type="submit" value="Cerrar sesión">
 			</form>
 			<p><font color ="red"><%=message%></font></p>
+			<p><font color ="red"><%=mensaje%></font></p>
 		
 		<%
 		}%>

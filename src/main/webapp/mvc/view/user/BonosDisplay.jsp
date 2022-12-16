@@ -56,7 +56,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							    <td><%= bono.getBonoId() %></td>
 							    <td><%= bono.getTipo() %></td>
 							    <td><%= bono.getSesiones() %></td>
-							   	<%if (bono.getFechaCaducidad().contentEquals("01/01/1900")){%>
+							   	<%if (bono.getFechaCaducidad().contentEquals("01/01/1970")){%>
 							   		 <td> <i>Sin reservas</i></td>
 							   	<% }else{ %>
 							   		<td><%= bono.getFechaCaducidad() %></td>

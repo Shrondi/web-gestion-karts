@@ -45,7 +45,7 @@ public class BonoDTO implements Serializable {
 	}
 	
 	public String getFechaCaducidad() {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		String retVal = sdf.format(this.fechaCaducidad_);
 		return retVal;
 	}
@@ -72,7 +72,7 @@ public class BonoDTO implements Serializable {
 	}
 	
 	public void setFechaCaducidad(String fechaCaducidad) {
-		java.text.SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd'T'HH:mm");
+		java.text.SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		sdf.setLenient(false);
 		try{
 			this.fechaCaducidad_ = sdf.parse(fechaCaducidad);
