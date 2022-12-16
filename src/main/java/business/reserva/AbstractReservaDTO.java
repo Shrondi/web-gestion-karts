@@ -24,6 +24,7 @@ public class AbstractReservaDTO implements Serializable {
 	
 	protected int idReserva_;
 	protected String idUsuario_;
+	protected String modalidad_;
 	protected Date fecha_;
 	protected int duracion_;
 	protected String idPista_;
@@ -46,6 +47,10 @@ public class AbstractReservaDTO implements Serializable {
 	
 	public String getIdUsuario() {
 		return this.idUsuario_;
+	}
+	
+	public String getModalidad() {
+		return this.modalidad_;
 	}
 	
 	public String getFecha() {
@@ -80,6 +85,10 @@ public class AbstractReservaDTO implements Serializable {
 	
 	public void setIdReserva(int idReserva) {
 		this.idReserva_ = idReserva;
+	}
+	
+	public void setModalidad(String modalidad) {
+		modalidad_ = modalidad;
 	}
 	
 	public void setFecha(String fecha) {

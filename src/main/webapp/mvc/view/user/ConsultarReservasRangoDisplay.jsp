@@ -43,16 +43,16 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 										
 								</div>	
 								
-								<% if (request.getAttribute("reservasInfantilPasadas") != null){ %>
-										<jsp:include page="ReservasRangoDisplay.jsp" />  
-								<%} %>
-								
-								<input type="submit" value="Aceptar">
+								<input type="submit" value="Nueva busqueda">
 						</form>
-						
+								
 						<form id="volver" method="post" action="/WebProyectoPW">
 								<input type="submit" value="Volver">
 						</form>
+						
+						<% if (request.getAttribute("reservasInfantilPasadas") != null){ %>
+										<jsp:include page="ReservasRangoDisplay.jsp" />  
+						<%} %>
 		</body>
 </html>
 

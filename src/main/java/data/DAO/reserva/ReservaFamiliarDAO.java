@@ -144,6 +144,7 @@ public class ReservaFamiliarDAO {
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
 				int idReserva = rs.getInt("id_Reserva");
+				String modalidad = rs.getString("modalidad_reserva");
 				int participantes_infantiles = rs.getInt("participantes_infantiles");
 				int participantes_adultos = rs.getInt("participantes_adultos");
 				Date fecha = new Date(rs.getTimestamp("fecha").getTime());
@@ -155,6 +156,7 @@ public class ReservaFamiliarDAO {
 				ReservaFamiliarDTO reservafamiliar = new ReservaFamiliarDTO();
 				
 				reservafamiliar.setIdReserva(idReserva);
+				reservafamiliar.setModalidad(modalidad);
 				reservafamiliar.setIdUsuario(usuario);
 				reservafamiliar.setParticipantesInfantiles(participantes_infantiles);
 				reservafamiliar.setParticipantesAdultos(participantes_adultos);
@@ -199,6 +201,7 @@ public class ReservaFamiliarDAO {
 			while (rs.next()) {
 
 				int idReserva = rs.getInt("id_Reserva");
+				String modalidad = rs.getString("modalidad_reserva");
 				int participantes_adultos = rs.getInt("participantes_adultos");
 				int participantes_infantiles = rs.getInt("participantes_infantiles");
 				Date fecha = new Date(rs.getTimestamp("fecha").getTime());
@@ -210,6 +213,7 @@ public class ReservaFamiliarDAO {
 				ReservaFamiliarDTO reservafamiliar = new ReservaFamiliarDTO();
 				
 				reservafamiliar.setIdReserva(idReserva);
+				reservafamiliar.setModalidad(modalidad);
 				reservafamiliar.setIdUsuario(usuario);
 				reservafamiliar.setParticipantesAdultos(participantes_adultos);
 				reservafamiliar.setParticipantesInfantiles(participantes_infantiles);
@@ -255,6 +259,7 @@ public class ReservaFamiliarDAO {
 				while (rs.next()) {
 
 					int idReserva = rs.getInt("id_Reserva");
+					String modalidad = rs.getString("modalidad_reserva");
 					String usuario = rs.getString("usuario");
 					int participantes_adultos = rs.getInt("participantes_adultos");
 					int participantes_infantiles = rs.getInt("participantes_infantiles");
@@ -267,6 +272,7 @@ public class ReservaFamiliarDAO {
 					ReservaFamiliarDTO reservafamiliar = new ReservaFamiliarDTO();
 					
 					reservafamiliar.setIdReserva(idReserva);
+					reservafamiliar.setModalidad(modalidad);
 					reservafamiliar.setIdUsuario(usuario);
 					reservafamiliar.setParticipantesAdultos(participantes_adultos);
 					reservafamiliar.setParticipantesInfantiles(participantes_infantiles);
@@ -312,6 +318,7 @@ public class ReservaFamiliarDAO {
 						while (rs.next()) {
 
 							int idReserva = rs.getInt("id_Reserva");
+							String modalidad = rs.getString("modalidad_reserva");
 							String usuario = rs.getString("usuario");
 							int participantes_adultos = rs.getInt("participantes_adultos");
 							int participantes_infantiles = rs.getInt("participantes_infantiles");
@@ -324,6 +331,7 @@ public class ReservaFamiliarDAO {
 							ReservaFamiliarDTO reservafamiliar = new ReservaFamiliarDTO();
 							
 							reservafamiliar.setIdReserva(idReserva);
+							reservafamiliar.setModalidad(modalidad);
 							reservafamiliar.setIdUsuario(usuario);
 							reservafamiliar.setParticipantesAdultos(participantes_adultos);
 							reservafamiliar.setParticipantesInfantiles(participantes_infantiles);

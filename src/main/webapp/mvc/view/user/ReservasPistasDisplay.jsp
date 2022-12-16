@@ -32,6 +32,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 <html>
 		<head>
 				<meta charset="UTF-8">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">
 				<title>Listado Pistas</title>
 		</head>
 		<body>

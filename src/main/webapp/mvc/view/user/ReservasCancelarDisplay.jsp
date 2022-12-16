@@ -32,6 +32,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 <html>
 		<head>
 				<meta charset="UTF-8">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">
 				<title>Cancelar Reserva</title>
 		</head>
 		<body>
@@ -52,6 +53,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							  <tr>
 							    <th></th>
 							    <th>Fecha y hora</th>
+							    <th>Modalidad</th>
 							    <th>Duracion</th>
 							    <th>Participantes infantiles</th>
 							    <th>Descuento</th>
@@ -66,6 +68,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							  <tr>
 							    <td><input type="radio" name="reserva" value="<%= reserva.getIdReserva()%>" required></td>
 							    <td><%= reserva.getFecha() %></td>
+							    <td><%= reserva.getModalidad() %></td>
 							    <td><%= reserva.getDuracion() %> minutos</td>
 							    <td><%= reserva.getParticipantesInfantiles() %></td>
 							    <td><%= reserva.getDescuento() %> %</td>
@@ -87,6 +90,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							  <tr>
 							    <th></th>
 							    <th>Fecha y hora</th>
+							    <th>Modalidad</th>
 							    <th>Duracion</th>
 							    <th>Participantes infantiles</th>
 							    <th>Participantes adultos</th>
@@ -102,6 +106,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							  <tr>
 							    <td><input type="radio" name="reserva" value="<%= reserva.getIdReserva()%>" required></td>
 							    <td><%= reserva.getFecha() %></td>
+							    <td><%= reserva.getModalidad() %></td>
 							    <td><%= reserva.getDuracion() %> minutos</td>
 							    <td><%= reserva.getParticipantesInfantiles() %></td>
 							    <td><%= reserva.getParticipantesAdultos() %></td>
@@ -124,6 +129,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							  <tr>
 							    <th></th>
 							    <th>Fecha y hora</th>
+							    <th>Modalidad</th>
 							    <th>Duracion</th>
 							    <th>Participantes adultos</th>
 							    <th>Descuento</th>
@@ -138,6 +144,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							  <tr>
 							    <td><input type="radio" name="reserva" value="<%= reserva.getIdReserva()%>" required></td>
 							    <td><%= reserva.getFecha() %></td>
+							    <td><%= reserva.getModalidad() %></td>
 							    <td><%= reserva.getDuracion() %> minutos</td>
 							    <td><%= reserva.getParticipantesAdultos() %></td>
 							    <td><%= reserva.getDescuento() %> %</td>

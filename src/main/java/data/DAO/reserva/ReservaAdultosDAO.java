@@ -138,6 +138,7 @@ public class ReservaAdultosDAO {
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
 				int idReserva = rs.getInt("id_Reserva");
+				String modalidad = rs.getString("modalidad_reserva");
 				int participantes_adultos = rs.getInt("participantes_adultos");
 				Date fecha = new Date(rs.getTimestamp("fecha").getTime());
 				int duracion = rs.getInt("duracion");
@@ -148,6 +149,7 @@ public class ReservaAdultosDAO {
 				ReservaAdultosDTO reservaadulto = new ReservaAdultosDTO();
 				
 				reservaadulto.setIdReserva(idReserva);
+				reservaadulto.setModalidad(modalidad);
 				reservaadulto.setIdUsuario(usuario);
 				reservaadulto.setParticipantesAdultos(participantes_adultos);
 				reservaadulto.setFecha(fecha);
@@ -191,6 +193,7 @@ public class ReservaAdultosDAO {
 			while (rs.next()) {
 
 				int idReserva = rs.getInt("id_Reserva");
+				String modalidad = rs.getString("modalidad_reserva");
 				int participantes_adultos = rs.getInt("participantes_adultos");
 				Date fecha = new Date(rs.getTimestamp("fecha").getTime());
 				int duracion = rs.getInt("duracion");
@@ -201,6 +204,7 @@ public class ReservaAdultosDAO {
 				ReservaAdultosDTO reservaadulto = new ReservaAdultosDTO();
 				
 				reservaadulto.setIdReserva(idReserva);
+				reservaadulto.setModalidad(modalidad);
 				reservaadulto.setIdUsuario(usuario);
 				reservaadulto.setParticipantesAdultos(participantes_adultos);
 				reservaadulto.setFecha(fecha);
@@ -243,6 +247,7 @@ public class ReservaAdultosDAO {
 				while (rs.next()) {
 
 					int idReserva = rs.getInt("id_Reserva");
+					String modalidad = rs.getString("modalidad_reserva");
 					String usuario = rs.getString("usuario");
 					int participantes_adultos = rs.getInt("participantes_adultos");
 					Date fecha = new Date(rs.getTimestamp("fecha").getTime());
@@ -254,6 +259,7 @@ public class ReservaAdultosDAO {
 					ReservaAdultosDTO reservaadulto = new ReservaAdultosDTO();
 					
 					reservaadulto.setIdReserva(idReserva);
+					reservaadulto.setModalidad(modalidad);
 					reservaadulto.setIdUsuario(usuario);
 					reservaadulto.setParticipantesAdultos(participantes_adultos);
 					reservaadulto.setFecha(fecha);
@@ -296,6 +302,7 @@ public class ReservaAdultosDAO {
 						while (rs.next()) {
 
 							int idReserva = rs.getInt("id_Reserva");
+							String modalidad = rs.getString("modalidad_reserva");
 							String usuario = rs.getString("usuario");
 							int participantes_adultos = rs.getInt("participantes_adultos");
 							Date fecha = new Date(rs.getTimestamp("fecha").getTime());
@@ -307,6 +314,7 @@ public class ReservaAdultosDAO {
 							ReservaAdultosDTO reservaadulto = new ReservaAdultosDTO();
 							
 							reservaadulto.setIdReserva(idReserva);
+							reservaadulto.setModalidad(modalidad);
 							reservaadulto.setIdUsuario(usuario);
 							reservaadulto.setParticipantesAdultos(participantes_adultos);
 							reservaadulto.setFecha(fecha);
