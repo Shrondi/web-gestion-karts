@@ -51,6 +51,8 @@ public class CrearBonoReserva extends HttpServlet {
 			
 		//Caso 2: Usuario logueado
 		}else{
+			
+			//Segun el bono seleccionado, el tipo del bono es conseguido a traves de un parametro oculto en el display con el mismo nombre que el ID del bono
 			String bono = request.getParameter("bono");
 			String tipo = request.getParameter(bono);
 			
@@ -74,6 +76,7 @@ public class CrearBonoReserva extends HttpServlet {
 				
 				int idBono = 0;
 				int numeroSesiones = 0;
+				
 				//Guardamos la id del bono a nivel de sesion
 				if (bono != null){
 					idBono = Integer.parseInt(bono);

@@ -1,8 +1,6 @@
 package servlet.user;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -13,11 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import display.javabean.userBean;
-import business.kart.Estado;
-import business.pista.PistaDTO;
-import business.reserva.*;
-import data.DAO.KartDAO;
-import data.DAO.PistaDAO;
 import data.DAO.reserva.*;
 
 /**

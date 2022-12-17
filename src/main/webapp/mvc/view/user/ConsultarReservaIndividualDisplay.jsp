@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:useBean id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
-<jsp:useBean id="reservaBean" scope="request" class="display.javabean.reservaBean"></jsp:useBean>
 
 <%
 
@@ -64,16 +63,15 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 										</select>
 										
 								</div>	
-						
+								
 								<input type="submit" value="Continuar">
 						</form>
+						<script type="text/javascript" src="/WebProyectoPW/js/ResIndValidation.js"></script>
 						<form id="volver" method="post" action="/WebProyectoPW">
 								<input type="submit" value="Volver">
 						</form>
 		</body>
 </html>
-
-
 <%
 
 }

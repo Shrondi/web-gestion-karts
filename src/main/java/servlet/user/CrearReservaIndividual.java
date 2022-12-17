@@ -1,7 +1,6 @@
 package servlet.user;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -66,13 +65,13 @@ public class CrearReservaIndividual extends HttpServlet {
 			String fechaReserva = request.getParameter("fecha");
 			String pista = request.getParameter("pista");
 			
-			//Caso 3a: No hay parametros en el request -> Ir a la vista para crear una reserva individual
+			//CASO 3a: No hay parametros en el request -> Ir a la vista para crear una reserva individual
 			if (fechaReserva == null && pista == null){
 				
 				dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaIndividualDisplay.jsp");
 				dispatcher.forward(request, response);
 			
-			//Caso 3b: Hay parametros en el request proveniente de la vista de crear reservas
+			//CASO 3b: Hay parametros en el request proveniente de la vista de crear reservas -> Elegimos la pista
 			}else if (fechaReserva != null && pista == null){
 				
 					//Obtenemos los parametros restantes del request
@@ -117,6 +116,8 @@ public class CrearReservaIndividual extends HttpServlet {
 						
 						//Hay pistas disponibles para los datos dados -> Ir al display a elegir una pista
 						}else{
+							
+							//Guardamos los datos de la reserva para un posterior uso
 							bean.setFecha(fechaReserva);
 							bean.setDuracion(duracion);
 							bean.setTipoReserva(tipoReserva);
@@ -130,7 +131,7 @@ public class CrearReservaIndividual extends HttpServlet {
 						}
 					}
 				
-				//Caso 3c: Hay parametros en el request (se ha elegido la pista) -> Realizar la reserva
+				//CASO 3c: Hay parametros en el request (se ha elegido la pista) -> Realizar la reserva
 				}else if(pista != null){
 				
 				int duracion = bean.getDuracion();
@@ -212,7 +213,6 @@ public class CrearReservaIndividual extends HttpServlet {
 					request.setAttribute("reservaAdultos", adultos);
 				}
 				
-				
 				//Actualizamos el numero de karts disponibles de la pista
 				PistaDAO pistaDAO = new PistaDAO(prop);
 				pistaDAO.actualizarPista(pista, numeroNinios, numeroAdultos);
@@ -221,14 +221,6 @@ public class CrearReservaIndividual extends HttpServlet {
 				KartDAO kartDAO = new KartDAO(prop);
 				kartDAO.actualizarEstadoKart(true, Estado.RESERVADO, pista, numeroNinios);
 				kartDAO.actualizarEstadoKart(false, Estado.RESERVADO, pista, numeroAdultos);
-				
-				//Borramos los atributos de la sesion correspondientes a esta reserva
-				session.removeAttribute("ListaPistas");
-				session.removeAttribute("duracion");
-				session.removeAttribute("numeroNinios");
-				session.removeAttribute("numeroAdultos");
-				session.removeAttribute("tipoReserva");
-				session.removeAttribute("fecha");
 				
 				//Mostramos el resumen de la reserva
 				request.setAttribute("modalidad", "Individual");
