@@ -72,18 +72,18 @@ public class PistaDAO{
 	}
 	
 	/**
-	 * Obtener pistas por su estado
+	 * Obtener pistas disponibles para que se puedan asignar karts
 	 * @param estado Estado de la pista
 	 * @return pistas Listado de pistas
 	 */
 	//NEW
-	public List<PistaDTO> consultarByEstado(Boolean estado){
+	public List<PistaDTO> consultarPistasAsignacion(){
 		List<PistaDTO> pistas = new ArrayList<>();
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
 		try {
 			Statement stmt = con.createStatement();
-			String query = prop.getProperty("obtenerPistasbyStateSTM")+estado;
+			String query = prop.getProperty("obtenerPistasAsignacionSTM");
 			ResultSet rs = stmt.executeQuery(query);
 			
 			while (rs.next()) {
@@ -98,7 +98,6 @@ public class PistaDAO{
 				pistaToPush.setMaxAmmount(max_karts);
 				pistaToPush.setAsocAmmountInf(asoc_karts_infantiles);
 				pistaToPush.setAsocAmmountAdult(asoc_karts_adultos);
-				pistaToPush.setEstado(estado);
 				pistas.add(pistaToPush);
 			}
 		} catch (SQLException e) {

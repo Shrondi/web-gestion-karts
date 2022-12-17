@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
     import="business.kart.KartDTO, java.util.List, java.util.ArrayList"%>
 <jsp:useBean id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
+<jsp:useBean id="adminBean" scope="request" class="display.javabean.adminBean"></jsp:useBean>
 
 <%
 
@@ -19,7 +20,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		mensajeNextPage = "";
 	}
 	
-	List<KartDTO> karts = (List<KartDTO>) request.getAttribute("karts");
+	List<KartDTO> karts = adminBean.getListadoKarts();
 	
 	//Caso 3: Si se accede de forma forzosa por url
 	if (karts == null){ 
@@ -70,7 +71,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 								<input type="submit" value="Confirmar">
 						</form>
 						<br>
-						<form id="volver" method="post" action="<%= request.getAttribute("nextPage")%>">
+						<form id="volver" method="post" action="/WebProyectoPW/AsociarKartPista">
 								<input type="submit" value="Volver">
 						</form>
 		</body>

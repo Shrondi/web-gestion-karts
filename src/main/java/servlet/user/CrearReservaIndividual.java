@@ -199,9 +199,6 @@ public class CrearReservaIndividual extends HttpServlet {
 					List<PistaDTO> pistas = new ArrayList<>();
 					
 					pistas = pistaDAO.consultarPistas(tipoReserva, numeroNinios, numeroAdultos);
-					for (PistaDTO pistaDTO : pistas) {
-						System.out.println(pistaDTO.getNombre());
-					}
 					
 					//No se puede realizar una reserva ya que no hay pistas disponibles para los datos dados
 					if (pistas.isEmpty()) {
