@@ -39,13 +39,14 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 										
 												<label for="fechaFin">Fecha Fin: </label>
 												<input type="datetime-local" name="fechaFin" id="fechaFin" value="<%=request.getSession().getAttribute("fechaFin")%>" required>
+												<div id="dateErrorText"></div>
 												
-												<div>
+												<div id="popup">
 												<p> ¿Listar reservas con menos de 24 horas?: </p>
-												<input type="radio" name="restriccion" id="si" value="true" required>
+												<input type="radio" name="restriccion" id="si" value="true">
 												<label for="si">Si</label> <br>
 										
-												<input type="radio" name="restriccion" id="no" value="false" required>
+												<input type="radio" name="restriccion" id="no" value="false">
 												<label for="no">No</label> <br>
 												</div>
 										
@@ -54,7 +55,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 								
 								<input type="submit" value="Nueva busqueda">
 						</form>
-						
+						<script type="text/javascript" src="/WebProyectoPW/js/RangoFechasBorrar.js"></script>
 						<% if (request.getSession().getAttribute("reservasInfantil") != null){ %>
 										<jsp:include page="ReservasCancelarDisplay.jsp" />  
 						<%} %>
