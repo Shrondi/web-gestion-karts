@@ -34,39 +34,67 @@ function validacionEdad(actualMillis , inputMillis){
 const validarFormulario = (e) => {
 	switch(e.target.name){
 		case "nombre":
+		var nameErrorText = document.getElementById('nameErrorText')
 			if(RegularExpressions.firstname.test(e.target.value)){
+				nameErrorText.innerText = ""
 				correctName=true
 			}else{
+				var name = e.target.value
+				if(name.length < 1){
+					nameErrorText.innerText = "el nombre no puede estar vacío"
+				}else if(name.length > 32){
+					nameErrorText.innerText = "el nombre no puede tener mas de 32 caracteres"
+				}else{
+					nameErrorText.innerText = "el nombre no puede usar caracteres especiales"
+				}
 				correctName=false
 			}
 			console.log("usuario: "+correctName)
 		break;
 		case "apellidos":
+		var surnameErrorText = document.getElementById('surnameErrorText')
 			if(RegularExpressions.surname.test(e.target.value)){
+				surnameErrorText.innerText = ""
 				correctSurname=true
 			}else{
+				var surname = e.target.value
+				if(surname.length < 1){
+					surnameErrorText.innerText = "el apellido no puede estar vacío"
+				}else if(surname.length > 32){
+					surnameErrorText.innerText = "el apellido no puede tener mas de 32 caracteres"
+				}else{
+					surnameErrorText.innerText = "el apellido no puede usar caracteres especiales"
+				}
 				correctSurname=false
 			}
 			console.log("apellido: "+correctSurname)
 		break;
 		case "correo":
+		var emailErrorText = document.getElementById('mailErrorText')
 			if(RegularExpressions.email.test(e.target.value)){
+				emailErrorText.innerText = ""
 				correctEmail=true
 			}else{
+				var email= e.target.value
+				emailErrorText.innerText = "El correo no es válido"
 				correctEmail=false
 			}
 			console.log("Email: "+ correctEmail)
 		break;
 		case "fechaNacimiento":
+		var dateErrorText = document.getElementById('dateErrorText')
 		if(RegularExpressions.date.test(e.target.value)){
 				inputDate = Date.parse(e.target.value)
 				if(validacionEdad(date,inputDate)>=18){
+					dateErrorText.innerText = ""
 					correctDate=true
 				}else{
+					dateErrorText.innerText = "No se permite el registro a menores de edad"
 					correctDate=false
 				}
 				console.log("parsed fechaNacimiento: "+ inputDate)
 			}else{
+				dateErrorText.innerText = "La fecha no es válida"
 				correctDate=false
 			}
 			console.log("fechaNacimiento: "+ correctDate)
@@ -75,9 +103,17 @@ const validarFormulario = (e) => {
 			console.log("fechaNacimiento_VALUE: "+e.target.value)
 		break;
 		case "passWord":
+		var passwordErrorText = document.getElementById('passwordErrorText')
 			if(RegularExpressions.password.test(e.target.value)){
+				passwordErrorText.innerText = ""
 				correctPassWord=true
 			}else{
+				var password = e.target.value
+				if(password.length < 4){
+					passwordErrorText.innerText = "La contraseña debe tener mas de 4 carecteres"
+				}else if(password.length > 32){
+					passwordErrorText.innerText = "La contraseña no puede tener mas de 32 caracteres"
+				}
 				correctPassWord=false
 			}
 			console.log("contraseña: "+correctPassWord)

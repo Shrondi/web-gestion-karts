@@ -45,20 +45,30 @@ if (userBean.getAdmin()){
 			<p><font color ="blue"><%=message%></font></p>
 			
 				<label for="nombre">Nombre: </label>
-				<input type="text" name="nombre" placeholder="Nombre" required><br></br>
-
+				<input type="text" name="nombre" placeholder="Nombre" required>
+				<div id="nameErrorText"></div>
+				<br></br>
+				
 				<label for="apellidos">Apellidos: </label>
-				<input type="text" name="apellidos" placeholder="Apellidos" required><br></br>
+				<input type="text" name="apellidos" placeholder="Apellidos" required>
+				<div id="surnameErrorText"></div>
+				<br></br>
 
 				<label for="correo">Correo: </label>
-				<input type="email" name="correo" id="correo" placeholder="email@example.com" required><br></br>
-
+				<input type="email" name="correo" id="correo" placeholder="email@example.com" required>
+				<div id="mailErrorText"></div>
+				<br></br>
+				
 				<label for="fechaNacimiento">Fecha Nacimiento: </label>
-				<input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="dd/mm/yyyy" required><br></br>
-
+				<input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="dd/mm/yyyy" required>
+				<div id="dateErrorText"></div>
+				<br></br>
+				
 				<label for="passWord">Contraseña: </label>
-				<input type="password" name="passWord" id="passWord" placeholder="Contraseña" required><br></br>
-
+				<input type="password" name="passWord" id="passWord" placeholder="Contraseña" required>
+				<div id="passwordErrorText"></div>
+				<br></br>
+	
 				<input type="submit" value="Aceptar">
 			</form>
 			<script type="text/javascript" src="/WebProyectoPW/js/RegisterValidation.js"></script>
