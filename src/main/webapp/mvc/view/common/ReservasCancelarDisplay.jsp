@@ -161,7 +161,6 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 						<% if (!(reservasInfantil.isEmpty() && reservasFamiliar.isEmpty() && reservasAdultos.isEmpty())){ %>
 							
 									<input type="submit" value="Confirmar">
-							
 						<%} %>
 						</form>
 						

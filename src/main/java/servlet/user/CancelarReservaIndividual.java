@@ -82,11 +82,18 @@ public class CancelarReservaIndividual extends HttpServlet {
 				bean.setReservasFamiliar(reservasFamiliar);
 				bean.setReservasAdultos(reservasAdultos);
 				
-				request.setAttribute("cancelarBean", bean);
-				request.setAttribute("nextPage", "/WebProyectoPW/CancelarReservaIndividual");
-				request.setAttribute("mensaje", "Aviso: Solo se estan mostrando aquellas reservas que se pueden cancelar");
-				dispatcher = request.getRequestDispatcher("/mvc/view/common/ReservasCancelarDisplay.jsp");
-				dispatcher.forward(request, response);
+				if (reservasInfantil.isEmpty() && reservasFamiliar.isEmpty() && reservasAdultos.isEmpty()) {
+					
+					request.setAttribute("mensaje", "No se ha encontrado ninguna reserva");
+					dispatcher = request.getRequestDispatcher("/");
+					dispatcher.forward(request, response);
+				}else {
+					request.setAttribute("cancelarBean", bean);
+					request.setAttribute("nextPage", "/WebProyectoPW/CancelarReservaIndividual");
+					request.setAttribute("mensaje", "Aviso: Solo se estan mostrando aquellas reservas que se pueden cancelar");
+					dispatcher = request.getRequestDispatcher("/mvc/view/common/ReservasCancelarDisplay.jsp");
+					dispatcher.forward(request, response);
+				}
 				
 			//Caso 2b: Request no esta vacio	
 			}else {

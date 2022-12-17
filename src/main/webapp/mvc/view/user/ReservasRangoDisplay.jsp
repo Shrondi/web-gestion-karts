@@ -38,13 +38,6 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 				<title>Consultar Reservas</title>
 		</head>
 		<body>
-				<p>
-					RESERVAS PASADAS:
-				</p>
-				
-				 <%  if (reservasInfantilPasadas.isEmpty()){ %>
-				 		<p> No se han encontrado reservas infantiles </p>
-				  <% }else{ %>
 				
 				<table>
 				<caption> <strong> Reservas Infantiles </strong> </caption>
@@ -61,136 +54,34 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							</thead>
 							<tbody>
 							
-							<% for (ReservaInfantilDTO reserva : reservasInfantilPasadas){ %>
+							<% for (ReservaInfantilDTO reservaInfantilDTO : reservasInfantilFuturas){ %>
 					
-							  <tr>
-							    <td><%= reserva.getFecha() %></td>
-							    <td><%= reserva.getModalidad() %></td>
-							    <td><%= reserva.getDuracion() %> minutos</td>
-							    <td><%= reserva.getParticipantesInfantiles() %></td>
-							    <td><%= reserva.getDescuento() %> %</td>
-							    <td><%= reserva.getPrecio() %> €</td>
-							    <td><%= reserva.getIdPista() %></td>
-							  </tr>
-						<% } %>
-							</tbody>
-						</table>
-					<% } %>
-				
-				<%  if (reservasFamiliarPasadas.isEmpty()){ %>
-				 		<p> No se han encontrado reservas familiares </p>
-				  <% }else{ %>
-				
-				<table>
-				<caption> <strong> Reservas Familiares </strong> </caption>
-							<thead>
-							  <tr>
-							    <th>Fecha y hora</th>
-							    <th>Modalidad</th>
-							    <th>Duracion</th>
-							    <th>Participantes infantiles</th>
-							    <th>Participantes adultos</th>
-							    <th>Descuento</th>
-							    <th>Precio</th>
-							    <th>Pista</th>
-							  </tr>
-							</thead>
-							<tbody>
-							
-							<% for (ReservaFamiliarDTO reserva : reservasFamiliarPasadas){ %>
-					
-							  <tr>
-							    <td><%= reserva.getFecha() %></td>
-							    <td><%= reserva.getModalidad() %></td>
-							    <td><%= reserva.getDuracion() %> minutos</td>
-							    <td><%= reserva.getParticipantesInfantiles() %></td>
-							    <td><%= reserva.getParticipantesAdultos() %></td>
-							    <td><%= reserva.getDescuento() %> %</td>
-							    <td><%= reserva.getPrecio() %> €</td>
-							    <td><%= reserva.getIdPista() %></td>
-							  </tr>
-						<% } %>
-							</tbody>
-						</table>
-					<% } %>
-				
-				<%  if (reservasAdultosPasadas.isEmpty()){ %>
-				 		<p> No se han encontrado reservas de adultos </p>
-				  <% }else{ %>
-				
-				<table>
-				<caption> <strong> Reservas Adultos </strong> </caption>
-							<thead>
-							  <tr>
-							    <th>Fecha y hora</th>
-							    <th>Modalidad</th>
-							    <th>Duracion</th>
-							    <th>Participantes adultos</th>
-							    <th>Descuento</th>
-							    <th>Precio</th>
-							    <th>Pista</th>
-							  </tr>
-							</thead>
-							<tbody>
-							
-							<% for (ReservaAdultosDTO reserva : reservasAdultosPasadas){ %>
-					
-							  <tr>
-							    <td><%= reserva.getFecha() %></td>
-							    <td><%= reserva.getModalidad() %></td>
-							    <td><%= reserva.getDuracion() %> minutos</td>
-							    <td><%= reserva.getParticipantesAdultos() %></td>
-							    <td><%= reserva.getDescuento() %> %</td>
-							    <td><%= reserva.getPrecio() %> €</td>
-							    <td><%= reserva.getIdPista() %></td>
-							  </tr>
-						<% } %>
-							</tbody>
-						</table>
-						<% } %>
+								  <tr>
+								    <td><%= reservaInfantilDTO.getFecha() %></td>
+								    <td><%= reservaInfantilDTO.getModalidad() %></td>
+								    <td><%= reservaInfantilDTO.getDuracion() %> minutos</td>
+								    <td><%= reservaInfantilDTO.getParticipantesInfantiles() %></td>
+								    <td><%= reservaInfantilDTO.getDescuento() %> %</td>
+								    <td><%= reservaInfantilDTO.getPrecio() %> €</td>
+								    <td><%= reservaInfantilDTO.getIdPista() %></td>
+								  </tr>
+							<% } %>
 						
-				<p>
-					RESERVAS FUTURAS:
-				</p>
-				
-				 <%  if (reservasInfantilFuturas.isEmpty()){ %>
-				 		<p> No se han encontrado reservas infantiles </p>
-				  <% }else{ %>
-				
-				<table>
-				<caption> <strong> Reservas Infantiles </strong> </caption>
-							<thead>
-							  <tr>
-							    <th>Fecha y hora</th>
-							    <th>Modalidad</th>
-							    <th>Duracion</th>
-							    <th>Participantes infantiles</th>
-							    <th>Descuento</th>
-							    <th>Precio</th>
-							    <th>Pista</th>
-							  </tr>
-							</thead>
-							<tbody>
-							
-							<% for (ReservaInfantilDTO reserva : reservasInfantilFuturas){ %>
+							<% for (ReservaInfantilDTO reservaInfantilDTO : reservasInfantilPasadas){ %>
 					
 							  <tr>
-							    <td><%= reserva.getFecha() %></td>
-							    <td><%= reserva.getModalidad() %></td>
-							    <td><%= reserva.getDuracion() %> minutos</td>
-							    <td><%= reserva.getParticipantesInfantiles() %></td>
-							    <td><%= reserva.getDescuento() %> %</td>
-							    <td><%= reserva.getPrecio() %> €</td>
-							    <td><%= reserva.getIdPista() %></td>
+							    <td><%= reservaInfantilDTO.getFecha() %></td>
+							    <td><%= reservaInfantilDTO.getModalidad() %></td>
+							    <td><%= reservaInfantilDTO.getDuracion() %> minutos</td>
+							    <td><%= reservaInfantilDTO.getParticipantesInfantiles() %></td>
+							    <td><%= reservaInfantilDTO.getDescuento() %> %</td>
+							    <td><%= reservaInfantilDTO.getPrecio() %> €</td>
+							    <td><%= reservaInfantilDTO.getIdPista() %></td>
 							  </tr>
 						<% } %>
 							</tbody>
 						</table>
 					<% } %>
-				
-				<%  if (reservasFamiliarFuturas.isEmpty()){ %>
-				 		<p> No se han encontrado reservas familiares </p>
-				  <% }else{ %>
 				
 				<table>
 				<caption> <strong> Reservas Familiares </strong> </caption>
@@ -208,27 +99,35 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							</thead>
 							<tbody>
 							
-							<% for (ReservaFamiliarDTO reserva : reservasFamiliarFuturas){ %>
+							<% for (ReservaFamiliarDTO reservaFamiliarDTO : reservasFamiliarFuturas){ %>
+								  <tr>
+								    <td><%= reservaFamiliarDTO.getFecha() %></td>
+								    <td><%= reservaFamiliarDTO.getModalidad() %></td>
+								    <td><%= reservaFamiliarDTO.getDuracion() %> minutos</td>
+								    <td><%= reservaFamiliarDTO.getParticipantesInfantiles() %></td>
+								    <td><%= reservaFamiliarDTO.getParticipantesAdultos() %></td>
+								    <td><%= reservaFamiliarDTO.getDescuento() %> %</td>
+								    <td><%= reservaFamiliarDTO.getPrecio() %> €</td>
+								    <td><%= reservaFamiliarDTO.getIdPista() %></td>
+								  </tr>
+					
+					
+							<% for (ReservaFamiliarDTO reservaFamiliarDTO : reservasFamiliarPasadas){ %>
 					
 							  <tr>
-							    <td><%= reserva.getFecha() %></td>
-							    <td><%= reserva.getModalidad() %></td>
-							    <td><%= reserva.getDuracion() %> minutos</td>
-							    <td><%= reserva.getParticipantesInfantiles() %></td>
-							    <td><%= reserva.getParticipantesAdultos() %></td>
-							    <td><%= reserva.getDescuento() %> %</td>
-							    <td><%= reserva.getPrecio() %> €</td>
-							    <td><%= reserva.getIdPista() %></td>
+							    <td><%= reservaFamiliarDTO.getFecha() %></td>
+							    <td><%= reservaFamiliarDTO.getModalidad() %></td>
+							    <td><%= reservaFamiliarDTO.getDuracion() %> minutos</td>
+							    <td><%= reservaFamiliarDTO.getParticipantesInfantiles() %></td>
+							    <td><%= reservaFamiliarDTO.getParticipantesAdultos() %></td>
+							    <td><%= reservaFamiliarDTO.getDescuento() %> %</td>
+							    <td><%= reservaFamiliarDTO.getPrecio() %> €</td>
+							    <td><%= reservaFamiliarDTO.getIdPista() %></td>
 							  </tr>
 						<% } %>
 							</tbody>
-						</table>
-					<% } %>
-				
-				<%  if (reservasAdultosFuturas.isEmpty()){ %>
-				 		<p> No se han encontrado reservas de adultos </p>
-				  <% }else{ %>
-				
+				</table>
+
 				<table>
 				<caption> <strong> Reservas Adultos </strong> </caption>
 							<thead>
@@ -244,21 +143,34 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							</thead>
 							<tbody>
 							
-							<% for (ReservaAdultosDTO reserva : reservasAdultosFuturas){ %>
+							<% for (ReservaAdultosDTO reservaAdultosDTO : reservasAdultosFuturas){ %>
+								  <tr>
+								    <td><%= reservaAdultosDTO.getFecha() %></td>
+								    <td><%= reservaAdultosDTO.getModalidad() %></td>
+								    <td><%= reservaAdultosDTO.getDuracion() %> minutos</td>
+								    <td><%= reservaAdultosDTO.getParticipantesAdultos() %></td>
+								    <td><%= reservaAdultosDTO.getDescuento() %> %</td>
+								    <td><%= reservaAdultosDTO.getPrecio() %> €</td>
+								    <td><%= reservaAdultosDTO.getIdPista() %></td>
+								  </tr>
+							<% } %>
+						
+							<% for (ReservaAdultosDTO reservaAdultosDTO : reservasAdultosPasadas){ %>
 					
 							  <tr>
-							    <td><%= reserva.getFecha() %></td>
-							    <td><%= reserva.getModalidad() %></td>
-							    <td><%= reserva.getDuracion() %> minutos</td>
-							    <td><%= reserva.getParticipantesAdultos() %></td>
-							    <td><%= reserva.getDescuento() %> %</td>
-							    <td><%= reserva.getPrecio() %> €</td>
-							    <td><%= reserva.getIdPista() %></td>
+							    <td><%= reservaAdultosDTO.getFecha() %></td>
+							    <td><%= reservaAdultosDTO.getModalidad() %></td>
+							    <td><%= reservaAdultosDTO.getDuracion() %> minutos</td>
+							    <td><%= reservaAdultosDTO.getParticipantesAdultos() %></td>
+							    <td><%= reservaAdultosDTO.getDescuento() %> %</td>
+							    <td><%= reservaAdultosDTO.getPrecio() %> €</td>
+							    <td><%= reservaAdultosDTO.getIdPista() %></td>
 							  </tr>
-						<% } %>
+							<% } %>
 							</tbody>
-						</table>
-						<% } %>
+				</table>
+						
+			
 		</body>
 </html>
 
