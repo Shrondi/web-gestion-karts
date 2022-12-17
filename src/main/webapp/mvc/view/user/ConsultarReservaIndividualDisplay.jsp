@@ -33,8 +33,9 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 								<div>
 										
 										<label for="fecha">Fecha reserva: </label>
-										<input type="datetime-local" name="fecha" id="fecha" required>
-										 
+										<input id="fecha" type="datetime-local" name="fecha" id="fecha" required>
+										<div id="textErrorFecha"></div>
+										
 											<p> Tipo reserva: </p>
 											<input type="radio" name="tipoReserva" id="infantil" value="INFANTIL" required>
 											<label for="infantil">Reserva Infantil</label> <br>
@@ -45,12 +46,14 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 											<input type="radio" name="tipoReserva" id="adultos" value="ADULTOS" required>
 											<label for="adultos">Reserva Adulto</label> <br>
 											
+											<div id="integrantes">
 											<p> </p>
-											<label for="numeroNinios"> Número de participantes infantiles:  </label>
-											<input type="number" name="numeroNinios" id="numeroNinios" min="0" max="20" step="1" placeholder="0" required>
+											<label id="labelninios" for="numeroNinios"> Número de participantes infantiles:  </label>
+											<input type="number" name="numeroNinios" id="numeroNinios" min="0" max="20" step="1" placeholder="1" required>
 											<p> </p>
-											<label for="numeroAdultos">Número de participantes adultos: </label>
-											<input type="number" name="numeroAdultos" min="0" max="20" step="1" placeholder="0" required>
+											<label id ="labeladultos" for="numeroAdultos">Número de participantes adultos: </label>
+											<input type="number" name="numeroAdultos" id="numeroAdultos" min="0" max="20" step="1" placeholder="1" required>
+											</div>
 										
 										
 										<p> </p>
@@ -66,7 +69,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 								
 								<input type="submit" value="Continuar">
 						</form>
-						<script type="text/javascript" src="/WebProyectoPW/js/ResIndValidation.js"></script>
+						<script type="text/javascript" src="/WebProyectoPW/js/ReservaIndividualValidation.js"></script>
 						<form id="volver" method="post" action="/WebProyectoPW">
 								<input type="submit" value="Volver">
 						</form>
