@@ -51,7 +51,7 @@ public class reservaBean implements java.io.Serializable{
 	public void setFecha(String fecha) {
 		this.fecha_ = fecha;
 	}
-	public void setIdBono_(int idBono) {
+	public void setIdBono(int idBono) {
 		this.idBono_ = idBono;
 	}
 	public void setNumeroSesiones(int numeroSesiones) {

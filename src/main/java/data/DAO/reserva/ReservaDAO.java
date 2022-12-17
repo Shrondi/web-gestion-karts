@@ -143,22 +143,26 @@ public class ReservaDAO {
 	}
 	
 	//NEW
-	public int consultarSesionesBono(String correo, int idBono) {
-			
-		int sesiones = 0;
+	public BonoDTO consultarBono(int idBono) {
+		BonoDTO bono = new BonoDTO();
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
 
 		try {
-			PreparedStatement ps = con.prepareStatement(prop.getProperty("consultarSesionesBonoSTM"));
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("consultarBonoSTM"));
 
 			ps.setInt(1,idBono);
-			ps.setString(2, correo);
-				
+			
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				sesiones = rs.getInt("numero_sesiones");
+				int sesiones = rs.getInt("numero_sesiones");
+				Date fechaCaducidad = rs.getDate("fecha_caducidad");
+				String tipo = rs.getString("tipo_Bono");
+				
+				bono.setSesiones(sesiones);
+				bono.setFechaCaducidad(fechaCaducidad);
+				bono.setTipo(tipo);
 			}
 				
 				
@@ -167,11 +171,11 @@ public class ReservaDAO {
 			}
 				
 			connection.closeConnection();
-			return sesiones;
+			return bono;
 	}
 		
 	//NEW
-	public int actualizarFechaBono(int idBono, java.util.Date fecha) {
+	public int actualizarFechaBono(int idBono, String fecha) {
 					
 		int sesiones = 0;
 		DBConnection connection = new DBConnection();
@@ -180,7 +184,7 @@ public class ReservaDAO {
 		try {
 		PreparedStatement ps = con.prepareStatement(prop.getProperty("actualizarFechaBonoSTM"));
 
-		ps.setDate(1, new Date(fecha.getTime()));
+		ps.setString(1, fecha);
 		ps.setInt(2, idBono);
 						
 		ps.executeUpdate();

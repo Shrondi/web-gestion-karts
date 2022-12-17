@@ -37,45 +37,44 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		</head>
 		<body>
 				<p id="message"><%= mensajeNextPage %> </p>
-				<form id="submit" method="post" action="/WebProyectoPW/ReservaBono">
-				
 				<%if (bonos.isEmpty()){ %>
 					<p> No dispone de bonos </p>
 				<% }else{%>
-				<table>
-							<thead>
-							  <tr>
-							    <th></th>
-							    <th>Bono ID</th>
-							    <th>Tipo Bono</th>
-							    <th>Numero de sesiones</th>
-							    <th>Fecha Caducidad</th>
-							  </tr>
-							</thead>
-							<tbody>
-							
-							<% for (BonoDTO bono : bonos){ %>
-							  <tr>
-							    <td><input type="radio" name="bono" value="<%= bono.getBonoId()%>" required>
-							    <input type="hidden" name="<%= bono.getBonoId()%>" value="<%= bono.getTipo()%>"></td>
-							    <td><%= bono.getBonoId() %></td>
-							    <td><%= bono.getTipo() %></td>
-							    <td><%= bono.getSesiones() %></td>
-							   	<%if (bono.getFechaCaducidad().contentEquals("01/01/1970")){%>
-							   		 <td> <i>Sin reservas</i></td>
-							   	<% }else{ %>
-							   		<td><%= bono.getFechaCaducidad() %></td>
-							   	<% } %>
-							   
-							  </tr>
-						<% } %>
+					<form id="submit" method="post" action="/WebProyectoPW/ReservaBono">
+					<table>
+								<thead>
+								  <tr>
+								    <th></th>
+								    <th>Bono ID</th>
+								    <th>Tipo Bono</th>
+								    <th>Numero de sesiones</th>
+								    <th>Fecha Caducidad</th>
+								  </tr>
+								</thead>
+								<tbody>
+								
+								<% for (BonoDTO bono : bonos){ %>
+								  <tr>
+								    <td><input type="radio" name="bono" value="<%= bono.getBonoId()%>" required>
+								    <td><%= bono.getBonoId() %></td>
+								    <td><%= bono.getTipo() %></td>
+								    <td><%= bono.getSesiones() %></td>
+								   	<%if (bono.getFechaCaducidad().contentEquals("01/01/1970")){%>
+								   		 <td> <i>Sin reservas</i></td>
+								   	<% }else{ %>
+								   		<td><%= bono.getFechaCaducidad() %></td>
+								   	<% } %>
+								   
+								  </tr>
+							<% } %>
 							</tbody>
 						</table>
 						<br>
-								<input type="submit" value="Confirmar">
+							<input type="submit" value="Confirmar">
 						</form>
 						<br>
 					<%} %>
+					
 						<form id="volver" method="post" action="/WebProyectoPW">
 								<input type="submit" value="Volver">
 						</form>
