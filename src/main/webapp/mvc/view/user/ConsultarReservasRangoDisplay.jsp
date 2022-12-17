@@ -40,12 +40,12 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 												<label for="fechaFin">Fecha Fin: </label>
 												<input type="datetime-local" name="fechaFin" id="fechaFin" value="<%=request.getAttribute("fechaFin")%>" required>
 										
-										
+										<div id="dateErrorText"></div>
 								</div>	
 								
 								<input type="submit" value="Nueva busqueda">
 						</form>
-								
+						<script type="text/javascript" src="/WebProyectoPW/js/ConsultarReservasRango.js"></script>		
 						<form id="volver" method="post" action="/WebProyectoPW">
 								<input type="submit" value="Volver">
 						</form>
