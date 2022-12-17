@@ -48,7 +48,7 @@
 	}else{
 		errorMessage.innerText = ""
 		rango = true
-		if(primeraParsed<=actualDate<=segundaParsed){
+		if((primeraParsed < actualDate) && (actualDate < segundaParsed)){
 			resolution = true
 			popUp.style.display = 'block'
 		}else{
@@ -59,8 +59,8 @@
 	}
 	
 	console.log("tiempo:"+time)
-	console.log("tiempo actual: " + thisTime)
 	console.log("primera fecha: "+primeraParsed)
+	console.log("fecha del sistema: "+actualDate)
 	console.log("segunda fecha: "+segundaParsed)
 	
 	
