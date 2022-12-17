@@ -1,0 +1,104 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+    import="business.pista.*, java.util.List, java.util.ArrayList"%>
+<jsp:useBean id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
+
+<%
+
+//Caso 1: No esta logado o no es admin
+if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() == false ) {
+	
+%>
+	<jsp:forward page="../../../index.jsp" />
+<%
+//Caso 2: El usuario esta logado y no es admin
+}else{
+	
+	String mensajeNextPage = (String) request.getAttribute("mensaje");
+	
+	if (mensajeNextPage == null) {
+		mensajeNextPage = "";
+	}
+	
+	List<PistaDTO> ListaPistas = (List<PistaDTO>) request.getAttribute("ListaPistas");
+	String estado="";
+	//Caso 3: Si se accede de forma forzosa por url
+	if (ListaPistas == null){
+%>
+		<jsp:forward page="../../../index.jsp" />
+<%	}else{ %>
+
+<!DOCTYPE html>
+<html>
+		<head>
+				<meta charset="UTF-8">
+				<title>Modificar estado de las pistas</title>
+		</head>
+		<body>
+				<p id="message"><%= mensajeNextPage %> </p>
+				
+				<div>
+				<form id="form1" method="post" action="/WebProyectoPW/ModificarEstadoPista">
+				<p>
+					Elija la pista cuyo estado desea modificar.
+				</p>
+				
+				<% if (ListaPistas.isEmpty()){ %>
+				 		<p> No se han encontrado pistas </p>
+				 		
+				<% }else{ %>
+				
+					<table>
+					<caption> <strong> Pistas:</strong> </caption>
+								<thead>
+								  <tr>
+								    <th></th>
+								    <th>Nombre</th>
+								    <th>Estado</th>
+								    <th>Dificultad</th>
+								    <th>Maximo de karts</th>
+								  </tr>
+								</thead>
+								<tbody>
+								
+								<% for (PistaDTO pista : ListaPistas){ %> 			
+								 
+									 <% if(pista.getEstado() == true){ %>
+											<% estado = "Disponible"; %>
+									<% }else{  %>
+											<% estado = "No disponible"; %>
+										
+									<% } %>
+									
+								 
+								  <tr>
+								    <td><input type="radio" name="pista" id="kart" value="<%= pista.getNombre() %>" required></td>
+								    <td><%= pista.getNombre() %></td>
+								    <td><%= estado %></td>
+								    <td><%= pista.getDificulty() %></td>
+								    <td><%= pista.getMaxAmmount() %></td>
+								    				   	
+								  </tr>
+							
+								<% } %>
+							
+								</tbody>
+							</table>
+						<% } %>		
+					<input type="submit" value="Continuar">											
+				</form>							
+								
+				
+				<br>
+				</div>
+				
+				<form id="volver" method="post" action="/WebProyectoPW">
+						<input type="submit" value="Volver">
+				</form>
+		</body>
+</html>
+
+<%
+
+	}
+}
+%>
