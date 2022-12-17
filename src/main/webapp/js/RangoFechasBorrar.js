@@ -15,6 +15,7 @@
  var actualDate = Date.parse(new Date())
  var resolution = false
  
+ //funcion simple para calcular el tiempo entre dos fechas en dias
  function validacionEdad(actualMillis , inputMillis){
 	
 	diff = inputMillis-actualMillis
@@ -22,7 +23,11 @@
 	console.log("days: "+diff)
 	return diff
 }
- 
+
+  /*funcion usada para validar que la fecha en la que se borra una reserva es valida, es decir, que la primera fecha no sea superior a la segunda 
+  y que si la fecha de una reserva coincide con la fecha del sistema (entendiendo como fecha el dia entero) se de la oportunidad de listar las reservas que se encuentran a un intervalo de fecha menor a 1 dia
+  en caso de que se muestren estas opciones será necesario elegir una de las dos opciones mostradas
+  */
   const validarFecha = (e) => {
 	
 	
@@ -34,7 +39,7 @@
 	}
 	
 	time = validacionEdad(primeraParsed,segundaParsed)
-	thisTime = validacionEdad(primeraParsed,actualDate)
+	//thisTime = validacionEdad(primeraParsed,actualDate)
 
 	if(time <= 0){
 		errorMessage.innerText = "La segunda fecha de finalizacion no puede ser menor que la de inicio"
@@ -43,7 +48,7 @@
 	}else{
 		errorMessage.innerText = ""
 		rango = true
-		if(Math.abs(thisTime)<=1 && Math.abs(thisTime)>=0){
+		if(primeraParsed<=actualDate<=segundaParsed){
 			resolution = true
 			popUp.style.display = 'block'
 		}else{
@@ -61,11 +66,15 @@
 	
  }
  
+//asignación de eventos de escucha a los inputs de las fechas
 
 primeraFecha.addEventListener('keyup',validarFecha)
 primeraFecha.addEventListener('blur',validarFecha);
 segundaFecha.addEventListener('keyup',validarFecha)
 segundaFecha.addEventListener('blur',validarFecha);
+
+//eventos de escucha para saber si se ha pulsado alguna de las opciones en caso de que la fecha actual sea igual a la del input
+
 si.addEventListener('click',(e) =>{
 	resolution = false
 	
@@ -74,6 +83,8 @@ si.addEventListener('click',(e) =>{
 no.addEventListener('click',(e) =>{
 	resolution = false
 });
+
+// evento de escucha en el que se verá si se cumplen las condiciones para pasar al controlador
 
 formulario.addEventListener('submit', (e) => {
 	

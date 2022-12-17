@@ -14,7 +14,7 @@
  correctEmail = false
  correctDate = false
  
- 
+// expresiones regulares usadas para la validación del valor de los inputs del registro
 const RegularExpressions = {
 	firstname: /^[a-zA-ZÀ-ÿ\s]{1,32}$/, // letters, numbers and - _
 	surname: /^[a-zA-ZÀ-ÿ\s]{1,32}$/, // 
@@ -23,6 +23,8 @@ const RegularExpressions = {
 	date: /^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))$/
 }
 
+//funcion simple para calcular el tiempo entre dos fechas en años
+
 function validacionEdad(actualMillis , inputMillis){
 	
 	diff = actualMillis-inputMillis
@@ -30,6 +32,8 @@ function validacionEdad(actualMillis , inputMillis){
 	console.log("years: "+diff)
 	return diff
 }
+
+// función usada para hacer las comprobaciones necesarias a los diferentes campos del formulario de registro
 
 const validarFormulario = (e) => {
 	switch(e.target.name){
@@ -121,12 +125,15 @@ const validarFormulario = (e) => {
 	}
 }
 
+// un bucle sencillo para asignar un listener a los eventos de pulsación y clicado fuera a cada input del formulario
 inputs.forEach((input) => {
 	input.addEventListener('keyup',validarFormulario)
 	input.addEventListener('blur',validarFormulario);
 	
 });
 
+
+// evento de escucha en el que se verá si se cumplen las condiciones para pasar al controlador
 formulario.addEventListener('submit', (e) => {
 	
 	if(correctName && correctSurname && correctPassWord && correctEmail && correctDate){

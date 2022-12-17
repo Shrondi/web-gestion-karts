@@ -25,6 +25,8 @@
  var ratFa = false
  var option = false
   
+  
+//una funcion simple que calcula que el tiemmpo entre dos fechas en dias
 function validacionEdad(actualMillis , inputMillis){
 	
 	diff = inputMillis-actualMillis
@@ -33,7 +35,7 @@ function validacionEdad(actualMillis , inputMillis){
 	return diff
 }
  
- 
+ //funcion usada para validar que la fecha en la que se realiza/modifica una reserva es por lo menos un dia despues de la fecha actual
  const validarFecha = (e) => {
 	
 	inputFechaMillis = Date.parse(e.target.value)
@@ -48,9 +50,17 @@ function validacionEdad(actualMillis , inputMillis){
 	
  }
  
+//implementacion de los listener para los eventos de importancia en de la vista
 
+//listener de los eventos de pulsación y clicado fuera del input en el que se comprobará el valor de la fecha
 inputFecha.addEventListener('keyup',validarFecha)
 inputFecha.addEventListener('blur',validarFecha);
+
+
+/*listener de los eventos de clicado en los inputs tipo ratio que indican el tipo de reserva a hacer, en funcion del ratio pulsado
+	se ocultará un input de participantes u otro
+*/
+
 ratioAdultos.addEventListener('click',(e) =>{
 	ratAd = true
     ratIn = false
@@ -86,6 +96,8 @@ ratioKids.addEventListener('click',(e) =>{
 	
 });
 
+
+//listener del clicado fuera del input en el que se comprobará que se ha elegido un valor diferente al predefinido
 selector.addEventListener('blur', (e) =>{
 	
 	if(selector.value != ""){
@@ -116,7 +128,7 @@ ratioFamiliar.addEventListener('click',(e) =>{
 	
 });
 	
-
+// evento de escucha en el que se verá si se cumplen las condiciones para pasar al controlador
 formulario.addEventListener('submit', (e) => {
 	
 	if(correctDate && (ratAd || ratIn || ratFa) && option){

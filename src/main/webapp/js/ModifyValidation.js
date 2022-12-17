@@ -9,7 +9,8 @@
  correctSurname = true
  correctPassWord = false
  
- 
+ //expresiones regulares usadas para validar el contenido de los inputs
+
 const RegularExpressions = {
 	firstname: /^[a-zA-ZÀ-ÿ\s]{1,20}$/, // letters, numbers and - _
 	surname: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // 
@@ -17,6 +18,7 @@ const RegularExpressions = {
 	
 }
 
+// funcion usada para ver si los valores de los inputs de la modificación del perfil de usuario son validos
 
 const validarFormulario = (e) => {
 	switch(e.target.name){
@@ -75,11 +77,16 @@ const validarFormulario = (e) => {
 	}
 }
 
+// asignación de eventos de escucha a todos inputs del formulario de modificación de usuario
+
 inputs.forEach((input) => {
 	input.addEventListener('keyup',validarFormulario)
 	input.addEventListener('blur',validarFormulario);
 	
 });
+
+// evento de escucha en el que se verá si se cumplen las condiciones para pasar al controlador
+
 
 formulario.addEventListener('submit', (e) => {
 	

@@ -10,6 +10,8 @@
  
  var rango = false
  
+  //funcion simple para calcular el tiempo entre dos fechas en dias
+ 
  function validacionEdad(actualMillis , inputMillis){
 	
 	diff = inputMillis-actualMillis
@@ -18,6 +20,11 @@
 	return diff
 }
  
+ 
+ /* funcion usada para ver si los valores de los inputs de la consulta de reservas es válida,
+ 	para que sea valida, la segunda fecha no debe ser inferior a la segunda nunca
+ */ 
+
   const validarFecha = (e) => {
 	
 	
@@ -45,12 +52,14 @@
 	
  }
  
+// asignación de eventos de escucha a los inputs de fechas
 
 primeraFecha.addEventListener('keyup',validarFecha)
 primeraFecha.addEventListener('blur',validarFecha);
 segundaFecha.addEventListener('keyup',validarFecha)
 segundaFecha.addEventListener('blur',validarFecha);
 
+// evento de escucha en el que se verá si se cumplen las condiciones para pasar al controlador
 formulario.addEventListener('submit', (e) => {
 	
 	if(rango){
