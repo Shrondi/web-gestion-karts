@@ -41,10 +41,12 @@ if (userBean == null || userBean.getCorreo().isEmpty() ) {
 						<p>
 							<label for="nombre">Nombre: </label>
 							<input type="text" name="nombre" id="nombre" value="<%=userBean.getNombre()%>" required="required">
+							<div id="nameErrorText"></div>
 						</p>
 						<p>
 							<label for="apellidos">Apellidos: </label>
 							<input type="text" name="apellidos" id="apellidos" value="<%=userBean.getApellidos()%>" required="required">
+							<div id="surnameErrorText"></div>
 						</p>
 						<p>
 							<label for="passWord">Contraseña: </label>
