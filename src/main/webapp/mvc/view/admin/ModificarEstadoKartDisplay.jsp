@@ -20,7 +20,9 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 	}
 	
 	List<KartDTO> ListaKarts = (List<KartDTO>) request.getAttribute("ListaKarts");
-	
+	String tipo="";
+	String pista_asociada = "";
+			
 	//Caso 3: Si se accede de forma forzosa por url
 	if (ListaKarts == null){
 %>
@@ -34,74 +36,78 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 				<title>Modificar estado de los karts</title>
 		</head>
 		<body>
-				<p id="message"><%= mensajeNextPage %> </p>
-				
+			<form id="formModificarEstadoKart" method="post" action="/WebProyectoPW/ModificarEstadoKart">
 				<div>
-				<form id="form1" method="post" action="/WebProyectoPW/ModificarEstadoKart">
-				<p>
-					Elija el kart cuyo estado desea modificar.
-				</p>
-				
-				<% if (ListaKarts.isEmpty()){ %>
-				 		<p> No se han encontrado karts </p>
-				 		
-				<% }else{ %>
-				
-					<table>
-					<caption> <strong> Karts:</strong> </caption>
-								<thead>
-								  <tr>
-								  	<th></th>
-								    <th>ID del Kart</th>
-								    <th>Tipo de kart</th>
-								    <th>Estado</th>
-								    <th>Pista asociada</th>
-								  </tr>
-								</thead>
-								<tbody>
-								
-								<% for (KartDTO kart : ListaKarts){ %> 			
-								 
-								  <tr>
-								    <td><input type="radio" name="kart" id="kart" value="<%= kart.getId() %>" required></td>
-								    <td><%= kart.getId() %></td>
-								    <td><%= kart.geType() %></td>
-								    <td><%= kart.getStatus() %></td>
-								    <td><%= kart.getPista() %></td>
-								    				   	
-								  </tr>
-							
-								<% } %>
-							
-								</tbody>
-							</table>
-						<% } %>											
-				</form>					
-							
-				<form id="form2" method="post" action="/WebProyectoPW/ModificarEstadoKart">
-				<p>
-					Elija el estado al que pasa el kart
-				</p>
-					<select name="estado">
-						<option value="DISPONIBLE">DISPONIBLE</option>
-						<option value="RESERVADO">RESERVADO</option>
-						<option value="MANTENIMIENTO">MANTENIMIENTO</option>									
-					</select> 
+						<p id="message"><%= mensajeNextPage %></p>
+						<p> 
 						
-				</form>
-				
-				<button id="submit">Confirmar</button>		
+							<label for="kart"></label>
+								<%  if (ListaKarts.isEmpty()){ %>
+						 			<p> No se han encontrado karts </p>
+						  		<% }else{ %>
 						
-				<script type="text/javascript" src="/WebProyectoPW/js/SubmitForms.js"></script>
-								
-				<%--  <input type="submit" value="Confirmar" onclick="submitForms()" /> --%>
-				
-				<br>
-				</div>
-				
-				<form id="volver" method="post" action="/WebProyectoPW">
-						<input type="submit" value="Volver">
-				</form>
+										<p> Seleccione el nuevo estado para el kart </p>
+										<table>
+										<caption> <strong> Karts </strong> </caption>
+													<thead>
+													  <tr>
+													    <th></th>
+													    <th>ID del Kart</th>
+													    <th>Tipo de kart</th>
+													    <th>Estado</th>
+													    <th>Pista asociada</th>
+													  </tr>
+													</thead>
+													<tbody>
+													
+													<% for (KartDTO kart : ListaKarts){ %>
+														
+														 <% if(kart.geType() == true){ %>
+																<% tipo = "Niños"; %>
+														<% }else{  %>
+																<% tipo = "Adultos"; %>
+										
+														<% } %>
+														
+														
+														<% if(kart.getPista() == null){ %>
+																<% pista_asociada = "Sin pista asociada"; %>
+														<% }else{  %>
+																<% pista_asociada= kart.getPista(); %>
+										
+														<% } %>
+														
+														  <tr>
+														    <td><input type="radio" name="kart" value="<%= kart.getId()%>" required></td>
+														    <td><%= kart.getId() %></td>
+														    <td><%= tipo %></td>
+														    <td><%= kart.getStatus() %></td>
+														    <td><%= pista_asociada %></td>
+														  
+														  </tr>
+													<% } %>
+														</tbody>
+													</table>
+													<% } %>
+													<br>
+						</p>				
+						<p> Seleccione el nuevo estado para el kart </p>						
+						<p>		
+								<label for="estado"> Estado:  </label>
+								<select name="estado" id="estado" required>
+									<option value="">...</option>
+									<option value="DISPONIBLE">DISPONIBLE</option>
+									<option value="RESERVADO">RESERVADO</option>
+									<option value="MANTENIMIENTO">MANTENIMIENTO</option>
+								</select>
+						</p>
+				</div>	
+				<input type="submit" value="Confirmar">
+			</form>
+			
+			<form id="volver" method="post" action="/WebProyectoPW">
+					<input type="submit" value="Volver">
+			</form>
 		</body>
 </html>
 

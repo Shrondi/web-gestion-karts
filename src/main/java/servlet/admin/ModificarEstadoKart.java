@@ -56,13 +56,11 @@ public class ModificarEstadoKart extends HttpServlet {
 			
 			String kart = request.getParameter("kart");
 			String estado = request.getParameter("estado");
-			System.out.println("Valor de kart:"+kart);
-			System.out.println("Valor de estado:"+estado);
+			
+			KartDAO kartdao = new KartDAO(prop);
 			
 			if (kart == null && estado == null) { //Nos vamos a la vista para seleccionar el kart y el estado
 				
-				KartDAO kartdao = new KartDAO(prop);
-
 				List<KartDTO> ListaKarts = kartdao.listadoKarts();
 				
 				request.setAttribute("ListaKarts", ListaKarts);
@@ -72,15 +70,14 @@ public class ModificarEstadoKart extends HttpServlet {
 				
 			}
 			else{ //Se modifica el estado del kart seleccionado
-					
-				System.out.println("Valor de estado:"+estado);
-				System.out.println("Valor de kart:"+kart);
 				
-				//int id_kart = Integer.parseInt(kart);
-				//KartDAO kartdao = new KartDAO(prop);
+				int id_kart = Integer.parseInt(kart);
 				
-				//kartdao.modificarEstadoKart(estado, id_kart);
+				kartdao.modificarEstadoKart(estado, id_kart);
 				
+				//request.setAttribute("mensaje", "El estado del kart " + kart + " ahora es " + estado);
+				//dispatcher = request.getRequestDispatcher("/mvc/view/admin/ModificarEstadoKartDisplay.jsp");
+				//dispatcher.forward(request, response);
 				response.sendRedirect("/WebProyectoPW");
 				
 			}
