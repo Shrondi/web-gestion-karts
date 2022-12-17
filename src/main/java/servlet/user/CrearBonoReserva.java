@@ -1,6 +1,9 @@
 package servlet.user;
 
 import java.io.IOException;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -81,17 +84,18 @@ public class CrearBonoReserva extends HttpServlet {
 				
 			//Caso 2b: El request viene lleno (se ha seleccionado un bono)
 			}else if (bono != null){
-				System.out.println("ENTRO");
-				
-				//Obtenemos el bono del servidor segun la ID proporcionada
+						
 				int idBono = Integer.parseInt(bono);
 				
+				//Obtenemos el bono del servidor segun la ID proporcionada
 				BonoDTO bonoDTO = reservaDAO.consultarBono(idBono);
+				
 				int numeroSesiones = bonoDTO.getSesiones();
 				String tipo = bonoDTO.getTipo();
 					
 				//Guardamos en el bean los datos del bono para un posterior uso
 				bean.setIdBono(idBono);
+				bean.setFechaCaducidad(bonoDTO.getFechaCaducidad());
 				bean.setTipoReserva(tipo);
 				bean.setNumeroSesiones(numeroSesiones);
 				
@@ -101,12 +105,13 @@ public class CrearBonoReserva extends HttpServlet {
 					request.setAttribute("mensaje", "No se pueden añadir mas reservas al bono con ID " + idBono + ". El numero maximo de sesiones de un bono son 5.");
 					dispatcher = request.getRequestDispatcher("/WebProyectoPW");
 					dispatcher.forward(request, response);
+					
+				}else{
+					request.setAttribute("reservaBean", bean);
+					dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaBonoDisplay.jsp");
+					dispatcher.forward(request, response);
 				}
-				
-				request.setAttribute("reservaBean", bean);
-				dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaBonoDisplay.jsp");
-				dispatcher.forward(request, response);
-				
+	
 				//(A partir de aqui el codigo es el mismo que CrearReservaIndividual salvo que se cambia la fecha de caducidad del bono
 				//si es la primera reserva y se calcula un descuento diferente y los datos de la reserva se piden en un display distinto dependiendo del tipo de bono
 				
@@ -116,6 +121,18 @@ public class CrearBonoReserva extends HttpServlet {
 					//CASO 3b: Hay parametros en el request proveniente de la vista de crear reservas -> Elegimos la pista
 					if (fechaReserva != null && pista == null){
 						
+							SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+							SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+							
+							Date dateFechaReserva = new Date();
+							Date dateFechaCaducidad = new Date();
+							
+							try{
+								dateFechaReserva = sdf.parse(fechaReserva);
+								dateFechaCaducidad = sdf2.parse(bean.getFechaCaducidad());
+							}catch(ParseException e){
+								e.printStackTrace();
+							}
 							//Obtenemos los parametros del request
 							int duracion = Integer.parseInt(request.getParameter("duracion"));
 							int numeroNinios = 0;
@@ -145,9 +162,14 @@ public class CrearBonoReserva extends HttpServlet {
 								dispatcher.forward(request, response);
 							
 							
-							}else if() {
-							
-							//Se puede realizar la reserva
+							}else if(dateFechaReserva.compareTo(dateFechaCaducidad) > 0 && !bean.getFechaCaducidad().contentEquals("01/01/1970")) {
+								
+								request.setAttribute("reservaBean", bean);
+								request.setAttribute("mensaje", "La fecha de la reserva supera la fecha de caducidad del bono " + bean.getFechaCaducidad());
+								dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaBonoDisplay.jsp");
+								dispatcher.forward(request, response);
+								
+							//Se consulta una pista disponible
 							}else{
 								
 								List<PistaDTO> pistas = pistaDAO.consultarPistas(tipoReserva, numeroNinios, numeroAdultos);

@@ -11,6 +11,7 @@ public class reservaBean implements java.io.Serializable{
 	private String fecha_ = null;
 	private int idBono_ = 0;
 	private int numeroSesiones_ = 0;
+	private String fechaCaducidad_ = null;
 	
 	
 	public int getDuracion() {
@@ -34,6 +35,9 @@ public class reservaBean implements java.io.Serializable{
 	public int getNumeroSesiones() {
 		return numeroSesiones_;
 	}
+	public String getFechaCaducidad() {
+		return fechaCaducidad_;
+	}
 	
 	
 	public void setDuracion(int duracion) {
@@ -56,6 +60,9 @@ public class reservaBean implements java.io.Serializable{
 	}
 	public void setNumeroSesiones(int numeroSesiones) {
 		this.numeroSesiones_ = numeroSesiones;
+	}
+	public void setFechaCaducidad(String fechaCaducidad) {
+		this.fechaCaducidad_ = fechaCaducidad;
 	}
 	
 }
