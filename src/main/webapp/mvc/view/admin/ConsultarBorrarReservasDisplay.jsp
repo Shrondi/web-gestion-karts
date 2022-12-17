@@ -39,6 +39,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 										
 										
 												<label for="fechaFin">Fecha Fin: </label>
+
 												<input type="datetime-local" name="fechaFin" id="fechaFin" value="<%=cancelarBean.getFechaFin()%>" required>
 												<div id="dateErrorText"></div>
 												
@@ -57,11 +58,11 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 								<input type="submit" value="Nueva busqueda">
 						</form>
 
-						<script type="text/javascript" src="/WebProyectoPW/js/RangoFechasBorrar.js"></script>
+						<script type="text/javascript" src="/WebProyectoPW/js/RangoFechasBorrar.js"> </script>
 						<% if (cancelarBean.getReservasInfantil() != null){ %>
 										<jsp:include page="/mvc/view/common/ReservasCancelarDisplay.jsp" > 
 											<jsp:param name="nextPage" value="/WebProyectoPW/BorrarReservaIndividual" /> 
-
+										</jsp:include>
 						<%} %>
 						
 						<form id="volver" method="post" action="/WebProyectoPW">

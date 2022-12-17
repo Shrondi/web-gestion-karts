@@ -101,14 +101,20 @@ public class BorrarReservaIndividual extends HttpServlet {
 						reservasAdultos = reservaAdultosDAO.consultarReservasAdultosRangoFuturas(fechaInicio, fechaFin);
 					}
 					
-					//Guardamos en el bean para usarlo posteriormente y asi se evita hacer conexiones extra al servidor
-					bean.setReservasInfantil(reservasInfantil);
-					bean.setReservasFamiliar(reservasFamiliar);
-					bean.setReservasAdultos(reservasAdultos);
-					
-					request.setAttribute("flag", "flag");
-					dispatcher = request.getRequestDispatcher("/mvc/view/admin/ConsultarBorrarReservasDisplay.jsp");
-					dispatcher.forward(request, response);
+					if (reservasInfantil.isEmpty() && reservasFamiliar.isEmpty() && reservasAdultos.isEmpty()) {
+						request.setAttribute("mensaje", "No hay ninguna reserva para cancelar");
+						dispatcher = request.getRequestDispatcher("/");
+						dispatcher.forward(request, response);
+						
+					}else{
+						//Guardamos en el bean para usarlo posteriormente y asi se evita hacer conexiones extra al servidor
+						bean.setReservasInfantil(reservasInfantil);
+						bean.setReservasFamiliar(reservasFamiliar);
+						bean.setReservasAdultos(reservasAdultos);
+						
+						dispatcher = request.getRequestDispatcher("/mvc/view/admin/ConsultarBorrarReservasDisplay.jsp");
+						dispatcher.forward(request, response);
+					}
 					
 				//Se ha elegido la reserva a borrar
 				}else{
