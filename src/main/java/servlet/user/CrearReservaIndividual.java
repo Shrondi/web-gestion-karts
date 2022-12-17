@@ -224,7 +224,7 @@ public class CrearReservaIndividual extends HttpServlet {
 				
 				//Mostramos el resumen de la reserva
 				request.setAttribute("modalidad", "Individual");
-				dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservaIndividualDisplay.jsp");
+				dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservaDisplay.jsp");
 				dispatcher.forward(request, response);
 			}
 		}

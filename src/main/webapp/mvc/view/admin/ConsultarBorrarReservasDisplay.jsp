@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
     import="business.reserva.*, java.util.List, java.util.ArrayList"%>
 <jsp:useBean id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
+<jsp:useBean id="cancelarBean" scope="request" class="display.javabean.cancelarBean"></jsp:useBean>
 
 <%
 
@@ -34,11 +35,12 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 								<div>
 								
 												<label for="fechaInicio">Fecha Inicio: </label>
-												<input type="datetime-local" name="fechaInicio" id="fechaInicio" value="<%=request.getSession().getAttribute("fechaInicio")%>" required>
+												<input type="datetime-local" name="fechaInicio" id="fechaInicio" value="<%=cancelarBean.getFechaInicio()%>" required>
 										
 										
 												<label for="fechaFin">Fecha Fin: </label>
-												<input type="datetime-local" name="fechaFin" id="fechaFin" value="<%=request.getSession().getAttribute("fechaFin")%>" required>
+
+												<input type="datetime-local" name="fechaFin" id="fechaFin" value="<%=cancelarBean.getFechaFin()%>" required>
 												<div id="dateErrorText"></div>
 												
 												<div id="popup">
@@ -55,9 +57,12 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 								
 								<input type="submit" value="Nueva busqueda">
 						</form>
-						<script type="text/javascript" src="/WebProyectoPW/js/RangoFechasBorrar.js"></script>
-						<% if (request.getSession().getAttribute("reservasInfantil") != null){ %>
-										<jsp:include page="ReservasCancelarDisplay.jsp" />  
+
+						<script type="text/javascript" src="/WebProyectoPW/js/RangoFechasBorrar.js"> </script>
+						<% if (cancelarBean.getReservasInfantil() != null){ %>
+										<jsp:include page="/mvc/view/common/ReservasCancelarDisplay.jsp" > 
+											<jsp:param name="nextPage" value="/WebProyectoPW/BorrarReservaIndividual" /> 
+										</jsp:include>
 						<%} %>
 						
 						<form id="volver" method="post" action="/WebProyectoPW">

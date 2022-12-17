@@ -5,7 +5,7 @@ import java.util.List;
 import business.kart.KartDTO;
 import business.pista.PistaDTO;
 
-public class adminBean implements java.io.Serializable{
+public class asociarBean implements java.io.Serializable{
 
 	private static final long serialVersionUID = 1L;
 	

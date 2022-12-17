@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import display.javabean.cancelarBean;
 import display.javabean.userBean;
 import business.kart.Estado;
 import business.reserva.*;
@@ -25,6 +26,16 @@ import data.DAO.reserva.*;
 public class BorrarReservaIndividual extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	/*
+	 * Las variables de clase, declaradas fuera de los métodos doGet y doPost (por ejemplo, en este caso bean), son
+	 * persistentes, es decir, conservan sus valores en posteriores solicitudes al mismo servlet. Esto es así ya que
+	 * el ServletContainer sólo crea una instancia del mismo servlet, creando posteriormente un nuevo hilo para
+	 * servir cada solicitud.
+	 * 
+	 * Ref: http://gssi.det.uvigo.es/users/agil/public_html/LRO/jsp.pdf, Pagina: 2
+	 */
+	
+	cancelarBean bean = new cancelarBean();
        
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -62,25 +73,17 @@ public class BorrarReservaIndividual extends HttpServlet {
 			//Caso 2a: Si request esta vacio -> Ir a la vista
 			if (fechaInicio == null && reserva == null) {
 				
-				//Borramos los atributos si se hizo alguna consulta anterior pero no se llego a borrar ninguna reserva
-				session.removeAttribute("fechaInicio");
-				session.removeAttribute("fechaFin");
-				
-				session.removeAttribute("reservasInfantil");
-				session.removeAttribute("reservasFamiliar");
-				session.removeAttribute("reservasAdultos");
-				
 				dispatcher = request.getRequestDispatcher("/mvc/view/admin/ConsultarBorrarReservasDisplay.jsp");
 				dispatcher.forward(request, response);
 				
-			//Caso 2b: Request no esta vacio (se ha elegido el rango de fechas)	
+			//Caso 2b: Request no esta vacio (Se ha elegido el rango de fechas)	
 			}else {
 		
-				//(Guardamos estos atributos a nivel de sesion para que no se pierdan y se muestren en el display)
-				session.setAttribute("fechaInicio", fechaInicio);
-				session.setAttribute("fechaFin", fechaFin);
-				
-				//No se ha elegido la reserva a borrar
+				//Los guardamos en el bean para su uso
+				bean.setFechaInicio(fechaInicio);
+				bean.setFechaFin(fechaFin);
+			
+				//Caso 3a: No se ha elegido la reserva a borrar -> Ir al display
 				if (reserva == null) {
 					ReservaInfantilDAO reservaInfantilDAO = new ReservaInfantilDAO(prop);
 					ReservaFamiliarDAO reservaFamiliarDAO = new ReservaFamiliarDAO(prop);
@@ -98,26 +101,33 @@ public class BorrarReservaIndividual extends HttpServlet {
 						reservasAdultos = reservaAdultosDAO.consultarReservasAdultosRangoFuturas(fechaInicio, fechaFin);
 					}
 					
-					
-					//Guardamos las listas con las reservas a nivel de sesion para no perderlas cuando volvamos al servlet
-					session.setAttribute("reservasInfantil", reservasInfantil);
-					session.setAttribute("reservasFamiliar", reservasFamiliar);
-					session.setAttribute("reservasAdultos", reservasAdultos);
-					
-					dispatcher = request.getRequestDispatcher("/mvc/view/admin/ConsultarBorrarReservasDisplay.jsp");
-					dispatcher.forward(request, response);
+					if (reservasInfantil.isEmpty() && reservasFamiliar.isEmpty() && reservasAdultos.isEmpty()) {
+						request.setAttribute("mensaje", "No hay ninguna reserva para cancelar");
+						dispatcher = request.getRequestDispatcher("/");
+						dispatcher.forward(request, response);
+						
+					}else{
+						//Guardamos en el bean para usarlo posteriormente y asi se evita hacer conexiones extra al servidor
+						bean.setReservasInfantil(reservasInfantil);
+						bean.setReservasFamiliar(reservasFamiliar);
+						bean.setReservasAdultos(reservasAdultos);
+						
+						dispatcher = request.getRequestDispatcher("/mvc/view/admin/ConsultarBorrarReservasDisplay.jsp");
+						dispatcher.forward(request, response);
+					}
 					
 				//Se ha elegido la reserva a borrar
 				}else{
 					
-					reservasInfantil = (List<ReservaInfantilDTO>) session.getAttribute("reservasInfantil");
-					reservasFamiliar = (List<ReservaFamiliarDTO>) session.getAttribute("reservasFamiliar");
-					reservasAdultos = (List<ReservaAdultosDTO>) session.getAttribute("reservasAdultos");
+					reservasInfantil = bean.getReservasInfantil();
+					reservasFamiliar = bean.getReservasFamiliar();
+					reservasAdultos = bean.getReservasAdultos();
 					
 					ReservaDAO reservaDAO = new ReservaDAO(prop);
 					PistaDAO pistaDAO = new PistaDAO(prop);
 					KartDAO kartDAO = new KartDAO(prop);
 					
+					//Buscamos la ID de la reserva para borrarla
 					int IdReserva = Integer.parseInt(reserva);
 					
 						for (ReservaInfantilDTO reservaInfantil : reservasInfantil) {
@@ -150,10 +160,6 @@ public class BorrarReservaIndividual extends HttpServlet {
 								break;
 							}
 						}
-					
-					session.removeAttribute("reservasInfantil");
-					session.removeAttribute("reservasFamiliar");
-					session.removeAttribute("reservasAdultos");
 					
 					response.sendRedirect("/WebProyectoPW");
 				}
