@@ -19,7 +19,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		mensajeNextPage = "";
 	}
 	
-	List<PistaDTO> pistas = (List<PistaDTO>) request.getSession().getAttribute("ListaPistas");
+	List<PistaDTO> pistas = (List<PistaDTO>) request.getAttribute("ListaPistas");
 	
 	//Caso 3: Si se accede de forma forzosa por url
 	if (pistas == null){ 
