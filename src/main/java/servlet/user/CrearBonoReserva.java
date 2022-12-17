@@ -147,7 +147,7 @@ public class CrearBonoReserva extends HttpServlet {
 								numeroAdultos = Integer.parseInt(request.getParameter("numeroAdultos"));
 							}
 							
-							if (tipoReserva.contentEquals("FAMILIAR") || tipoReserva.contentEquals("INFANTILES")) {
+							if (tipoReserva.contentEquals("FAMILIAR") || tipoReserva.contentEquals("INFANTIL")) {
 								numeroNinios = Integer.parseInt(request.getParameter("numeroNinios"));
 							}
 							
