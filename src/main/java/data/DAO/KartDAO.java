@@ -3,7 +3,6 @@ package data.DAO;
 import data.common.DBConnection;
 
 import business.kart.KartDTO;
-import business.pista.Dificultad;
 import business.kart.Estado;
 
 import java.sql.*;

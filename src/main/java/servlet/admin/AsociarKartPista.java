@@ -19,7 +19,7 @@ import business.pista.PistaDTO;
 import data.DAO.KartDAO;
 import data.DAO.PistaDAO;
 import display.javabean.userBean;
-import display.javabean.adminBean;
+import display.javabean.asociarBean;
 
 /**
  * Servlet implementation class AsociarKartPista
@@ -37,7 +37,7 @@ public class AsociarKartPista extends HttpServlet {
 	 * Ref: http://gssi.det.uvigo.es/users/agil/public_html/LRO/jsp.pdf, Pagina: 2
 	 */
 	
-	adminBean bean = new adminBean();
+	asociarBean bean = new asociarBean();
 	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -73,7 +73,7 @@ public class AsociarKartPista extends HttpServlet {
 				
 				//Guardamos en un bean el listado de pistas para evitar conexiones repetidas al servidor de la misma informacion
 				bean.setListadoPistas(pistas);
-				request.setAttribute("adminBean", bean);
+				request.setAttribute("asociarBean", bean);
 				
 				dispatcher = request.getRequestDispatcher("/mvc/view/admin/PistasDisplay.jsp");
 				dispatcher.forward(request, response);
@@ -87,9 +87,7 @@ public class AsociarKartPista extends HttpServlet {
 					//Obtenemos la pista
 					//(Se puede los datos de la pista en la vista a traves del objeto request ya que en el display "iteramos" sobre la lista, pero es inseguro al ser client-side)
 					for (PistaDTO pistaDTO : bean.getListadoPistas()) {
-						System.out.println(pistaDTO.getNombre());
 						if (pistaDTO.getNombre().contentEquals(pista)) {
-							System.out.println("ENTRO");
 							bean.setPista(pistaDTO);
 						}
 					}
@@ -107,7 +105,7 @@ public class AsociarKartPista extends HttpServlet {
 					}
 					
 					bean.setListadoKarts(karts);
-					request.setAttribute("adminBean", bean);
+					request.setAttribute("asociarBean", bean);
 					
 					dispatcher = request.getRequestDispatcher("/mvc/view/admin/KartsDisplay.jsp");
 					dispatcher.forward(request, response);
@@ -120,7 +118,6 @@ public class AsociarKartPista extends HttpServlet {
 					
 					//Si se han elegido mas karts de los maximos permitidos en la pista -> Volver al display
 					if (ids.length > bean.getPista().getMaxAmmount()) {
-						System.out.println("ENTRO");
 						done = false;
 						request.setAttribute("adminBean", bean);
 						request.setAttribute("mensaje", "Ha seleccionado mas karts que los permitidos en la pista. Max karts = " + bean.getPista().getMaxAmmount());
@@ -150,7 +147,6 @@ public class AsociarKartPista extends HttpServlet {
 						
 				//Si se han elegido mas karts de adultos que los permitidos en la pista -> Volver al display
 				if(numKartAdultos+bean.getPista().getAsocAmmountAdult() > bean.getPista().getMaxAmmount() ) {
-					System.out.println("ENTRO");
 					done = false;
 					request.setAttribute("adminBean", bean);
 					request.setAttribute("mensaje", "Ha seleccionado mas karts adultos que los permitidos en la pista. Numero asoc adultos = "+ bean.getPista().getAsocAmmountAdult() + "Max karts = " + bean.getPista().getMaxAmmount());
@@ -158,7 +154,6 @@ public class AsociarKartPista extends HttpServlet {
 							
 				//Si se han elegido mas karts infantiles que los permitidos en la pista -> Volver al display
 				if(numKartInfantiles+bean.getPista().getAsocAmmountInf() > bean.getPista().getMaxAmmount()) {
-					System.out.println("ENTRO");
 					done = false;
 					request.setAttribute("adminBean", bean);
 					request.setAttribute("mensaje", "Ha seleccionado mas karts infantiles que los permitidos en la pista. Numero asoc infantiles = "+ bean.getPista().getAsocAmmountInf() + "Max karts = " + bean.getPista().getMaxAmmount());

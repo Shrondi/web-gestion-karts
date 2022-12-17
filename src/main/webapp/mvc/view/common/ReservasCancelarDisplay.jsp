@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
     import="business.reserva.*, java.util.List, java.util.ArrayList"%>
 <jsp:useBean id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
+<jsp:useBean id="cancelarBean" scope="request" class="display.javabean.cancelarBean"></jsp:useBean>
 
 <%
 
@@ -19,9 +20,9 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		mensajeNextPage = "";
 	}
 	
-	List<ReservaInfantilDTO> reservasInfantil = (List<ReservaInfantilDTO>) request.getSession().getAttribute("reservasInfantil");
-	List<ReservaFamiliarDTO> reservasFamiliar = (List<ReservaFamiliarDTO>) request.getSession().getAttribute("reservasFamiliar");
-	List<ReservaAdultosDTO> reservasAdultos = (List<ReservaAdultosDTO>) request.getSession().getAttribute("reservasAdultos");
+	List<ReservaInfantilDTO> reservasInfantil = cancelarBean.getReservasInfantil();
+	List<ReservaFamiliarDTO> reservasFamiliar = cancelarBean.getReservasFamiliar();
+	List<ReservaAdultosDTO> reservasAdultos = cancelarBean.getReservasAdultos();
 	
 	if (reservasInfantil == null || reservasFamiliar == null || reservasAdultos == null){
 %>
@@ -160,8 +161,9 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 						<% if (!(reservasInfantil.isEmpty() && reservasFamiliar.isEmpty() && reservasAdultos.isEmpty())){ %>
 							
 									<input type="submit" value="Confirmar">
-							</form>
+							
 						<%} %>
+						</form>
 						
 						<form id="volver" method="post" action="/WebProyectoPW">
 								<input type="submit" value="Volver">

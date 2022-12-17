@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
     import="business.pista.PistaDTO, java.util.List, java.util.ArrayList"%>
 <jsp:useBean id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
-<jsp:useBean id="adminBean" scope="request" class="display.javabean.adminBean"></jsp:useBean>
+<jsp:useBean id="asociarBean" scope="request" class="display.javabean.asociarBean"></jsp:useBean>
 
 <%
 
@@ -20,7 +20,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		mensajeNextPage = "";
 	}
 	
-	List<PistaDTO> pistas = adminBean.getListadoPistas();
+	List<PistaDTO> pistas = asociarBean.getListadoPistas();
 	
 	//Caso 3: Si se accede de forma forzosa por url
 	if (pistas == null){ 

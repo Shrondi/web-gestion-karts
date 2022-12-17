@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import display.javabean.cancelarBean;
 import display.javabean.userBean;
 import business.kart.Estado;
 import business.reserva.*;
@@ -25,6 +26,16 @@ import data.DAO.reserva.*;
 public class CancelarReservaIndividual extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	/*
+	 * Las variables de clase, declaradas fuera de los métodos doGet y doPost (por ejemplo, en este caso bean), son
+	 * persistentes, es decir, conservan sus valores en posteriores solicitudes al mismo servlet. Esto es así ya que
+	 * el ServletContainer sólo crea una instancia del mismo servlet, creando posteriormente un nuevo hilo para
+	 * servir cada solicitud.
+	 * 
+	 * Ref: http://gssi.det.uvigo.es/users/agil/public_html/LRO/jsp.pdf, Pagina: 2
+	 */
+	
+	cancelarBean bean = new cancelarBean();
        
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -44,8 +55,7 @@ public class CancelarReservaIndividual extends HttpServlet {
 		
 		//Caso 1: Usuario no esta logueado -> Volvemos al index
 		if (userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() == true) {
-			//dispatcher = request.getRequestDispatcher("/index.jsp");
-			//dispatcher.forward(request, response);
+		
 			response.sendRedirect("/WebProyectoPW");
 			
 		//Caso 2: Usuario logueado
@@ -68,20 +78,21 @@ public class CancelarReservaIndividual extends HttpServlet {
 				reservasFamiliar = reservaFamiliarDAO.consultarReservasFamiliarFuturas(userBean.getCorreo());
 				reservasAdultos = reservaAdultosDAO.consultarReservasAdultosFuturas(userBean.getCorreo());
 				
-				session.setAttribute("reservasInfantil", reservasInfantil);
-				session.setAttribute("reservasFamiliar", reservasFamiliar);
-				session.setAttribute("reservasAdultos", reservasAdultos);
+				bean.setReservasInfantil(reservasInfantil);
+				bean.setReservasFamiliar(reservasFamiliar);
+				bean.setReservasAdultos(reservasAdultos);
 				
+				request.setAttribute("cancelarBean", bean);
 				request.setAttribute("nextPage", "/WebProyectoPW/CancelarReservaIndividual");
 				request.setAttribute("mensaje", "Aviso: Solo se estan mostrando aquellas reservas que se pueden cancelar");
-				dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservasCancelarDisplay.jsp");
+				dispatcher = request.getRequestDispatcher("/mvc/view/common/ReservasCancelarDisplay.jsp");
 				dispatcher.forward(request, response);
 				
 			//Caso 2b: Request no esta vacio	
 			}else {
-				reservasInfantil = (List<ReservaInfantilDTO>) request.getSession().getAttribute("reservasInfantil");
-				reservasFamiliar = (List<ReservaFamiliarDTO>) request.getSession().getAttribute("reservasFamiliar");
-				reservasAdultos =  (List<ReservaAdultosDTO>) request.getSession().getAttribute("reservasAdultos");
+				reservasInfantil = bean.getReservasInfantil();
+				reservasFamiliar = bean.getReservasFamiliar();
+				reservasAdultos =  bean.getReservasAdultos();
 				 
 				ReservaDAO reservaDAO = new ReservaDAO(prop);
 				PistaDAO pistaDAO = new PistaDAO(prop);
@@ -89,6 +100,7 @@ public class CancelarReservaIndividual extends HttpServlet {
 				
 				int IdReserva = Integer.parseInt(reserva);
 				
+				//Para evitar recorrer los otros bucles, cuando una reserva se cancele la variable cambia a true
 				boolean done = false;
 				
 				if (done == false) {
@@ -128,12 +140,7 @@ public class CancelarReservaIndividual extends HttpServlet {
 					}
 				}
 				
-				session.removeAttribute("reservasInfantil");
-				session.removeAttribute("reservasFamiliar");
-				session.removeAttribute("reservasAdulto");
-				
 				response.sendRedirect("/WebProyectoPW");
-					
 			}
 			
 		}
