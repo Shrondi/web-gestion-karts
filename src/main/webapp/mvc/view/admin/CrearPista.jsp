@@ -27,14 +27,14 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 				<title>Crear Pista</title>
 		</head>
 		<body>
-			<form id="formCrearKart" method="post" action="/WebProyectoPW/CrearPista">
+			<form id="formCrearPista" method="post" action="/WebProyectoPW/CrearPista">
 				<div>
 						<p id="message"><%= mensajeNextPage %></p>
 						<p> Escriba los siguientes datos para crear una pista: </p>
 						<p>
 								<label for="nombrePista">Nombre: </label>
 								<input type="text" name="nombrePista" id="nombrePista" placeholder="Pista 1" required="required">
-						
+								<div id="nameErrorText"></div>
 						<p> 
 								<label for="estado"> Estado:  </label>
 								<select name="estado" id="estado" required>
@@ -59,7 +59,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 				</div>	
 				<input type="submit" value="Crear pista">
 			</form>
-			
+			<script type="text/javascript" src="/WebProyectoPW/js/PistaCreateValidation.js"></script>
 			<form id="volver" method="post" action="/WebProyectoPW">
 					<input type="submit" value="Volver">
 			</form>
