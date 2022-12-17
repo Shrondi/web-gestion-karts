@@ -44,8 +44,8 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							    <th></th>
 							    <th>Nombre de la Pista</th>
 							    <th>Capacidad maxima</th>
-							    <th>Numero de karts infantiles</th>
-							    <th>Numero de karts adultos</th>
+							    <th>Numero de karts infantiles disponibles</th>
+							    <th>Numero de karts adultos disponibles</th>
 							  </tr>
 							</thead>
 							<tbody>
@@ -66,6 +66,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 								<input type="submit" value="Confirmar">
 						</form>
 						<br>
+						
 						<form id="volver" method="post" action="<%= request.getAttribute("nextPage")%>">
 								<input type="submit" value="Volver">
 						</form>

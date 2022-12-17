@@ -145,13 +145,13 @@ public class PistaDAO{
 	 * @return pistas Listado de pistas
 	 */
 	
-	public List<PistaDTO> consultarByDif(String dificultad){
+	public List<PistaDTO> consultarByDif(Dificultad dificultad){
 		List<PistaDTO> pistas = new ArrayList<>();
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
 		try {
 			Statement stmt = con.createStatement();
-			String query = prop.getProperty("obtenerPistasbyDifSTM")+dificultad;
+			String query = prop.getProperty("obtenerPistasbyDifSTM")+String.format("'%s'", dificultad.name());
 			ResultSet rs = stmt.executeQuery(query);
 			
 			while (rs.next()) {
@@ -167,7 +167,7 @@ public class PistaDAO{
 				pistaToPush.setMaxAmmount(max_karts);
 				pistaToPush.setAsocAmmountInf(asoc_karts_infantiles);
 				pistaToPush.setAsocAmmountAdult(asoc_karts_adultos);
-				pistaToPush.setDificulty(Dificultad.valueOf(dificultad.toUpperCase()));
+				pistaToPush.setDificulty(dificultad);
 				pistas.add(pistaToPush);
 			}
 		} catch (SQLException e) {
@@ -250,8 +250,6 @@ public class PistaDAO{
 			ps.setString(1, tipoPista);
 			ps.setInt(2, kartsInfantiles);
 			ps.setInt(3, kartsAdultos);
-			ps.setInt(4, kartsInfantiles);
-			ps.setInt(5, kartsAdultos);
 		
 			ResultSet rs = ps.executeQuery();
 			
