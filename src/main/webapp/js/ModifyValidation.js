@@ -7,13 +7,13 @@
  
  correctName = true
  correctSurname = true
- //correctPassWord = false
+ correctPassWord = false
  
  
 const RegularExpressions = {
 	firstname: /^[a-zA-ZÀ-ÿ\s]{1,20}$/, // letters, numbers and - _
 	surname: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // 
-	//password: /^.{4,32}$/, // 4 a 12 digitos.
+	password: /^.{4,16}$/, // 4 a 16 digitos.
 	
 }
 
@@ -56,6 +56,22 @@ const validarFormulario = (e) => {
 			}
 			console.log("apellido: "+correctSurname)
 		break;
+		case "passWord":
+		var passwordErrorText = document.getElementById('passwordErrorText')
+			if(RegularExpressions.password.test(e.target.value)){
+				passwordErrorText.innerText = ""
+				correctPassWord=true
+			}else{
+				var password = e.target.value
+				if(password.length < 4){
+					passwordErrorText.innerText = "La contraseña debe tener mas de 4 carecteres"
+				}else if(password.length > 32){
+					passwordErrorText.innerText = "La contraseña no puede tener mas de 32 caracteres"
+				}
+				correctPassWord=false
+			}
+			console.log("contraseña: "+correctPassWord)
+		break;
 	}
 }
 
@@ -67,7 +83,7 @@ inputs.forEach((input) => {
 
 formulario.addEventListener('submit', (e) => {
 	
-	if(correctName && correctSurname){
+	if(correctName && correctSurname && correctPassWord){
 		
 	}else{
 		e.preventDefault()

@@ -51,6 +51,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() ) {
 						<p>
 							<label for="passWord">Contraseña: </label>
 							<input type="password" name="passWord" id="passWord" required="required">
+							<div id="passwordErrorText"></div>
 						</p>
 						<p>
 							<label for="email">Email: </label>
