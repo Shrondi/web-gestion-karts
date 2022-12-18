@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
     import="business.reserva.*, java.util.List, java.util.ArrayList"%>
+<%@ page errorPage="include/errorPage.jsp" %>
 <jsp:useBean id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
 <jsp:useBean id="cancelarBean" scope="request" class="display.javabean.cancelarBean"></jsp:useBean>
 
@@ -75,7 +76,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							    <td><input type="radio" name="reserva" value="<%= reserva.getIdReserva()%>" required></td>
 							    <td><%= reserva.getFecha() %></td>
 							    <td><%= reserva.getModalidad() %></td>
-							    <td><%= reserva.getDuracion() %> minutos</td>
+							    <td><%= reserva.getDuracion() %> min</td>
 							    <td><%= reserva.getParticipantesInfantiles() %></td>
 							    <td><%= reserva.getDescuento() %> %</td>
 							    <td><%= reserva.getPrecio() %> €</td>
@@ -113,7 +114,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							    <td><input type="radio" name="reserva" value="<%= reserva.getIdReserva()%>" required></td>
 							    <td><%= reserva.getFecha() %></td>
 							    <td><%= reserva.getModalidad() %></td>
-							    <td><%= reserva.getDuracion() %> minutos</td>
+							    <td><%= reserva.getDuracion() %> min</td>
 							    <td><%= reserva.getParticipantesInfantiles() %></td>
 							    <td><%= reserva.getParticipantesAdultos() %></td>
 							    <td><%= reserva.getDescuento() %> %</td>
@@ -151,7 +152,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							    <td><input type="radio" name="reserva" value="<%= reserva.getIdReserva()%>" required></td>
 							    <td><%= reserva.getFecha() %></td>
 							    <td><%= reserva.getModalidad() %></td>
-							    <td><%= reserva.getDuracion() %> minutos</td>
+							    <td><%= reserva.getDuracion() %> min</td>
 							    <td><%= reserva.getParticipantesAdultos() %></td>
 							    <td><%= reserva.getDescuento() %> %</td>
 							    <td><%= reserva.getPrecio() %> €</td>
