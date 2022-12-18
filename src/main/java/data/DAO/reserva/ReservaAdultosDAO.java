@@ -133,7 +133,7 @@ public class ReservaAdultosDAO {
 		con = connection.getConnection();
 		
 		try {
-			PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasInfantilbyFechaSTM"));
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasAdultosbyFechaSTM"));
 			ps.setString(1, modalidad);
 			ps.setString(2, usuario);
 			
