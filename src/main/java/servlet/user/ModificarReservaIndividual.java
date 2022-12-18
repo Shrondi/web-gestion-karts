@@ -76,7 +76,7 @@ public class ModificarReservaIndividual extends HttpServlet {
 				session.setAttribute("reservasAdultos", reservasAdultos);
 					
 				request.setAttribute("nextPage", "/WebProyectoPW/ModificarReservaIndividual");
-				request.setAttribute("mensaje", "Aviso: Solo se estan mostrando aquellas reservas que se pueden modificar");
+				request.setAttribute("mensaje", "Aviso: Solo se est&aacute;n mostrando aquellas reservas que se pueden modificar");
 				dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservasCancelarDisplay.jsp");
 				dispatcher.forward(request, response);
 				
@@ -262,7 +262,7 @@ public class ModificarReservaIndividual extends HttpServlet {
 					//Si el usuario elige una fecha en en el rango de la fecha de la ultima reserva + 2 horas, tendra que elegir otra fecha
 					// (Asi se evita tener dos reservas que transcurran a la vez para el mismo usuario)
 					if (reservaDAO.comprobarReserva(fecha, userBean.getCorreo())) {
-						request.setAttribute("mensaje", "Ya tiene una reserva para la fecha dada. Debe haber una diferencia de 2 horas minimo entre la fecha de las reservas");
+						request.setAttribute("mensaje", "Ya tiene una reserva para la fecha dada. Debe haber una diferencia de 2 horas m&iacute;nimo entre la fecha de las reservas");
 						
 						request.setAttribute("nextPage", "/WebProyectoPW/ModificarReservaIndividual");
 						dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaDisplay.jsp");
@@ -276,7 +276,7 @@ public class ModificarReservaIndividual extends HttpServlet {
 						//No se puede realizar una reserva ya que no hay pistas disponibles para los datos dados
 						if (pistas.isEmpty()) {
 							
-							request.setAttribute("mensaje", "No hay pistas disponibles con los datos dados. Intentelo de nuevo mas tarde.");
+							request.setAttribute("mensaje", "No hay pistas disponibles con los datos dados. Int&eacute;ntelo de nuevo m&aacute;s tarde.");
 							
 							request.setAttribute("nextPage", "/WebProyectoPW/ModificarReservaIndividual");
 							dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaDisplay.jsp");
