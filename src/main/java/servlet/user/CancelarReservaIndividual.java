@@ -147,7 +147,9 @@ public class CancelarReservaIndividual extends HttpServlet {
 					}
 				}
 				
-				response.sendRedirect("/WebProyectoPW");
+				request.setAttribute("mensaje", "Se ha borrado con &eacute;xito la reserva");
+				dispatcher = request.getRequestDispatcher("/mvc/view/common/ReservasCancelarDisplay.jsp");
+				dispatcher.forward(request, response);
 			}
 			
 		}

@@ -56,7 +56,6 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 								<select name="estado" id="estado" required>
 									<option value="">...</option>
 									<option value="DISPONIBLE">DISPONIBLE</option>
-									<option value="RESERVADO">RESERVADO</option>
 									<option value="MANTENIMIENTO">MANTENIMIENTO</option>
 								</select>
 						</p>

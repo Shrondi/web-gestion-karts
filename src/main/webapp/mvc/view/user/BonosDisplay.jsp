@@ -42,8 +42,8 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 				
 		</head>
 		<body>
-		
-		<%if (){ %>
+		<%String nextPage = (String)request.getAttribute("nextPage"); %>
+		<%if (nextPage.contentEquals("/WebProyectoPW/ReservaBono")){ %>
 			<h2>Hacer Reserva</h2>
 		<% }else{%>
 			<h2>Cancelar Bono</h2>
