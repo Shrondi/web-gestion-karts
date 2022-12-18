@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
     import="business.reserva.*, java.util.List, java.util.ArrayList"%>
-<%@ page errorPage="include/errorPage.jsp" %>
 <jsp:useBean id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
+<jsp:useBean id="rangoBean" scope="request" class="display.javabean.rangoBean"></jsp:useBean>
 
 
 <%
@@ -14,14 +14,14 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 //Caso 2: El usuario esta logado y no es admin
 }else{
 	
-	List<ReservaInfantilDTO> reservasInfantilPasadas = (List<ReservaInfantilDTO>) request.getAttribute("reservasInfantilPasadas");
-	List<ReservaInfantilDTO> reservasInfantilFuturas = (List<ReservaInfantilDTO>) request.getAttribute("reservasInfantilFuturas");
+	List<ReservaInfantilDTO> reservasInfantilPasadas = rangoBean.getReservasInfantilPasadas();
+	List<ReservaInfantilDTO> reservasInfantilFuturas = rangoBean.getReservasInfantilFuturas();
 	
-	List<ReservaFamiliarDTO> reservasFamiliarPasadas = (List<ReservaFamiliarDTO>) request.getAttribute("reservasFamiliarPasadas");
-	List<ReservaFamiliarDTO> reservasFamiliarFuturas = (List<ReservaFamiliarDTO>) request.getAttribute("reservasFamiliarFuturas");
+	List<ReservaFamiliarDTO> reservasFamiliarPasadas = rangoBean.getReservasFamiliarPasadas();
+	List<ReservaFamiliarDTO> reservasFamiliarFuturas = rangoBean.getReservasFamiliarFuturas();
 	
-	List<ReservaAdultosDTO> reservasAdultosPasadas = (List<ReservaAdultosDTO>) request.getAttribute("reservasAdultosPasadas");
-	List<ReservaAdultosDTO> reservasAdultosFuturas = (List<ReservaAdultosDTO>) request.getAttribute("reservasAdultosFuturas");
+	List<ReservaAdultosDTO> reservasAdultosPasadas = rangoBean.getReservasAdultosPasadas();
+	List<ReservaAdultosDTO> reservasAdultosFuturas = rangoBean.getReservasAdultosPasadas();
 	
 	if (reservasInfantilPasadas == null || reservasInfantilFuturas == null || reservasFamiliarPasadas == null || reservasFamiliarFuturas == null || reservasAdultosPasadas == null || reservasAdultosFuturas == null){
 %>
@@ -38,8 +38,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table_reservas.css">
 		</head>
 		<body>
-				
-				<%if(!reservasInfantilFuturas.isEmpty() && !reservasInfantilPasadas.isEmpty()){ %>
+			
 				<table>
 				<caption> <strong> Reservas Infantiles </strong> </caption>
 							<thead>
@@ -81,9 +80,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 						<% } %>
 							</tbody>
 						</table>
-				<%} %>
 				
-				<%if(!reservasFamiliarFuturas.isEmpty() && !reservasFamiliarPasadas.isEmpty()){ %>
 				<table>
 				<caption> <strong> Reservas Familiares </strong> </caption>
 							<thead>
@@ -129,9 +126,9 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 						<% } %>
 							</tbody>
 				</table>
-				<%} %>
-				
-				<%if(!reservasAdultosFuturas.isEmpty() && !reservasAdultosPasadas.isEmpty()){ %>
+
+
+				<%if (reservasAdultosFuturas == null) %>
 				<table>
 				<caption> <strong> Reservas Adultos </strong> </caption>
 							<thead>
@@ -179,6 +176,5 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 </html>
 
 <%
-	}
 }
 %>

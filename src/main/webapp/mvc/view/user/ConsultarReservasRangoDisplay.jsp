@@ -2,6 +2,7 @@
     import="business.reserva.*, java.util.List, java.util.ArrayList"%>
 <%@ page errorPage="include/errorPage.jsp" %>
 <jsp:useBean id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
+<jsp:useBean id="rangoBean" scope="request" class="display.javabean.rangoBean"></jsp:useBean>
 
 <%
 
@@ -56,7 +57,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 						</form>
 				<script type="text/javascript" src="/WebProyectoPW/js/ConsultarReservasRango.js"></script>			
 								
-			<% if (request.getAttribute("reservasInfantilPasadas") != null){ %>
+			<% if (request.getAttribute("fechaInicio") != null){ %>
 					<jsp:include page="ReservasRangoDisplay.jsp" />  
 			<%} %>
 			

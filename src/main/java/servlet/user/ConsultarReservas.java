@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import display.javabean.rangoBean;
 import display.javabean.userBean;
 import business.reserva.*;
 import data.DAO.reserva.*;
@@ -24,6 +25,17 @@ import java.util.Date;
 
 public class ConsultarReservas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	/*
+	 * Las variables de clase, declaradas fuera de los métodos doGet y doPost (por ejemplo, en este caso bean), son
+	 * persistentes, es decir, conservan sus valores en posteriores solicitudes al mismo servlet. Esto es así ya que
+	 * el ServletContainer sólo crea una instancia del mismo servlet, creando posteriormente un nuevo hilo para
+	 * servir cada solicitud.
+	 * 
+	 * Ref: http://gssi.det.uvigo.es/users/agil/public_html/LRO/jsp.pdf, Pagina: 2
+	 */
+	
+	rangoBean bean = new rangoBean();
        
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -43,8 +55,7 @@ public class ConsultarReservas extends HttpServlet {
 		
 		//Caso 1: Usuario no esta logueado -> Volvemos al index
 		if (userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() == true) {
-			//dispatcher = request.getRequestDispatcher("/index.jsp");
-			//dispatcher.forward(request, response);
+			
 			response.sendRedirect("/WebProyectoPW");
 			
 		//Caso 2: Usuario logueado
@@ -104,18 +115,18 @@ public class ConsultarReservas extends HttpServlet {
 					}
 				}
 				
-				request.setAttribute("reservasInfantilPasadas", reservasInfantilPasadas);
-				request.setAttribute("reservasInfantilFuturas", reservasInfantilFuturas);
 				
-				request.setAttribute("reservasFamiliarPasadas", reservasFamiliarPasadas);
-				request.setAttribute("reservasFamiliarFuturas", reservasFamiliarFuturas);
-				
-				request.setAttribute("reservasAdultosPasadas", reservasAdultosPasadas);
-				request.setAttribute("reservasAdultosFuturas", reservasAdultosFuturas);
+				bean.setReservasInfantilPasadas(reservasInfantilPasadas);
+				bean.setReservasInfantilFuturas(reservasInfantilFuturas);
+				bean.setReservasFamiliarPasadas(reservasFamiliarPasadas);
+				bean.setReservasFamiliarFuturas(reservasFamiliarFuturas);
+				bean.setReservasAdultosPasadas(reservasAdultosPasadas);
+				bean.setReservasAdultosFuturas(reservasAdultosFuturas);
 				
 				request.setAttribute("fechaInicio", fechaInicio);
 				request.setAttribute("fechaFin", fechaFin);
 				
+				request.setAttribute("rangoBean", bean);
 				dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservasRangoDisplay.jsp");
 				dispatcher.forward(request, response);
 				

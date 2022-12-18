@@ -60,7 +60,7 @@ public class ConsultarPistas extends HttpServlet {
 			
 				//Caso 2a: Request viene vacio -> Ir al display
 				if(tipo_check == null && minKarts_check == null){
-					System.out.println("ENTRO");
+					
 					dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarPistasDisplay.jsp");
 					dispatcher.forward(request, response);
 					
@@ -90,13 +90,11 @@ public class ConsultarPistas extends HttpServlet {
 					}
 					
 					if (pistas == null) {
-						System.out.println("ENTRO");
 						request.setAttribute("mensaje", "No hay pistas disponibles");
 						dispatcher = request.getRequestDispatcher("/mvc/view/user/PistasConsultaDisplay.jsp");
 						dispatcher.forward(request, response);
 						
 					}else {
-						System.out.println("ENTRO");
 						request.setAttribute("ListaPistas", pistas);
 						dispatcher = request.getRequestDispatcher("/mvc/view/user/PistasConsultaDisplay.jsp");
 						dispatcher.forward(request, response);

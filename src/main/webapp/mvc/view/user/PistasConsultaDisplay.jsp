@@ -45,6 +45,10 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		<body>
 			<h2>Consultar Pistas</h2>
 			<p class="mensaje" id="message"><%= mensajeNextPage %> </p>
+			
+			<%if (pistas.isEmpty()){ %>
+				<p> No hay pistas disponibles </p>
+			<%}else{ %>
 				<table>
 					<caption><strong>Listado de Pistas</strong></caption>
 					<thead>
@@ -82,6 +86,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 </html>
 
 <%
+		}
 	}
 }
 %>
