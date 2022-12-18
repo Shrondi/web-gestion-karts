@@ -1,0 +1,28 @@
+table{
+  border-collapse: collapse;
+  width: 100%;
+  text-align:center;
+}
+
+caption{
+  padding:10px;
+}
+
+td, th {
+  border: 1.5px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #ee4b4be8;
+  color: white;
+}
+
+tr:hover{
+	background-color: #ddd;
+}
+.pasadas{
+	background-color:lightgrey ;
+}
