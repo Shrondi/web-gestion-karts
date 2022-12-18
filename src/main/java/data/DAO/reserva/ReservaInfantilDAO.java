@@ -28,7 +28,8 @@ public class ReservaInfantilDAO {
 	private Properties prop;
 	
 	/**
-	 * Constructor sin parametros del DAO 
+	 * Constructor del DAO de Usuario
+	 * @param properties Objeto properties que contiene las consultas relativas a la BD
 	 */
 	
 	public ReservaInfantilDAO(Properties properties) {
@@ -37,9 +38,20 @@ public class ReservaInfantilDAO {
 	}
 	
 	/**
-	 * Metodo para incluir una nueva reserva de tipo Infantil en la base de datos
-	 * 
-	 * @param reservaInfantil reserva de tipo Infantil a incluir en la base de datos
+	 * Se usa para incluir una nueva reserva infantil
+	 * Tablas usadas:
+	 *	-RESERVA: Para seleccionar todos los usuarios existentes en la BD
+	 *Atributos de la tabla usados:
+	 *	-usuario: Usuario de la reserva
+	 *	-modalidad_reserva: Modalidad de la reserva
+	 *	-tipo_Reserva: Tipo de reserva
+	 *	-participantes_infantiles: Número de participantes infantiles
+	 *	-fecha: Fecha de la reserva
+	 *	-duracion: Duracion de la reserva
+	 *	-descuento: Posible descuento a aplicar
+	 *	-precio: Precio de la reserva
+	 *	-pista: Pista de la reserva
+	 * @param reservaInfantil Reserva infantil a crear
 	 */
 	
 	public void crearReservaInfantil(ReservaInfantilDTO reservaInfantil) {
@@ -68,10 +80,22 @@ public class ReservaInfantilDAO {
 	}
 	
 	/**
-	 * Metodo que crea una reserva de tipo Infantil asociada a un bono
-	 * 
-	 * @param reservaInfantil Reserva de tipo Infantil a incluir en la base de datos, asociada a un bono
-	 * @param idBono Identificador del bono al que asociar a la reserva
+	 * Metodo que crea un bono de reservas infantiles
+	 * Tablas usadas:
+	 *	-RESERVA: Para crear el bono de reservas
+	 *Atributos de la tabla usados:
+	 *	-usuario: Usuario de la reserva
+	 *	-modalidad_reserva: Modalidad de la reserva
+	 *	-tipo_Reserva: Tipo de reserva
+	 *	-participantes_infantiles: Número de participantes infantiles
+	 *	-fecha: Fecha de la reserva
+	 *	-duracion: Duracion de la reserva
+	 *	-descuento: Posible descuento a aplicar
+	 *	-precio: Precio de la reserva
+	 *	-pista: Pista de la reserva
+	 *	-idBono: ID del bono
+	 * @param reservaInfantil Reserva de adultos a crear
+	 * @param idBono ID del bono
 	 */
 	
 	public void crearReservaInfantilBono(ReservaInfantilDTO reservaInfantil, int idBono) {
@@ -100,6 +124,24 @@ public class ReservaInfantilDAO {
 			
 	}
 	
+	/**
+	 * Metodo que consulta reservas a partir del día siguiente
+	 * Tablas usadas:
+	 *	-RESERVA: Para consultar las reservas
+	 *Atributos de la tabla usados:
+	 *	-usuario: Usuario de la reserva
+	 *	-modalidad_reserva: Modalidad de la reserva
+	 *	-tipo_Reserva: Tipo de reserva
+	 *	-participantes_infantiles: Número de participantes infantiles
+	 *	-fecha: Fecha de la reserva
+	 *	-duracion: Duracion de la reserva
+	 *	-descuento: Posible descuento a aplicar
+	 *	-precio: Precio de la reserva
+	 *	-pista: Pista de la reserva
+	 * @param modalidad Modalidad de la reserva
+	 * @param usuario Usuario de la reserva
+	 * @return reservas Lista de reservas
+	 */
 	
 	//NEW -- Consultar reservas a partir de mañana de un usuario
 	public List<ReservaInfantilDTO> consultarReservasInfantilFuturas(String modalidad, String usuario){
@@ -152,6 +194,20 @@ public class ReservaInfantilDAO {
 		return reservas;
 	}
 	
+	
+	/**
+	 * Metodo que consulta reservas infantiles en un rango de fechas
+	 * Tablas usadas:
+	 *	-RESERVA: Para consultar las reservas
+	 *Atributos de la tabla usados:
+	 *	-usuario: Usuario de la reserva
+	 *	-fecha: Modalidad de la reserva
+	 *	-tipo_Reserva: Tipo de reserva (infantil)
+	 * @param fechaInicio Fecha de inicio
+	 * @param fechaFIn Fecha de fin
+	 * @param usuario Usuario que hace las reservas
+	 * @return reservas Lista de reservas
+	 */
 	//NEW -- Consultar reservas de un usuario en un rango de fechas dado
 	public List<ReservaInfantilDTO> consultarReservasInfantilRango(String fechaInicio, String fechaFin, String usuario){
 		
@@ -208,6 +264,20 @@ public class ReservaInfantilDAO {
 		return reservas;
 		
 	}
+	
+	
+	/**
+	 * Metodo que consulta reservas infantiles
+	 * Tablas usadas:
+	 *	-RESERVA: Para consultar las reservas
+	 *Atributos de la tabla usados:
+	 *	-usuario: Usuario de la reserva
+	 *	-fecha: Modalidad de la reserva
+	 *	-tipo_Reserva: Tipo de reserva (infantil)
+	 * @param fechaInicio Fecha de inicio
+	 * @param fechaFIn Fecha de fin
+	 * @return reservas Lista de reservas
+	 */
 	
 	//NEW -- Consultar todas las reservas de cualquier usuario en un rango de fechas dado
 		public List<ReservaInfantilDTO> consultarReservasInfantil(String fechaInicio, String fechaFin){
@@ -266,6 +336,20 @@ public class ReservaInfantilDAO {
 			
 		}
 		
+		
+		/**
+		 * Metodo que consulta reservas infantiles futuras en un rango
+		 * Tablas usadas:
+		 *	-RESERVA: Para consultar las reservas
+		 *Atributos de la tabla usados:
+		 *	-usuario: Usuario de la reserva
+		 *	-fecha: Modalidad de la reserva
+		 *	-tipo_Reserva: Tipo de reserva (infantil)
+		 * @param modalidad Modalidad de la reserva
+		 * @param fechaInicio Fecha de inicio
+		 * @param fechaFIn Fecha de fin
+		 * @return reservas Lista de reservas
+		 */
 		///NEW -- Consultar todas las reservas de cualquier usuario en un rango dado y a partir de mañana
 		public List<ReservaInfantilDTO> consultarReservasInfantilRangoFuturas(String modalidad, String fechaInicio, String fechaFin){
 					

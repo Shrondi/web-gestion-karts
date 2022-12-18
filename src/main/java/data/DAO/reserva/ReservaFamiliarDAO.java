@@ -28,7 +28,8 @@ public class ReservaFamiliarDAO {
 	private Properties prop;
 	
 	/**
-	 * Constructor sin parametros del DAO 
+	 * Constructor del DAO de Usuario
+	 * @param properties Objeto properties que contiene las consultas relativas a la BD
 	 */
 	
 	public ReservaFamiliarDAO(Properties properties) {
@@ -37,9 +38,21 @@ public class ReservaFamiliarDAO {
 	}
 	
 	/**
-	 * Metodo para incluir una nueva reserva de tipo Familiar en la base de datos
-	 * 
-	 * @param reservaFamiliar reserva de tipo Familiar a incluir en la base de datos
+	 * Se usa para incluir una nueva reserva familiar
+	 * Tablas usadas:
+	 *	-RESERVA: Para crear la reserva
+	 *Atributos de la tabla usados:
+	 *	-usuario: Usuario de la reserva
+	 *	-modalidad_reserva: Modalidad de la reserva
+	 *	-tipo_Reserva: Tipo de reserva
+	 *	-participantes_adultos: Número de participantes adultos
+	 *  -participantes_adultos: Número de participantes infantiles 
+	 *	-fecha: Fecha de la reserva
+	 *	-duracion: Duracion de la reserva
+	 *	-descuento: Posible descuento a aplicar
+	 *	-precio: Precio de la reserva
+	 *	-pista: Pista de la reserva
+	 * @param reservas Reserva familiar a crear
 	 */
 	
 	public void crearReservaFamiliar(ReservaFamiliarDTO reservaFamiliar) {
@@ -69,10 +82,23 @@ public class ReservaFamiliarDAO {
 	}
 	
 	/**
-	 * Metodo que crea una reserva de tipo Familiar asociada a un bono
-	 * 
-	 * @param reservaAFamiliar Reserva de tipo Familiar a incluir en la base de datos, asociada a un bono
-	 * @param idBono Identificador del bono al que asociar a la reserva
+	 * Metodo que crea un bono de reservas familiares
+	 * Tablas usadas:
+	 *	-RESERVA: Para crear el bono de reservas
+	 *Atributos de la tabla usados:
+	 *	-usuario: Usuario de la reserva
+	 *	-modalidad_reserva: Modalidad de la reserva
+	 *	-tipo_Reserva: Tipo de reserva
+	 *	-participantes_adultos: Número de participantes adultos
+	 *	-participantes_infantiles: Número de participantes infantiles
+	 *	-fecha: Fecha de la reserva
+	 *	-duracion: Duracion de la reserva
+	 *	-descuento: Posible descuento a aplicar
+	 *	-precio: Precio de la reserva
+	 *	-pista: Pista de la reserva
+	 *	-idBono: ID del bono
+	 * @param reservaFamiliar Reserva familiar a crear
+	 * @param idBono ID del bono
 	 */
 	
 	public void crearReservaFamiliarBono(ReservaFamiliarDTO reservaFamiliar, int idBono) {
@@ -102,6 +128,26 @@ public class ReservaFamiliarDAO {
 			
 	}
 	
+	
+	/**
+	 * Metodo que consulta reservas a partir del día siguiente
+	 * Tablas usadas:
+	 *	-RESERVA: Para consultar las reservas
+	 *Atributos de la tabla usados:
+	 *	-usuario: Usuario de la reserva
+	 *	-modalidad_reserva: Modalidad de la reserva
+	 *	-tipo_Reserva: Tipo de reserva
+	 *	-participantes_adultos: Número de participantes adultos
+	 *	-participantes_infantiles: Número de participantes infantiles
+	 *	-fecha: Fecha de la reserva
+	 *	-duracion: Duracion de la reserva
+	 *	-descuento: Posible descuento a aplicar
+	 *	-precio: Precio de la reserva
+	 *	-pista: Pista de la reserva
+	 * @param modalidad Modalidad de la reserva
+	 * @param usuario Usuario de la reserva
+	 * @return reservas Lista de reservas
+	 */
 	
 	//NEW -- Consultar reservas a partir de mañana de un usuario
 	public List<ReservaFamiliarDTO> consultarReservasFamiliarFuturas(String modalidad, String usuario){
@@ -152,6 +198,21 @@ public class ReservaFamiliarDAO {
 		connection.closeConnection();
 		return reservas;
 	}
+	
+	
+	/**
+	 * Metodo que consulta reservas familiares en un rango de fechas
+	 * Tablas usadas:
+	 *	-RESERVA: Para consultar las reservas
+	 *Atributos de la tabla usados:
+	 *	-usuario: Usuario de la reserva
+	 *	-fecha: Modalidad de la reserva
+	 *	-tipo_Reserva: Tipo de reserva (familiar)
+	 * @param fechaInicio Fecha de inicio
+	 * @param fechaFIn Fecha de fin
+	 * @param usuario Usuario que hace las reservas
+	 * @return reservas Lista de reservas
+	 */
 	
 	//NEW -- Consultar reservas de un usuario en un rango de fechas dado
 	public List<ReservaFamiliarDTO> consultarReservasFamiliarRango(String fechaInicio, String fechaFin, String usuario){
@@ -212,6 +273,19 @@ public class ReservaFamiliarDAO {
 		
 	}
 	
+	/**
+	 * Metodo que consulta reservas familiares
+	 * Tablas usadas:
+	 *	-RESERVA: Para consultar las reservas
+	 *Atributos de la tabla usados:
+	 *	-usuario: Usuario de la reserva
+	 *	-fecha: Modalidad de la reserva
+	 *	-tipo_Reserva: Tipo de reserva (adultos)
+	 * @param fechaInicio Fecha de inicio
+	 * @param fechaFIn Fecha de fin
+	 * @return reservas Lista de reservas
+	 */
+	
 	//NEW -- Consultar todas las reservas de cualquier usuario en un rango de fechas dado
 		public List<ReservaFamiliarDTO> consultarReservasFamiliar(String fechaInicio, String fechaFin){
 			
@@ -270,6 +344,21 @@ public class ReservaFamiliarDAO {
 			return reservas;
 			
 		}
+		
+		
+		/**
+		 * Metodo que consulta reservas familiares futuras en un rango
+		 * Tablas usadas:
+		 *	-RESERVA: Para consultar las reservas
+		 *Atributos de la tabla usados:
+		 *	-usuario: Usuario de la reserva
+		 *	-fecha: Modalidad de la reserva
+		 *	-tipo_Reserva: Tipo de reserva (adultos)
+		 * @param modalidad Modalidad de la reserva
+		 * @param fechaInicio Fecha de inicio
+		 * @param fechaFIn Fecha de fin
+		 * @return reservas Lista de reservas
+		 */
 		
 		//NEW -- Consultar todas las reservas de cualquier usuario en un rango dado y a partir de mañana
 				public List<ReservaFamiliarDTO> consultarReservasFamiliarRangoFuturas(String modalidad, String fechaInicio, String fechaFin){

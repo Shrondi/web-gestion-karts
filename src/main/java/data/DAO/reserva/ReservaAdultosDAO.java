@@ -42,7 +42,7 @@ public class ReservaAdultosDAO {
 	 * Tablas usadas:
 	 *	-RESERVA: Para seleccionar todos los usuarios existentes en la BD
 	 *Atributos de la tabla usados:
-	 *	-usuario: Sirve de identificador del usuario, al ser la Primary Key
+	 *	-usuario: Usuario de la reserva
 	 *	-modalidad_reserva: Modalidad de la reserva
 	 *	-tipo_Reserva: Tipo de reserva
 	 *	-participantes_adultos: Número de participantes adultos
@@ -80,10 +80,22 @@ public class ReservaAdultosDAO {
 	}
 	
 	/**
-	 * Metodo que crea una reserva de tipo Adulto asociada a un bono
-	 * 
-	 * @param reservaAdultos Reserva de tipo Adulto a incluir en la base de datos, asociada a un bono
-	 * @param idBono Identificador del bono al que asociar a la reserva
+	 * Metodo que crea un bono de reservas de adultos
+	 * Tablas usadas:
+	 *	-RESERVA: Para crear el bono de reservas
+	 *Atributos de la tabla usados:
+	 *	-usuario: Usuario de la reserva
+	 *	-modalidad_reserva: Modalidad de la reserva
+	 *	-tipo_Reserva: Tipo de reserva
+	 *	-participantes_adultos: Número de participantes adultos
+	 *	-fecha: Fecha de la reserva
+	 *	-duracion: Duracion de la reserva
+	 *	-descuento: Posible descuento a aplicar
+	 *	-precio: Precio de la reserva
+	 *	-pista: Pista de la reserva
+	 *	-idBono: ID del bono
+	 * @param reservaAdultos Reserva de adultos a crear
+	 * @param idBono ID del bono
 	 */
 	public void crearReservaAdultoBono(ReservaAdultosDTO reservaAdultos, int idBono) {
 		
@@ -110,6 +122,26 @@ public class ReservaAdultosDAO {
 		connection.closeConnection();
 			
 	}
+	
+	/**
+	 * Metodo que consulta reservas a partir del día siguiente
+	 * Tablas usadas:
+	 *	-RESERVA: Para consultar las reservas
+	 *Atributos de la tabla usados:
+	 *	-usuario: Usuario de la reserva
+	 *	-modalidad_reserva: Modalidad de la reserva
+	 *	-tipo_Reserva: Tipo de reserva
+	 *	-participantes_adultos: Número de participantes adultos
+	 *	-fecha: Fecha de la reserva
+	 *	-duracion: Duracion de la reserva
+	 *	-descuento: Posible descuento a aplicar
+	 *	-precio: Precio de la reserva
+	 *	-pista: Pista de la reserva
+	 *	-idBono: ID del bono
+	 * @param modalidad Modalidad de la reserva
+	 * @param usuario Usuario de la reserva
+	 * @return reservas Lista de reservas
+	 */
 	
 	//NEW -- Consultar reservas a partir de mañana de un usuario
 	public List<ReservaAdultosDTO> consultarReservasAdultosFuturas(String modalidad, String usuario){
@@ -160,6 +192,21 @@ public class ReservaAdultosDAO {
 		connection.closeConnection();
 		return reservas;
 	}
+	
+	
+	/**
+	 * Metodo que consulta reservas de adultos en un rango de fechas
+	 * Tablas usadas:
+	 *	-RESERVA: Para consultar las reservas
+	 *Atributos de la tabla usados:
+	 *	-usuario: Usuario de la reserva
+	 *	-fecha: Modalidad de la reserva
+	 *	-tipo_Reserva: Tipo de reserva (adultos)
+	 * @param fechaInicio Fecha de inicio
+	 * @param fechaFIn Fecha de fin
+	 * @param usuario Usuario que hace las reservas
+	 * @return reservas Lista de reservas
+	 */
 	
 	///NEW -- Consultar reservas de un usuario en un rango de fechas dado
 	public List<ReservaAdultosDTO> consultarReservasAdultosRango(String fechaInicio, String fechaFin, String usuario){
@@ -216,7 +263,18 @@ public class ReservaAdultosDAO {
 		return reservas;
 	}
 	
-	////NEW -- Consultar todas las reservas de cualquier usuario en un rango de fechas dado
+	/**
+	 * Metodo que consulta reservas de adultos
+	 * Tablas usadas:
+	 *	-RESERVA: Para consultar las reservas
+	 *Atributos de la tabla usados:
+	 *	-usuario: Usuario de la reserva
+	 *	-fecha: Modalidad de la reserva
+	 *	-tipo_Reserva: Tipo de reserva (adultos)
+	 * @param fechaInicio Fecha de inicio
+	 * @param fechaFIn Fecha de fin
+	 * @return reservas Lista de reservas
+	 */
 		public List<ReservaAdultosDTO> consultarReservasAdultos(String fechaInicio, String fechaFin){
 			List<ReservaAdultosDTO> reservas = new ArrayList<>();
 			DBConnection connection = new DBConnection();
@@ -270,6 +328,21 @@ public class ReservaAdultosDAO {
 			connection.closeConnection();
 			return reservas;
 		}
+		
+		
+		/**
+		 * Metodo que consulta reservas de adultos futuras en un rango
+		 * Tablas usadas:
+		 *	-RESERVA: Para consultar las reservas
+		 *Atributos de la tabla usados:
+		 *	-usuario: Usuario de la reserva
+		 *	-fecha: Modalidad de la reserva
+		 *	-tipo_Reserva: Tipo de reserva (adultos)
+		 * @param modalidad Modalidad de la reserva
+		 * @param fechaInicio Fecha de inicio
+		 * @param fechaFIn Fecha de fin
+		 * @return reservas Lista de reservas
+		 */
 		
 		//NEW -- Consultar todas las reservas de cualquier usuario en un rango dado y a partir de mañana
 		public List<ReservaAdultosDTO> consultarReservasAdultosRangoFuturas(String modalidad, String fechaInicio, String fechaFin){
