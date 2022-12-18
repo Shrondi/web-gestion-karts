@@ -100,35 +100,6 @@ public class ReservaInfantilDAO {
 			
 	}
 	
-	/**
-	 * Modifica una entrada de reserva de tipo Infantil de la base de datos
-	 * 
-	 * @param reservaInfantil reserva de tipo Infantil existente en la base de datos a modificar
-	 */
-	
-	public void modificarReservaInfantil(ReservaInfantilDTO reservaInfantil) {
-		
-		DBConnection connection = new DBConnection();
-		con = connection.getConnection();
-
-		try {
-			PreparedStatement ps = con.prepareStatement(prop.getProperty("modificarReservaInfantilSTM"));
-			ps.setInt(2,reservaInfantil.getParticipantesInfantiles());
-			ps.setString(3, reservaInfantil.getFecha());
-			ps.setInt(4, reservaInfantil.getDuracion());
-			ps.setFloat(6, reservaInfantil.getPrecio());
-			ps.setString(7, reservaInfantil.getIdPista());
-			
-			ps.executeUpdate();
-		
-		} catch(SQLException e) {
-			e.printStackTrace();
-		}
-		
-		connection.closeConnection();
-		
-	}
-	
 	
 	//NEW -- Consultar reservas a partir de mañana de un usuario
 	public List<ReservaInfantilDTO> consultarReservasInfantilFuturas(String modalidad, String usuario){

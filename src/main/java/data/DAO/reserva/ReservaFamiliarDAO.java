@@ -102,35 +102,6 @@ public class ReservaFamiliarDAO {
 			
 	}
 	
-	/**
-	 * Modifica una entrada de reserva de tipo Familiar de la base de datos
-	 * 
-	 * @param reservaFamiliar reserva de tipo Familiar existente en la base de datos a modificar
-	 */
-	
-	public void modificarReservaFamiliar(ReservaFamiliarDTO reservaFamiliar) {
-		
-		DBConnection connection = new DBConnection();
-		con = connection.getConnection();
-
-		try {
-			PreparedStatement ps = con.prepareStatement(prop.getProperty("crearReservaFamiliarSTM"));
-			ps.setInt(2,reservaFamiliar.getParticipantesInfantiles());
-			ps.setInt(3,reservaFamiliar.getParticipantesAdultos());
-			ps.setString(4, reservaFamiliar.getFecha());
-			ps.setInt(5, reservaFamiliar.getDuracion());
-			ps.setFloat(7, reservaFamiliar.getPrecio());
-			ps.setString(8, reservaFamiliar.getIdPista());
-			
-			ps.executeUpdate();
-		
-		} catch(SQLException e) {
-			e.printStackTrace();
-		}
-		
-		connection.closeConnection();
-			
-	}
 	
 	//NEW -- Consultar reservas a partir de mañana de un usuario
 	public List<ReservaFamiliarDTO> consultarReservasFamiliarFuturas(String modalidad, String usuario){

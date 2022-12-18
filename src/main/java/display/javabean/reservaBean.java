@@ -4,16 +4,20 @@ package display.javabean;
 public class reservaBean implements java.io.Serializable{
 
 	private static final long serialVersionUID = 1L;
+	private int idReserva_= 0;
 	private int duracion_ = 0;
 	private int numeroNinios_ = 0;
 	private int numeroAdultos_ = 0;
 	private String tipoReserva_ = null;
 	private String fecha_ = null;
+	private String pista_ = null;
 	private int idBono_ = 0;
 	private int numeroSesiones_ = 0;
 	private String fechaCaducidad_ = null;
 	
-	
+	public int getIdReserva() {
+		return idReserva_;
+	}
 	public int getDuracion() {
 		return duracion_;
 	}
@@ -38,8 +42,14 @@ public class reservaBean implements java.io.Serializable{
 	public String getFechaCaducidad() {
 		return fechaCaducidad_;
 	}
+	public String getPista() {
+		return pista_;
+	}
 	
 	
+	public void setIdReserva(int idReserva) {
+		this.idReserva_ = idReserva;
+	}
 	public void setDuracion(int duracion) {
 		this.duracion_ = duracion;
 	}
@@ -63,6 +73,9 @@ public class reservaBean implements java.io.Serializable{
 	}
 	public void setFechaCaducidad(String fechaCaducidad) {
 		this.fechaCaducidad_ = fechaCaducidad;
+	}
+	public void setPista(String pista) {
+		this.pista_ = pista;
 	}
 	
 }

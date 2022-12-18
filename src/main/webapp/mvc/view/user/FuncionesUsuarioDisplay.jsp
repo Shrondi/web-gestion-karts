@@ -38,7 +38,7 @@ if(userBean == null || userBean.getCorreo().equals("")){
 						</li>
 						
 						<li>
-							<form method="post" action="/WebProyectoPW-main/ModificarReservaIndividual">
+							<form method="post" action="/WebProyectoPW/ModificarReservaIndividual">
 								<input type="submit" name="option" class="option" value="Modificar reserva Individual">
 							</form>
 						</li>

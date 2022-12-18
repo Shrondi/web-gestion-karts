@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import display.javabean.cancelarBean;
+import display.javabean.reservaBean;
 import display.javabean.userBean;
 import business.kart.Estado;
 import business.pista.PistaDTO;
@@ -26,10 +28,23 @@ import data.DAO.reserva.*;
 public class ModificarReservaIndividual extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	/*
+	 * Las variables de clase, declaradas fuera de los métodos doGet y doPost (por ejemplo, en este caso bean), son
+	 * persistentes, es decir, conservan sus valores en posteriores solicitudes al mismo servlet. Esto es así ya que
+	 * el ServletContainer sólo crea una instancia del mismo servlet, creando posteriormente un nuevo hilo para
+	 * servir cada solicitud.
+	 * 
+	 * Ref: http://gssi.det.uvigo.es/users/agil/public_html/LRO/jsp.pdf, Pagina: 2
+	 */
+	
+	reservaBean bean = new reservaBean();
+	reservaBean oldbean = new reservaBean();
+	cancelarBean beanAux = new cancelarBean();
        
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher;
 		HttpSession session = request.getSession();
@@ -42,108 +57,166 @@ public class ModificarReservaIndividual extends HttpServlet {
 		java.util.Properties prop = new java.util.Properties();
 		prop.load(myIO);
 		
-		
 		//Caso 1: Usuario no esta logueado -> Volvemos al index
 		if (userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() == true) {
+		
 			response.sendRedirect("/WebProyectoPW");
 			
 		//Caso 2: Usuario logueado
 		}else{
 			
-			String reservaId = request.getParameter("reserva");
+			String reservaElegida = request.getParameter("reserva"); 
 			
-			String fecha = request.getParameter("fecha");
-			String pista = request.getParameter("pista");
-			
-				
 			List<ReservaInfantilDTO> reservasInfantil = new ArrayList<>();
 			List<ReservaFamiliarDTO> reservasFamiliar = new ArrayList<>();
 			List<ReservaAdultosDTO> reservasAdultos = new ArrayList<>();
-				
+			
 			//Caso 2a: Si request esta vacio -> Ir a la vista
-			if (reservaId == null && fecha == null && pista == null) {
-					
+			if (reservaElegida == null) {
+				
 				ReservaInfantilDAO reservaInfantilDAO = new ReservaInfantilDAO(prop);
 				ReservaFamiliarDAO reservaFamiliarDAO = new ReservaFamiliarDAO(prop);
 				ReservaAdultosDAO reservaAdultosDAO = new ReservaAdultosDAO(prop);
 
-				reservasInfantil = reservaInfantilDAO.consultarReservasInfantilFuturas(userBean.getCorreo());
-				reservasFamiliar = reservaFamiliarDAO.consultarReservasFamiliarFuturas(userBean.getCorreo());
-				reservasAdultos = reservaAdultosDAO.consultarReservasAdultosFuturas(userBean.getCorreo());
-					
-				session.setAttribute("reservasInfantil", reservasInfantil);
-				session.setAttribute("reservasFamiliar", reservasFamiliar);
-				session.setAttribute("reservasAdultos", reservasAdultos);
-					
-				request.setAttribute("nextPage", "/WebProyectoPW/ModificarReservaIndividual");
-				request.setAttribute("mensaje", "Aviso: Solo se est&aacute;n mostrando aquellas reservas que se pueden modificar");
-				dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservasCancelarDisplay.jsp");
-				dispatcher.forward(request, response);
+				reservasInfantil = reservaInfantilDAO.consultarReservasInfantilFuturas("INDIVIDUAL", userBean.getCorreo());
+				reservasFamiliar = reservaFamiliarDAO.consultarReservasFamiliarFuturas("INDIVIDUAL", userBean.getCorreo());
+				reservasAdultos = reservaAdultosDAO.consultarReservasAdultosFuturas("INDIVIDUAL", userBean.getCorreo());
 				
-			}else if (fecha == null && pista == null){
-				reservasInfantil = (List<ReservaInfantilDTO>) request.getSession().getAttribute("reservasInfantil");
-				reservasFamiliar = (List<ReservaFamiliarDTO>) request.getSession().getAttribute("reservasFamiliar");
-				reservasAdultos =  (List<ReservaAdultosDTO>) request.getSession().getAttribute("reservasAdultos");
-				 
+				beanAux.setReservasInfantil(reservasInfantil);
+				beanAux.setReservasFamiliar(reservasFamiliar);
+				beanAux.setReservasAdultos(reservasAdultos);
+				
+				if (reservasInfantil.isEmpty() && reservasFamiliar.isEmpty() && reservasAdultos.isEmpty()) {
+					
+					request.setAttribute("mensaje", "No se ha encontrado ninguna reserva");
+					dispatcher = request.getRequestDispatcher("/");
+					dispatcher.forward(request, response);
+				}else {
+					request.setAttribute("cancelarBean", beanAux);
+					request.setAttribute("nextPage", "/WebProyectoPW/ModificarReservaIndividual");
+					request.setAttribute("mensaje", "Aviso: Solo se est&aacute;n mostrando aquellas reservas que se pueden modificar");
+					dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservasModificarDisplay.jsp");
+					dispatcher.forward(request, response);
+				}
+				
+			//Caso 2b: Request no esta vacio	
+			}else {
+				int IdReserva = Integer.parseInt(reservaElegida);
+				
+				oldbean.setIdReserva(IdReserva);
+				
+				//Buscamos la reserva para guardar los datos antiguos
+				
+				if (beanAux.getReservasInfantil() != null) {
+					for (ReservaInfantilDTO reservaInfantil : beanAux.getReservasInfantil()) {
+						if (reservaInfantil.getIdReserva() == IdReserva) {
+							oldbean.setNumeroNinios(reservaInfantil.getParticipantesInfantiles());
+							oldbean.setPista(reservaInfantil.getIdPista());
+							break;
+						}
+					}
+				}
+				
+				if (beanAux.getReservasFamiliar() != null) {
+					for (ReservaFamiliarDTO reservaFamiliar : beanAux.getReservasFamiliar()) {
+						if (reservaFamiliar.getIdReserva() == IdReserva) {
+							oldbean.setNumeroNinios(reservaFamiliar.getParticipantesInfantiles());
+							oldbean.setNumeroNinios(reservaFamiliar.getParticipantesAdultos());
+							oldbean.setPista(reservaFamiliar.getIdPista());
+							break;
+						}
+					}
+				}
+				
+				if (beanAux.getReservasAdultos() != null) {
+					for (ReservaAdultosDTO reservaAdultos : beanAux.getReservasAdultos()) {
+						if (reservaAdultos.getIdReserva() == IdReserva) {
+							oldbean.setNumeroNinios(reservaAdultos.getParticipantesAdultos());
+							oldbean.setPista(reservaAdultos.getIdPista());
+							break;
+						}
+					}
+				}
+				
 				ReservaDAO reservaDAO = new ReservaDAO(prop);
 				PistaDAO pistaDAO = new PistaDAO(prop);
 				KartDAO kartDAO = new KartDAO(prop);
 				
-				int IdReserva = Integer.parseInt(reservaId);
+				String fechaReserva = request.getParameter("fecha");
+				String pista = request.getParameter("pista");
 				
-				boolean done = false;
-				
-				if (done == false) {
-					for (ReservaInfantilDTO reservaInfantil : reservasInfantil) {
-						if (reservaInfantil.getIdReserva() == IdReserva) {
-							
-							pistaDAO.actualizarPista(reservaInfantil.getIdPista(), -reservaInfantil.getParticipantesInfantiles(), 0);
-							kartDAO.actualizarEstadoKart(true, Estado.DISPONIBLE, reservaInfantil.getIdPista(), reservaInfantil.getParticipantesInfantiles());
-							break;
-						}
-					}
-				}
-				
-				if (done == false) {
-					for (ReservaFamiliarDTO reservaFamiliar : reservasFamiliar) {
-						if (reservaFamiliar.getIdReserva() == IdReserva) {
-
-							pistaDAO.actualizarPista(reservaFamiliar.getIdPista(), -reservaFamiliar.getParticipantesInfantiles(), -reservaFamiliar.getParticipantesAdultos());
-							
-							kartDAO.actualizarEstadoKart(true, Estado.DISPONIBLE, reservaFamiliar.getIdPista(), reservaFamiliar.getParticipantesInfantiles());
-							kartDAO.actualizarEstadoKart(false, Estado.DISPONIBLE, reservaFamiliar.getIdPista(), reservaFamiliar.getParticipantesAdultos());
-							break;
-						}
-					}
-				}
-				
-				if (done == false) {
-					for (ReservaAdultosDTO reservaAdultos : reservasAdultos) {
-						if (reservaAdultos.getIdReserva() == IdReserva) {
+				//CASO 3a: No hay parametros en el request -> Ir a la vista para crear una reserva individual
+				if (fechaReserva == null && pista == null){
 					
-							pistaDAO.actualizarPista(reservaAdultos.getIdPista(), 0, -reservaAdultos.getParticipantesAdultos());
-							kartDAO.actualizarEstadoKart(false, Estado.DISPONIBLE, reservaAdultos.getIdPista(), reservaAdultos.getParticipantesAdultos());
-							break;
-						}
-					}
-				}
-				
-				
-				//Caso 2a: No hay parametros en el request -> Ir a la vista para modificar los campos
-				if (fecha == null && pista == null){
-					System.out.println("LLEGUE");
-					request.setAttribute("nextPage", "/WebProyectoPW/ModificarReservaIndividual");
-					dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaDisplay.jsp");
+					dispatcher = request.getRequestDispatcher("/mvc/view/user/ModificarReservaIndividualDisplay.jsp");
 					dispatcher.forward(request, response);
 				
-				//Caso 2b: Hay parametros en el request (se ha elegido la pista) -> Realizar la reserva
-				}else if(pista != null){
+				//CASO 3b: Hay parametros en el request proveniente de la vista de crear reservas -> Elegimos la pista
+				}else if (fechaReserva != null && pista == null){
 					
-					int duracion = (int) request.getSession().getAttribute("duracion");
-					int numeroNinios = (int) request.getSession().getAttribute("numeroNinios");
-					int numeroAdultos = (int) request.getSession().getAttribute("numeroAdultos");
-					String tipoReserva = (String) request.getSession().getAttribute("tipoReserva");
-					fecha = (String) request.getSession().getAttribute("fecha");
+						//Obtenemos los parametros restantes del request
+						int duracion = Integer.parseInt(request.getParameter("duracion"));
+						String tipoReserva = request.getParameter("tipoReserva");
+						int numeroNinios = 0;
+						int numeroAdultos = 0;
+						
+						//Dependiento del tipo de reserva, el valor del numero de niños o adultos sera 0 o se parseara
+						
+						if (tipoReserva.contentEquals("FAMILIAR") || tipoReserva.contentEquals("ADULTOS")) {
+							numeroAdultos = Integer.parseInt(request.getParameter("numeroAdultos"));
+						}
+						
+						if (tipoReserva.contentEquals("FAMILIAR") || tipoReserva.contentEquals("INFANTIL")) {
+							numeroNinios = Integer.parseInt(request.getParameter("numeroNinios"));
+						}
+						
+						
+						//Si el usuario elige una fecha en en el rango de la fecha de la ultima reserva + 2 horas, tendra que elegir otra fecha
+						// (Asi se evita tener dos reservas que transcurran a la vez para el mismo usuario)
+						// Se ha elegido un franja de 2 horas por comodidad ya que la maxima duracion de una reserva son 2 horas
+						if (reservaDAO.comprobarReserva(fechaReserva, userBean.getCorreo())) {
+							request.setAttribute("mensaje", "Ya tiene una reserva para la fecha dada. Debe haber una diferencia de 2 horas m&iacute;nimo entre la fecha de las reservas");
+							
+							dispatcher = request.getRequestDispatcher("/mvc/view/user/ModificarReservaIndividualDisplay.jsp");
+							dispatcher.forward(request, response);
+						
+						//Se puede realizar la reserva
+						}else{
+							
+							List<PistaDTO> pistas = pistaDAO.consultarPistas(tipoReserva, numeroNinios, numeroAdultos);
+							
+							//No hay pistas disponibles para los datos dados -> Volver al display a pedir nuevos datos para la reserva
+							if (pistas.isEmpty()) {
+								
+								request.setAttribute("mensaje", "No hay pistas disponibles con los datos dados. Int&eacute;ntelo de nuevo m&aacute;s tarde.");
+								dispatcher = request.getRequestDispatcher("/mvc/view/user/ModificarReservaIndividualDisplay.jsp");
+								dispatcher.forward(request, response);
+							
+							//Hay pistas disponibles para los datos dados -> Ir al display a elegir una pista
+							}else{
+								
+								//Guardamos los datos de la reserva para un posterior uso
+								bean.setFecha(fechaReserva);
+								bean.setDuracion(duracion);
+								bean.setTipoReserva(tipoReserva);
+								bean.setNumeroNinios(numeroNinios);
+								bean.setNumeroAdultos(numeroAdultos);
+								
+								request.setAttribute("ListaPistas", pistas);
+								request.setAttribute("nextPage", "/WebProyectoPW/ModificarReservaIndividual");
+								dispatcher = request.getRequestDispatcher("/mvc/view/user/PistasDisplay.jsp");
+								dispatcher.forward(request, response);
+							}
+						}
+					
+					//CASO 3c: Hay parametros en el request (se ha elegido la pista) -> Realizar la reserva
+					}else if(pista != null){
+					
+					int duracion = bean.getDuracion();
+					int numeroNinios = bean.getNumeroNinios();
+					int numeroAdultos = bean.getNumeroAdultos();
+					String tipoReserva = bean.getTipoReserva();
+					String fecha = bean.getFecha();
 					
 					 //Calculamos el descuento por su antiguedad y el precio final de la reserva
 					 
@@ -167,11 +240,14 @@ public class ModificarReservaIndividual extends HttpServlet {
 						precio = 40 * precio;			
 					}
 					
+					System.out.println("ENTRO");
+					
 					if (tipoReserva.contentEquals("INFANTIL")) {
 						ReservaInfantilDAO reserva = new ReservaInfantilDAO(prop);
 						ReservaInfantilDTO infantil = new ReservaInfantilDTO();
 						
 						infantil.setIdUsuario(userBean.getCorreo());
+						infantil.setIdReserva(oldbean.getIdReserva());
 						infantil.setFecha(fecha);
 						infantil.setParticipantesInfantiles(numeroNinios);
 						infantil.setDuracion(duracion);
@@ -189,6 +265,7 @@ public class ModificarReservaIndividual extends HttpServlet {
 						ReservaFamiliarDTO familiar = new ReservaFamiliarDTO();
 						
 						familiar.setIdUsuario(userBean.getCorreo());
+						familiar.setIdReserva(oldbean.getIdReserva());
 						familiar.setFecha(fecha);
 						familiar.setParticipantesAdultos(numeroAdultos);
 						familiar.setParticipantesInfantiles(numeroNinios);
@@ -206,6 +283,7 @@ public class ModificarReservaIndividual extends HttpServlet {
 						ReservaAdultosDTO adultos = new ReservaAdultosDTO();
 						
 						adultos.setIdUsuario(userBean.getCorreo());
+						adultos.setIdReserva(oldbean.getIdReserva());
 						adultos.setFecha(fecha);
 						adultos.setParticipantesAdultos(numeroAdultos);
 						adultos.setDuracion(duracion);
@@ -218,83 +296,23 @@ public class ModificarReservaIndividual extends HttpServlet {
 						request.setAttribute("reservaAdultos", adultos);
 					}
 					
+					//Deshacemos los cambios de la reserva antigua en las pistas y los karts
+					pistaDAO.actualizarPista(pista, -oldbean.getNumeroNinios(), -oldbean.getNumeroAdultos());		
+					kartDAO.actualizarEstadoKart(true, Estado.DISPONIBLE, oldbean.getPista(), oldbean.getNumeroNinios());
+					kartDAO.actualizarEstadoKart(false, Estado.RESERVADO, oldbean.getPista(), oldbean.getNumeroAdultos());
+					
+					
 					//Actualizamos el numero de karts disponibles de la pista
 					pistaDAO.actualizarPista(pista, numeroNinios, numeroAdultos);
 					
-					//Actualizamos el estado de los karts a reservado por cada tipo
+					//Actualizamos el estado de los karts a reservado por cada tipo			
 					kartDAO.actualizarEstadoKart(true, Estado.RESERVADO, pista, numeroNinios);
 					kartDAO.actualizarEstadoKart(false, Estado.RESERVADO, pista, numeroAdultos);
 					
-					//Borramos los atributos de la sesion correspondientes a esta reserva
-					session.removeAttribute("ListaPistas");
-					session.removeAttribute("duracion");
-					session.removeAttribute("numeroNinios");
-					session.removeAttribute("numeroAdultos");
-					session.removeAttribute("tipoReserva");
-					session.removeAttribute("fecha");
-					session.removeAttribute("reservasInfantil");
-					session.removeAttribute("reservasFamiliar");
-					session.removeAttribute("reservasAdulto");
-					
 					//Mostramos el resumen de la reserva
 					request.setAttribute("modalidad", "Individual");
-					request.setAttribute("mensaje", "Se ha modificado correctamente la reserva.");
-					dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservaIndividualDisplay.jsp");
+					dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservaDisplay.jsp");
 					dispatcher.forward(request, response);
-					
-				//Caso 2c: Hay parametros en el request proveniente de la vista de crear reservas
-				}else{
-					
-					int duracion = Integer.parseInt(request.getParameter("duracion"));
-					String tipoReserva = request.getParameter("tipoReserva");
-					int numeroNinios = 0;
-					int numeroAdultos = 0;
-					
-					if (tipoReserva.contentEquals("FAMILIAR") || tipoReserva.contentEquals("ADULTOS")) {
-						numeroAdultos = Integer.parseInt(request.getParameter("numeroAdultos"));
-					}
-					
-					if (tipoReserva.contentEquals("FAMILIAR") || tipoReserva.contentEquals("INFANTILES")) {
-						numeroNinios = Integer.parseInt(request.getParameter("numeroNinios"));
-					}
-			
-					
-					//Si el usuario elige una fecha en en el rango de la fecha de la ultima reserva + 2 horas, tendra que elegir otra fecha
-					// (Asi se evita tener dos reservas que transcurran a la vez para el mismo usuario)
-					if (reservaDAO.comprobarReserva(fecha, userBean.getCorreo())) {
-						request.setAttribute("mensaje", "Ya tiene una reserva para la fecha dada. Debe haber una diferencia de 2 horas m&iacute;nimo entre la fecha de las reservas");
-						
-						request.setAttribute("nextPage", "/WebProyectoPW/ModificarReservaIndividual");
-						dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaDisplay.jsp");
-						dispatcher.forward(request, response);
-						
-					}else{
-						List<PistaDTO> pistas = new ArrayList<>();
-						
-						pistas = pistaDAO.consultarPistas(tipoReserva, numeroNinios, numeroAdultos);
-						
-						//No se puede realizar una reserva ya que no hay pistas disponibles para los datos dados
-						if (pistas.isEmpty()) {
-							
-							request.setAttribute("mensaje", "No hay pistas disponibles con los datos dados. Int&eacute;ntelo de nuevo m&aacute;s tarde.");
-							
-							request.setAttribute("nextPage", "/WebProyectoPW/ModificarReservaIndividual");
-							dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaDisplay.jsp");
-							dispatcher.forward(request, response);
-							
-						}else{
-							session.setAttribute("ListaPistas", pistas);
-							session.setAttribute("duracion", duracion);
-							session.setAttribute("numeroNinios", numeroNinios);
-							session.setAttribute("numeroAdultos", numeroAdultos);
-							session.setAttribute("tipoReserva", tipoReserva);
-							session.setAttribute("fecha", fecha);
-
-							request.setAttribute("nextPage", "/WebProyectoPW/ModificarReservaIndividual");
-							dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservasPistasDisplay.jsp");
-							dispatcher.forward(request, response);
-						}
-					}
 				}
 			}
 		}

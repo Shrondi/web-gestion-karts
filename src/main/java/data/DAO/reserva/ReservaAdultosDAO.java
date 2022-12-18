@@ -97,35 +97,6 @@ public class ReservaAdultosDAO {
 			
 	}
 	
-	/**
-	 * Modifica una entrada de reserva de tipo Adulto de la base de datos
-	 * 
-	 * @param reservaAdultos reserva de tipo Adulto existente en la base de datos a modificar
-	 */
-	
-	public void modificarReservaAdulto(ReservaAdultosDTO reservaAdultos) {
-		
-		DBConnection connection = new DBConnection();
-		con = connection.getConnection();
-
-		try {
-			PreparedStatement ps = con.prepareStatement(prop.getProperty("crearReservaAdultosSTM"));
-			ps.setInt(2,reservaAdultos.getParticipantesAdultos());
-			ps.setString(3, reservaAdultos.getFecha());
-			ps.setInt(4, reservaAdultos.getDuracion());
-			ps.setFloat(6, reservaAdultos.getPrecio());
-			ps.setString(7, reservaAdultos.getIdPista());
-			
-			ps.executeUpdate();
-		
-		} catch(SQLException e) {
-			e.printStackTrace();
-		}
-		
-		connection.closeConnection();
-			
-	}
-	
 	//NEW -- Consultar reservas a partir de mañana de un usuario
 	public List<ReservaAdultosDTO> consultarReservasAdultosFuturas(String modalidad, String usuario){
 		List<ReservaAdultosDTO> reservas = new ArrayList<>();

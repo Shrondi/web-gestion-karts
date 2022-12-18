@@ -65,6 +65,7 @@
 
 		<%} %>
 		<p class="mensaje"><%=message%></p>
+		<p class="mensaje"><%=mensaje%></p>
 	
 		<%
 		}%>
