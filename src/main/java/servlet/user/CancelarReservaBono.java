@@ -90,7 +90,7 @@ public class CancelarReservaBono extends HttpServlet {
 				}else {
 					request.setAttribute("cancelarBean", bean);
 					request.setAttribute("nextPage", "/WebProyectoPW/CancelarReservaIndividual");
-					request.setAttribute("mensaje", "Aviso: Solo se estan mostrando aquellas reservas que se pueden cancelar");
+					request.setAttribute("mensaje", "Aviso: Solo se est&aacute;n mostrando aquellas reservas que se pueden cancelar");
 					dispatcher = request.getRequestDispatcher("/mvc/view/common/ReservasCancelarDisplay.jsp");
 					dispatcher.forward(request, response);
 				}
