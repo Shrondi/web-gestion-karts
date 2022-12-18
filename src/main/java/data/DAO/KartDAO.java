@@ -76,6 +76,26 @@ public class KartDAO {
 		connection.closeConnection();
 	}
 	
+	/**
+	 * Actualizar la pista asociada de un kart a NULL
+	 * @param id Id del kart
+	 */
+	//NEW
+	public void eliminarPistaKart(int id) {
+		DBConnection connection = new DBConnection();
+		con = connection.getConnection();
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("actualizarPistaKartNullSTM"));
+			ps.setInt(1,id);
+			ps.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		connection.closeConnection();
+	}
+	
 	
 	//NEW
 	public void actualizarEstadoKart(boolean tipo, Estado estado, String nombre, int numKart) {
@@ -197,13 +217,13 @@ public class KartDAO {
 	}
 	
 	//NEW
-	public void modificarEstadoKart(String estado, int id_kart) {
+	public void modificarEstadoKart(Estado estado, int id_kart) {
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
 		
 		try {
 			PreparedStatement ps = con.prepareStatement(prop.getProperty("modificacionEstadoKartSTM"));
-			ps.setString(1,estado);
+			ps.setString(1,estado.name());
 			ps.setInt(2,id_kart);
 			ps.executeUpdate();
 			

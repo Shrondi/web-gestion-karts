@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
     import="business.kart.*, java.util.List, java.util.ArrayList"%>
 <jsp:useBean id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
+<jsp:useBean id="asociarBean" scope="request" class="display.javabean.asociarBean"></jsp:useBean>
 
 <%
 
@@ -19,9 +20,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		mensajeNextPage = "";
 	}
 	
-	List<KartDTO> ListaKarts = (List<KartDTO>) request.getAttribute("ListaKarts");
-	String tipo="";
-	String pista_asociada = "";
+	List<KartDTO> ListaKarts = asociarBean.getListadoKarts();
 			
 	//Caso 3: Si se accede de forma forzosa por url
 	if (ListaKarts == null){
@@ -35,6 +34,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 
 		<head>
 				<meta charset="UTF-8">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">
 				<title>Modificar estado de los karts</title>
 				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
 				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
@@ -46,69 +46,62 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 			<h2>Modificar estado de Karts</h2>
 			<p class="mensaje" id="message"><%= mensajeNextPage %> </p>
 			<form id="formModificarEstadoKart" method="post" action="/WebProyectoPW/ModificarEstadoKart">
-				<div>
-					<p> 
-						<label for="kart"></label>
-							<%  if (ListaKarts.isEmpty()){ %>
-						 		<p> No se han encontrado karts </p>
-						  	<% }else{ %>
-								<p> Seleccione el kart cuyo estado desee modificar</p>
-									<table>
-										<caption> <strong> Listado de Karts </strong> </caption>
-												<thead>
-												  <tr>
-												    <th></th>
-												    <th>ID del Kart</th>
-												    <th>Tipo de kart</th>
-												    <th>Estado</th>
-												    <th>Pista asociada</th>
-												  </tr>
-												</thead>
-												<tbody>
-													
-												<% for (KartDTO kart : ListaKarts){ %>
-														
-													 <% if(kart.geType() == true){ %>
-															<% tipo = "Niños"; %>
-													<% }else{  %>
-															<% tipo = "Adultos"; %>
-													<% } %>
-														
-														
-													<% if(kart.getPista() == null){ %>
-															<% pista_asociada = "Sin pista asociada"; %>
-													<% }else{  %>
-															<% pista_asociada= kart.getPista(); %>
-													<% } %>
-														
-													  <tr>
-													    <td><input type="radio" name="kart" value="<%= kart.getId()%>" required></td>
-													    <td><%= kart.getId() %></td>
-													    <td><%= tipo %></td>
-													    <td><%= kart.getStatus() %></td>
-													    <td><%= pista_asociada %></td>
-													  
-													  </tr>
-												<% } %>
-												</tbody>
-											</table>
-										<% } %>
-							<br>				
-						<p> Seleccione el nuevo estado para el kart </p>						
+			<div>	
+						<p id="message"><%= mensajeNextPage %></p>
+						<p> 
+						
+						<p> Seleccione el nuevo estado para los karts seleccionados: </p>						
 						<p>		
-							<label for="estado"> Estado:  </label>
-							<select name="estado" id="estado" required>
-								<option value="">...</option>
-								<option value="DISPONIBLE">DISPONIBLE</option>
-								<option value="RESERVADO">RESERVADO</option>
-								<option value="MANTENIMIENTO">MANTENIMIENTO</option>
-							</select>
+								<label for="estado"> Estado:  </label>
+								<select name="estado" id="estado" required>
+									<option value="">...</option>
+									<option value="DISPONIBLE">DISPONIBLE</option>
+									<option value="RESERVADO">RESERVADO</option>
+									<option value="MANTENIMIENTO">MANTENIMIENTO</option>
+								</select>
 						</p>
-				</div>
+						
+								<%  if (ListaKarts.isEmpty()){ %>
+						 			<p> No se han encontrado karts </p>
+						  		<% }else{ %>
+						
+										<table>
+										<caption> <strong> Lista de Karts </strong> </caption>
+													<thead>
+													  <tr>
+													    <th></th>
+													    <th>ID del Kart</th>
+													    <th>Tipo de kart</th>
+													    <th>Estado</th>
+													    <th>Pista asociada</th>
+													  </tr>
+													</thead>
+													<tbody>
+													
+													<% for (KartDTO kart : ListaKarts){ %>
+														  <tr>
+														    <td><input type="checkbox" name="kart" value="<%= kart.getId()%>"></td>
+														    <td><%= kart.getId() %></td>
+														    <% if(kart.geType() == true){ %>
+																<td> INFANTIL </td>
+															<% }else{  %>
+																<td> ADULTO </td>
+															<% } %>
+														    <td><%= kart.getStatus() %></td>
+														    <% if(kart.getPista() == null){ %>
+																<td> <i>Sin pista asociada </i> </td>
+															<% }else{  %>
+																<td> <%= kart.getPista() %></td>
+															<% } %>
+														  
+														  </tr>
+													<% } %>
+														</tbody>
+													</table>
+													<% } %>			
+				</div>	
 				
-				<div class="aceptar">
-					<input type="submit" value="Confirmar">	
-				</div>
+				<input type="submit" value="Confirmar">
 			</form>
 			
 	<jsp:include page="/include/volver_admin.jsp" />

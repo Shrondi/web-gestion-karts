@@ -366,7 +366,6 @@ public class ReservaFamiliarDAO {
 	 * @param pista Pista a la que deben estar asociadas las reservas de tipo Familiar
 	 * @return Lista de reservas de tipo Familiar con una fecha y pista concretas
 	 */
-	
 	public List<ReservaFamiliarDTO> consultarReservasFamiliarbyFechaPista(String fecha, String pista){
 		List<ReservaFamiliarDTO> reservas = new ArrayList<>();
 		DBConnection connection = new DBConnection();
@@ -404,6 +403,5 @@ public class ReservaFamiliarDAO {
 		connection.closeConnection();
 		return reservas;
 	}
-	
 	
 }

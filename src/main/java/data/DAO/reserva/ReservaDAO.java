@@ -117,6 +117,53 @@ public class ReservaDAO {
 	}
 	
 	
+	//NEW
+	public int obtenerUltimaReservaID(String pista) {
+						
+		int id = 0;
+		DBConnection connection = new DBConnection();
+		con = connection.getConnection();
+
+		try {
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerUltimaReservaIDSTM"));
+			ps.setString(1, pista);
+							
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				id = rs.getInt(1);
+			}
+						
+		} catch(SQLException e) {
+				e.printStackTrace();
+		}
+						
+		connection.closeConnection();
+		return id;
+	}
+	
+	//NEW
+		public void actualizarReserva(int numInfantiles, int numAdultos, int idReserva) {
+			
+			DBConnection connection = new DBConnection();
+			con = connection.getConnection();
+
+			try {
+				PreparedStatement ps = con.prepareStatement(prop.getProperty("actualizarReservabyIDSTM"));
+
+				ps.setInt(1, numInfantiles);
+				ps.setInt(2, numAdultos);
+				ps.setInt(3, idReserva);
+				
+				ps.executeUpdate();
+			
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+			connection.closeConnection();
+		}
+	
 	/**
 	 * Insertar un nuevo bono
 	 * @param correo Correo del usuario
