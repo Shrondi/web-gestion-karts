@@ -65,12 +65,14 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 
 
 			<script type="text/javascript" src="/WebProyectoPW/js/RangoFechasBorrar.js"> </script>
+			</fieldset>	
 			<% if (cancelarBean.getReservasInfantil() != null){ %>
 				<jsp:include page="/mvc/view/common/ReservasCancelarDisplay.jsp" > 
 					<jsp:param name="nextPage" value="/WebProyectoPW/BorrarReservaIndividual" /> 
+					<jsp:param name="cancelarBean" value="cancelarBean" /> 
 				</jsp:include>
 			<%} %>
-		</fieldset>				
+					
 	<jsp:include page="/include/volver_admin.jsp" />
 	<jsp:include page="/include/footer.jsp" />
 </body>

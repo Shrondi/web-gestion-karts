@@ -5,8 +5,8 @@
 
 <%
 
-//Caso 1: No esta logado o si lo esta si es admin
-if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() == true) {
+//Caso 1: No esta logado
+if (userBean == null || userBean.getCorreo().isEmpty()) {
 	
 %>
 	<jsp:forward page="../../../index.jsp" />
@@ -169,8 +169,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 						<%} %>
 						</form>
 						
-	<jsp:include page="/include/volver.jsp" />
-	<jsp:include page="/include/footer.jsp" />
+
 </body>
 </html>
 
