@@ -30,12 +30,30 @@ public class ReservaDAO {
 	private Connection con;
 	private Properties prop;
 	
+	
+	/**
+	 * Constructor del DAO de Reserva
+	 * @param properties Objeto properties que contiene las consultas relativas a la BD
+	 */
+	
 	public ReservaDAO(Properties properties) {
 		
 		prop = properties;
 	}
 	
 	//NEW
+	
+	/**
+	 * Se usa para eliminar unq reserva
+	 * Tablas usadas:
+	 *	-RESERVA: Para eliminar la reserva correspondiente
+	 * Atributos de la tabla usados:
+	 *	-id_Reserva: ID que identifica a la reserva a eliminar
+	 *
+	 * @param idReserva ID de la reserva a borrar
+	 * @return flag Booleano que devuelve True si se borra de forma correcta la reserva y False en caso contrario
+	 */
+	
 	public boolean borrarReserva(int idReserva) {
 		
 		boolean flag = true;
@@ -58,6 +76,20 @@ public class ReservaDAO {
 	}
 	
 	//NEW
+	
+	/**
+	 * Se usa para comprobar si una reserva existe en el rango [fechaNuevaReserva - 2 horas, fechaNuevaReserva]
+	 * Tablas usadas:
+	 *	-RESERVA: Para comprobar si eixste la reserva correspondiente
+	 * Atributos de la tabla usados:
+	 *	-usuario: Usuario que hizo la reserva
+	 *	-fecha: Fecha de la reserva
+	 *
+	 * @param fecha Fecha de la reserva
+	 * @param correo Correo del usuario
+	 * @return check Booleano que devuelve True si la reserva existe y false en caso contrario
+	 */
+	
 	public boolean comprobarReserva(String fecha, String correo){
 		boolean check = false;
 		DBConnection connection = new DBConnection();
@@ -85,6 +117,19 @@ public class ReservaDAO {
 	}
 	
 	//NEW
+	
+	/**
+	 * Se usa para obtener la próxima reserva de un usuario
+	 * Tablas usadas:
+	 *	-RESERVA: Para eliminar la reserva correspondiente
+	 * Atributos de la tabla usados:
+	 *	-usuario: Usuario que hizo la reserva
+	 *	-fecha: Fecha de la reserva
+	 *
+	 * @param correo Correo del usuario que hizo la reserva
+	 * @return reserva Próxima reservada realizada
+	 */
+	
 	public AbstractReservaDTO obtenerProximaReserva(String correo){
 		AbstractReservaDTO reserva = new AbstractReservaDTO();
 		DBConnection connection = new DBConnection();
@@ -118,6 +163,19 @@ public class ReservaDAO {
 	
 	
 	//NEW
+	
+	/**
+	 * Se usa para obtener la última reserva en función de la pista asociada
+	 * Tablas usadas:
+	 *	-RESERVA: Para obtener la reserva correspondiente
+	 * Atributos de la tabla usados:
+	 *	-pista: Usuario que hizo la reserva
+	 *	-fecha: Fecha de la reserva
+	 *
+	 * @param pista Pista asociada a la reserva
+	 * @return id ID de la última reserva
+	 */
+	
 	public int obtenerUltimaReservaID(String pista) {
 						
 		int id = 0;
@@ -143,6 +201,21 @@ public class ReservaDAO {
 	}
 	
 	//NEW
+	
+	/**
+	 * Se usa para actualizar una reserva,concretamente el número de participantes infantiles y/o adultos
+	 * Tablas usadas:
+	 *	-RESERVA: Para actualizar la reserva correspondiente
+	 * Atributos de la tabla usados:
+	 *	-participantes_infantiles: Nuevo número de participantes infantiles
+	 *	-participantes_adultos: Nuevo número de participantes adultos
+	 *	-id_Reserva: ID de la reserva a actualizar
+	 *
+	 * @param numInfantiles Número de participantes infantiles a modificar
+	 * @param numAdultos Número de participantes adultos a modificar
+	 * @param idReserva ID de la reserva
+	 */
+	
 		public void actualizarReserva(int numInfantiles, int numAdultos, int idReserva) {
 			
 			DBConnection connection = new DBConnection();
@@ -164,10 +237,18 @@ public class ReservaDAO {
 			connection.closeConnection();
 		}
 	
-	/**
-	 * Insertar un nuevo bono
-	 * @param correo Correo del usuario
-	 */	
+		/**
+		 * Se usa para insertar un bono
+		 * Tablas usadas:
+		 *	-BONO: Para insertar el bono
+		 * Atributos de la tabla usados:
+		 *	-usuario: Usuario al que pertenece el bono
+		 *	-tipo_bono: Tipo de bono
+		 *
+		 * @param correo Correo del usuario cuyo bono será insertado
+		 * @param tipoBono Tipo de bono
+		 */
+		
 	//NEW
 	public void insertarBono(String correo, String tipoBono) {
 		
@@ -190,6 +271,19 @@ public class ReservaDAO {
 	}
 	
 	//NEW
+	
+	/**
+	 * Se usa para consultar un bono
+	 * Tablas usadas:
+	 *	-BONO: Para acceder al bono correspondiente y poder consultarlo
+	 * Atributos de la tabla usados:
+	 *	-id_Bono: ID del bono a consultar
+	 *	-tipo_bono: Tipo de bono
+	 *
+	 * @param idBono ID del bono a consultar
+	 * @return bono Bono elegido para ser consultado
+	 */
+	
 	public BonoDTO consultarBono(int idBono) {
 		BonoDTO bono = new BonoDTO();
 		DBConnection connection = new DBConnection();
@@ -222,6 +316,19 @@ public class ReservaDAO {
 	}
 		
 	//NEW
+	
+	/**
+	 * Se usa para actualizar la fecha de caducidad de un bono
+	 * Tablas usadas:
+	 *	-BONO: Para poder acceder al bono que se quiera actualizar
+	 * Atributos de la tabla usados:
+	 *	-id_Bono: ID del bono a consultar
+	 *	-fecha_caducidad: Fecha de caducidad del bono, que será actualizada
+	 *
+	 * @param idBono ID del bono a consultar
+	 * @param fecha Nueva fecha de caducidad del bono
+	 */
+	
 	public int actualizarFechaBono(int idBono, String fecha) {
 					
 		int sesiones = 0;
@@ -245,6 +352,19 @@ public class ReservaDAO {
 	}
 				
 	//NEW
+	
+	/**
+	 * Se usa para actualizar el número de sesiones de un bono
+	 * Tablas usadas:
+	 *	-BONO: Para poder acceder al bono cuyo número de sesiones se desee modificar
+	 * Atributos de la tabla usados:
+	 *	-id_Bono: ID del bono cuyas sesiones s everán modificados
+	 *	-numero_sesiones: Número de sesiones, que será modificado
+	 *
+	 * @param numeroSesiones Nuevo número de sesiones del bono
+	 * @param idBono ID del bono
+	 */
+	
 	public void actualizarSesionesBono(int numeroSesiones, int idBono) {
 					
 		DBConnection connection = new DBConnection();
@@ -265,6 +385,19 @@ public class ReservaDAO {
 	}
 	
 	//NEW
+	
+	/**
+	 * Se usa para consultar el ID del bono de una reserva
+	 * Tablas usadas:
+	 *	-RESERVA: Para poder acceder al bono
+	 * Atributos de la tabla usados:
+	 *	-id_Bono: ID del bono 
+	 *	-id_Reserva: ID de la reserva
+	 *
+	 * @param idReserva ID de la reserva
+	 * @param idBono ID del bono a consultar
+	 */
+	
 		public int consultarIDBonoReserva(int idReserva) {
 			int idBono = 0;
 			DBConnection connection = new DBConnection();
@@ -291,6 +424,17 @@ public class ReservaDAO {
 		}
 	
 	//NEW
+		
+		/**
+		 * Se usa para consultar el número de reservas completadas
+		 * Tablas usadas:
+		 *	-RESERVA: Para acceder a las reservas
+		 * Atributos de la tabla usados:
+		 *	-fecha: Fecha de las reservas completadas
+		 *
+		 * @return reservas Número de reservas completadas
+		 */
+		
 	public int consultarReservasCompletadas() {
 				
 		int reservas = 0;
@@ -314,6 +458,18 @@ public class ReservaDAO {
 			
 	
 	//NEW
+	
+	/**
+	 * Se usa para consultar el número de reservas de un usuario completadas
+	 * Tablas usadas:
+	 *	-RESERVA: Para acceder a las reservas del usuario
+	 * Atributos de la tabla usados:
+	 *	-fecha: Fecha de las reservas completadas por parte del usuario
+	 *	-usuario: Usuario del que se quiere saber el número de reservas completadas
+	 *
+	 * @return reservas Número de reservas del usuario que han sido completadas
+	 */
+	
 	public int obtenerReservasCompletadasUsuario(String correo){
 						
 		int reservas = 0;
@@ -336,8 +492,13 @@ public class ReservaDAO {
 	}
 	
 	/**
-	 * Borrar un bono
-	 * @param id ID del bono
+	 * Se usa para borrar un bono
+	 * Tablas usadas:
+	 *	-BONO: Para acceder a los bonos y borrar el deseado
+	 * Atributos de la tabla usados:
+	 *	-id_Bono: ID del bono a borrar
+	 *
+	 * @param id ID del bono a eliminar
 	 */		
 	
 	public void borrarBono(int id) {
@@ -358,10 +519,16 @@ public class ReservaDAO {
 	}
 	
 	/**
-	 * Consultar un bono
-	 * @param usuario Usuario poseedor del bono
-	 * @return ids Lista de IDs de los bonos
-	 */		
+	 * Se usa para consultar los bonos de un usuario
+	 * Tablas usadas:
+	 *	-BONO: Para acceder a los bonos y elegir los relativos a un usuario
+	 * Atributos de la tabla usados:
+	 *	-usuario: Usuario cuyos bonos quieren obtenerse
+	 *
+	 * @param usuario Usuario al que pertenecen los bonos
+	 * @return bonos Lista con los bonos del usuario
+	 */
+	
 	//NEW
 	public List<BonoDTO> consultarBonos(String usuario){
 		

@@ -27,8 +27,10 @@ public class ReservaAdultosDAO {
 	private Connection con;
 	private Properties prop;
 	
+	
 	/**
-	 * Constructor sin parametros del DAO 
+	 * Constructor del DAO de Usuario
+	 * @param properties Objeto properties que contiene las consultas relativas a la BD
 	 */
 	
 	public ReservaAdultosDAO(Properties properties) {
@@ -36,10 +38,22 @@ public class ReservaAdultosDAO {
 	}
 	
 	/**
-	 * Metodo para incluir una nueva reserva de tipo Adulto en la base de datos
-	 * 
-	 * @param reservaAdultos reserva de tipo Adulto a incluir en la base de datos
+	 * Se usa para incluir una nueva reserva de adultos
+	 * Tablas usadas:
+	 *	-RESERVA: Para seleccionar todos los usuarios existentes en la BD
+	 *Atributos de la tabla usados:
+	 *	-usuario: Sirve de identificador del usuario, al ser la Primary Key
+	 *	-modalidad_reserva: Modalidad de la reserva
+	 *	-tipo_Reserva: Tipo de reserva
+	 *	-participantes_adultos: Número de participantes adultos
+	 *	-fecha: Fecha de la reserva
+	 *	-duracion: Duracion de la reserva
+	 *	-descuento: Posible descuento a aplicar
+	 *	-precio: Precio de la reserva
+	 *	-pista: Pista de la reserva
+	 * @param reservaAdultos Reserva de adultos a crear
 	 */
+	
 	public void crearReservaAdulto(ReservaAdultosDTO reservaAdultos) {
 		
 		DBConnection connection = new DBConnection();

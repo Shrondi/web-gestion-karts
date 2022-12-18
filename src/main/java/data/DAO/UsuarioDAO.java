@@ -27,11 +27,28 @@ public class UsuarioDAO{
 	private Connection con;
 	private Properties prop;
 	
+	
+	/**
+	 * Constructor del DAO de Usuario
+	 * @param properties Objeto properties que contiene las consultas relativas a la BD
+	 */
 	public UsuarioDAO(Properties properties){
 		prop = properties;
 	}
 	
 	//NEW
+	
+	/**
+	 * Se usa a modo de consulta.
+	 * Comprueba si un usuario existe a través de su correo
+	 * Tablas usadas:
+	 *	-USUARIO: Para seleccionar todos los usuarios existentes en la BD
+	 *Atributos de la tabla usados:
+	 *	-correo: Sirve de identificador del usuario, al ser la Primary Key
+	 * @param correo Correo del usuario
+	 * @return check Booleano que contiene true en caso de que el usuario existe y false en caso contrario
+	 */
+	
 	public boolean usuarioExiste(String correo){
 		boolean check = false;
 		DBConnection connection = new DBConnection();
@@ -57,8 +74,19 @@ public class UsuarioDAO{
 	}
 	
 	/**
-	 * Dar de alta a un usuario
-	 * @param usuarioDTO
+	 * Se usa para crear un nuevo usuario
+	 * Tablas usadas:
+	 *	-USUARIO: Para insertar el valor de los distintos atributos que componen la tabla
+	 * Atributos de la tabla usados:
+	 *	-correo: Correo que identificará al usuario
+	 *	-nombre: Nombre del usuario
+	 *	-apellidos: Apellidos del usuario
+	 *	-fecha_Nacimiento: Fecha de nacimiento del usuario
+	 *	-password: Contraseña del usuario
+	 *	-administrador: Booleano que indica si el usuario será o no administrador
+	 *	-fecha_Inscripcion: Fecha de inscripción del usuario
+	 *
+	 * @param usuario DTO de Usuario en el que se almacenará la información del nuevo usuario
 	 */
 	
 	public void altaUsuario(UsuarioDTO usuario) {
@@ -83,9 +111,17 @@ public class UsuarioDAO{
 	}
 	
 	/**
-	 * Modificar todos los campos de usuario salvo correo
-	 * puesto que correo es PK y si tiene reservas hechas salta error
-	 * @param usuarioDTO
+	 * Se usa para modificar usuario registrado en la BD
+	 * Tablas usadas:
+	 *	-USUARIO: Para modificar el valor de los distintos atributos que conforman la tabla
+	 * Atributos de la tabla usados:
+	 *	-nombre: Nombre del usuario a modificar
+	 *	-apellidos: Apellidos del usuario a modificar
+	 *	-fecha_Nacimiento: Fecha de nacimiento del usuario a modificar
+	 *	-password: Contraseña del usuario a modificar
+	 *	-correo: Correo que sirve para identificar el usuario a modificar
+	 *
+	 * @param usuario DTO de Usuario en el que se almacenará la información modificada del usuario
 	 */
 	
 	public void modificarUsuario(UsuarioDTO usuario) {
@@ -107,10 +143,41 @@ public class UsuarioDAO{
 		connection.closeConnection();
 	}
 
+	
 	/**
-	 * Obtener usuario por su correo
-	 * @param correo Correo del usuario
-	 * @return usuario Usuario buscado
+	 * Se usa para eliminar un usuario registrado en la BD
+	 * Tablas usadas:
+	 *	-USUARIO: Para tomar el correo del usuario y, posteriormente, eliminar dicho usuario.
+	 * Atributos de la tabla usados:
+	 *	-correo: Correo que sirve para identificar el usuario a eliminar
+	 *
+	 * @param correo Correo del usuario que será eliminado
+	 */
+	
+	public void eliminarUsuario(String correo) {
+		DBConnection connection = new DBConnection();
+		con = connection.getConnection();
+		try {
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("eliminarUsuarioSTM"));
+			ps.setString(1, correo);
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		connection.closeConnection();
+	}
+
+	/**
+	 * Se usa para obtener un usuario a través de su correo
+	 * Tablas usadas:
+	 *	-USUARIO: Para obtener el correo del usuario
+	 * Atributos de la tabla usados:
+	 *	-correo: Correo que sirve para identificar el usuario a obtener
+	 *
+	 * @param correo Correo que se usará para obtener el usuario
+	 * @return usuario Usuario conseguido a través de su correo
 	 */
 	
 	public UsuarioDTO obtenerUsuario(String correo){
@@ -148,8 +215,11 @@ public class UsuarioDAO{
 	}
 	
 	/**
-	 * Obtener listado de todos los usuarios
-	 * @return List<usuarioDTO> Lista de usuarios
+	 * Se usa para obtener una lista que contiene todos los usuarios
+	 * Tablas usadas:
+	 *	-USUARIO: Para obtener cada uno de los usuarios
+	 *
+	 * @return usuarios Lista formada por todos los usuarios registrados
 	 */
 	
 	public List<UsuarioDTO> obtenerUsuarios(){

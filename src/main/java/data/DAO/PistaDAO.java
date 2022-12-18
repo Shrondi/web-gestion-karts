@@ -27,13 +27,28 @@ public class PistaDAO{
 	private Connection con;
 	private Properties prop;
 	
+	
+	/**
+	 * Constructor del DAO de Pista
+	 * @param properties Objeto properties que contiene las consultas relativas a la BD
+	 */
+	
+	
 	public PistaDAO(Properties properties){
 		prop = properties;
 	}
 	
 	/**
-	 * Crear pista
-	 * @param pista PistaDTO
+	 * Se usa para crear una nueva pista
+	 * Tablas usadas:
+	 *	-PISTA: Para insertar el valor de los distintos atributos que componen la tabla
+	 * Atributos de la tabla usados:
+	 *	-nombre: Nombre que identificará a la pista
+	 *	-estado: Estado de la pista (True si es Dsiponible o False en caso contrario)
+	 *	-dificultad: Dificultad de la pista (Infantil, Familiar o Adultos)
+	 *	-max_karts: Número máximo de karts permitidos en la pista
+	 *
+	 * @param pista DTO de Pista en el que se almacenará la información de la nueva pista
 	 */
 	
 	public void CrearPista(PistaDTO pista) {
@@ -54,6 +69,20 @@ public class PistaDAO{
 	}
 	
 
+	/**
+	 * Se usa para actualizar el número de karts infantiles y de adultos disponibles asociados a esa pista
+	 * Tablas usadas:
+	 *	-PISTA: Para modificar el número de karts infantiles y de adultos disponibles
+	 * Atributos de la tabla usados:
+	 *	-asoc_karts_disp_infantiles: Nuevo número de karts infantiles asociados disponibles
+	 *	-asoc_karts_disp_adultos: Nuevo número de karts infantiles asociados disponibles
+	 *	-nombre: Nombre de la pista a modificar
+	 *
+	 * @param nombre Nombre de la pista elegida
+	 * @param asocKartInfantiles Número de karts asociados infantiles
+	 * @param asocKartAdultos Número de karts asociados de adultos
+	 */
+	
 	//NEW
 	public void actualizarPista(String nombre, int asocKartInfantiles, int asocKartAdultos) {
 		DBConnection connection = new DBConnection();
@@ -72,9 +101,17 @@ public class PistaDAO{
 	}
 	
 	/**
-	 * Obtener pistas disponibles para que se puedan asignar karts
-	 * @param estado Estado de la pista
-	 * @return pistas Listado de pistas
+	 * Se usa para consultar las pistas que pueden asignarse a un kart
+	 * Tablas usadas:
+	 *	-PISTA: Para poder obtener las pistas con posibilidad de asignación a un kart
+	 * Atributos de la tabla usados:
+	 *	-estado: Estado de la pista. En este caso, debe estar disponible y, por tanto, tomar el valor 1.
+	 *	-asoc_karts_disp_infantiles: Número de karts infantiles disponibles
+	 *	-asoc_karts_disp_adultos: Número de karts de adultos disponibles
+	 *	-max_karts: Número máximo de karts que pueda tener la pista. Debe ser mayor a la suma de karts infantiles y de adultos disponibles.
+	 *	-nombre: Nombre de la pista a modificar
+	 *
+	 * @return pistas Lista de pistas disponibles para ser asignadas a un kart
 	 */
 	//NEW
 	public List<PistaDTO> consultarPistasAsignacion(){
@@ -111,9 +148,14 @@ public class PistaDAO{
 	}
 	
 	/**
-	 * Comprobar si una pista existe
+	 * Se usa para comprobar si una pista existe
+	 * Tablas usadas:
+	 *	-PISTA: Para poder obtener la pista en caso de que exista
+	 * Atributos de la tabla usados:
+	 *	-nombre: Nombre de la pista, que la identifica
+	 *
 	 * @param nombre Nombre de la pista
-	 * @return boolean
+	 * @return flag Booleano que contiene True si la pista existe y False en caso contrario
 	 */
 	
 	public boolean consultarPistaExiste(String nombre){
@@ -140,9 +182,14 @@ public class PistaDAO{
 	
 	//NEW
 	/**
-	 * Obtener pistas por su dificultad (infantil,familiar,adultos)
-	 * @param dificultad Tipo de pista
-	 * @return pistas Listado de pistas
+	 * Se usa para obtener pistas disponibles según su dificultad
+	 * Tablas usadas:
+	 *	-PISTA: Para poder obtener las pistas con la dificultad elegida
+	 * Atributos de la tabla usados:
+	 *	-estado: Estado de la pista. En este caso, debe estar disponible y, por tanto, tomar el valor 1.
+	 *	-dificultad: Dificultad de la pista (Infantil, Familiar o Adultos)
+	 * @param dificultad Dificultad de las pistas
+	 * @return pistas Lista de pistas con la dificultad correspondiente
 	 */
 	
 	public List<PistaDTO> consultarByDif(Dificultad dificultad){
@@ -182,11 +229,18 @@ public class PistaDAO{
 	
 	//NEW
 	/**
-	 * Obtener pistas por su numero de karts infantiles y karts adultos
-	 * @param kartsInfantiles Numero de karts infantiles
-	 * @param kartsAdultos Numero de karts adultos
-	 * @return pistas Listado de pistas
+	 * Se usa para obtener una lista de pistas en función del número disponible de karts infantiles y adultos
+	 * Tablas usadas:
+	 *	-PISTA: Para poder obtener las pistas según el número disponible de karts infantiles y adultos disponibles
+	 * Atributos de la tabla usados:
+	 *	-estado: Estado de la pista. En este caso, debe estar disponible y, por tanto, tomar el valor 1.
+	 *	-asoc_karts_disp_infantiles: Karts infantiles disponibles. Debe ser mayor o igual que el número de karts infantiles pasado como parámetro
+	 *	-asoc_karts_disp_adultos: Karts de adultos disponibles. Debe ser mayor o igual que el número de karts de adultos pasado como parámetro.
+	 * @param kartsInfantiles Número de karts infantiles
+	 * @param kartsAdultos Número de karts de adultos
+	 * @return pistas Lista de pistas con menor o igual número de karts infantiles y de adultos
 	 */
+	
 	public List<PistaDTO> consultarByMinKarts(int kartsInfantiles, int kartsAdultos){
 		List<PistaDTO> pistas = new ArrayList<>();
 		DBConnection connection = new DBConnection();
@@ -233,12 +287,20 @@ public class PistaDAO{
 	
 	//NEW
 	/**
-	 * Obtener pistas por su tipo y numero de karts infantiles y karts adultos
-	 * @param tipoPista Tipo de pista (infantil,familiar,adultos)
-	 * @param kartsInfantiles Numero de karts infantiles
-	 * @param kartsAdultos Numero de karts adultos
-	 * @return pistas Listado de pistas
+	 * Se usa para consultar pistas por su tipo y por el número de karts infantiles y de adultos
+	 * Tablas usadas:
+	 *	-PISTA: Para poder obtener las pistas según el tipo de pista y el número de karts infantiles y adultos disponibles
+	 * Atributos de la tabla usados:
+	 *  -dificultad: Dificultad de la pista
+	 *	-estado: Estado de la pista. En este caso, debe estar disponible y, por tanto, tomar el valor 1.
+	 *	-asoc_karts_disp_adultos: Número de karts de tipo adulto disponibles
+	 *	-asoc_karts_disp_infantiles: Número de karts de tipo infantil disponibles
+	 * @param tipoPista Tipo de pista
+	 * @param kartsInfantiles Número de karts infantiles
+	 * @param kartsAdultos Número de karts de adultos
+	 * @return pistas Lista de pistas con menor o igual número de karts infantiles y de adultos
 	 */
+	
 	public List<PistaDTO> consultarPistas(String tipoPista, int kartsInfantiles, int kartsAdultos){
 		List<PistaDTO> pistas = new ArrayList<>();
 		DBConnection connection = new DBConnection();
@@ -285,6 +347,15 @@ public class PistaDAO{
 	}
 	
 	//NEW
+	
+	/**
+	 * Se usa para obtener un listado con todas las pistas
+	 * Tablas usadas:
+	 *	-PISTA: Para poder obtener todas las pistas
+	 *
+	 * @return pistas Listado de todas las pistas
+	 */
+	
 	public List<PistaDTO> listadoPistas() {
 		List<PistaDTO> pistas = new ArrayList<>();
 		DBConnection connection = new DBConnection();
@@ -322,6 +393,19 @@ public class PistaDAO{
 	}
 	
 	//NEW
+	
+	/**
+	 * Se usa para modificar el estado de una pista
+	 * Tablas usadas:
+	 *	-PISTA: Para poder modificar el estado de la pista deseada
+	 * Atributos de la tabla usados:
+	 *  -nombre: Nombre de la pista
+	 *	-estado: Estado nuevo que tendrá la pista
+	 *
+	 * @param estado Estado al que pasará la pista
+	 * @param nombre_pista Nombre de la pista a modificar
+	 */
+	
 	public void modificarEstadoPista(boolean estado, String nombre_pista) {
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
