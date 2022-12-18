@@ -280,7 +280,7 @@ public class CrearBonoReserva extends HttpServlet {
 						}
 						
 						//Actualizamos el numero de sesiones del bono
-						reservaDAO.actualizarSesionesBono(bean.getIdBono());
+						reservaDAO.actualizarSesionesBono(1,bean.getIdBono());
 						
 						//Actualizamos el numero de karts disponibles de la pista
 						pistaDAO.actualizarPista(pista, numeroNinios, numeroAdultos);
