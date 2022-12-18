@@ -112,10 +112,6 @@ public class BorrarReservaIndividual extends HttpServlet {
 						bean.setReservasFamiliar(reservasFamiliar);
 						bean.setReservasAdultos(reservasAdultos);
 						
-						for (ReservaInfantilDTO reservaInfantilDTO : reservasInfantil) {
-							System.out.println(reservaInfantilDTO.getIdUsuario());
-						}
-						
 						request.setAttribute("cancelarBean", bean);
 						dispatcher = request.getRequestDispatcher("/mvc/view/admin/ConsultarBorrarReservasDisplay.jsp");
 						dispatcher.forward(request, response);

@@ -7,7 +7,7 @@
 <%
 
 //Caso 1: No esta logado o si lo esta si es admin
-if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() == true) {
+if (userBean == null || userBean.getCorreo().isEmpty()) {
 	
 %>
 	<jsp:forward page="../../../index.jsp" />
@@ -32,7 +32,6 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 
 <!DOCTYPE html>
 <html>
-	<jsp:include page="/include/encabezado.jsp" />
 
 		<head>
 				<meta charset="UTF-8">
@@ -173,7 +172,6 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 						</form>
 						
 	<jsp:include page="/include/volver.jsp" />
-	<jsp:include page="/include/footer.jsp" />
 </body>
 </html>
 
