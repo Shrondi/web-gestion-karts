@@ -10,8 +10,9 @@
 	<meta charset="UTF-8">
 	<title>UcoGestor</title>
 	<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
-	<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/index.css">
+	<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/fieldset.css">
 	<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
+	<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/boton_operaciones.css">
 </head>
 
 <body>
@@ -31,24 +32,20 @@
 %>
 	<h1>Bienvenido a UcoKarts</h1>
 	<fieldset>
-	
-		<form action="/WebProyectoPW/mvc/control/LoginController.jsp" method="post">
-	    	    	
-	    	<label for="correo">Correo electrónico:</label>
-	    	<input type="email" name="correo" placeholder="example@gmail.com" required><br><br/>
-	    	
-	    	<label for="passWord">Contraseña:</label>
-	    	<input type="password" name="passWord" placeholder="Contraseña" required><br><br/>	
-			
-			<p><input type="submit" value="Iniciar sesión"></p>
-		</form>
-		
-		<form action="/WebProyectoPW/mvc/control/RegistroController.jsp" method="post">
-			<p><input type="submit" value="Registrarse"></p>
-		</form>
+			<form action="/WebProyectoPW/mvc/control/LoginController.jsp" method="post">  	
+		    	<label for="correo">Correo electrónico:</label><br><br/>
+		    	<input type="email" name="correo" placeholder="example@gmail.com" required><br><br/>
+		    	
+		    	<label for="passWord">Contraseña:</label><br><br/>
+		    	<input type="password" name="passWord" placeholder="contraseña" required><br><br/>	
+				<p><input type="submit" value="Iniciar sesi&oacute;n"></p>
+			</form>
+			<form action="/WebProyectoPW/mvc/control/RegistroController.jsp" method="post">
+				<p><input type="submit" value="Registrarse"></p>
+			</form>
 	</fieldset>
 	
-	<p><font color ="red"><%=message%></font></p>
+	<p class="mensaje"><%=message%></p>
 	
 	
 	<%}
@@ -59,30 +56,15 @@
 <%		
 		if(userBean.getAdmin()){
 		%>
-			<jsp:include page="/mvc/control/PaginaPrincipalAdministradorController.jsp" />
-					
-			<form action="/WebProyectoPW/mvc/view/LoginAdminDisplay.jsp" method="post">
-				<p><input type="submit" value="Acceso a operaciones"></p>
-			</form>
+			<jsp:include page="/mvc/control/PaginaPrincipalAdministradorController.jsp" />		
 				
 		<%}else{
 		%>
 			<jsp:include page="/mvc/control/PaginaPrincipalUsuarioController.jsp" />
-			
-			<form action="/WebProyectoPW/mvc/view/LoginClientDisplay.jsp" method="post">
-				<p><input type="submit" value="Acceso a operaciones"></p>
-			</form>
+
 		<%} %>
-			<form action="/WebProyectoPW/mvc/control/ModificacionController.jsp" method="post">
-				<input type="submit" value="Editar perfil">
-			</form>
-				
-			<form action="/WebProyectoPW/mvc/control/LogoutController.jsp" method="post">
-				<input type="submit" value="Cerrar sesión">
-			</form>
-			<p><font color ="red"><%=message%></font></p>
-			<p><font color ="red"><%=mensaje%></font></p>
-		
+		<p class="mensaje"><%=message%></p>
+	
 		<%
 		}%>
 		
