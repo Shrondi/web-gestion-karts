@@ -1,7 +1,7 @@
 package servlet.user;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -47,57 +47,61 @@ public class ConsultarPistas extends HttpServlet {
 			
 		//Caso 2: Usuario logueado
 		}else{
+			List<PistaDTO> pistas = new ArrayList<>();
+			
 			PistaDAO pistaDAO = new PistaDAO(prop);
 			
-			String filtro = request.getParameter("filtro");
+			String tipo_check = request.getParameter("tipo_check");
+			String minKarts_check = request.getParameter("minKarts_check");
+			
 			String tipo = request.getParameter("tipo");
 			String minKartsInf = request.getParameter("min_karts_inf");
 			String minKartsAdult = request.getParameter("min_karts_adult");
 			
 				//Caso 2a: Request viene vacio -> Ir al display
-				if(filtro == null){
-					
+				if(tipo_check == null && minKarts_check == null){
+					System.out.println("ENTRO");
 					dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarPistasDisplay.jsp");
 					dispatcher.forward(request, response);
 					
 				//Caso 2b: Request viene lleno (se ha elegido la opcion de filtrar por numero minimo de karts
-				}else if (filtro.contentEquals("tipo")){
-					
-					Dificultad dificultad = Dificultad.valueOf(tipo.toUpperCase());
-					
-					List<PistaDTO> pistas = pistaDAO.consultarByDif(dificultad);
-					
-					request.setAttribute("ListaPistas", pistas);
-					
-					request.setAttribute("nextPage", "/WebProyectoPW/ConsultarPistas");
-					dispatcher = request.getRequestDispatcher("/mvc/view/user/PistasDisplay.jsp");
-					dispatcher.forward(request, response);
-					
-				}else if(filtro.contentEquals("minKarts")) {
-					
-					int min_karts_inf = Integer.parseInt(minKartsInf);
-					int min_karts_adult = Integer.parseInt(minKartsAdult);
-
-					List<PistaDTO> pistas = pistaDAO.consultarByMinKarts(min_karts_inf, min_karts_adult);
-					
-					request.setAttribute("ListaPistas", pistas);
-					
-					request.setAttribute("nextPage", "/WebProyectoPW/ConsultarPistas");
-					dispatcher = request.getRequestDispatcher("/mvc/view/user/PistasDisplay.jsp");
-					dispatcher.forward(request, response);
-					
 				}else{
-					int min_karts_inf = Integer.parseInt(minKartsInf);
-					int min_karts_adult = Integer.parseInt(minKartsAdult);
+					
+					if (tipo_check != null && minKarts_check == null){
+						
+						
+						Dificultad dificultad = Dificultad.valueOf(tipo.toUpperCase());
+						
+						 pistas = pistaDAO.consultarByDif(dificultad);
+					
+					}else if(tipo_check == null && minKarts_check != null) {
+						
+						int min_karts_inf = Integer.parseInt(minKartsInf);
+						int min_karts_adult = Integer.parseInt(minKartsAdult);
 
-					List<PistaDTO> pistas = pistaDAO.consultarPistas(tipo, min_karts_inf, min_karts_adult);
+						pistas = pistaDAO.consultarByMinKarts(min_karts_inf, min_karts_adult);
+						
+						
+					}else if (tipo_check != null && minKarts_check != null){
+						int min_karts_inf = Integer.parseInt(minKartsInf);
+						int min_karts_adult = Integer.parseInt(minKartsAdult);
+
+						pistas = pistaDAO.consultarPistas(tipo, min_karts_inf, min_karts_adult);
+					}
 					
-					request.setAttribute("ListaPistas", pistas);
-					
-					request.setAttribute("nextPage", "/WebProyectoPW/ConsultarPistas");
-					dispatcher = request.getRequestDispatcher("/mvc/view/user/PistasDisplay.jsp");
-					dispatcher.forward(request, response);
-				}
+					if (pistas == null) {
+						System.out.println("ENTRO");
+						request.setAttribute("mensaje", "No hay pistas disponibles");
+						dispatcher = request.getRequestDispatcher("/mvc/view/user/PistasConsultaDisplay.jsp");
+						dispatcher.forward(request, response);
+						
+					}else {
+						System.out.println("ENTRO");
+						request.setAttribute("ListaPistas", pistas);
+						dispatcher = request.getRequestDispatcher("/mvc/view/user/PistasConsultaDisplay.jsp");
+						dispatcher.forward(request, response);
+					}
+			}	
 		}
 	}
 	
