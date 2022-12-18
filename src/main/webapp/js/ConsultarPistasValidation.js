@@ -63,7 +63,8 @@ chMin.addEventListener('click',(e) => {
 			inputKids.style.display = 'none'
 			optSelected = true
 		}
-		}
+		
+	}
 		
 	}else{
 		divMinKarts.style.display = 'none'
@@ -99,11 +100,11 @@ tipo_select.addEventListener('click',(e)=>{
 		}
 		if(tipo_select.value == ""){
 			optSelected = false
-			tipoErrorMessage.innerText = "Debe elegir una opción"
+			//tipoErrorMessage.innerText = "Debe elegir una opción"
 		}
 	}
 	if(tipo_select.value == ""){
-		tipoErrorMessage.innerText = "Debe elegir una opción"
+		//tipoErrorMessage.innerText = "Debe elegir una opción"
 		optSelected = false
 	}else{
 		optSelected = true
