@@ -63,7 +63,7 @@
 			<jsp:include page="/mvc/control/PaginaPrincipalUsuarioController.jsp" />
 
 		<%} %>
-		<p class="mensaje"><%=message%></p>
+		<p class="mensaje"><%=mensaje%></p>
 	
 		<%
 		}%>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
     import="business.pista.*, java.util.List, java.util.ArrayList"%>
 <jsp:useBean id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
+<jsp:useBean id="asociarBean" scope="request" class="display.javabean.asociarBean"></jsp:useBean>
 
 <%
 
@@ -19,7 +20,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		mensajeNextPage = "";
 	}
 	
-	List<PistaDTO> ListaPistas = (List<PistaDTO>) request.getAttribute("ListaPistas");
+	List<PistaDTO> ListaPistas = asociarBean.getListadoPistas();
 	
 	//Caso 3: Si se accede de forma forzosa por url
 	if (ListaPistas == null){
@@ -63,12 +64,12 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 								<% for (PistaDTO pista : ListaPistas){ %> 
 								
 								  <tr>
-								    <td><input type="radio" name="pista" id="kart" value="<%= pista.getNombre() %>" required></td>
+								    <td><input type="checkbox" name="pista" id="kart" value="<%= pista.getNombre() %>"></td>
 								    <td><%= pista.getNombre() %></td>
 								    <% if(pista.getEstado()){ %>
 											<td>Disponible</td>
 									<% }else{  %>
-										<td>No disponible</td>
+										<td>No disponible </td>
 									<% } %>
 								    <td><%= pista.getDificulty() %></td>
 								    <td><%= pista.getMaxAmmount() %></td>				   	
@@ -85,7 +86,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 								
 				</div>
 				
-				<form id="volver" method="post" action="/WebProyectoPW">
+				<form id="volver" method="post" action="/WebProyectoPW/FuncionesAdministrador">
 						<input type="submit" value="Volver">
 				</form>
 		</body>

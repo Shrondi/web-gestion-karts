@@ -6,23 +6,14 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import business.reserva.ReservaAdultosDTO;
-import business.reserva.ReservaFamiliarDTO;
-import business.reserva.ReservaInfantilDTO;
-import business.kart.*;
 import business.pista.*;
-import data.DAO.reserva.ReservaAdultosDAO;
-import data.DAO.reserva.ReservaDAO;
-import data.DAO.reserva.ReservaFamiliarDAO;
-import data.DAO.reserva.ReservaInfantilDAO;
-import data.DAO.KartDAO;
 import data.DAO.PistaDAO;
+import display.javabean.asociarBean;
 import display.javabean.userBean;
 
 /**
@@ -31,6 +22,17 @@ import display.javabean.userBean;
 
 public class ModificarEstadoPista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	/*
+	 * Las variables de clase, declaradas fuera de los métodos doGet y doPost (por ejemplo, en este caso bean), son
+	 * persistentes, es decir, conservan sus valores en posteriores solicitudes al mismo servlet. Esto es así ya que
+	 * el ServletContainer sólo crea una instancia del mismo servlet, creando posteriormente un nuevo hilo para
+	 * servir cada solicitud.
+	 * 
+	 * Ref: http://gssi.det.uvigo.es/users/agil/public_html/LRO/jsp.pdf, Pagina: 2
+	 */
+	
+	asociarBean bean = new asociarBean();
        
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -54,56 +56,45 @@ public class ModificarEstadoPista extends HttpServlet {
 			
 		//Caso 2: Usuario logueado
 		}else{
+			PistaDAO pistaDAO = new PistaDAO(prop);
+		
+			String[] pistasId = request.getParameterValues("pista");
 			
-			String pista = (String) request.getParameter("pista");
-			
-			PistaDAO pistadao = new PistaDAO(prop);
-			List<PistaDTO> ListaPistas = pistadao.listadoPistas();
-			
-			//Caso 2b: 
-			if (pista == null) { //Nos vamos a la vista para seleccionar la pista
+			//Caso 2b: El request viene vacio (no se ha seleccionado ninguna pista) -> Vamos al disply
+			if (pistasId == null) { 
 				
-				request.setAttribute("ListaPistas", ListaPistas);
+				List<PistaDTO> ListaPistas = pistaDAO.listadoPistas();
 				
+				//Lo guardamos en el bean para evitar posteriores conexiones repetidas en la BD
+				bean.setListadoPistas(ListaPistas);
+				
+				request.setAttribute("asociarBean", bean);
 				dispatcher = request.getRequestDispatcher("/mvc/view/admin/ModificarEstadoPistaDisplay.jsp");
 				dispatcher.forward(request, response);
 				
-			}
-			else{ //Se obtiene y modifica el estado de la pista elegida
+			//Caso 2c: El request viene lleno (se ha seleccionado una pista) -> Modificar estado de la pista elegida
+			}else{
 				
-				boolean estado=false;
-								
-				for(PistaDTO pistadto : ListaPistas) {
-					
-					if( pistadto.getNombre().contentEquals(pista) == true) {
-						
-						estado = pistadto.getEstado();
-						break;
+				for(PistaDTO pistaDTO : bean.getListadoPistas()) {
+					for (String pista : pistasId) {
+						if( pistaDTO.getNombre().contentEquals(pista) == true) {
+							
+							if (pistaDTO.getEstado()) {
+								pistaDAO.modificarEstadoPista(false, pista);
+							}else {
+								pistaDAO.modificarEstadoPista(true, pista);
+							}
+						}
 					}
 				}
 				
-				//Cambiamos el estado
-				if(estado == true) {
-					estado = false;
-				}
-				
-				else {
-					estado = true;
-				}
-				
-				pistadao.modificarEstadoPista(estado, pista);
-
-				//request.setAttribute("mensaje", "La pista " + pista + " ha pasado a tener el estado " + estado);
-				//dispatcher = request.getRequestDispatcher("/mvc/view/admin/ModificarEstadoPistaDisplay.jsp");
-				//dispatcher.forward(request, response);
-				response.sendRedirect("/WebProyectoPW");
-				
+				request.setAttribute("mensaje", "Las pistas seleccionadas han cambiado de estado");
+				dispatcher = request.getRequestDispatcher("/");
+				dispatcher.forward(request, response);
 			}
-			
-		}
-		
-		
+		}	
 	}
+
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
