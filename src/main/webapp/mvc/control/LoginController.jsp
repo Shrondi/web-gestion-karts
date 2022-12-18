@@ -32,7 +32,7 @@ if(userBean == null || userBean.getCorreo().equals("")){
 		//Comprobamos si el usuario existe
 		if ( !usuarioDAO.usuarioExiste(emailUsuario)){ //No existe
 			nextPage = "../../index.jsp";
-			mensajeNextPage = "Usuario no existe";
+			mensajeNextPage = "Usuario no existente";
 			
 		}else{ //Existe
 			
@@ -65,14 +65,14 @@ if(userBean == null || userBean.getCorreo().equals("")){
 				<%
 				
 				nextPage = "../../index.jsp";
-				mensajeNextPage = "Se ha iniciado sesion correctamente";
+				mensajeNextPage = "Se ha iniciado sesi&oacute;n correctamente";
 			}
 		}
 		
 	//Caso 2.b: No hay parámetros en el request -> ir a la vista por primera vez
 	} else {
 		nextPage = "../../index.jsp";
-		mensajeNextPage = "Rellene los campos para loguearse";
+		mensajeNextPage = "Rellene los campos para iniciar sesi&oacute;n";
 	}
 }
 

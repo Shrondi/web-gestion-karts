@@ -7,7 +7,7 @@
 
 //Caso 1, por defecto usuario no logado -> Se redirige al index.jsp	
 String nextPage = "../../index.jsp";
-String mensajeNextPage = "Error. Para modificar sus datos, primero debe loguearse.";
+String mensajeNextPage = "Error. Para modificar sus datos, primero debe iniciar sesi&oacute;n.";
 
 
 //Caso 2: Usuario logueado
@@ -33,7 +33,7 @@ if (userBean != null || !userBean.getCorreo().equals("")){
 			usuarioDAO.modificarUsuario(usuarioDTO);
 			
 			nextPage = "../../index.jsp";
-			mensajeNextPage = "La informacion ha sido actualizada de manera exitosa";	
+			mensajeNextPage = "La informaci&oacute;n ha sido actualizada de manera exitosa";	
 		
 %>	
 			

@@ -43,7 +43,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		//Comprobamos si el usuario ya existe
 		if (usuario.usuarioExiste(correo)){
 			nextPage = "../view/RegistroDisplay.jsp";
-			mensajeNextPage = "Ya existe un usuario registrado con ese email";
+			mensajeNextPage = "Ya existe un usuario registrado con ese correo";
 			
 		//Creamos el usuario
 		}else{
@@ -69,7 +69,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 			if (userBean.getAdmin()){
 				mensajeNextPage = "Se ha creado el usuario administrador " + correo + " correctamente";
 			}else{
-				mensajeNextPage = "Se ha iniciado sesion correctamente";
+				mensajeNextPage = "Se ha iniciado sesi&oacute;n correctamente";
 			}
 			
 		}
