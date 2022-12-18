@@ -103,7 +103,7 @@ public class CrearBonoReserva extends HttpServlet {
 				if (numeroSesiones == 5) {
 
 					request.setAttribute("mensaje", "No se pueden añadir mas reservas al bono con ID " + idBono + ". El numero maximo de sesiones de un bono son 5.");
-					dispatcher = request.getRequestDispatcher("/WebProyectoPW");
+					dispatcher = request.getRequestDispatcher("/");
 					dispatcher.forward(request, response);
 					
 				}else{
