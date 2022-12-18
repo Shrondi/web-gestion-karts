@@ -5,8 +5,8 @@
 
 <%
 
-//Caso 1: No esta logado
-if (userBean == null || userBean.getCorreo().isEmpty()) {
+//Caso 1: No esta logado o si lo esta si es admin
+if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() == true) {
 	
 %>
 	<jsp:forward page="../../../index.jsp" />
@@ -31,6 +31,8 @@ if (userBean == null || userBean.getCorreo().isEmpty()) {
 
 <!DOCTYPE html>
 <html>
+	<jsp:include page="/include/encabezado.jsp" />
+
 		<head>
 				<meta charset="UTF-8">
 				<title>Cancelar Reserva</title>
@@ -169,7 +171,8 @@ if (userBean == null || userBean.getCorreo().isEmpty()) {
 						<%} %>
 						</form>
 						
-
+	<jsp:include page="/include/volver.jsp" />
+	<jsp:include page="/include/footer.jsp" />
 </body>
 </html>
 
