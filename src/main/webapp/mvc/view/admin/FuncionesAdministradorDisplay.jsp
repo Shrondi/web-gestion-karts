@@ -83,7 +83,13 @@ if(userBean == null || userBean.getCorreo().equals("")){
 								<form method="post" action="/WebProyectoPW/BorrarReservaIndividual">
 									<input type="submit" name="option" class="option" value="Eliminar Reserva">
 								</form>
-							</li>							
+							</li>
+							
+							<li>
+								<form method="post" action="/WebProyectoPW/BorrarReservaBono">
+									<input type="submit" name="option" class="option" value="Eliminar Reserva">
+								</form>
+							</li>								
 						</ul>
 					</li>										
 				</ul>

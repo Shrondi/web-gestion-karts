@@ -301,7 +301,7 @@ public class ReservaFamiliarDAO {
 		}
 		
 		//NEW -- Consultar todas las reservas de cualquier usuario en un rango dado y a partir de mañana
-				public List<ReservaFamiliarDTO> consultarReservasFamiliarRangoFuturas(String fechaInicio, String fechaFin){
+				public List<ReservaFamiliarDTO> consultarReservasFamiliarRangoFuturas(String modalidad, String fechaInicio, String fechaFin){
 					
 					List<ReservaFamiliarDTO> reservas = new ArrayList<>();
 					DBConnection connection = new DBConnection();
@@ -310,8 +310,9 @@ public class ReservaFamiliarDAO {
 					try {
 						PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasFamiliarRangobyFechaSTM"));
 						
-						ps.setString(1, fechaInicio);
-						ps.setString(2, fechaFin);
+						ps.setString(1, modalidad);
+						ps.setString(2, fechaInicio);
+						ps.setString(3, fechaFin);
 						
 					
 						ResultSet rs = ps.executeQuery();
@@ -319,7 +320,6 @@ public class ReservaFamiliarDAO {
 						while (rs.next()) {
 
 							int idReserva = rs.getInt("id_Reserva");
-							String modalidad = rs.getString("modalidad_reserva");
 							String usuario = rs.getString("usuario");
 							int participantes_adultos = rs.getInt("participantes_adultos");
 							int participantes_infantiles = rs.getInt("participantes_infantiles");

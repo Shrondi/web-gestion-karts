@@ -23,7 +23,7 @@ import data.DAO.reserva.*;
 /**
  * Servlet implementation class CrearReservaIndividual
  */
-public class BorrarReservaIndividual extends HttpServlet {
+public class BorrarReservaBono extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	/*
@@ -96,9 +96,9 @@ public class BorrarReservaIndividual extends HttpServlet {
 						reservasAdultos = reservaAdultosDAO.consultarReservasAdultos(fechaInicio, fechaFin);
 						
 					}else{
-						reservasInfantil = reservaInfantilDAO.consultarReservasInfantilRangoFuturas("INDIVIDUAL", fechaInicio, fechaFin);
-						reservasFamiliar = reservaFamiliarDAO.consultarReservasFamiliarRangoFuturas("INDIVIDUAL", fechaInicio, fechaFin);
-						reservasAdultos = reservaAdultosDAO.consultarReservasAdultosRangoFuturas("INDIVIDUAL", fechaInicio, fechaFin);
+						reservasInfantil = reservaInfantilDAO.consultarReservasInfantilRangoFuturas("BONO", fechaInicio, fechaFin);
+						reservasFamiliar = reservaFamiliarDAO.consultarReservasFamiliarRangoFuturas("BONO", fechaInicio, fechaFin);
+						reservasAdultos = reservaAdultosDAO.consultarReservasAdultosRangoFuturas("BONO", fechaInicio, fechaFin);
 					}
 					
 					if (reservasInfantil.isEmpty() && reservasFamiliar.isEmpty() && reservasAdultos.isEmpty()) {
