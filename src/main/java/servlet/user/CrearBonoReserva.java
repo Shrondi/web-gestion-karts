@@ -177,6 +177,7 @@ public class CrearBonoReserva extends HttpServlet {
 								//No hay pistas disponibles para los datos dados -> Volver al display a pedir nuevos datos para la reserva
 								if (pistas.isEmpty()) {
 									
+									request.setAttribute("reservaBean", bean);
 									request.setAttribute("mensaje", "No hay pistas disponibles con los datos dados. Intentelo de nuevo mas tarde.");
 									dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaBonoDisplay.jsp");
 									dispatcher.forward(request, response);

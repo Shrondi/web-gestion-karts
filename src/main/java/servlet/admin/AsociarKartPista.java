@@ -97,9 +97,12 @@ public class AsociarKartPista extends HttpServlet {
 					//Obtenemos todos los karts del servidor, y guardamos aquellos que cumplan la restriccion de la dificultad de la pista elegida
 					List<KartDTO> karts = new ArrayList<>();
 					for (KartDTO kartDTO : kartDAO.consultarKartsDisponibles()) {
+						
 						if (kartDTO.geType() == true && (bean.getPista().getDificulty()  == Dificultad.FAMILIAR || bean.getPista().getDificulty()  == Dificultad.INFANTIL)) {
 							karts.add(kartDTO);
-						}else if (kartDTO.geType() == false && (bean.getPista().getDificulty() == Dificultad.FAMILIAR || bean.getPista().getDificulty()  == Dificultad.ADULTOS)) {
+						}
+						
+						if (kartDTO.geType() == false && (bean.getPista().getDificulty() == Dificultad.FAMILIAR || bean.getPista().getDificulty()  == Dificultad.ADULTOS)) {
 							karts.add(kartDTO);
 						}
 					}
