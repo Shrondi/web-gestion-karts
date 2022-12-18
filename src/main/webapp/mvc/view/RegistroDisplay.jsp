@@ -47,27 +47,27 @@ if (userBean.getAdmin()){
 			
 				<label for="nombre">Nombre: </label>
 				<input type="text" name="nombre" placeholder="Nombre" required>
-				<div id="nameErrorText"></div>
+				<div class="validar" id="nameErrorText"></div>
 				<br></br>
 				
 				<label for="apellidos">Apellidos: </label>
 				<input type="text" name="apellidos" placeholder="Apellidos" required>
-				<div id="surnameErrorText"></div>
+				<div class="validar" id="surnameErrorText"></div>
 				<br></br>
 
 				<label for="correo">Correo: </label>
 				<input type="email" name="correo" id="correo" placeholder="email@example.com" required>
-				<div id="mailErrorText"></div>
+				<div class="validar" id="mailErrorText"></div>
 				<br></br>
 				
 				<label for="fechaNacimiento">Fecha Nacimiento: </label>
 				<input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="dd/mm/yyyy" required>
-				<div id="dateErrorText"></div>
+				<div class="validar" id="dateErrorText"></div>
 				<br></br>
 				
 				<label for="passWord">Contraseña: </label>
 				<input type="password" name="passWord" id="passWord" placeholder="Contraseña" required>
-				<div id="passwordErrorText"></div>
+				<div class="validar" id="passwordErrorText"></div>
 				<br></br>
 	
 				<input type="submit" value="Aceptar">

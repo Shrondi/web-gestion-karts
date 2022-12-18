@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page errorPage="include/errorPage.jsp" %>
 <jsp:useBean id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
 
 <%
@@ -33,6 +34,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() ) {
 				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">	
 				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/fieldset.css">							
 				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/boton_aceptar.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/validacion.css">
 		</head>
 		<body>
 			<h3>Modifique sus datos </h3>
@@ -42,17 +44,17 @@ if (userBean == null || userBean.getCorreo().isEmpty() ) {
 						
 					<label for="nombre">Nombre: </label>
 					<input type="text" name="nombre" id="nombre" value="<%=userBean.getNombre()%>" required="required">
-					<div id="nameErrorText"></div>
+					<div class="validar" id="nameErrorText"></div>
 					<br></br>
 					
 					<label for="apellidos">Apellidos: </label>
 					<input type="text" name="apellidos" id="apellidos" value="<%=userBean.getApellidos()%>" required="required">
-					<div id="surnameErrorText"></div>
+					<div class="validar" id="surnameErrorText"></div>
 					<br></br>
 	
 					<label for="passWord">Contraseña: </label>
 					<input type="password" name="passWord" id="passWord" required="required">
-					<div id="passwordErrorText"></div>
+					<div class="validar" id="passwordErrorText"></div>
 					<br></br>
 	
 					<label for="email">Correo: </label>
