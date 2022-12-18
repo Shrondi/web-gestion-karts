@@ -38,6 +38,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		</head>
 		<body>
 				
+				<%if(!reservasInfantilFuturas.isEmpty() && !reservasInfantilPasadas.isEmpty()){ %>
 				<table>
 				<caption> <strong> Reservas Infantiles </strong> </caption>
 							<thead>
@@ -79,7 +80,9 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 						<% } %>
 							</tbody>
 						</table>
+				<%} %>
 				
+				<%if(!reservasFamiliarFuturas.isEmpty() && !reservasFamiliarPasadas.isEmpty()){ %>
 				<table>
 				<caption> <strong> Reservas Familiares </strong> </caption>
 							<thead>
@@ -125,7 +128,9 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 						<% } %>
 							</tbody>
 				</table>
-
+				<%} %>
+				
+				<%if(!reservasAdultosFuturas.isEmpty() && !reservasAdultosPasadas.isEmpty()){ %>
 				<table>
 				<caption> <strong> Reservas Adultos </strong> </caption>
 							<thead>
@@ -167,7 +172,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							<% } %>
 							</tbody>
 				</table>
-						
+				<%} %>
 			
 		</body>
 </html>
