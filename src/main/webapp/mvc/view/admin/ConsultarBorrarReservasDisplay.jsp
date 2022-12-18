@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
     import="business.reserva.*, java.util.List, java.util.ArrayList"%>
+<%@ page errorPage="include/errorPage.jsp" %>
 <jsp:useBean id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
 <jsp:useBean id="cancelarBean" scope="request" class="display.javabean.cancelarBean"></jsp:useBean>
 
@@ -48,7 +49,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 					<p>
 						<label for="fechaFin">Fecha Fin: </label>
 						<input type="datetime-local" name="fechaFin" id="fechaFin" value="<%=cancelarBean.getFechaFin()%>" required>
-						<div id="dateErrorText"></div>
+						<div class="validar" id="dateErrorText"></div>
 					</p>
 					
 					<div id="popup">
@@ -65,14 +66,12 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 
 
 			<script type="text/javascript" src="/WebProyectoPW/js/RangoFechasBorrar.js"> </script>
-			</fieldset>	
 			<% if (cancelarBean.getReservasInfantil() != null){ %>
 				<jsp:include page="/mvc/view/common/ReservasCancelarDisplay.jsp" > 
 					<jsp:param name="nextPage" value="/WebProyectoPW/BorrarReservaIndividual" /> 
-					<jsp:param name="cancelarBean" value="cancelarBean" /> 
 				</jsp:include>
 			<%} %>
-					
+		</fieldset>				
 	<jsp:include page="/include/volver_admin.jsp" />
 	<jsp:include page="/include/footer.jsp" />
 </body>

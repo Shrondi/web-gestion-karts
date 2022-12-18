@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
     import="business.pista.*"%>
+<%@ page errorPage="include/errorPage.jsp" %>
 <jsp:useBean id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
 
 <%
@@ -31,6 +32,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/fieldset.css">
 				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
 				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/validacion.css">
 
 		</head>
 		<body>
@@ -42,7 +44,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 					<p>
 						<label for="nombrePista">Nombre: </label>
 						<input type="text" name="nombrePista" id="nombrePista" placeholder="Pista 1" required="required">
-						<div id="nameErrorText"></div>
+						<div class="validar" id="nameErrorText"></div>
 					</p>
 					<p> 
 						<label for="estado"> Estado:  </label>

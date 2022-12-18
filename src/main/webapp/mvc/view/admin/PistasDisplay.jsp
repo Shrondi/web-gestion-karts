@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
     import="business.pista.PistaDTO, java.util.List, java.util.ArrayList"%>
+<%@ page errorPage="include/errorPage.jsp" %>
 <jsp:useBean id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
 <jsp:useBean id="asociarBean" scope="request" class="display.javabean.asociarBean"></jsp:useBean>
 
@@ -54,9 +55,9 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 					    <th></th>
 					    <th>Nombre de la Pista</th>
 					    <th>Tipo</th>
-					    <th>Capacidad maxima</th>
-					    <th>Numero de karts infantiles disponibles asociados</th>
-					    <th>Numero de karts adultos disponibles asociados</th>
+					    <th>Capacidad máxima</th>
+					    <th>Número de karts infantiles disponibles asociados</th>
+					    <th>Número de karts adultos disponibles asociados</th>
 					  </tr>
 					</thead>
 					<tbody>
