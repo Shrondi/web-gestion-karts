@@ -9,7 +9,8 @@
 		<meta charset="UTF-8">
 		<title>Registro</title>
 		<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
-		<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/index.css">
+		<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/fieldset.css">
+		<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/validacion.css">
 		<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
 	</head>
 	<body>
