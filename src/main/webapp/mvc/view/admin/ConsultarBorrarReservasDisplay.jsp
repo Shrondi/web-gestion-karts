@@ -24,51 +24,56 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 
 <!DOCTYPE html>
 <html>
+	<jsp:include page="/include/encabezado.jsp" />
+
 		<head>
 				<meta charset="UTF-8">
-				<title>Consultar Reservas</title>
+				<title>Consultar reservas para eliminar</title>
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/fieldset.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/validacion.css">
 		</head>
 		<body>
-				<p id="message"><%= mensajeNextPage %></p>
-						<p> Escriba la fecha de inicio y de fin para consultar reservas entre dichas fechas:</p>
-						<form id="formReservasUsuario" method="post" action="/WebProyectoPW/BorrarReservaIndividual">
-								<div>
-								
-												<label for="fechaInicio">Fecha Inicio: </label>
-												<input type="datetime-local" name="fechaInicio" id="fechaInicio" value="<%=cancelarBean.getFechaInicio()%>" required>
-										
-										
-												<label for="fechaFin">Fecha Fin: </label>
+			<h2> Eliminar Reserva</h2>
+			<p class="mensaje" id="message"><%= mensajeNextPage %></p>
+			<fieldset>
+				<legend> Rellene los siguientes datos</legend>
+				<form id="formReservasUsuario" method="post" action="/WebProyectoPW/BorrarReservaIndividual">
+					<p>
+						<label for="fechaInicio">Fecha Inicio: </label>
+						<input type="datetime-local" name="fechaInicio" id="fechaInicio" value="<%=cancelarBean.getFechaInicio()%>" required>
+					</p>
+					<p>
+						<label for="fechaFin">Fecha Fin: </label>
+						<input type="datetime-local" name="fechaFin" id="fechaFin" value="<%=cancelarBean.getFechaFin()%>" required>
+						<div class="" id="dateErrorText"></div>
+					</p>
+					
+					<div id="popup">
+						<p> ¿Listar reservas con menos de 24 horas?: </p>
+						<input type="radio" name="restriccion" id="si" value="true">
+						<label for="si">Sí</label> <br>
+				
+						<input type="radio" name="restriccion" id="no" value="false">
+						<label for="no">No</label> <br>
+					</div>
 
-												<input type="datetime-local" name="fechaFin" id="fechaFin" value="<%=cancelarBean.getFechaFin()%>" required>
-												<div id="dateErrorText"></div>
-												
-												<div id="popup">
-												<p> ¿Listar reservas con menos de 24 horas?: </p>
-												<input type="radio" name="restriccion" id="si" value="true">
-												<label for="si">Si</label> <br>
-										
-												<input type="radio" name="restriccion" id="no" value="false">
-												<label for="no">No</label> <br>
-												</div>
-										
-								</div>	
-								
-								
-								<input type="submit" value="Nueva busqueda">
-						</form>
+					<input type="submit" value="Buscar">
+				</form>
 
-						<script type="text/javascript" src="/WebProyectoPW/js/RangoFechasBorrar.js"> </script>
-						<% if (cancelarBean.getReservasInfantil() != null){ %>
-										<jsp:include page="/mvc/view/common/ReservasCancelarDisplay.jsp" > 
-											<jsp:param name="nextPage" value="/WebProyectoPW/BorrarReservaIndividual" /> 
-										</jsp:include>
-						<%} %>
-						
-						<form id="volver" method="post" action="/WebProyectoPW">
-								<input type="submit" value="Volver">
-						</form>
-		</body>
+
+			<script type="text/javascript" src="/WebProyectoPW/js/RangoFechasBorrar.js"> </script>
+			<% if (cancelarBean.getReservasInfantil() != null){ %>
+				<jsp:include page="/mvc/view/common/ReservasCancelarDisplay.jsp" > 
+					<jsp:param name="nextPage" value="/WebProyectoPW/BorrarReservaIndividual" /> 
+				</jsp:include>
+			<%} %>
+		</fieldset>				
+	<jsp:include page="/include/volver_admin.jsp" />
+	<jsp:include page="/include/footer.jsp" />
+</body>
 </html>
 
 <%
