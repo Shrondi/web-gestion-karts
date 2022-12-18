@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page errorPage="include/errorPage.jsp" %>
 <%@page import="display.javabean.userBean, java.util.Date"%>
 <jsp:useBean id="userBean" class="display.javabean.userBean" scope = "session"/>
 
@@ -63,7 +64,7 @@
 			<jsp:include page="/mvc/control/PaginaPrincipalUsuarioController.jsp" />
 
 		<%} %>
-		<p class="mensaje"><%=mensaje%></p>
+		<p class="mensaje"><%=message%></p>
 	
 		<%
 		}%>
