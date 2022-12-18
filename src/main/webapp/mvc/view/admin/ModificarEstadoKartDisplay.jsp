@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
     import="business.kart.*, java.util.List, java.util.ArrayList"%>
-<%@ page errorPage="include/errorPage.jsp" %>
 <jsp:useBean id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
 
 <%
@@ -53,7 +52,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							<%  if (ListaKarts.isEmpty()){ %>
 						 		<p> No se han encontrado karts </p>
 						  	<% }else{ %>
-								<p> Seleccione los karts cuyo estados desee modificar</p>
+								<p> Seleccione el kart cuyo estado desee modificar</p>
 									<table>
 										<caption> <strong> Listado de Karts </strong> </caption>
 												<thead>
@@ -101,6 +100,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							<select name="estado" id="estado" required>
 								<option value="">...</option>
 								<option value="DISPONIBLE">DISPONIBLE</option>
+								<option value="RESERVADO">RESERVADO</option>
 								<option value="MANTENIMIENTO">MANTENIMIENTO</option>
 							</select>
 						</p>

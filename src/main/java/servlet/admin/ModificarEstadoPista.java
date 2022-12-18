@@ -65,6 +65,10 @@ public class ModificarEstadoPista extends HttpServlet {
 				
 				List<PistaDTO> ListaPistas = pistaDAO.listadoPistas();
 				
+				for (PistaDTO pistaDTO : ListaPistas) {
+					System.out.println(pistaDTO.getNombre());
+				}
+				
 				//Lo guardamos en el bean para evitar posteriores conexiones repetidas en la BD
 				bean.setListadoPistas(ListaPistas);
 				
