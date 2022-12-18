@@ -81,7 +81,6 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 						<% } %>
 							</tbody>
 						</table>
-					<% } %>
 				
 				<table>
 				<caption> <strong> Reservas Familiares </strong> </caption>
@@ -110,8 +109,8 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 								    <td><%= reservaFamiliarDTO.getPrecio() %> €</td>
 								    <td><%= reservaFamiliarDTO.getIdPista() %></td>
 								  </tr>
-					
-					
+							<%} %>
+							
 							<% for (ReservaFamiliarDTO reservafamiliarDTO : reservasFamiliarPasadas){ %>
 					
 							  <tr>
