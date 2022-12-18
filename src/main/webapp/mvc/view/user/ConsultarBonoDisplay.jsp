@@ -17,33 +17,42 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 
 <!DOCTYPE html>
 <html>
+	<jsp:include page="/include/encabezado.jsp" />
+
 		<head>
 				<meta charset="UTF-8">
 				<title>Crear Bono</title>
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/fieldset_funciones.css">				
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/reservas.css">												
+
 		</head>
 		<body>
+			<h2>Crear Bono</h2>
+					<fieldset>
+						<legend>Seleccione el campo</legend>	
 						<form id="formBono" method="post" action="/WebProyectoPW/CrearBono">
-								<div>
-								
-										<p> Seleccione el tipo de bono que desea: </p>
-										<p> Tipo de bono: </p>
-										<input type="radio" name="tipoBono" id="infantil" value="INFANTIL" required>
-										<label for="infantil">Bono Infantil</label> <br>
-										
-										<input type="radio" name="tipoBono" id="familiar" value="FAMILIAR" required>
-										<label for="familiar">Bono Familiar</label> <br>
-										
-										<input type="radio" name="tipoBono" id="adultos" value="ADULTOS" required>
-										<label for="adultos">Bono Adulto</label> <br>
-										
-								</div>	
-						
+							<p> Tipo de bono: </p>
+							<input type="radio" name="tipoBono" id="infantil" value="INFANTIL" required>
+							<label for="infantil">Bono Infantil</label> <br>
+							
+							<input type="radio" name="tipoBono" id="familiar" value="FAMILIAR" required>
+							<label for="familiar">Bono Familiar</label> <br>
+							
+							<input type="radio" name="tipoBono" id="adultos" value="ADULTOS" required>
+							<label for="adultos">Bono Adulto</label> <br>
+
+							<div class="aceptar">	
 								<input type="submit" value="Crear Bono">
+							</div>
 						</form>
-						<form id="volver" method="post" action="/WebProyectoPW">
-								<input type="submit" value="Volver">
-						</form>
-		</body>
+					</fieldset>
+	<jsp:include page="/include/volver_usuario.jsp" />
+	<jsp:include page="/include/footer.jsp" />
+	
+	</body>
 </html>
 
 

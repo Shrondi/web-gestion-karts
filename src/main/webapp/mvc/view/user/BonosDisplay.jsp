@@ -30,20 +30,26 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 
 <!DOCTYPE html>
 <html>
+	<jsp:include page="/include/encabezado.jsp" />
+
 		<head>
 				<meta charset="UTF-8">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">
 				<title>Listado Bonos</title>
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">								
+				
 		</head>
 		<body>
-				<p id="message"><%= mensajeNextPage %> </p>
+			<h2>Hacer Reserva</h2>
+				<p class="mensaje" id="message"><%= mensajeNextPage %> </p>
 				<%if (bonos.isEmpty()){ %>
 					<p> No dispone de bonos </p>
 				<% }else{%>
 					<form id="submit" method="post" action="<%= request.getAttribute("nextPage") %>">
-					
 					<table>
-					<caption> <strong> Bonos </strong> </caption>
+						<caption><strong>Listado de bonos creados</strong></caption>
 								<thead>
 								  <tr>
 								    <th></th>
@@ -72,15 +78,17 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							</tbody>
 						</table>
 						<br>
-							<input type="submit" value="Confirmar">
+							<div class="aceptar">
+								<input type="submit" value="Confirmar">
+							</div>
 						</form>
 						<br>
 					<%} %>
 					
-						<form id="volver" method="post" action="/WebProyectoPW">
-								<input type="submit" value="Volver">
-						</form>
-		</body>
+	<jsp:include page="/include/volver_usuario.jsp" />
+	<jsp:include page="/include/footer.jsp" />
+	
+	</body>
 </html>
 
 <%
