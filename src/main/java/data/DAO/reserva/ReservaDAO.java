@@ -245,14 +245,15 @@ public class ReservaDAO {
 	}
 				
 	//NEW
-	public void actualizarSesionesBono(int idBono) {
+	public void actualizarSesionesBono(int numeroSesiones, int idBono) {
 					
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
 
 		try {
 			PreparedStatement ps2 = con.prepareStatement(prop.getProperty("actualizarSesionesBonoSTM"));
-			ps2.setInt(1, idBono);
+			ps2.setInt(1, numeroSesiones);
+			ps2.setInt(2, idBono);
 						
 			ps2.executeUpdate();
 					
