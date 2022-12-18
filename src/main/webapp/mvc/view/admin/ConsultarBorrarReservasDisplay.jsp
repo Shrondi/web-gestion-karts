@@ -48,7 +48,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 					<p>
 						<label for="fechaFin">Fecha Fin: </label>
 						<input type="datetime-local" name="fechaFin" id="fechaFin" value="<%=cancelarBean.getFechaFin()%>" required>
-						<div class="" id="dateErrorText"></div>
+						<div id="dateErrorText"></div>
 					</p>
 					
 					<div id="popup">
