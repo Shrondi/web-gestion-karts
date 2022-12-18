@@ -64,7 +64,7 @@ public class CrearKart extends HttpServlet {
 				
 				kartDAO.crearKart(kart);
 				
-				request.setAttribute("mensaje", "Se ha creado con éxito el kart");
+				request.setAttribute("mensaje", "Se ha creado con &eacute;xito el kart");
 				dispatcher = request.getRequestDispatcher("/mvc/view/admin/CrearKart.jsp");
 				dispatcher.forward(request, response);
 			}

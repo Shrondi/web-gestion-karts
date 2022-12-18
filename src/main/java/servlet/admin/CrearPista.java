@@ -80,7 +80,7 @@ public class CrearPista extends HttpServlet {
 					pistaDAO.CrearPista(pista);
 					
 					//Volvemos a la vista para crear mas pistas
-					request.setAttribute("mensaje", "Se ha creado con éxito la pista con nombre: " + nombre_pista);
+					request.setAttribute("mensaje", "Se ha creado con &eacute;xito la pista con nombre: " + nombre_pista);
 					dispatcher = request.getRequestDispatcher("/mvc/view/admin/CrearPista.jsp");
 					dispatcher.forward(request, response);
 				}
