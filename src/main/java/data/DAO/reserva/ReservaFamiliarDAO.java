@@ -133,18 +133,19 @@ public class ReservaFamiliarDAO {
 	}
 	
 	//NEW -- Consultar reservas a partir de mañana de un usuario
-	public List<ReservaFamiliarDTO> consultarReservasFamiliarFuturas(String usuario){
+	public List<ReservaFamiliarDTO> consultarReservasFamiliarFuturas(String modalidad, String usuario){
 		List<ReservaFamiliarDTO> reservas = new ArrayList<>();
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
 		
 		try {
-			Statement stmt = con.createStatement();
-			String query = prop.getProperty("obtenerReservasFamiliarbyFechaSTM") + String.format("'%s'", usuario);
-			ResultSet rs = stmt.executeQuery(query);
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasFamiliarbyFechaSTM"));
+			ps.setString(1, modalidad);
+			ps.setString(2, usuario);
+			
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				int idReserva = rs.getInt("id_Reserva");
-				String modalidad = rs.getString("modalidad_reserva");
 				int participantes_infantiles = rs.getInt("participantes_infantiles");
 				int participantes_adultos = rs.getInt("participantes_adultos");
 				Date fecha = new Date(rs.getTimestamp("fecha").getTime());
@@ -169,7 +170,7 @@ public class ReservaFamiliarDAO {
 			}
 			
 			rs.close();
-			stmt.close();
+			ps.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

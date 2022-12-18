@@ -23,7 +23,7 @@ import data.DAO.reserva.*;
 /**
  * Servlet implementation class CrearReservaIndividual
  */
-public class CancelarReservaIndividual extends HttpServlet {
+public class CancelarReservaBono extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	/*
@@ -74,9 +74,9 @@ public class CancelarReservaIndividual extends HttpServlet {
 				ReservaFamiliarDAO reservaFamiliarDAO = new ReservaFamiliarDAO(prop);
 				ReservaAdultosDAO reservaAdultosDAO = new ReservaAdultosDAO(prop);
 
-				reservasInfantil = reservaInfantilDAO.consultarReservasInfantilFuturas("INDIVIDUAL", userBean.getCorreo());
-				reservasFamiliar = reservaFamiliarDAO.consultarReservasFamiliarFuturas("INDIVIDUAL", userBean.getCorreo());
-				reservasAdultos = reservaAdultosDAO.consultarReservasAdultosFuturas("INDIVIDUAL", userBean.getCorreo());
+				reservasInfantil = reservaInfantilDAO.consultarReservasInfantilFuturas("BONO", userBean.getCorreo());
+				reservasFamiliar = reservaFamiliarDAO.consultarReservasFamiliarFuturas("BONO", userBean.getCorreo());
+				reservasAdultos = reservaAdultosDAO.consultarReservasAdultosFuturas("BONO", userBean.getCorreo());
 				
 				bean.setReservasInfantil(reservasInfantil);
 				bean.setReservasFamiliar(reservasFamiliar);

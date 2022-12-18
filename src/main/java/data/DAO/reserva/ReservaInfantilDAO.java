@@ -131,19 +131,20 @@ public class ReservaInfantilDAO {
 	
 	
 	//NEW -- Consultar reservas a partir de mañana de un usuario
-	public List<ReservaInfantilDTO> consultarReservasInfantilFuturas(String usuario){
+	public List<ReservaInfantilDTO> consultarReservasInfantilFuturas(String modalidad, String usuario){
 		List<ReservaInfantilDTO> reservas = new ArrayList<>();
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
 		
 		try {
-			Statement stmt = con.createStatement();
+			PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerReservasInfantilbyFechaSTM"));
+			ps.setString(1, modalidad);
+			ps.setString(2, usuario);
 			
-			String query = prop.getProperty("obtenerReservasInfantilbyFechaSTM") + String.format("'%s'", usuario);
-			ResultSet rs = stmt.executeQuery(query);
+			ResultSet rs = ps.executeQuery();
+			
 			while (rs.next()) {
 				int idReserva = rs.getInt("id_Reserva");
-				String modalidad = rs.getString("modalidad_reserva");
 				int participantes_infantiles = rs.getInt("participantes_infantiles");
 				Date fecha = new Date(rs.getTimestamp("fecha").getTime());
 				int duracion = rs.getInt("duracion");
@@ -166,7 +167,7 @@ public class ReservaInfantilDAO {
 			}
 			
 			rs.close();
-			stmt.close();
+			ps.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

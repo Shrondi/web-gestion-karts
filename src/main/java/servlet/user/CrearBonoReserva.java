@@ -235,7 +235,7 @@ public class CrearBonoReserva extends HttpServlet {
 							infantil.setPrecio(precio);
 							infantil.setIdPista(pista);
 							
-							reserva.crearReservaInfantil(infantil);
+							reserva.crearReservaInfantilBono(infantil, bean.getIdBono());
 							
 							request.setAttribute("reservaInfantil", infantil);
 							
@@ -253,7 +253,7 @@ public class CrearBonoReserva extends HttpServlet {
 							familiar.setPrecio(precio);
 							familiar.setIdPista(pista);
 							
-							reserva.crearReservaFamiliar(familiar);
+							reserva.crearReservaFamiliarBono(familiar, bean.getIdBono());
 							
 							request.setAttribute("reservaFamiliar", familiar);
 							
@@ -269,7 +269,7 @@ public class CrearBonoReserva extends HttpServlet {
 							adultos.setPrecio(precio);
 							adultos.setIdPista(pista);
 							
-							reserva.crearReservaAdulto(adultos);
+							reserva.crearReservaAdultoBono(adultos, bean.getIdBono());
 							
 							request.setAttribute("reservaAdultos", adultos);
 						}
