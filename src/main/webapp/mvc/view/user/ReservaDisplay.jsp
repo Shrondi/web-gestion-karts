@@ -31,58 +31,84 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 
 <!DOCTYPE html>
 <html>
+	<jsp:include page="/include/encabezado.jsp" />
+
 		<head>
 				<meta charset="UTF-8">
 				<title>Resumen Reserva</title>
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">					
 		</head>
 		<body>
-				<p id="message"><%= mensajeNextPage %> </p>
-				<form id="volver" method="post" action="/WebProyectoPW">
-				
-				<p>
-					RESUMEN RESERVA <br>
-				</p>
-				
+			<h2>Resumen Reserva</h2>
+			<p class="mensaje" id="message"><%= mensajeNextPage %> </p>
+				<table class="vertical">
+					<caption><strong>Reserva realizada</strong></caption>
 				 <%  if (reservaInfantil != null){ %>
-				 		Modalidad: Individual <br>
-				 		Tipo: Infantil <br>
-					 	Fecha y hora: <%= reservaInfantil.getFecha() %> <br>
-					 	Duracion: <%= reservaInfantil.getDuracion() %> <br>
-					 	Participantes Infantiles: <%= reservaInfantil.getParticipantesInfantiles() %> <br>
-					 	Descuento: <%= reservaInfantil.getDescuento() %> % <br>
-					 	Precio: <%= reservaInfantil.getPrecio() %> € <br>
-					 	Pista: <%= reservaInfantil.getIdPista() %> <br>
-					 	
-					 	<! –– Se puede hacer con el metodo toString <%= reservaInfantil.toString() %> ––>
-					 	
+				 		<tr><th>Modalidad</th>				 			
+				 			<td><%= request.getAttribute("modalidad") %></td></tr>
+						<tr><th>Tipo</th>
+							<td>Infantil</td></tr>
+						<tr><th>Pista</th>
+					 		<td><%= reservaInfantil.getIdPista() %></td></tr>
+					 	<tr><th>Fecha</th>
+					 		<td><%= reservaInfantil.getFecha() %></td></tr>
+						<tr><th>Duración</th>
+							<td><%= reservaInfantil.getDuracion() %> min</td></tr>
+						 <tr><th>Participantes infantiles</th>
+						 	<td><%= reservaInfantil.getParticipantesInfantiles() %></td> </tr>
+						 <tr><th>Participantes adultos</th>
+						 	<td>0</td></tr>
+						 <tr><th>Descuento aplicado</th>
+						 	<td><%= reservaInfantil.getDescuento() %> %</td></tr>
+						 <tr><th>Precio final</th>
+						 	<td><%= reservaInfantil.getPrecio() %> €</td></tr>
 					<% }else if (reservaFamiliar != null){%>
-			
-						Modalidad: Individual <br>
-				 		Tipo: Familiar <br>
-					 	Fecha y hora: <%= reservaFamiliar.getFecha() %> <br>
-					 	Duracion: <%= reservaFamiliar.getDuracion() %> <br>
-					 	Participantes Infantiles: <%= reservaFamiliar.getParticipantesInfantiles() %> <br>
-					 	Participantes Adultos: <%= reservaFamiliar.getParticipantesAdultos() %> <br>
-					 	Descuento: <%= reservaFamiliar.getDescuento() %> % <br>
-					 	Precio: <%= reservaFamiliar.getPrecio() %> € <br>
-					 	Pista: <%= reservaFamiliar.getIdPista() %> <br>
-					 	
+				 		<tr><th>Modalidad</th>				 			
+				 			<td><%= request.getAttribute("modalidad") %></td></tr>
+						<tr><th>Tipo</th>
+							<td>Familiar</td></tr>
+						<tr><th>Pista</th>
+					 		<td><%= reservaFamiliar.getIdPista() %></td></tr>
+					 	<tr><th>Fecha</th>
+					 		<td><%= reservaFamiliar.getFecha() %></td></tr>
+						<tr><th>Duración</th>
+							<td><%= reservaFamiliar.getDuracion() %> min</td></tr>
+						 <tr><th>Participantes infantiles</th>
+						 	<td><%= reservaFamiliar.getParticipantesInfantiles() %></td></tr>
+						 <tr><th>Participantes adultos</th>
+						 	<td><%= reservaFamiliar.getParticipantesAdultos() %></td></tr>
+						 <tr><th>Descuento aplicado</th>
+						 	<td><%= reservaFamiliar.getDescuento() %> %</td></tr>
+						 <tr><th>Precio final</th>
+						 	<td><%= reservaFamiliar.getPrecio() %> €</td></tr>				 	
 					<% }else if (reservaAdultos != null){%>
-			
-						Modalidad: Individual <br>
-				 		Tipo: Adulto <br>
-					 	Fecha y hora: <%= reservaAdultos.getFecha() %> <br>
-					 	Duracion: <%= reservaAdultos.getDuracion() %> <br>
-					 	Participantes Adultos: <%= reservaAdultos.getParticipantesAdultos() %> <br>
-					 	Descuento: <%= reservaAdultos.getDescuento() %> % <br>
-					 	Precio: <%= reservaAdultos.getPrecio() %> € <br>
-					 	Pista: <%= reservaAdultos.getIdPista() %> <br>
-					<% } %>
-						
-						
-								<input type="submit" value="Volver">
-						</form>
-		</body>
+				 		<tr><th>Modalidad</th>				 			
+				 			<td><%= request.getAttribute("modalidad") %></td></tr>
+						<tr><th>Tipo</th>
+							<td>Adultos</td></tr>
+						<tr><th>Pista</th>
+					 		<td><%= reservaAdultos.getIdPista() %></td></tr>
+					 	<tr><th>Fecha</th>
+					 		<td><%= reservaAdultos.getFecha() %></td></tr>
+						<tr><th>Duración</th>
+							<td><%= reservaAdultos.getDuracion() %> min</td></tr>
+						 <tr><th>Participantes infantiles</th>
+						 	<td>0</td></tr>
+						 <tr><th>Participantes adultos</th>
+						 	<td><%= reservaAdultos.getParticipantesAdultos() %></td></tr>
+						 <tr><th>Descuento aplicado</th>
+						 	<td><%= reservaAdultos.getDescuento() %> %</td> </tr>
+						 <tr><th>Precio final</th>
+						 	<td><%= reservaAdultos.getPrecio() %> €</td></tr>							 		
+					<% } %>					
+					
+				</table>			
+
+	<jsp:include page="/include/volver_usuario.jsp" />						
+	<jsp:include page="/include/footer.jsp" />
+</body>
 </html>
 
 <%
