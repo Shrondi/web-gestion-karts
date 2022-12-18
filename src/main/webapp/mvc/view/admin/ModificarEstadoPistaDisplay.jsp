@@ -20,7 +20,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 	}
 	
 	List<PistaDTO> ListaPistas = (List<PistaDTO>) request.getAttribute("ListaPistas");
-	String estado="";
+	
 	//Caso 3: Si se accede de forma forzosa por url
 	if (ListaPistas == null){
 %>
@@ -30,6 +30,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 <!DOCTYPE html>
 <html>
 		<head>
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">
 				<meta charset="UTF-8">
 				<title>Modificar estado de las pistas</title>
 		</head>
@@ -37,18 +38,17 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 				<p id="message"><%= mensajeNextPage %> </p>
 				
 				<div>
-				<form id="form1" method="post" action="/WebProyectoPW/ModificarEstadoPista">
 				<p>
-					Elija la pista cuyo estado desea modificar.
+					Elija la pista cuyo estado desea modificar:
 				</p>
 				
 				<% if (ListaPistas.isEmpty()){ %>
 				 		<p> No se han encontrado pistas </p>
 				 		
 				<% }else{ %>
-				
+				<form id="form1" method="post" action="/WebProyectoPW/ModificarEstadoPista">
 					<table>
-					<caption> <strong> Pistas:</strong> </caption>
+					<caption> <strong> Listado de pistas</strong> </caption>
 								<thead>
 								  <tr>
 								    <th></th>
@@ -60,35 +60,29 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 								</thead>
 								<tbody>
 								
-								<% for (PistaDTO pista : ListaPistas){ %> 			
-								 
-									 <% if(pista.getEstado() == true){ %>
-											<% estado = "Disponible"; %>
-									<% }else{  %>
-											<% estado = "No disponible"; %>
-										
-									<% } %>
-									
-								 
+								<% for (PistaDTO pista : ListaPistas){ %> 
+								
 								  <tr>
 								    <td><input type="radio" name="pista" id="kart" value="<%= pista.getNombre() %>" required></td>
 								    <td><%= pista.getNombre() %></td>
-								    <td><%= estado %></td>
+								    <% if(pista.getEstado()){ %>
+											<td>Disponible</td>
+									<% }else{  %>
+										<td>No disponible</td>
+									<% } %>
 								    <td><%= pista.getDificulty() %></td>
-								    <td><%= pista.getMaxAmmount() %></td>
-								    				   	
+								    <td><%= pista.getMaxAmmount() %></td>				   	
 								  </tr>
 							
 								<% } %>
 							
 								</tbody>
 							</table>
-						<% } %>		
-					<input type="submit" value="Continuar">											
-				</form>							
+							
+						<input type="submit" value="Continuar">											
+				</form>		
+				<% } %>						
 								
-				
-				<br>
 				</div>
 				
 				<form id="volver" method="post" action="/WebProyectoPW">
@@ -98,7 +92,6 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 </html>
 
 <%
-
 	}
 }
 %>

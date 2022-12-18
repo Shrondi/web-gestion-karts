@@ -49,8 +49,7 @@ public class ModificarEstadoPista extends HttpServlet {
 		
 		//Caso 1: Usuario no esta logueado o no es administrador-> Volvemos al index
 		if ( userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() == false ) {
-			//dispatcher = request.getRequestDispatcher("/index.jsp");
-			//dispatcher.forward(request, response);
+
 			response.sendRedirect("/WebProyectoPW");
 			
 		//Caso 2: Usuario logueado
@@ -61,6 +60,7 @@ public class ModificarEstadoPista extends HttpServlet {
 			PistaDAO pistadao = new PistaDAO(prop);
 			List<PistaDTO> ListaPistas = pistadao.listadoPistas();
 			
+			//Caso 2b: 
 			if (pista == null) { //Nos vamos a la vista para seleccionar la pista
 				
 				request.setAttribute("ListaPistas", ListaPistas);
