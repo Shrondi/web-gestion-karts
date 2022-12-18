@@ -107,6 +107,10 @@ public class CancelarReservaBono extends HttpServlet {
 				
 				int IdReserva = Integer.parseInt(reserva);
 				
+				int idBono = reservaDAO.consultarIDBonoReserva(IdReserva);
+				
+				reservaDAO.actualizarSesionesBono(-1,idBono);	
+				
 				//Para evitar recorrer los otros bucles, cuando una reserva se cancele la variable cambia a true
 				boolean done = false;
 				
@@ -147,9 +151,7 @@ public class CancelarReservaBono extends HttpServlet {
 					}
 				}
 				
-				int idBono = reservaDAO.consultarIDBonoReserva(IdReserva);
 				
-				reservaDAO.actualizarSesionesBono(-1,idBono);
 				
 				request.setAttribute("mensaje", "Se ha borrado correctamente la reserva");
 				dispatcher = request.getRequestDispatcher("/");

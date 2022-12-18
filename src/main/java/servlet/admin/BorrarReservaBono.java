@@ -135,6 +135,10 @@ public class BorrarReservaBono extends HttpServlet {
 					//Buscamos la ID de la reserva para borrarla
 					int IdReserva = Integer.parseInt(reserva);
 					
+					int idBono = reservaDAO.consultarIDBonoReserva(IdReserva);
+					
+					reservaDAO.actualizarSesionesBono(-1,idBono);	
+					
 						for (ReservaInfantilDTO reservaInfantil : reservasInfantil) {
 							if (reservaInfantil.getIdReserva() == IdReserva) {
 								reservaDAO.borrarReserva(IdReserva);
