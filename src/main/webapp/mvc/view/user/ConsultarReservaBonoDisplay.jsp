@@ -50,11 +50,11 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 								<% if (reservaBean.getTipoReserva().contentEquals("INFANTIL") || reservaBean.getTipoReserva().contentEquals("FAMILIAR")){  %>
 									<p> </p>
 									<label for="numeroNinios"> Número de participantes infantiles:  </label>
-									<input type="number" name="numeroNinios" id="numeroNinios" min="0" max="20" step="1" required>
+									<input type="number" name="numeroNinios" id="numeroNinios" min="1" max="20" step="1" required>
 								<%}if (reservaBean.getTipoReserva().contentEquals("ADULTOS") || reservaBean.getTipoReserva().contentEquals("FAMILIAR")){ %>
 									<p> </p>
 									<label for="numeroAdultos">Número de participantes adultos: </label>
-									<input type="number" name="numeroAdultos" min="0" max="20" step="1"  required>
+									<input type="number" name="numeroAdultos" min="1" max="20" step="1"  required>
 								<%} %>
 								
 								
