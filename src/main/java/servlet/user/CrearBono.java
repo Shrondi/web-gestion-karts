@@ -57,7 +57,7 @@ public class CrearBono extends HttpServlet {
 				
 				reservaDAO.insertarBono(userBean.getCorreo(), tipoBono);
 
-				request.setAttribute("mensaje", "Puede elegir el bono recien creado si quiere asignarle reservas (puede hacerlo en otro momento): ");
+				request.setAttribute("mensaje", "Puede elegir el bono reci&eacute;n creado si quiere asignarle reservas (puede hacerlo en otro momento): ");
 				dispatcher = request.getRequestDispatcher("/ReservaBono");
 				dispatcher.forward(request, response);
 								
