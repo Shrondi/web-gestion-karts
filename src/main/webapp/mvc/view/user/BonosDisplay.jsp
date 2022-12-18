@@ -40,8 +40,10 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 				<%if (bonos.isEmpty()){ %>
 					<p> No dispone de bonos </p>
 				<% }else{%>
-					<form id="submit" method="post" action="/WebProyectoPW/ReservaBono">
+					<form id="submit" method="post" action="<%= request.getAttribute("nextPage") %>">
+					
 					<table>
+					<caption> <strong> Bonos </strong> </caption>
 								<thead>
 								  <tr>
 								    <th></th>

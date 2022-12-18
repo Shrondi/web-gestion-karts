@@ -309,27 +309,6 @@ public class ReservaDAO {
 			connection.closeConnection();
 			return reservas;
 	}
-	/**
-	 * Borrar una reserva de un bono
-	 * @param id ID del bono
-	 */		
-	
-	public void borrarReservaBono(int id) {
-		
-		DBConnection connection = new DBConnection();
-		con = connection.getConnection();
-
-		try {
-			PreparedStatement ps = con.prepareStatement(prop.getProperty("cancelarReservaBonoSTM")+id);
-			
-			ps.executeUpdate();
-		
-		} catch(SQLException e) {
-			e.printStackTrace();
-		}
-		
-		connection.closeConnection();
-	}
 	
 	/**
 	 * Borrar un bono

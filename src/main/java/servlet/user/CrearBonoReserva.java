@@ -79,6 +79,7 @@ public class CrearBonoReserva extends HttpServlet {
 				List<BonoDTO> bonos = reserva.consultarBonos(userBean.getCorreo());
 				
 				request.setAttribute("bonos", bonos);
+				request.setAttribute("nextPage", "/WebProyectoPW/ReservaBono");
 				dispatcher = request.getRequestDispatcher("/mvc/view/user/BonosDisplay.jsp");
 				dispatcher.forward(request, response);
 				

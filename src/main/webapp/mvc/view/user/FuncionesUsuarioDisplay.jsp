@@ -71,10 +71,17 @@ if(userBean == null || userBean.getCorreo().equals("")){
 						</li>
 						
 						<li>
+							<form method="post" action="/WebProyectoPW/CancelarBono">
+								<input type="submit" name="option" class="option" value="Cancelar Bono">
+							</form>
+						</li>
+						
+						<li>
 							<form method="post" action="/WebProyectoPW/CancelarReservaBono">
 								<input type="submit" name="option" class="option" value="Cancelar reserva Bono">
 							</form>
-						</li>	
+						</li>
+							
 					</ul>
 				</li>
 				
