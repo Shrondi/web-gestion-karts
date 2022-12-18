@@ -120,7 +120,7 @@ public class AsociarKartPista extends HttpServlet {
 					if (ids.length > bean.getPista().getMaxAmmount()) {
 						done = false;
 						request.setAttribute("adminBean", bean);
-						request.setAttribute("mensaje", "Ha seleccionado mas karts que los permitidos en la pista. Max karts = " + bean.getPista().getMaxAmmount());
+						request.setAttribute("mensaje", "Ha seleccionado m&aacute;s karts que los permitidos en la pista. Max karts = " + bean.getPista().getMaxAmmount());
 					}
 					
 					
@@ -149,14 +149,14 @@ public class AsociarKartPista extends HttpServlet {
 				if(numKartAdultos+bean.getPista().getAsocAmmountAdult() > bean.getPista().getMaxAmmount() ) {
 					done = false;
 					request.setAttribute("adminBean", bean);
-					request.setAttribute("mensaje", "Ha seleccionado mas karts adultos que los permitidos en la pista. Numero asoc adultos = "+ bean.getPista().getAsocAmmountAdult() + "Max karts = " + bean.getPista().getMaxAmmount());
+					request.setAttribute("mensaje", "Ha seleccionado m&aacute;s karts adultos que los permitidos en la pista. N&uacute;mero asoc adultos= "+ bean.getPista().getAsocAmmountAdult() + " Max karts= " + bean.getPista().getMaxAmmount());
 				}
 							
 				//Si se han elegido mas karts infantiles que los permitidos en la pista -> Volver al display
 				if(numKartInfantiles+bean.getPista().getAsocAmmountInf() > bean.getPista().getMaxAmmount()) {
 					done = false;
 					request.setAttribute("adminBean", bean);
-					request.setAttribute("mensaje", "Ha seleccionado mas karts infantiles que los permitidos en la pista. Numero asoc infantiles = "+ bean.getPista().getAsocAmmountInf() + "Max karts = " + bean.getPista().getMaxAmmount());
+					request.setAttribute("mensaje", "Ha seleccionado m&aacute;s karts infantiles que los permitidos en la pista. N&uacute;mero asoc infantiles= "+ bean.getPista().getAsocAmmountInf() + " Max karts= " + bean.getPista().getMaxAmmount());
 								
 				}
 						
