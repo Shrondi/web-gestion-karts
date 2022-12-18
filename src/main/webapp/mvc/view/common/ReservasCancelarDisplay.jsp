@@ -33,13 +33,16 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 <html>
 		<head>
 				<meta charset="UTF-8">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">
 				<title>Cancelar Reserva</title>
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
 		</head>
 		<body>
-				<p id="message"><%= mensajeNextPage %> </p>
-				
-				<form id="submit" method="post" action="<%= request.getAttribute("nextPage")%>">
+			<h2>Cancelar Reserva</h2>
+			<p class="mensaje" id="message"><%= mensajeNextPage %> </p>				
+			<form id="submit" method="post" action="<%= request.getAttribute("nextPage")%>">
 				<p>
 					Seleccione una de las siguientes reservas:
 				</p>
@@ -55,7 +58,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							    <th></th>
 							    <th>Fecha y hora</th>
 							    <th>Modalidad</th>
-							    <th>Duracion</th>
+							    <th>Duración</th>
 							    <th>Participantes infantiles</th>
 							    <th>Descuento</th>
 							    <th>Precio</th>
@@ -92,7 +95,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							    <th></th>
 							    <th>Fecha y hora</th>
 							    <th>Modalidad</th>
-							    <th>Duracion</th>
+							    <th>Duración</th>
 							    <th>Participantes infantiles</th>
 							    <th>Participantes adultos</th>
 							    <th>Descuento</th>
@@ -131,7 +134,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							    <th></th>
 							    <th>Fecha y hora</th>
 							    <th>Modalidad</th>
-							    <th>Duracion</th>
+							    <th>Duración</th>
 							    <th>Participantes adultos</th>
 							    <th>Descuento</th>
 							    <th>Precio</th>
@@ -160,14 +163,15 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 						
 						<% if (!(reservasInfantil.isEmpty() && reservasFamiliar.isEmpty() && reservasAdultos.isEmpty())){ %>
 							
-									<input type="submit" value="Confirmar">
+							<div class="aceptar">
+								<input type="submit" value="Confirmar">
+							</div>						
 						<%} %>
 						</form>
 						
-						<form id="volver" method="post" action="/WebProyectoPW">
-								<input type="submit" value="Volver">
-						</form>
-		</body>
+	<jsp:include page="/include/volver.jsp" />
+	<jsp:include page="/include/footer.jsp" />
+</body>
 </html>
 
 <%
