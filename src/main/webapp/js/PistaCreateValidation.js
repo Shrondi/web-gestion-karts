@@ -23,9 +23,9 @@ const RegularExpressions = {
 			}else{
 				var name = e.target.value
 				if(name.length < 1){
-					nameErrorText.innerText = "el nombre no puede estar vacío"
+					nameErrorText.innerText = "Nombre no puede estar vacío"
 				}else if(name.length > 64){
-					nameErrorText.innerText = "el nombre no puede tener mas de 64 caracteres"
+					nameErrorText.innerText = "Nombre no puede tener más de 64 caracteres"
 				}
 				correctName=false
 			}

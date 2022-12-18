@@ -44,7 +44,7 @@ function validacionEdad(actualMillis , inputMillis){
 		errorfecha.innerText = ""
 		correctDate = true
 	}else{
-		errorfecha.innerText = "Se deben realizar reservas con al menos un dia de antelación"
+		errorfecha.innerText = "Se deben realizar reservas con al menos un día de antelación"
 		correctDate = false
 	}
 	

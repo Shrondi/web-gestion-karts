@@ -42,7 +42,7 @@
 	//thisTime = validacionEdad(primeraParsed,actualDate)
 
 	if(time <= 0){
-		errorMessage.innerText = "La segunda fecha de finalizacion no puede ser menor que la de inicio"
+		errorMessage.innerText = "La fecha de fin no puede ser menor que la de inicio"
 		popUp.style.display = 'none'
 		rango = false
 	}else{

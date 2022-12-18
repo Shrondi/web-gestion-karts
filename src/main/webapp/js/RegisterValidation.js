@@ -45,11 +45,11 @@ const validarFormulario = (e) => {
 			}else{
 				var name = e.target.value
 				if(name.length < 1){
-					nameErrorText.innerText = "el nombre no puede estar vacío"
+					nameErrorText.innerText = "Nombre no puede estar vacío"
 				}else if(name.length > 32){
-					nameErrorText.innerText = "el nombre no puede tener mas de 32 caracteres"
+					nameErrorText.innerText = "Nombre no puede tener más de 32 caracteres"
 				}else{
-					nameErrorText.innerText = "el nombre no puede usar caracteres especiales"
+					nameErrorText.innerText = "Nombre no puede usar caracteres especiales"
 				}
 				correctName=false
 			}
@@ -63,11 +63,11 @@ const validarFormulario = (e) => {
 			}else{
 				var surname = e.target.value
 				if(surname.length < 1){
-					surnameErrorText.innerText = "el apellido no puede estar vacío"
+					surnameErrorText.innerText = "Apellidos no pueden estar vacío"
 				}else if(surname.length > 32){
-					surnameErrorText.innerText = "el apellido no puede tener mas de 32 caracteres"
+					surnameErrorText.innerText = "Apellidos no pueden tener más de 32 caracteres"
 				}else{
-					surnameErrorText.innerText = "el apellido no puede usar caracteres especiales"
+					surnameErrorText.innerText = "Apellidos no pueden usar caracteres especiales"
 				}
 				correctSurname=false
 			}
@@ -80,7 +80,7 @@ const validarFormulario = (e) => {
 				correctEmail=true
 			}else{
 				var email= e.target.value
-				emailErrorText.innerText = "El correo no es válido"
+				emailErrorText.innerText = "Correo no válido"
 				correctEmail=false
 			}
 			console.log("Email: "+ correctEmail)
@@ -98,7 +98,7 @@ const validarFormulario = (e) => {
 				}
 				console.log("parsed fechaNacimiento: "+ inputDate)
 			}else{
-				dateErrorText.innerText = "La fecha no es válida"
+				dateErrorText.innerText = "Fecha no válida"
 				correctDate=false
 			}
 			console.log("fechaNacimiento: "+ correctDate)
@@ -114,9 +114,9 @@ const validarFormulario = (e) => {
 			}else{
 				var password = e.target.value
 				if(password.length < 4){
-					passwordErrorText.innerText = "La contraseña debe tener mas de 4 carecteres"
+					passwordErrorText.innerText = "Contraseña debe tener más de 4 carecteres"
 				}else if(password.length > 32){
-					passwordErrorText.innerText = "La contraseña no puede tener mas de 32 caracteres"
+					passwordErrorText.innerText = "Contraseña no puede tener más de 32 caracteres"
 				}
 				correctPassWord=false
 			}
