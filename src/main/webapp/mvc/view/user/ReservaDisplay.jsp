@@ -44,29 +44,42 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 				</p>
 				
 				 <%  if (reservaInfantil != null){ %>
-				 		Modalidad: <%= request.getAttribute("modalidad") %> <br>
+				 		Modalidad: Individual <br>
 				 		Tipo: Infantil <br>
-				 		
-					 	<%= reservaInfantil.toString().replaceAll("(\r\n|\n)", "<br>") %>
+					 	Fecha y hora: <%= reservaInfantil.getFecha() %> <br>
+					 	Duracion: <%= reservaInfantil.getDuracion() %> <br>
+					 	Participantes Infantiles: <%= reservaInfantil.getParticipantesInfantiles() %> <br>
+					 	Descuento: <%= reservaInfantil.getDescuento() %> % <br>
+					 	Precio: <%= reservaInfantil.getPrecio() %> € <br>
+					 	Pista: <%= reservaInfantil.getIdPista() %> <br>
 					 	
+					 	<! –– Se puede hacer con el metodo toString <%= reservaInfantil.toString() %> ––>
 					 	
 					<% }else if (reservaFamiliar != null){%>
 			
-						Modalidad: <%= request.getAttribute("modalidad") %> <br>
+						Modalidad: Individual <br>
 				 		Tipo: Familiar <br>
-				 		
-					 	<%= reservaFamiliar.toString().replaceAll("(\r\n|\n)", "<br>") %>
+					 	Fecha y hora: <%= reservaFamiliar.getFecha() %> <br>
+					 	Duracion: <%= reservaFamiliar.getDuracion() %> <br>
+					 	Participantes Infantiles: <%= reservaFamiliar.getParticipantesInfantiles() %> <br>
+					 	Participantes Adultos: <%= reservaFamiliar.getParticipantesAdultos() %> <br>
+					 	Descuento: <%= reservaFamiliar.getDescuento() %> % <br>
+					 	Precio: <%= reservaFamiliar.getPrecio() %> € <br>
+					 	Pista: <%= reservaFamiliar.getIdPista() %> <br>
 					 	
 					<% }else if (reservaAdultos != null){%>
 			
-						Modalidad: <%= request.getAttribute("modalidad") %> <br>
+						Modalidad: Individual <br>
 				 		Tipo: Adulto <br>
-				 		
-					 	<%= reservaAdultos.toString().replaceAll("(\r\n|\n)", "<br>") %>
+					 	Fecha y hora: <%= reservaAdultos.getFecha() %> <br>
+					 	Duracion: <%= reservaAdultos.getDuracion() %> <br>
+					 	Participantes Adultos: <%= reservaAdultos.getParticipantesAdultos() %> <br>
+					 	Descuento: <%= reservaAdultos.getDescuento() %> % <br>
+					 	Precio: <%= reservaAdultos.getPrecio() %> € <br>
+					 	Pista: <%= reservaAdultos.getIdPista() %> <br>
 					<% } %>
 						
-						<br>
-						<br>
+						
 								<input type="submit" value="Volver">
 						</form>
 		</body>
