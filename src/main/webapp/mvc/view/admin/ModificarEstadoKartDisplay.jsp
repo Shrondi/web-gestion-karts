@@ -53,7 +53,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							<%  if (ListaKarts.isEmpty()){ %>
 						 		<p> No se han encontrado karts </p>
 						  	<% }else{ %>
-								<p> Seleccione el kart cuyo estado desee modificar</p>
+								<p> Seleccione los karts cuyo estados desee modificar</p>
 									<table>
 										<caption> <strong> Listado de Karts </strong> </caption>
 												<thead>
@@ -101,7 +101,6 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							<select name="estado" id="estado" required>
 								<option value="">...</option>
 								<option value="DISPONIBLE">DISPONIBLE</option>
-								<option value="RESERVADO">RESERVADO</option>
 								<option value="MANTENIMIENTO">MANTENIMIENTO</option>
 							</select>
 						</p>
