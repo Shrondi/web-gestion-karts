@@ -36,12 +36,7 @@ if(userBean == null || userBean.getCorreo().equals("")){
 									<input type="submit" name="option" class="option" value="Alta de usuario administrador">
 								</form>
 							</li>
-						
-							<li>
-								<form method="get" action="/WebProyectoPW-main/EliminarUsuario">
-									<input type="submit" name="option" class="option" value="Eliminar usuario">
-								</form>
-							</li>	
+							
 						</ul>
 					</li>
 					<li>Operaciones con pistas y karts

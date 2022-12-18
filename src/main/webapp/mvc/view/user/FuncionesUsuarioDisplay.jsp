@@ -38,12 +38,6 @@ if(userBean == null || userBean.getCorreo().equals("")){
 						</li>
 						
 						<li>
-							<form method="post" action="/WebProyectoPW/ModificarReservaIndividual">
-								<input type="submit" name="option" class="option" value="Modificar reserva Individual">
-							</form>
-						</li>
-						
-						<li>
 							<form method="post" action="/WebProyectoPW/CancelarReservaIndividual">
 								<input type="submit" name="option" class="option" value="Cancelar reserva Individual">
 							</form>
@@ -64,11 +58,6 @@ if(userBean == null || userBean.getCorreo().equals("")){
 							</form>
 						</li>
 						
-						<li>
-							<form method="post" action="/WebProyectoPW-main/ModificarReservaBono">
-								<input type="submit" name="option" class="option" value="Modificar reserva Bono">
-							</form>
-						</li>
 						
 						<li>
 							<form method="post" action="/WebProyectoPW/CancelarBono">
