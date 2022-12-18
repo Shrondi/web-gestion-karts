@@ -103,7 +103,7 @@ public class CrearBonoReserva extends HttpServlet {
 				//Si se supera la cantidad de sesiones por bono no se pueden añadir mas
 				if (numeroSesiones == 5) {
 
-					request.setAttribute("mensaje", "No se pueden añadir mas reservas al bono con ID " + idBono + ". El numero maximo de sesiones de un bono son 5.");
+					request.setAttribute("mensaje", "No se pueden a&ntilde;adir m&aacute;s reservas al bono con ID " + idBono + ". El n&uacute;mero m&aacute;ximo de sesiones de un bono son 5.");
 					dispatcher = request.getRequestDispatcher("/");
 					dispatcher.forward(request, response);
 					
@@ -157,7 +157,7 @@ public class CrearBonoReserva extends HttpServlet {
 							// Se ha elegido un franja de 2 horas por comodidad ya que la maxima duracion de una reserva son 2 horas
 							if (reservaDAO.comprobarReserva(fechaReserva, userBean.getCorreo())) {
 								
-								request.setAttribute("mensaje", "Ya tiene una reserva para la fecha dada. Debe haber una diferencia de 2 horas minimo entre la fecha de las reservas");
+								request.setAttribute("mensaje", "Ya tiene una reserva para la fecha dada. Debe haber una diferencia de 2 horas m&iacute;nimo entre la fecha de las reservas");
 								request.setAttribute("reservaBean", bean);
 								dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaBonoDisplay.jsp");
 								dispatcher.forward(request, response);
@@ -179,7 +179,7 @@ public class CrearBonoReserva extends HttpServlet {
 								if (pistas.isEmpty()) {
 									
 									request.setAttribute("reservaBean", bean);
-									request.setAttribute("mensaje", "No hay pistas disponibles con los datos dados. Intentelo de nuevo mas tarde.");
+									request.setAttribute("mensaje", "No hay pistas disponibles con los datos dados. Int&eacute;ntelo de nuevo m&aacute;s tarde.");
 									dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaBonoDisplay.jsp");
 									dispatcher.forward(request, response);
 								
