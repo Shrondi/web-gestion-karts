@@ -96,7 +96,7 @@ public class CrearReservaIndividual extends HttpServlet {
 					// (Asi se evita tener dos reservas que transcurran a la vez para el mismo usuario)
 					// Se ha elegido un franja de 2 horas por comodidad ya que la maxima duracion de una reserva son 2 horas
 					if (reservaDAO.comprobarReserva(fechaReserva, userBean.getCorreo())) {
-						request.setAttribute("mensaje", "Ya tiene una reserva para la fecha dada. Debe haber una diferencia de 2 horas minimo entre la fecha de las reservas");
+						request.setAttribute("mensaje", "Ya tiene una reserva para la fecha dada. Debe haber una diferencia de 2 horas m&iacute;nimo entre la fecha de las reservas");
 						
 						dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaIndividualDisplay.jsp");
 						dispatcher.forward(request, response);
@@ -110,7 +110,7 @@ public class CrearReservaIndividual extends HttpServlet {
 						//No hay pistas disponibles para los datos dados -> Volver al display a pedir nuevos datos para la reserva
 						if (pistas.isEmpty()) {
 							
-							request.setAttribute("mensaje", "No hay pistas disponibles con los datos dados. Intentelo de nuevo mas tarde.");
+							request.setAttribute("mensaje", "No hay pistas disponibles con los datos dados. Int&eacute;ntelo de nuevo m&aacute;s tarde.");
 							dispatcher = request.getRequestDispatcher("/mvc/view/user/ConsultarReservaIndividualDisplay.jsp");
 							dispatcher.forward(request, response);
 						
