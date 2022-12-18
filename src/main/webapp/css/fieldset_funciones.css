@@ -4,10 +4,11 @@ fieldset{
     border-radius: 5px;
     border-color:black;
     padding: 2%;
-    margin:auto;
-    width:50%;
-    text-align:center;
+    margin:auto;    
+    min-width:50%;
+    max-width:100%;
 }
+
 legend{
     font-size:large;
     font-weight:bold;

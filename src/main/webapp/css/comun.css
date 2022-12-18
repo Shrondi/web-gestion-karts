@@ -7,7 +7,7 @@ body{
     color:black;
 }
 
-h1,h2{
+h1,h2,h3,p{
 	text-align: center;
 }
 
@@ -25,4 +25,14 @@ input[type=button], input[type=submit], input[type=reset] {
   margin: 5px 1px;
   cursor: pointer;
   display:inline-block;
+  position:center;
+}
+
+.volver, .volver_asociar{
+	text-align:center;
+}
+
+.mensaje{
+	color:red;
+	text-align:center;
 }
