@@ -31,11 +31,13 @@ if(userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() ==
 			<%} %>
 			<%AbstractReservaDTO abstractReservaDTO = (AbstractReservaDTO)request.getAttribute("ProximaReserva"); %>
 			<%if (abstractReservaDTO.getIdPista() != null){ %>
-				<p>Su proxima reserva es el <%= abstractReservaDTO.getFecha()%> en la pista <%= abstractReservaDTO.getIdPista() %></p>
+				<p>Su próxima reserva es el <%= abstractReservaDTO.getFecha()%> en la pista <%= abstractReservaDTO.getIdPista() %></p>
 			<%}else{ %>
 				<p> No tiene reservas futuras </p>
 			<%} %>
 			
-						
+		<form action="/WebProyectoPW/mvc/view/user/FuncionesUsuarioDisplay.jsp" method="post">
+			<p><input type="submit" value="Acceso a operaciones"></p>
+		</form>									
 	</body>
 </html>
