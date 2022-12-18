@@ -21,7 +21,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 	}
 	
 	List<PistaDTO> ListaPistas = asociarBean.getListadoPistas();
-	
+	String estado="";
 	//Caso 3: Si se accede de forma forzosa por url
 	if (ListaPistas == null){
 %>
@@ -30,69 +30,75 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 
 <!DOCTYPE html>
 <html>
+	<jsp:include page="/include/encabezado.jsp" />
+
 		<head>
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">
 				<meta charset="UTF-8">
 				<title>Modificar estado de las pistas</title>
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">
 		</head>
 		<body>
-				<p id="message"><%= mensajeNextPage %> </p>
-				
-				<div>
-				<p>
-					Elija la pista cuyo estado desea modificar:
-				</p>
+			<h2>Modificar estado de Pistas</h2>
+			<p class="mensaje" id="message"><%= mensajeNextPage %> </p>
+						
+			<div>
+			<form id="form1" method="post" action="/WebProyectoPW/ModificarEstadoPista">
+				<p>Seleccione la pista cuyo estado desee modificar</p>
 				
 				<% if (ListaPistas.isEmpty()){ %>
 				 		<p> No se han encontrado pistas </p>
-				 		
 				<% }else{ %>
-				<form id="form1" method="post" action="/WebProyectoPW/ModificarEstadoPista">
+				
 					<table>
-					<caption> <strong> Listado de pistas</strong> </caption>
-								<thead>
-								  <tr>
-								    <th></th>
-								    <th>Nombre</th>
-								    <th>Estado</th>
-								    <th>Dificultad</th>
-								    <th>Maximo de karts</th>
-								  </tr>
-								</thead>
-								<tbody>
+					<caption> <strong> Listado de Pistas</strong> </caption>
+							<thead>
+							  <tr>
+							    <th></th>
+							    <th>Nombre</th>
+							    <th>Estado</th>
+							    <th>Dificultad</th>
+							    <th>Máximo de karts</th>
+							  </tr>
+							</thead>
+							<tbody>
 								
-								<% for (PistaDTO pista : ListaPistas){ %> 
-								
-								  <tr>
+							<% for (PistaDTO pista : ListaPistas){ %> 			
+								<tr>
 								    <td><input type="checkbox" name="pista" id="kart" value="<%= pista.getNombre() %>"></td>
 								    <td><%= pista.getNombre() %></td>
-								    <% if(pista.getEstado()){ %>
-											<td>Disponible</td>
-									<% }else{  %>
-										<td>No disponible </td>
-									<% } %>
+								 <% if(pista.getEstado() == true){ %>
+										<% estado = "Disponible"; %>
+								<% }else{  %>
+										<% estado = "No disponible"; %>
+								<% } %>
+									
+								    <td><%= estado %></td>
 								    <td><%= pista.getDificulty() %></td>
-								    <td><%= pista.getMaxAmmount() %></td>				   	
+								    <td><%= pista.getMaxAmmount() %></td>
 								  </tr>
 							
-								<% } %>
+							<% } %>
 							
-								</tbody>
-							</table>
-							
-						<input type="submit" value="Continuar">											
-				</form>		
-				<% } %>						
-								
-				</div>
+						</tbody>
+					</table>
+				<% } %>	
 				
-				<form id="volver" method="post" action="/WebProyectoPW/FuncionesAdministrador">
-						<input type="submit" value="Volver">
-				</form>
-		</body>
+				<div class="aceptar">
+					<input type="submit" value="Confirmar">											
+				</div>	
+			</form>													
+		</div>
+				
+	<jsp:include page="/include/volver_admin.jsp" />
+	<jsp:include page="/include/footer.jsp" />
+</body>
 </html>
 
 <%
+
 	}
 }
 %>
