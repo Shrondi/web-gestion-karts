@@ -4,7 +4,6 @@
 
 
 <%
-
 //Caso 1: No esta logado o si lo esta si es admin
 if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() == true) {
 	
@@ -34,8 +33,8 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 <html>
 		<head>
 				<meta charset="UTF-8">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">
 				<title>Consultar Reservas</title>
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table_reservas.css">
 		</head>
 		<body>
 				
@@ -45,7 +44,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							  <tr>
 							    <th>Fecha y hora</th>
 							    <th>Modalidad</th>
-							    <th>Duracion</th>
+							    <th>Duración</th>
 							    <th>Participantes infantiles</th>
 							    <th>Descuento</th>
 							    <th>Precio</th>
@@ -53,13 +52,12 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							  </tr>
 							</thead>
 							<tbody>
-							
+						
 							<% for (ReservaInfantilDTO reservaInfantilDTO : reservasInfantilFuturas){ %>
-					
 								  <tr>
 								    <td><%= reservaInfantilDTO.getFecha() %></td>
 								    <td><%= reservaInfantilDTO.getModalidad() %></td>
-								    <td><%= reservaInfantilDTO.getDuracion() %> minutos</td>
+								    <td><%= reservaInfantilDTO.getDuracion() %> min</td>
 								    <td><%= reservaInfantilDTO.getParticipantesInfantiles() %></td>
 								    <td><%= reservaInfantilDTO.getDescuento() %> %</td>
 								    <td><%= reservaInfantilDTO.getPrecio() %> €</td>
@@ -69,10 +67,10 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 						
 							<% for (ReservaInfantilDTO reservaInfantilDTO : reservasInfantilPasadas){ %>
 					
-							  <tr>
+							  <tr class="pasadas">
 							    <td><%= reservaInfantilDTO.getFecha() %></td>
 							    <td><%= reservaInfantilDTO.getModalidad() %></td>
-							    <td><%= reservaInfantilDTO.getDuracion() %> minutos</td>
+							    <td><%= reservaInfantilDTO.getDuracion() %> min</td>
 							    <td><%= reservaInfantilDTO.getParticipantesInfantiles() %></td>
 							    <td><%= reservaInfantilDTO.getDescuento() %> %</td>
 							    <td><%= reservaInfantilDTO.getPrecio() %> €</td>
@@ -88,7 +86,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							  <tr>
 							    <th>Fecha y hora</th>
 							    <th>Modalidad</th>
-							    <th>Duracion</th>
+							    <th>Duración</th>
 							    <th>Participantes infantiles</th>
 							    <th>Participantes adultos</th>
 							    <th>Descuento</th>
@@ -102,21 +100,22 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 								  <tr>
 								    <td><%= reservaFamiliarDTO.getFecha() %></td>
 								    <td><%= reservaFamiliarDTO.getModalidad() %></td>
-								    <td><%= reservaFamiliarDTO.getDuracion() %> minutos</td>
+								    <td><%= reservaFamiliarDTO.getDuracion() %> min</td>
 								    <td><%= reservaFamiliarDTO.getParticipantesInfantiles() %></td>
 								    <td><%= reservaFamiliarDTO.getParticipantesAdultos() %></td>
 								    <td><%= reservaFamiliarDTO.getDescuento() %> %</td>
 								    <td><%= reservaFamiliarDTO.getPrecio() %> €</td>
 								    <td><%= reservaFamiliarDTO.getIdPista() %></td>
 								  </tr>
+					
 							<%} %>
 							
 							<% for (ReservaFamiliarDTO reservafamiliarDTO : reservasFamiliarPasadas){ %>
 					
-							  <tr>
+							  <tr class="pasadas">
 							    <td><%= reservafamiliarDTO.getFecha() %></td>
 							    <td><%= reservafamiliarDTO.getModalidad() %></td>
-							    <td><%= reservafamiliarDTO.getDuracion() %> minutos</td>
+							    <td><%= reservafamiliarDTO.getDuracion() %> min</td>
 							    <td><%= reservafamiliarDTO.getParticipantesInfantiles() %></td>
 							    <td><%= reservafamiliarDTO.getParticipantesAdultos() %></td>
 							    <td><%= reservafamiliarDTO.getDescuento() %> %</td>
@@ -133,7 +132,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							  <tr>
 							    <th>Fecha y hora</th>
 							    <th>Modalidad</th>
-							    <th>Duracion</th>
+							    <th>Duración</th>
 							    <th>Participantes adultos</th>
 							    <th>Descuento</th>
 							    <th>Precio</th>
@@ -146,7 +145,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 								  <tr>
 								    <td><%= reservaAdultosDTO.getFecha() %></td>
 								    <td><%= reservaAdultosDTO.getModalidad() %></td>
-								    <td><%= reservaAdultosDTO.getDuracion() %> minutos</td>
+								    <td><%= reservaAdultosDTO.getDuracion() %> min</td>
 								    <td><%= reservaAdultosDTO.getParticipantesAdultos() %></td>
 								    <td><%= reservaAdultosDTO.getDescuento() %> %</td>
 								    <td><%= reservaAdultosDTO.getPrecio() %> €</td>
@@ -156,10 +155,10 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 						
 							<% for (ReservaAdultosDTO reservaAdultosDTO : reservasAdultosPasadas){ %>
 					
-							  <tr>
+							  <tr class="pasadas">
 							    <td><%= reservaAdultosDTO.getFecha() %></td>
 							    <td><%= reservaAdultosDTO.getModalidad() %></td>
-							    <td><%= reservaAdultosDTO.getDuracion() %> minutos</td>
+							    <td><%= reservaAdultosDTO.getDuracion() %> min</td>
 							    <td><%= reservaAdultosDTO.getParticipantesAdultos() %></td>
 							    <td><%= reservaAdultosDTO.getDescuento() %> %</td>
 							    <td><%= reservaAdultosDTO.getPrecio() %> €</td>
