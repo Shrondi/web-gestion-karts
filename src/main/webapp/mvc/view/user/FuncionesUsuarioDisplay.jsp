@@ -4,7 +4,7 @@
 <jsp:useBean id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
 
 <%
-if(userBean == null || userBean.getCorreo().equals("")){
+if(userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() == true){
 	
 	request.setAttribute("message", "Debe acceder o registrarse");
 	%>

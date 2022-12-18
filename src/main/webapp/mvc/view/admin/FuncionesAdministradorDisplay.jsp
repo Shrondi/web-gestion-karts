@@ -4,9 +4,8 @@
 <jsp:useBean id="userBean" scope="session" class="display.javabean.userBean"></jsp:useBean>
 
 <%
-if(userBean == null || userBean.getCorreo().equals("")){
+if(userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() == false){
 	
-	request.setAttribute("message", "Debe acceder o registrarse");
 	%>
 	<jsp:forward page="../../index.jsp"/>
 	<%	
