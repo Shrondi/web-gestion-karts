@@ -116,39 +116,6 @@ public class KartDAO {
 		connection.closeConnection();
 	}
 	
-
-	/**
-	 * Consultar karts disponibles por pista
-	 * @param nombre Nombre de una pista
-	 * @return karts Listado de karts
-	 */
-	
-	public List<KartDTO> consultarKartsPista(String nombre) {
-		List<KartDTO> karts = new ArrayList<>();
-		DBConnection connection = new DBConnection();
-		con = connection.getConnection();
-		try {
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(prop.getProperty("obtenerKartsPistaSTM")+ String.format("'%s'", nombre));
-			
-			while (rs.next()) {
-				int id = rs.getInt("id");
-				Boolean type = rs.getBoolean("tipo");
-				KartDTO kartToPush = new KartDTO();
-				kartToPush.setId(id);
-				kartToPush.seType(type);
-				karts.add(kartToPush);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch(IllegalArgumentException e){
-			e.printStackTrace();
-		}
-		
-		connection.closeConnection();
-		return karts;
-	}
-	
 	/**
 	 * Consultar karts sin asignar a pistas y que esten disponibles
 	 * @return karts Listado de karts

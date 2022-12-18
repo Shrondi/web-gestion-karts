@@ -352,50 +352,6 @@ public class ReservaInfantilDAO {
 					
 	}
 	
-	
-	/**
-	 * 
-	 * @param fecha Fecha que deben tener las reservas de tipo Infantil
-	 * @param pista Pista a la que deben estar asociadas las reservas de tipo Infantil
-	 * @return Lista de reservas de tipo Infantil con una fecha y pista concretas
-	 */
-	
-	public List<ReservaInfantilDTO> consultarReservasInfantilbyFechaPista(String fecha, String pista){
-		List<ReservaInfantilDTO> reservas = new ArrayList<>();
-		DBConnection connection = new DBConnection();
-		con = connection.getConnection();
-		
-		try {
-			Statement stmt = con.createStatement();
-			String query = prop.getProperty("obtenerReservasInfantilbyFechaPistaSTM")+String.format("'%s' AND pista='%s'", fecha, pista);
-			ResultSet rs = stmt.executeQuery(query);
-			while (rs.next()) {
-				String usuario = rs.getString("usuario");
-				int participantes_infantiles = rs.getInt("participantes_infantiles");
-				int duracion = rs.getInt("duracion");
-				float descuento = rs.getFloat("descuento");
-				float precio = rs.getFloat("precio");
-				
-				ReservaInfantilDTO reservainfantil = new ReservaInfantilDTO();
-				
-				reservainfantil.setIdUsuario(usuario);
-				reservainfantil.setParticipantesInfantiles(participantes_infantiles);
-				reservainfantil.setDuracion(duracion);
-				reservainfantil.setDescuento(descuento);
-				reservainfantil.setPrecio(precio);
-				reservainfantil.setIdPista(pista);
-				reservas.add(reservainfantil);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch(IllegalArgumentException e){
-			e.printStackTrace();
-		}
-		
-		connection.closeConnection();
-		return reservas;
-	}
-	
 
 }
 

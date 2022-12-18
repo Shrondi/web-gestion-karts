@@ -107,27 +107,6 @@ public class UsuarioDAO{
 		connection.closeConnection();
 	}
 
-	
-	/**
-	 * Eliminar usuario, solo se necesita su correo para eliminarlo
-	 * @param correo Correo del usuario
-	 */
-	
-	public void eliminarUsuario(String correo) {
-		DBConnection connection = new DBConnection();
-		con = connection.getConnection();
-		try {
-			PreparedStatement ps = con.prepareStatement(prop.getProperty("eliminarUsuarioSTM"));
-			ps.setString(1, correo);
-			ps.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		connection.closeConnection();
-	}
-
 	/**
 	 * Obtener usuario por su correo
 	 * @param correo Correo del usuario
