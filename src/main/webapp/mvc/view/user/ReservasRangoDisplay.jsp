@@ -112,17 +112,17 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 								  </tr>
 					
 					
-							<% for (ReservaFamiliarDTO reservaFamiliarDTO : reservasFamiliarPasadas){ %>
+							<% for (ReservaFamiliarDTO reservafamiliarDTO : reservasFamiliarPasadas){ %>
 					
 							  <tr>
-							    <td><%= reservaFamiliarDTO.getFecha() %></td>
-							    <td><%= reservaFamiliarDTO.getModalidad() %></td>
-							    <td><%= reservaFamiliarDTO.getDuracion() %> minutos</td>
-							    <td><%= reservaFamiliarDTO.getParticipantesInfantiles() %></td>
-							    <td><%= reservaFamiliarDTO.getParticipantesAdultos() %></td>
-							    <td><%= reservaFamiliarDTO.getDescuento() %> %</td>
-							    <td><%= reservaFamiliarDTO.getPrecio() %> €</td>
-							    <td><%= reservaFamiliarDTO.getIdPista() %></td>
+							    <td><%= reservafamiliarDTO.getFecha() %></td>
+							    <td><%= reservafamiliarDTO.getModalidad() %></td>
+							    <td><%= reservafamiliarDTO.getDuracion() %> minutos</td>
+							    <td><%= reservafamiliarDTO.getParticipantesInfantiles() %></td>
+							    <td><%= reservafamiliarDTO.getParticipantesAdultos() %></td>
+							    <td><%= reservafamiliarDTO.getDescuento() %> %</td>
+							    <td><%= reservafamiliarDTO.getPrecio() %> €</td>
+							    <td><%= reservafamiliarDTO.getIdPista() %></td>
 							  </tr>
 						<% } %>
 							</tbody>

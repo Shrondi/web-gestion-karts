@@ -36,7 +36,7 @@ if(userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() ==
 				<p> No tiene reservas futuras </p>
 			<%} %>
 			
-		<form action="/WebProyectoPW/mvc/view/user/FuncionesUsuarioDisplay.jsp" method="post">
+		<form action="/WebProyectoPW/FuncionesUsuario" method="post">
 			<p><input type="submit" value="Acceso a operaciones"></p>
 		</form>									
 	</body>
