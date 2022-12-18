@@ -245,9 +245,8 @@ public class ReservaDAO {
 	}
 				
 	//NEW
-	public int actualizarSesionesBono(int idBono) {
+	public void actualizarSesionesBono(int idBono) {
 					
-		int sesiones = 0;
 		DBConnection connection = new DBConnection();
 		con = connection.getConnection();
 
@@ -262,8 +261,33 @@ public class ReservaDAO {
 		}
 					
 		connection.closeConnection();
-		return sesiones;
 	}
+	
+	//NEW
+		public int consultarIDBonoReserva(int idReserva) {
+			int idBono = 0;
+			DBConnection connection = new DBConnection();
+			con = connection.getConnection();
+
+			try {
+				PreparedStatement ps = con.prepareStatement(prop.getProperty("obtenerIDBonoSTM"));
+
+				ps.setInt(1,idReserva);
+				
+				ResultSet rs = ps.executeQuery();
+
+				while (rs.next()) {
+					idBono = rs.getInt("id_Bono");
+				}
+					
+					
+				} catch(SQLException e) {
+					e.printStackTrace();
+				}
+					
+				connection.closeConnection();
+				return idBono;
+		}
 	
 	//NEW
 	public int consultarReservasCompletadas() {

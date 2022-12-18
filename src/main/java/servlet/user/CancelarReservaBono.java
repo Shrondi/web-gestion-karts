@@ -147,6 +147,9 @@ public class CancelarReservaBono extends HttpServlet {
 					}
 				}
 				
+				int idBono = reservaDAO.consultarIDBonoReserva(IdReserva);
+				
+				reservaDAO.actualizarSesionesBono(idBono);
 				
 				request.setAttribute("mensaje", "Se ha borrado correctamente la reserva");
 				dispatcher = request.getRequestDispatcher("/");
