@@ -23,39 +23,49 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 
 <!DOCTYPE html>
 <html>
+	<jsp:include page="/include/encabezado.jsp" />
+
 		<head>
 				<meta charset="UTF-8">
-				<title>Creación de Karts</title>
+				<title>Crear Karts</title>
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/fieldset.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
 		</head>
 		<body>
-			<form id="formCrearKart" method="post" action="/WebProyectoPW/CrearKart">
-				<div>
-						<p id="message"><%= mensajeNextPage %></p>
-						<p> 
-								<label for="estadoKart"> Estado:  </label>
-								<select name="estadoKart" id="estadoKart" required>
-									<option value="">...</option>
-									<option value="<%= Estado.DISPONIBLE%>">Disponible</option>
-									<option value="<%= Estado.RESERVADO%>">Reservado</option>
-									<option value="<%= Estado.MANTENIMIENTO%>">Mantenimiento</option>
-								</select>
-						</p>
-						<p> 
-								<label for="tipoKart"> Tipo:  </label>
-								<select name="tipoKart" id="tipoKart" required>
-									<option value="">...</option>
-									<option value="true">Infantil</option>
-									<option value="false">Adulto</option>
-								</select>
-						</p>
-				</div>	
-				<input type="submit" value="Crear kart">
-			</form>
+			<h2> Crear Kart</h2>
+			<p class="mensaje" id="message"><%= mensajeNextPage %></p>
+			<fieldset>
+				<legend> Rellene los siguientes datos </legend>
+				<form id="formCrearKart" method="post" action="/WebProyectoPW/CrearKart">
+					<p> 
+						<label for="estadoKart"> Estado:  </label>
+						<select name="estadoKart" id="estadoKart" required>
+							<option value="">...</option>
+							<option value="<%= Estado.DISPONIBLE%>">Disponible</option>
+							<option value="<%= Estado.RESERVADO%>">Reservado</option>
+							<option value="<%= Estado.MANTENIMIENTO%>">Mantenimiento</option>
+						</select>
+					</p>
+					<p> 
+						<label for="tipoKart"> Tipo:  </label>
+						<select name="tipoKart" id="tipoKart" required>
+							<option value="">...</option>
+							<option value="true">Infantil</option>
+							<option value="false">Adulto</option>
+						</select>
+					</p>
+					
+					<div class="aceptar">
+						<input type="submit" value="Crear kart">
+					</div>
+				</form>
+			</fieldset>
 			
-			<form id="volver" method="post" action="/WebProyectoPW">
-					<input type="submit" value="Volver">
-			</form>
-		</body>
+	<jsp:include page="/include/volver_admin.jsp" />
+	<jsp:include page="/include/footer.jsp" />
+</body>
 </html>
 
 <%

@@ -31,50 +31,66 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 
 <!DOCTYPE html>
 <html>
+	<jsp:include page="/include/encabezado.jsp" />
+
 		<head>
 				<meta charset="UTF-8">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">
 				<title>Listado Karts</title>
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">		
+		
 		</head>
 		<body>
-				<p id="message"><%= mensajeNextPage %> </p>
-				<form id="submit" method="post" action="/WebProyectoPW/AsociarKartPista">
+			<h2>Asociar Karts a Pistas</h2>
+			<p class="mensaje" id="message"><%= mensajeNextPage %> </p>
+			<p> Seleccione los karts a asociar a la pista seleccionada</p>
+			<form id="submit" method="post" action="/WebProyectoPW/AsociarKartPista">
 				
 				<%if (karts.isEmpty()){ %>
 					<p> No hay karts disponibles sin asignar </p>
 				<%}else{ %>
 				<table>
-							<thead>
-							  <tr>
-							    <th></th>
-							    <th>ID Kart</th>
-							    <th>Tipo de Kart</th>
-							  </tr>
-							</thead>
-							<tbody>
-							
-							<% for (KartDTO kart : karts){ %>
+					<caption><strong>Listado de Karts </strong></caption>
+					<thead>
+					  <tr>
+					    <th></th>
+					    <th>ID Kart</th>
+					    <th>Tipo de Kart</th>
+					  </tr>
+					</thead>
+					<tbody>
 					
-							  <tr>
-							    <td><input type="checkbox" name="ids" value="<%= kart.getId()%>" ></td>
-							    <td><%= kart.getId() %></td>
-							    <%if (kart.geType()){ %>
-							    	<td>INFANTIL</td>
-							    <%}else{ %>
-							    		<td>ADULTO</td>
-							    <% } %>
-							  </tr>
-						<% } %>
-							</tbody>
-						</table>
-						<br>
-								<input type="submit" value="Confirmar">
-						</form>
-						<br>
-						<form id="volver" method="post" action="/WebProyectoPW/AsociarKartPista">
-								<input type="submit" value="Volver">
-						</form>
-		</body>
+					<% for (KartDTO kart : karts){ %>
+			
+					  <tr>
+					    <td><input type="checkbox" name="ids" value="<%= kart.getId()%>" ></td>
+					    <td><%= kart.getId() %></td>
+					    <%if (kart.geType()){ %>
+					    	<td>INFANTIL</td>
+					    <%}else{ %>
+					    		<td>ADULTO</td>
+					    <% } %>
+					  </tr>
+				<% } %>
+					</tbody>
+				</table>
+				
+				<br>
+				<div class="aceptar">
+					<input type="submit" value="Confirmar">
+				</div>
+				</form>
+
+			<div class="volver_asociar">
+				<form id="volver" method="post" action="/WebProyectoPW/AsociarKartPista">
+						<input type="submit" value="Volver">
+				</form>
+			</div>
+			
+		<jsp:include page="/include/footer.jsp" />				
+</body>
 </html>
 
 <%

@@ -32,8 +32,10 @@ if(userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() ==
 			
 			<p> Se ha completado hasta la fecha de hoy <%= request.getAttribute("numeroReservas")%> reservas</p>
 			
-			<jsp:include page="/mvc/view/admin/ListadoUsuariosDisplay.jsp"/>
+			<form action="/WebProyectoPW/mvc/view/admin/FuncionesAdministradorDisplay.jsp" method="post">
+				<p><input type="submit" value="Acceso a operaciones"></p>
+			</form>			
 			
-						
+			<jsp:include page="/mvc/view/admin/ListadoUsuariosDisplay.jsp"/>				
 	</body>
 </html>

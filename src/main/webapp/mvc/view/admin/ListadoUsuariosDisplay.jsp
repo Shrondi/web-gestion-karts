@@ -27,16 +27,16 @@
 		<body>
 						
 				<table>
-				<caption> <strong> Usuarios Registrados </strong> </caption>
+					<caption> <strong> Usuarios Registrados </strong> </caption>
 							<thead>
 							  <tr>
 							    <th>Correo</th>
 							    <th>Nombre</th>
 							    <th>Apellidos</th>
 							    <th>Fecha Nacimiento</th>
-							    <th>Fecha Inscripcion</th>
+							    <th>Fecha Inscripción</th>
 							    <th>Antigüedad</th>
-							    <th>Numero de reservas completadas</th>
+							    <th>Número de reservas completadas</th>
 							    <th>¿Administrador?</th>
 							  </tr>
 							</thead>
@@ -53,7 +53,7 @@
 							  	<td><%= usuario.getAntiguedad() %> meses</td>
 							  	<td><%= usuario.getReservas() %></td>
 							  	<% if (usuario.getAdmin()){ %>
-							  		<td>Si</td>
+							  		<td>Sí</td>
 							  	<% }else{ %>
 							  		<td>No</td>
 							  	 <%} %>
@@ -62,7 +62,6 @@
 							</tbody>
 						</table>
 					<% } %>
-				
 				
 		</body>
 </html>

@@ -31,48 +31,59 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 
 <!DOCTYPE html>
 <html>
+	<jsp:include page="/include/encabezado.jsp" />
+
 		<head>
 				<meta charset="UTF-8">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">
 				<title>Listado Pistas</title>
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
+				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">
+			
 		</head>
 		<body>
-				<p id="message"><%= mensajeNextPage %> </p>
-				<form id="submit" method="post" action="/WebProyectoPW/AsociarKartPista">
+			<h2>Asociar Karts a Pistas</h2>
+			<p class="mensaje" id="message"><%= mensajeNextPage %> </p>
+			<p> Seleccione la pista a la que asociar los karts </p>
+			<form id="submit" method="post" action="/WebProyectoPW/AsociarKartPista">
 				<table>
-							<thead>
-							  <tr>
-							    <th></th>
-							    <th>Nombre de la Pista</th>
-							    <th>Dificultad</th>
-							    <th>Capacidad maxima</th>
-							    <th>Numero de karts infantiles disponibles asociados</th>
-							    <th>Numero de karts adultos disponibles asociados</th>
-							  </tr>
-							</thead>
-							<tbody>
-							
-							<% for (PistaDTO pista : pistas){ %>
+					<caption><strong>Listado de Pistas </strong></caption>
+					<thead>
+					  <tr>
+					    <th></th>
+					    <th>Nombre de la Pista</th>
+					    <th>Tipo</th>
+					    <th>Capacidad maxima</th>
+					    <th>Numero de karts infantiles disponibles asociados</th>
+					    <th>Numero de karts adultos disponibles asociados</th>
+					  </tr>
+					</thead>
+					<tbody>
 					
-							  <tr>
-							    <td><input type="radio" name="pista" value="<%= pista.getNombre()%>" required></td>
-							    <td><%= pista.getNombre() %></td>
-							    <td><%= pista.getDificulty() %></td>
-							    <td><%= pista.getMaxAmmount() %></td>
-							    <td><%= pista.getAsocAmmountInf() %></td>
-							    <td><%= pista.getAsocAmmountAdult() %></td>
-							  </tr>
-						<% } %>
-							</tbody>
-						</table>
-						<br>
-								<input type="submit" value="Confirmar">
-						</form>
-						<br>
-						<form id="volver" method="post" action="/WebProyectoPW">
-								<input type="submit" value="Volver">
-						</form>
-		</body>
+					<% for (PistaDTO pista : pistas){ %>
+			
+					  <tr>
+					    <td><input type="radio" name="pista" value="<%= pista.getNombre()%>" required></td>
+					    <td><%= pista.getNombre() %></td>
+					    <td><%= pista.getDificulty() %></td>
+					    <td><%= pista.getMaxAmmount() %></td>
+					    <td><%= pista.getAsocAmmountInf() %></td>
+					    <td><%= pista.getAsocAmmountAdult() %></td>
+					  </tr>
+				<% } %>
+					</tbody>
+				</table>
+				
+				<br>
+				<div class="aceptar">
+					<input type="submit" value="Confirmar">
+				</div>
+			</form>
+			
+	<jsp:include page="/include/volver_admin.jsp" />
+	<jsp:include page="/include/footer.jsp" />
+</body>
 </html>
 
 <%
