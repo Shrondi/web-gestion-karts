@@ -42,7 +42,12 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 				
 		</head>
 		<body>
+		
+		<%if (){ %>
 			<h2>Hacer Reserva</h2>
+		<% }else{%>
+			<h2>Cancelar Bono</h2>
+		<%}%>
 				<p class="mensaje" id="message"><%= mensajeNextPage %> </p>
 				<%if (bonos.isEmpty()){ %>
 					<p> No dispone de bonos </p>
