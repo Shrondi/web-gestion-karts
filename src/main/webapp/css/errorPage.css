@@ -1,0 +1,33 @@
+fieldset{
+    height: auto;
+    background-color:#E0E0E0;    
+    border-radius: 10px;
+    border-color:black;
+    padding: 2%;
+    margin:auto;
+    width:50%;
+    text-align:center;
+}
+p{
+	color:black;
+	font:sans-serif, Arial;
+	text-align:center;
+	font-size:xx-large;	
+}
+fieldset p{
+	color:red;
+	font-size:x-large;
+}
+
+input[type=submit] {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  text-decoration: none;
+  margin: 5px 1px;
+  cursor: pointer;
+  display:inline-block;
+  position:center;
+}
