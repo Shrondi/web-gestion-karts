@@ -290,7 +290,7 @@ public class CrearBonoReserva extends HttpServlet {
 						kartDAO.actualizarEstadoKart(false, Estado.RESERVADO, pista, numeroAdultos);
 						
 						//Mostramos el resumen de la reserva
-						request.setAttribute("modalidad", "Individual");
+						request.setAttribute("modalidad", "Bono");
 						dispatcher = request.getRequestDispatcher("/mvc/view/user/ReservaDisplay.jsp");
 						dispatcher.forward(request, response);
 					}
