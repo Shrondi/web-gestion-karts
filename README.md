@@ -30,7 +30,7 @@ Aplicación web para la gestión y centralización de distintos tipos y modalida
 ## Conceptos clave
 
 *   **Patrones de Diseño:**
-    *   **Factoría:** Se utiliza este patrón para la creación de los diferentes tipos de reservas (infantil, familiar, adulto, individual y bono).  La estructura de la factoría se mantuvo igual que en la primera práctica.
+    *   **Factoría:** Se utiliza este patrón para la creación de los diferentes tipos de reservas (infantil, familiar, adulto, individual y bono). 
     *   **MVC (Modelo Vista Controlador):** Se utiliza este patrón para organizar la arquitectura de la aplicación. Separa la lógica de negocio (modelo), la interfaz de usuario (vista) y el control de flujo de la aplicación (controlador).
 
 *   **Interacción con la Base de Datos:**
