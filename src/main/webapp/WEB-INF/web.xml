@@ -1,27 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
- <env-entry> 
-    <env-entry-name>url</env-entry-name>
-    <env-entry-type>java.lang.String</env-entry-type>
-    <env-entry-value>jdbc:mysql://oraclepr.uco.es:3306/**REMOVED**</env-entry-value> 
-</env-entry>
- <env-entry> 
-    <env-entry-name>password</env-entry-name>
-    <env-entry-type>java.lang.String</env-entry-type>
-    <env-entry-value>**REMOVED**</env-entry-value> 
-</env-entry>
-<env-entry> 
-    <env-entry-name>user</env-entry-name>
-    <env-entry-type>java.lang.String</env-entry-type>
-    <env-entry-value>**REMOVED**</env-entry-value> 
-</env-entry>
  <context-param>
     <param-name>sqlproperties</param-name>
     <param-value>/WEB-INF/sql.properties</param-value>
  </context-param>
  <error-page>  
-  <exception-type>java.lang.Exception</exception-type>  
-  <location>/include/errorPage.jsp</location>  
+ 	<exception-type>java.lang.Exception</exception-type>  
+ 	<location>/include/errorPage.jsp</location>  
   </error-page>
   <servlet>
 	<servlet-name>CrearReservaIndividual</servlet-name>
@@ -167,5 +152,4 @@
     <servlet-name>FuncionesAdministrador</servlet-name>
     <url-pattern>/FuncionesAdministrador</url-pattern>
   </servlet-mapping>
-       
 </web-app>

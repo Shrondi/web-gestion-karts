@@ -30,11 +30,11 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		<head>
 				<meta charset="UTF-8">
 				<title>Reserva Bono</title>
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/fieldset_funciones.css">				
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/reservas.css">												
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/aceptar_boton.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/fieldset_funciones.css">				
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/reservas.css">												
 		</head>
 		<body>
 			<h2>Hacer Reserva Bono</h2>
@@ -42,7 +42,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 					<fieldset>
 						<legend>Rellene los siguientes campos</legend>	
 
-						<form id="formReserva" method="post" action="/WebProyectoPW/ReservaBono">
+						<form id="formReserva" method="post" action="/web-gestion-karts/ReservaBono">
 								<label for="fecha">Fecha reserva: </label>
 								<input type="datetime-local" name="fecha" id="fecha" required>
 								 

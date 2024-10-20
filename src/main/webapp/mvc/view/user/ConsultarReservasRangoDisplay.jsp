@@ -30,17 +30,17 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		<head>
 				<meta charset="UTF-8">
 				<title>Consultar Reservas</title>
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/fieldset.css">				
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/validacion.css">	
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/aceptar_boton.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/fieldset.css">				
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/validacion.css">	
 		</head>
 		<body>
 			<h2>Consultar Reserva</h2>
 				<p class="mensaje" id="message"><%= mensajeNextPage %></p>
 					<p> Escriba la fecha de inicio y de fin para consultar reservas entre dichas fechas</p>
-					<form id="formReservasUsuario" method="post" action="/WebProyectoPW/ConsultarReservas">
+					<form id="formReservasUsuario" method="post" action="/web-gestion-karts/ConsultarReservas">
 								<fieldset>
 								
 									<label for="fechaInicio">Fecha Inicio: </label>
@@ -55,7 +55,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 							</div>
 							</fieldset>
 						</form>
-				<script type="text/javascript" src="/WebProyectoPW/js/ConsultarReservasRango.js"></script>			
+				<script type="text/javascript" src="/web-gestion-karts/js/ConsultarReservasRango.js"></script>			
 								
 			<% if (request.getAttribute("fechaInicio") != null){ %>
 					<jsp:include page="ReservasRangoDisplay.jsp" />  

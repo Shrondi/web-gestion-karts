@@ -36,10 +36,10 @@ if (userBean == null || userBean.getCorreo().isEmpty()) {
 		<head>
 				<meta charset="UTF-8">
 				<title>Cancelar Reserva</title>
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/table.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/aceptar_boton.css">
 		</head>
 		<body>
 			<h2>Cancelar Reserva</h2>

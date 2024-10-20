@@ -10,10 +10,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>UcoGestor</title>
-	<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
-	<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/fieldset.css">
-	<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
-	<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/boton_operaciones.css">
+	<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/comun.css">
+	<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/fieldset.css">
+	<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/footer_header.css">
+	<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/boton_operaciones.css">
 </head>
 
 <body>
@@ -33,7 +33,7 @@
 %>
 	<h1>Bienvenido a UcoKarts</h1>
 	<fieldset>
-			<form action="/WebProyectoPW/mvc/control/LoginController.jsp" method="post">  	
+			<form action="/web-gestion-karts/mvc/control/LoginController.jsp" method="post">  	
 		    	<label for="correo">Correo electrónico:</label><br><br/>
 		    	<input type="email" name="correo" placeholder="example@gmail.com" required><br><br/>
 		    	
@@ -41,7 +41,7 @@
 		    	<input type="password" name="passWord" placeholder="contraseña" required><br><br/>	
 				<p><input type="submit" value="Iniciar sesi&oacute;n"></p>
 			</form>
-			<form action="/WebProyectoPW/mvc/control/RegistroController.jsp" method="post">
+			<form action="/web-gestion-karts/mvc/control/RegistroController.jsp" method="post">
 				<p><input type="submit" value="Registrarse"></p>
 			</form>
 	</fieldset>

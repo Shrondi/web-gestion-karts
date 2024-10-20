@@ -58,7 +58,7 @@ public class CrearBonoReserva extends HttpServlet {
 		
 		//Caso 1: Usuario no esta logueado -> Volvemos al index
 		if (userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() == true) {
-			response.sendRedirect("/WebProyectoPW");
+			response.sendRedirect("/web-gestion-karts");
 			
 		//Caso 2: Usuario logueado
 		}else{
@@ -79,7 +79,7 @@ public class CrearBonoReserva extends HttpServlet {
 				List<BonoDTO> bonos = reserva.consultarBonos(userBean.getCorreo());
 				
 				request.setAttribute("bonos", bonos);
-				request.setAttribute("nextPage", "/WebProyectoPW/ReservaBono");
+				request.setAttribute("nextPage", "/web-gestion-karts/ReservaBono");
 				dispatcher = request.getRequestDispatcher("/mvc/view/user/BonosDisplay.jsp");
 				dispatcher.forward(request, response);
 				
@@ -193,7 +193,7 @@ public class CrearBonoReserva extends HttpServlet {
 									bean.setNumeroAdultos(numeroAdultos);
 									
 									request.setAttribute("ListaPistas", pistas);
-									request.setAttribute("nextPage", "/WebProyectoPW/ReservaBono");
+									request.setAttribute("nextPage", "/web-gestion-karts/ReservaBono");
 									dispatcher = request.getRequestDispatcher("/mvc/view/user/PistasDisplay.jsp");
 									dispatcher.forward(request, response);
 								}

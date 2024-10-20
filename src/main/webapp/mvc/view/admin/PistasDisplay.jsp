@@ -37,17 +37,17 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		<head>
 				<meta charset="UTF-8">
 				<title>Listado Pistas</title>
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/aceptar_boton.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/table.css">
 			
 		</head>
 		<body>
 			<h2>Asociar Karts a Pistas</h2>
 			<p class="mensaje" id="message"><%= mensajeNextPage %> </p>
 			<p> Seleccione la pista a la que asociar los karts </p>
-			<form id="submit" method="post" action="/WebProyectoPW/AsociarKartPista">
+			<form id="submit" method="post" action="/web-gestion-karts/AsociarKartPista">
 				<table>
 					<caption><strong>Listado de Pistas </strong></caption>
 					<thead>

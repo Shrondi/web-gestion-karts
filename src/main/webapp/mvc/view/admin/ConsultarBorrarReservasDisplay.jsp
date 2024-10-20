@@ -30,18 +30,18 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		<head>
 				<meta charset="UTF-8">
 				<title>Consultar reservas para eliminar</title>
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/fieldset.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/validacion.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/fieldset.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/aceptar_boton.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/validacion.css">
 		</head>
 		<body>
 			<h2> Eliminar Reserva</h2>
 			<p class="mensaje" id="message"><%= mensajeNextPage %></p>
 			<fieldset>
 				<legend> Rellene los siguientes datos</legend>
-				<form id="formReservasUsuario" method="post" action="/WebProyectoPW/BorrarReservaIndividual">
+				<form id="formReservasUsuario" method="post" action="/web-gestion-karts/BorrarReservaIndividual">
 					<p>
 						<label for="fechaInicio">Fecha Inicio: </label>
 						<input type="datetime-local" name="fechaInicio" id="fechaInicio" value="<%=cancelarBean.getFechaInicio()%>" required>
@@ -66,10 +66,10 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 
 			</fieldset>	
 			
-			<script type="text/javascript" src="/WebProyectoPW/js/RangoFechasBorrar.js"> </script>
+			<script type="text/javascript" src="/web-gestion-karts/js/RangoFechasBorrar.js"> </script>
 			<% if (cancelarBean.getReservasInfantil() != null){ %>
 				<jsp:include page="/mvc/view/common/ReservasCancelarDisplay.jsp" > 
-					<jsp:param name="nextPage" value="/WebProyectoPW/BorrarReservaIndividual" /> 
+					<jsp:param name="nextPage" value="/web-gestion-karts/BorrarReservaIndividual" /> 
 				</jsp:include>
 				
 			<%} %>

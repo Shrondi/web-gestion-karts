@@ -29,11 +29,11 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		<head>
 				<meta charset="UTF-8">
 				<title>Consultar Pistas</title>
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/fieldset_funciones.css">				
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/reservas.css">				
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/aceptar_boton.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/fieldset_funciones.css">				
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/reservas.css">				
 
 		</head>
 		<body>
@@ -41,7 +41,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 				<p class="mensaje" id="message"><%= mensajeNextPage %></p>
 					<fieldset>
 						<legend>Rellene los siguientes campos</legend>	
-						<form id="formConsultTipo" method="post" action="/WebProyectoPW/ConsultarPistas">
+						<form id="formConsultTipo" method="post" action="/web-gestion-karts/ConsultarPistas">
 						
 							<p>Elija el filtro de su búsqueda, puede seleccionar ambos:</p>
 							<input type='checkbox' id='tipo_check' name='tipo_check' value='tipo_check'>
@@ -74,7 +74,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 									<input type="submit" value="Continuar">			
 							</div>					
 					</form>
-					<script type="text/javascript" src="/WebProyectoPW/js/ConsultarPistasValidation.js"></script>
+					<script type="text/javascript" src="/web-gestion-karts/js/ConsultarPistasValidation.js"></script>
 				</fieldset>
 	<jsp:include page="/include/volver_usuario.jsp" />
 	<jsp:include page="/include/footer.jsp" />

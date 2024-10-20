@@ -30,17 +30,17 @@ if (userBean == null || userBean.getCorreo().isEmpty() ) {
 		<head>
 				<meta charset="UTF-8">
 				<title>Modificar datos del usuario</title>
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">	
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/fieldset.css">							
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/boton_aceptar.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/validacion.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/footer_header.css">	
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/fieldset.css">							
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/boton_aceptar.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/validacion.css">
 		</head>
 		<body>
 			<h3>Modifique sus datos </h3>
 			<p class="mensaje" id="message"><%= mensajeNextPage %></p>
 			<fieldset>
-				<form id="formModificarUsuario" method="post" action="/WebProyectoPW/mvc/control/ModificacionController.jsp">
+				<form id="formModificarUsuario" method="post" action="/web-gestion-karts/mvc/control/ModificacionController.jsp">
 						
 					<label for="nombre">Nombre: </label>
 					<input type="text" name="nombre" id="nombre" value="<%=userBean.getNombre()%>" required="required">
@@ -67,7 +67,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() ) {
 				</form>
 			</fieldset>
 				
-			<script type="text/javascript" src="/WebProyectoPW/js/ModifyValidation.js"></script>
+			<script type="text/javascript" src="/web-gestion-karts/js/ModifyValidation.js"></script>
 				
 	<jsp:include page="/include/volver.jsp" />
 	<jsp:include page="/include/footer.jsp" />

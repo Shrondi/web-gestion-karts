@@ -37,7 +37,7 @@ public class CrearBono extends HttpServlet {
 		
 		//Caso 1: Usuario no esta logueado -> Volvemos al index
 		if (userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() == true) {
-			response.sendRedirect("/WebProyectoPW");
+			response.sendRedirect("/web-gestion-karts");
 			
 		//Caso 2: Usuario logueado
 		}else{

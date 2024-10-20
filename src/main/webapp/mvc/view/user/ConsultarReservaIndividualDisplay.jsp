@@ -29,19 +29,19 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		<head>
 				<meta charset="UTF-8">
 				<title>Reserva Individual</title>
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/fieldset_funciones.css">				
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/validacion.css">	
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/reservas.css">												
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/aceptar_boton.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/fieldset_funciones.css">				
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/validacion.css">	
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/reservas.css">												
 		</head>
 		<body>
 			<h2>Hacer Reserva</h2>
 				<p class="mensaje" id="message"><%= mensajeNextPage %></p>
 					<fieldset>
 						<legend>Rellene los siguientes campos</legend>	
-						<form id="formReserva" method="post" action="/WebProyectoPW/ReservaIndividual">
+						<form id="formReserva" method="post" action="/web-gestion-karts/ReservaIndividual">
 							
 							<label for="fecha">Fecha reserva: </label>
 							<input id="fecha" type="datetime-local" name="fecha" id="fecha" required>
@@ -82,7 +82,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 						</form>
 					</fieldset>
 					
-					<script type="text/javascript" src="/WebProyectoPW/js/ReservaIndividualValidation.js"></script>
+					<script type="text/javascript" src="/web-gestion-karts/js/ReservaIndividualValidation.js"></script>
 	<jsp:include page="/include/volver_usuario.jsp" />
 	<jsp:include page="/include/footer.jsp" />
 	

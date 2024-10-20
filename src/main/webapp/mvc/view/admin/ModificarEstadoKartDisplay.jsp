@@ -34,18 +34,18 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 
 		<head>
 				<meta charset="UTF-8">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/table.css">
 				<title>Modificar estado de los karts</title>
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/aceptar_boton.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/table.css">
 
 		</head>
 		<body>
 			<h2>Modificar estado de Karts</h2>
 			<p class="mensaje" id="message"><%= mensajeNextPage %> </p>
-			<form id="formModificarEstadoKart" method="post" action="/WebProyectoPW/ModificarEstadoKart">
+			<form id="formModificarEstadoKart" method="post" action="/web-gestion-karts/ModificarEstadoKart">
 			<div>	
 						<p id="message"><%= mensajeNextPage %></p>
 						<p> 

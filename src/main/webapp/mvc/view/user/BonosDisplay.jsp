@@ -35,15 +35,15 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		<head>
 				<meta charset="UTF-8">
 				<title>Listado Bonos</title>
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">								
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/aceptar_boton.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/table.css">								
 				
 		</head>
 		<body>
 		<%String nextPage = (String)request.getAttribute("nextPage"); %>
-		<%if (nextPage.contentEquals("/WebProyectoPW/ReservaBono")){ %>
+		<%if (nextPage.contentEquals("/web-gestion-karts/ReservaBono")){ %>
 			<h2>Hacer Reserva</h2>
 		<% }else{%>
 			<h2>Cancelar Bono</h2>

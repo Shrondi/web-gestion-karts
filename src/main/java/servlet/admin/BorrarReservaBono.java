@@ -56,7 +56,7 @@ public class BorrarReservaBono extends HttpServlet {
 		//Caso 1: Usuario no esta logueado -> Volvemos al index
 		if (userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() == false) {
 			
-			response.sendRedirect("/WebProyectoPW");
+			response.sendRedirect("/web-gestion-karts");
 			
 		//Caso 2: Usuario logueado
 		}else{
@@ -170,7 +170,7 @@ public class BorrarReservaBono extends HttpServlet {
 							}
 						}
 					
-					response.sendRedirect("/WebProyectoPW");
+					response.sendRedirect("/web-gestion-karts");
 				}
 			}
 			

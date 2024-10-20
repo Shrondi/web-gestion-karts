@@ -28,11 +28,11 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		<head>
 				<meta charset="UTF-8">
 				<title>Crear Pista</title>
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/fieldset.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/validacion.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/fieldset.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/aceptar_boton.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/validacion.css">
 
 		</head>
 		<body>
@@ -40,7 +40,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 			<p class="mensaje" id="message"><%= mensajeNextPage %></p>
 			<fieldset>
 				<legend> Rellene los siguientes datos </legend>
-				<form id="formCrearPista" method="post" action="/WebProyectoPW/CrearPista">
+				<form id="formCrearPista" method="post" action="/web-gestion-karts/CrearPista">
 					<p>
 						<label for="nombrePista">Nombre: </label>
 						<input type="text" name="nombrePista" id="nombrePista" placeholder="Pista 1" required="required">
@@ -74,7 +74,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 				</form>
 			</fieldset>
 			
-	<script type="text/javascript" src="/WebProyectoPW/js/PistaCreateValidation.js"></script>
+	<script type="text/javascript" src="/web-gestion-karts/js/PistaCreateValidation.js"></script>
 	
 	<jsp:include page="/include/volver_admin.jsp" />
 	<jsp:include page="/include/footer.jsp" />

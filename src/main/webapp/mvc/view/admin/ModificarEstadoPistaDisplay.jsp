@@ -35,17 +35,17 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		<head>
 				<meta charset="UTF-8">
 				<title>Modificar estado de las pistas</title>
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/aceptar_boton.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/table.css">
 		</head>
 		<body>
 			<h2>Modificar estado de Pistas</h2>
 			<p class="mensaje" id="message"><%= mensajeNextPage %> </p>
 						
 			<div>
-			<form id="form1" method="post" action="/WebProyectoPW/ModificarEstadoPista">
+			<form id="form1" method="post" action="/web-gestion-karts/ModificarEstadoPista">
 				<p>Seleccione la pista cuyo estado desee modificar</p>
 				
 				<% if (ListaPistas.isEmpty()){ %>

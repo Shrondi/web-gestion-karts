@@ -4,10 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
 /**
  * A class to manage the MySQL connection (general methods and configuration).
  * */
@@ -19,18 +15,13 @@ public class DBConnection {
 	public Connection getConnection(){
 	    
 		try {
-			 Context ctx = new InitialContext();
-			 Context env = (Context) ctx.lookup("java:comp/env");
-			 final String url = (String) env.lookup("url");
-			 final String user = (String) env.lookup("user");
-			 final String password = (String) env.lookup("password");
+			 final String url = System.getenv("DB_URL");
+			 final String user = System.getenv("DB_USER");
+			 final String password = System.getenv("DB_PASSWORD");
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			this.connection = (Connection) DriverManager.getConnection(url, user, password);
 			System.err.println("Database connection successfully opened!");
-			
-		} catch (NamingException e) {
-				e.printStackTrace();
 			
 		}catch (SQLException e) {
 			System.err.println("Connection to MySQL has failed!");

@@ -8,10 +8,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Registro</title>
-		<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
-		<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/fieldset.css">
-		<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/validacion.css">
-		<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
+		<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/comun.css">
+		<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/fieldset.css">
+		<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/validacion.css">
+		<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/footer_header.css">
 	</head>
 	<body>
 <%
@@ -42,7 +42,7 @@ if (userBean.getAdmin()){
 		<h2> Nuevo Registro </h2>
 
 		<fieldset>
-			<form id="registroFormulario" class="registroFormulario" method="post" action="/WebProyectoPW/mvc/control/RegistroController.jsp">
+			<form id="registroFormulario" class="registroFormulario" method="post" action="/web-gestion-karts/mvc/control/RegistroController.jsp">
 			<p><font color ="blue"><%=message%></font></p>
 			
 				<label for="nombre">Nombre: </label>
@@ -72,7 +72,7 @@ if (userBean.getAdmin()){
 	
 				<input type="submit" value="Aceptar">
 			</form>
-			<script type="text/javascript" src="/WebProyectoPW/js/RegisterValidation.js"></script>
+			<script type="text/javascript" src="/web-gestion-karts/js/RegisterValidation.js"></script>
 		</fieldset>
 		
 	<jsp:include page="/include/volver.jsp" />

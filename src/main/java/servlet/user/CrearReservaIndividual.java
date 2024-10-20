@@ -57,7 +57,7 @@ public class CrearReservaIndividual extends HttpServlet {
 		//Caso 1: Usuario no esta logueado -> Volvemos al index
 		if (userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() == true) {
 			
-			response.sendRedirect("/WebProyectoPW");
+			response.sendRedirect("/web-gestion-karts");
 			
 		//Caso 2: Usuario logueado
 		}else{
@@ -125,7 +125,7 @@ public class CrearReservaIndividual extends HttpServlet {
 							bean.setNumeroAdultos(numeroAdultos);
 							
 							request.setAttribute("ListaPistas", pistas);
-							request.setAttribute("nextPage", "/WebProyectoPW/ReservaIndividual");
+							request.setAttribute("nextPage", "/web-gestion-karts/ReservaIndividual");
 							dispatcher = request.getRequestDispatcher("/mvc/view/user/PistasDisplay.jsp");
 							dispatcher.forward(request, response);
 						}

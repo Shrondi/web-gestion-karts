@@ -35,7 +35,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		<head>
 				<meta charset="UTF-8">
 				<title>Consultar Reservas</title>
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table_reservas.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/table_reservas.css">
 		</head>
 		<body>
 			

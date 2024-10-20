@@ -29,17 +29,17 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		<head>
 				<meta charset="UTF-8">
 				<title>Crear Karts</title>
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/fieldset.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/fieldset.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/aceptar_boton.css">
 		</head>
 		<body>
 			<h2> Crear Kart</h2>
 			<p class="mensaje" id="message"><%= mensajeNextPage %></p>
 			<fieldset>
 				<legend> Rellene los siguientes datos </legend>
-				<form id="formCrearKart" method="post" action="/WebProyectoPW/CrearKart">
+				<form id="formCrearKart" method="post" action="/web-gestion-karts/CrearKart">
 					<p> 
 						<label for="estadoKart"> Estado:  </label>
 						<select name="estadoKart" id="estadoKart" required>

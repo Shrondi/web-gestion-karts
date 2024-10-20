@@ -32,7 +32,7 @@ if(userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() ==
 			
 			<p> Se ha completado hasta la fecha de hoy <%= request.getAttribute("numeroReservas")%> reservas</p>
 			
-			<form action="/WebProyectoPW/FuncionesAdministrador" method="post">
+			<form action="/web-gestion-karts/FuncionesAdministrador" method="post">
 				<p><input type="submit" value="Acceso a operaciones"></p>
 			</form>			
 			

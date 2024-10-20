@@ -23,7 +23,7 @@
 <html>
 		<head>
 				<meta charset="UTF-8">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/table.css">
 		</head>
 		<body>
 						

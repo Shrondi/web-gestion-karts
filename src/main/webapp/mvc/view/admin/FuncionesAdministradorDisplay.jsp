@@ -19,9 +19,9 @@ if(userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() ==
 		<head>
 				<meta charset="UTF-8">
 				<title>Funciones Administrador</title>
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/fieldset_funciones.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/fieldset_funciones.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/footer_header.css">
 		</head>
 		<body>
 			<fieldset>
@@ -31,7 +31,7 @@ if(userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() ==
 					<li>Operaciones con usuarios
 						<ul>
 							<li>
-								<form method="post" action="/WebProyectoPW/mvc/control/RegistroController.jsp">
+								<form method="post" action="/web-gestion-karts/mvc/control/RegistroController.jsp">
 									<input type="submit" name="option" class="option" value="Alta de usuario administrador">
 								</form>
 							</li>
@@ -41,31 +41,31 @@ if(userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() ==
 					<li>Operaciones con pistas y karts
 						<ul>
 							<li>
-								<form method="post" action="/WebProyectoPW/CrearPista">
+								<form method="post" action="/web-gestion-karts/CrearPista">
 									<input type="submit" name="option" class="option" value="Crear Pista">
 								</form>
 							</li>
 						
 							<li>
-								<form method="post" action="/WebProyectoPW/CrearKart">
+								<form method="post" action="/web-gestion-karts/CrearKart">
 									<input type="submit" name="option" class="option" value="Crear Kart">
 								</form>
 							</li>	
 											
 							<li>
-								<form method="post" action="/WebProyectoPW/AsociarKartPista">
+								<form method="post" action="/web-gestion-karts/AsociarKartPista">
 									<input type="submit" name="option" class="option" value="Asociar kart a pista">
 								</form>
 							</li>
 							
 							<li>
-								<form method="post" action="/WebProyectoPW/ModificarEstadoPista">
+								<form method="post" action="/web-gestion-karts/ModificarEstadoPista">
 									<input type="submit" name="option" class="option" value="Modificar estado de una pista">
 								</form>
 							</li>
 							
 							<li>
-								<form method="post" action="/WebProyectoPW/ModificarEstadoKart">
+								<form method="post" action="/web-gestion-karts/ModificarEstadoKart">
 									<input type="submit" name="option" class="option" value="Modificar estado de un kart">
 								</form>
 							</li>													
@@ -74,13 +74,13 @@ if(userBean == null || userBean.getCorreo().equals("") || userBean.getAdmin() ==
 					<li>Operaciones con reservas
 						<ul>
 							<li>
-								<form method="post" action="/WebProyectoPW/BorrarReservaIndividual">
+								<form method="post" action="/web-gestion-karts/BorrarReservaIndividual">
 									<input type="submit" name="option" class="option" value="Eliminar Reserva Individual">
 								</form>
 							</li>
 							
 							<li>
-								<form method="post" action="/WebProyectoPW/BorrarReservaBono">
+								<form method="post" action="/web-gestion-karts/BorrarReservaBono">
 									<input type="submit" name="option" class="option" value="Eliminar Reserva Bono">
 								</form>
 							</li>								

@@ -37,17 +37,17 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 		<head>
 				<meta charset="UTF-8">
 				<title>Listado Karts</title>
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/comun.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/footer_header.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/aceptar_boton.css">
-				<link rel="stylesheet" type="text/css" href="/WebProyectoPW/css/table.css">		
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/comun.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/footer_header.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/aceptar_boton.css">
+				<link rel="stylesheet" type="text/css" href="/web-gestion-karts/css/table.css">		
 		
 		</head>
 		<body>
 			<h2>Asociar Karts a Pistas</h2>
 			<p class="mensaje" id="message"><%= mensajeNextPage %> </p>
 			<p> Seleccione los karts a asociar a la pista seleccionada</p>
-			<form id="submit" method="post" action="/WebProyectoPW/AsociarKartPista">
+			<form id="submit" method="post" action="/web-gestion-karts/AsociarKartPista">
 				
 				<%if (karts.isEmpty()){ %>
 					<p> No hay karts disponibles sin asignar </p>
@@ -85,7 +85,7 @@ if (userBean == null || userBean.getCorreo().isEmpty() || userBean.getAdmin() ==
 				</form>
 
 			<div class="volver_asociar">
-				<form id="volver" method="post" action="/WebProyectoPW/AsociarKartPista">
+				<form id="volver" method="post" action="/web-gestion-karts/AsociarKartPista">
 						<input type="submit" value="Volver">
 				</form>
 			</div>
