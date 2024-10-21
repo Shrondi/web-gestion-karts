@@ -2,7 +2,7 @@
 FROM tomcat:8.5-jdk17-openjdk
 
 # Copiar el archivo WAR al directorio webapps de Tomcat
-COPY target/WebProyectoPW.war /usr/local/tomcat/webapps/
+COPY target/web-gestion-karts.war /usr/local/tomcat/webapps/
 
 # Exponer el puerto que usará tu aplicación
 EXPOSE 8080
